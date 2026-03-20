@@ -160,24 +160,29 @@ onUnmounted(() => {
 
 <style scoped>
 .cook-timer {
-  border: 2px solid var(--rule);
-  border-radius: 8px;
-  padding: 12px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 10px;
   width: 100%;
-  min-height: 240px;
   background: var(--paper);
   display: flex;
   flex-direction: column;
+  transition: all 0.2s;
+  cursor: pointer;
 }
 
-/* Desktop - larger cards */
+.cook-timer:hover {
+  border-color: var(--green);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Desktop - more compact cards */
 @media (min-width: 768px) {
   .cook-timer {
-    padding: 16px;
-    min-width: 240px;
-    width: 240px;
-    height: 320px;
-    min-height: auto;
+    padding: 12px;
+    min-width: 200px;
+    width: 200px;
   }
 }
 
@@ -222,68 +227,73 @@ onUnmounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .timer-label {
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Jost", sans-serif;
   color: var(--ink);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   text-align: center;
-  line-height: 1.3;
+  line-height: 1.2;
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
 .timer-phase {
-  font-size: 0.7rem;
-  font-weight: 600;
+  font-size: 0.65rem;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--muted);
 }
 
 .timer-display {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  font-family: "Courier New", monospace;
+  font-family: "Jost", sans-serif;
   text-align: center;
   color: var(--ink);
-  margin: 8px 0;
+  margin: 6px 0;
 }
 
 .timer-display-text {
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 500;
   text-align: center;
   color: var(--muted);
-  margin: 12px 0;
+  margin: 8px 0;
 }
 
 .timer-sauce-alert {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 600;
   text-align: center;
   color: var(--orange);
-  margin-top: 6px;
-  min-height: 32px;
+  margin-top: 4px;
+  min-height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  line-height: 1.3;
+  line-height: 1.2;
   padding: 0 4px;
 }
 
-/* Desktop - larger text */
+/* Desktop - slightly larger text */
 @media (min-width: 768px) {
   .timer-phase {
     font-size: 0.7rem;
-    margin: 12px 0;
+    margin: 8px 0;
   }
 
   .timer-sauce-alert {
-    font-size: 0.8rem;
-    margin-top: 8px;
-    min-height: 40px;
-    padding: 0;
+    font-size: 0.7rem;
+    margin-top: 6px;
+    min-height: 28px;
+  }
+
+  .timer-display {
+    font-size: 1.75rem;
   }
 }
 
@@ -345,7 +355,7 @@ onUnmounted(() => {
 .timer-controls {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 6px;
   margin-top: 8px;
   padding-top: 8px;
   border-top: 1px solid var(--rule);
@@ -353,14 +363,14 @@ onUnmounted(() => {
 
 .timer-controls-row {
   display: flex;
-  gap: 3px;
+  gap: 6px;
 }
 
 .btn-control {
   flex: 1;
-  padding: 5px 6px;
+  padding: 4px 8px;
   border: 1px solid var(--rule);
-  border-radius: 3px;
+  border-radius: 4px;
   font-size: 0.7rem;
   font-weight: 500;
   cursor: pointer;
@@ -370,20 +380,20 @@ onUnmounted(() => {
   font-family: "Jost", sans-serif;
 }
 
-/* Desktop - larger buttons */
+/* Desktop - slightly larger buttons */
 @media (min-width: 768px) {
   .timer-controls {
-    gap: 4px;
-    margin-top: 12px;
-    padding-top: 12px;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 10px;
   }
 
   .timer-controls-row {
-    gap: 4px;
+    gap: 8px;
   }
 
   .btn-control {
-    padding: 6px 8px;
+    padding: 6px 10px;
     font-size: 0.75rem;
   }
 }

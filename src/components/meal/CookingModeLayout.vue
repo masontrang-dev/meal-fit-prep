@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, onUnmounted, watch } from "vue";
+import { ref, onMounted, onUnmounted, watch } from "vue";
 import TimerBar from "./TimerBar.vue";
 import HoveringTimers from "./HoveringTimers.vue";
 import type { ActiveTimer } from "@/stores/timerStore";
@@ -60,6 +60,11 @@ onUnmounted(() => {
     <div class="cooking-mode-header">
       <div class="cooking-mode-title">COOKING MODE</div>
       <button @click="emit('exit')" class="exit-btn">Exit ✕</button>
+    </div>
+
+    <!-- Full-width content area for meal summary -->
+    <div class="cooking-mode-full-width">
+      <slot name="full-width" />
     </div>
 
     <div class="cooking-mode-body">
@@ -146,6 +151,12 @@ onUnmounted(() => {
   border-color: rgba(255, 255, 255, 0.5);
 }
 
+.cooking-mode-full-width {
+  width: 100%;
+  background: var(--bg);
+  padding-top: 24px; /* Add space above meal summary */
+}
+
 .cooking-mode-body {
   display: flex;
   flex-direction: column;
@@ -158,7 +169,7 @@ onUnmounted(() => {
   width: 100%;
 }
 
-/* Desktop layout - sidebar on right */
+/* Desktop layout - sidebar on right for content area only */
 @media (min-width: 768px) {
   .cooking-mode-body {
     flex-direction: row;

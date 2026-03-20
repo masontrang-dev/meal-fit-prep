@@ -57,10 +57,10 @@ const activeTimers = computed(() => props.timers.filter((t) => !t.completed));
 }
 
 .timer-bar-label {
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: var(--muted);
   margin-bottom: 12px;
 }
@@ -87,25 +87,26 @@ const activeTimers = computed(() => props.timers.filter((t) => !t.completed));
     top: 80px;
     background: transparent;
     border-bottom: none;
-    border-left: 2px solid var(--rule);
-    padding: 0 0 0 24px;
-    min-width: 280px;
-    max-width: 280px;
+    border-left: 1px solid var(--rule);
+    padding: 0 0 0 20px;
+    min-width: 240px;
+    max-width: 240px;
     align-self: flex-start;
   }
 
   .timer-bar-label {
     color: var(--muted);
-    margin-bottom: 16px;
+    margin-bottom: 10px;
+    font-size: 0.7rem;
   }
 
   .timer-bar-scroll {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     overflow-x: visible;
     overflow-y: auto;
-    padding-bottom: 0;
+    padding: 4px 4px 0 4px; /* Reduce padding to prevent scroll */
     max-height: calc(100vh - 140px);
     scrollbar-width: thin;
     scrollbar-color: var(--rule) transparent;

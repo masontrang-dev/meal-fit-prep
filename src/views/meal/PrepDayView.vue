@@ -14,6 +14,9 @@ import CalloutBox from "@/components/ui/CalloutBox.vue";
 import CookingModeLayout from "@/components/meal/CookingModeLayout.vue";
 import SauceRecipeCard from "@/components/meal/SauceRecipeCard.vue";
 import SauceAlertModal from "@/components/meal/SauceAlertModal.vue";
+import RecipePopover from "@/components/meal/RecipePopover.vue";
+import IngredientPopover from "@/components/meal/IngredientPopover.vue";
+import MealSummary from "@/components/meal/MealSummary.vue";
 import type { PrepStep, Sauce } from "@/types/meal.types";
 import type { GeneratedPlan } from "@/types/randomizer.types";
 
@@ -27,6 +30,9 @@ const timerStore = useTimerStore();
 const cookingMode = ref(false);
 const activeStepIndex = ref(0);
 const showSauceAlert = ref(false);
+const showRecipePopover = ref(false);
+const showIngredientPopover = ref(false);
+const clickedIngredient = ref("");
 const currentSauceAlert = ref<{
   sauceName: string;
   instructions: string;
@@ -369,6 +375,29 @@ function handleResetTimer(timerId: string) {
 function handleDeleteTimer(timerId: string) {
   timerStore.deleteTimer(timerId);
 }
+
+function handleTimerClick(timerId: string) {
+  // Handle timer click - could be used for focusing or other interactions
+  console.log("Timer clicked:", timerId);
+}
+
+function openRecipePopover() {
+  showRecipePopover.value = true;
+}
+
+function closeRecipePopover() {
+  showRecipePopover.value = false;
+}
+
+function openIngredientPopover(ingredient: string) {
+  clickedIngredient.value = ingredient;
+  showIngredientPopover.value = true;
+}
+
+function closeIngredientPopover() {
+  showIngredientPopover.value = false;
+  clickedIngredient.value = "";
+}
 </script>
 
 <template>
@@ -389,6 +418,9 @@ function handleDeleteTimer(timerId: string) {
         </button>
       </div>
 
+      <!-- Meal Summary below header section -->
+      <MealSummary :plan="randomizerStore.confirmedPlan" />
+
       <CalloutBox v-if="!randomizerStore.confirmedPlan" variant="gold" class="mb-7">
         <p>
           <strong>Generate your weekly plan first.</strong> Once you confirm your plan in the Fridge
@@ -405,7 +437,7 @@ function handleDeleteTimer(timerId: string) {
       </CalloutBox>
 
       <section>
-        <PrepTimeline :steps="prepSteps" />
+        <PrepTimeline :steps="prepSteps" @ingredient-click="openIngredientPopover" />
       </section>
 
       <CalloutBox variant="green" class="mt-7">
@@ -427,6 +459,7 @@ function handleDeleteTimer(timerId: string) {
       :active-step-index="activeStepIndex"
       :total-steps="prepSteps.length"
       @exit="exitCookingMode"
+      @timer-click="handleTimerClick"
       @sauce-alert-fired="handleSauceAlertFired"
       @timer-completed="handleTimerCompleted"
       @confirm-sauce-applied="confirmSauceApplied"
@@ -436,31 +469,38 @@ function handleDeleteTimer(timerId: string) {
       @reset="handleResetTimer"
       @delete="handleDeleteTimer"
     >
-      <div class="cooking-steps">
-        <div class="section-label">ACTIVE STEP</div>
+      <!-- Meal Summary in full-width slot -->
+      <template #full-width>
+        <MealSummary :plan="randomizerStore.confirmedPlan" />
+      </template>
 
-        <div v-for="(step, index) in prepSteps" :key="step.id" class="step-wrapper">
-          <PrepTimeline :steps="[step]" />
+      <div class="cooking-content-area">
+        <div class="cooking-steps">
+          <div class="section-label">ACTIVE STEP</div>
 
-          <!-- Timer buttons for oven step -->
-          <div v-if="step.id === 'step-4' && randomizerStore.confirmedPlan" class="timer-buttons">
-            <div class="timer-button-label">Start Timers:</div>
-            <button @click="startFishTimer" class="btn-timer">▶ Fish (15 min)</button>
-            <button @click="startChickenTimer" class="btn-timer">
-              ▶ Chicken ({{
-                randomizerStore.confirmedPlan.batchChickenCut === "thighs" ? "40" : "30"
-              }}
-              min)
-            </button>
-            <button @click="startLentilTimer" class="btn-timer">
-              ▶
-              {{
-                randomizerStore.confirmedPlan.legume.charAt(0).toUpperCase() +
-                randomizerStore.confirmedPlan.legume.slice(1)
-              }}
-              ({{ standardCookConfig[randomizerStore.confirmedPlan.legume]?.durationMin || 22 }}
-              min)
-            </button>
+          <div v-for="(step, index) in prepSteps" :key="step.id" class="step-wrapper">
+            <PrepTimeline :steps="[step]" @ingredient-click="openIngredientPopover" />
+
+            <!-- Timer buttons for oven step -->
+            <div v-if="step.id === 'step-4' && randomizerStore.confirmedPlan" class="timer-buttons">
+              <div class="timer-button-label">Start Timers:</div>
+              <button @click="startFishTimer" class="btn-timer">▶ Fish (15 min)</button>
+              <button @click="startChickenTimer" class="btn-timer">
+                ▶ Chicken ({{
+                  randomizerStore.confirmedPlan.batchChickenCut === "thighs" ? "40" : "30"
+                }}
+                min)
+              </button>
+              <button @click="startLentilTimer" class="btn-timer">
+                ▶
+                {{
+                  randomizerStore.confirmedPlan.legume.charAt(0).toUpperCase() +
+                  randomizerStore.confirmedPlan.legume.slice(1)
+                }}
+                ({{ standardCookConfig[randomizerStore.confirmedPlan.legume]?.durationMin || 22 }}
+                min)
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -473,6 +513,19 @@ function handleDeleteTimer(timerId: string) {
       :phase2-duration-min="currentSauceAlert.phase2DurationMin"
       @confirm="confirmSauceApplied"
       @skip="skipSauce"
+    />
+
+    <RecipePopover
+      :is-open="showRecipePopover"
+      :plan="randomizerStore.confirmedPlan"
+      @close="closeRecipePopover"
+    />
+
+    <IngredientPopover
+      :is-open="showIngredientPopover"
+      :ingredient="clickedIngredient"
+      :plan="randomizerStore.confirmedPlan"
+      @close="closeIngredientPopover"
     />
   </div>
 </template>
@@ -497,9 +550,37 @@ function handleDeleteTimer(timerId: string) {
   box-shadow: 0 4px 12px rgba(59, 110, 76, 0.3);
 }
 
+.cooking-content-area {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .cooking-content-area {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .cooking-steps {
+    flex: 1;
+    min-width: 0; /* Prevent flex item from overflowing */
+  }
+}
+
 .cooking-steps {
   max-width: 800px;
   margin: 0 auto;
+}
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-bottom: 10px;
 }
 
 .step-wrapper {
