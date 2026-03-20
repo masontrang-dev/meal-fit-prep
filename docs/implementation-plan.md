@@ -86,24 +86,24 @@ This implementation plan breaks down the development of the Meal Prep & Fitness 
 
 **Goal:** Populate all static data files that drive the application content.
 
-### 2.1 Meal Prep Data Files
+### 2.1 Meal Prep Data Files ✓ (COMPLETED)
 
-- [ ] `src/data/proteins.ts` — Fish, chicken (thighs/breast), steak objects
-- [ ] `src/data/grainsLegumes.ts` — Grains (brown rice, quinoa, jasmine rice) + Legumes (lentils, pinto beans, black beans)
-- [ ] `src/data/vegetables.ts` — Broccoli (default) + 7 swap options
-- [ ] `src/data/marinades.ts` — 4 marinades with timing badges
-- [ ] `src/data/sauces.ts` — Fish (3), Chicken (3), Steak (3) sauces
-- [ ] `src/data/mealPlan.ts` — Weekly meal plan (Mon–Sat)
-- [ ] `src/data/prepTimeline.ts` — Sunday prep steps with timing
-- [ ] `src/data/emergencyMeals.ts` — 5 fallback meals
-- [ ] `src/data/nutrients.ts` — Nutrient status table rows
-- [ ] `src/data/storageGuide.ts` — Fridge life and reheating data
-- [ ] `src/data/shopping.ts` — Shopping list items by category
+- [x] `src/data/proteins.ts` — Fish, chicken (thighs/breast), steak objects
+- [x] `src/data/grainsLegumes.ts` — Grains (brown rice, quinoa, jasmine rice) + Legumes (lentils, pinto beans, black beans)
+- [x] `src/data/vegetables.ts` — Broccoli (default) + 7 swap options
+- [x] `src/data/marinades.ts` — 4 marinades with timing badges
+- [x] `src/data/sauces.ts` — Fish (3), Chicken (3), Steak (3) sauces
+- [x] `src/data/mealPlan.ts` — Weekly meal plan (Mon–Sat)
+- [x] `src/data/prepTimeline.ts` — Sunday prep steps with timing
+- [x] `src/data/emergencyMeals.ts` — 5 fallback meals
+- [x] `src/data/nutrients.ts` — Nutrient status table rows
+- [x] `src/data/storageGuide.ts` — Fridge life and reheating data
+- [x] `src/data/shopping.ts` — Shopping list items by category
 
-### 2.2 Fitness Data Files (Placeholder)
+### 2.2 Fitness Data Files (Placeholder) ✓ (COMPLETED)
 
-- [ ] `src/data/fitness/` folder structure created
-- [ ] Placeholder files for future fitness content
+- [x] `src/data/fitness/` folder structure created
+- [x] Placeholder files for future fitness content
 
 **Deliverable:** All meal prep content structured as typed TypeScript data.
 
