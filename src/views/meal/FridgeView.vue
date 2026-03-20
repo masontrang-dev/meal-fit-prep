@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
+import { useRouter } from "vue-router";
 import { useRandomizerStore } from "@/stores/randomizerStore";
 import FridgeEmptyState from "@/components/meal/FridgeEmptyState.vue";
 import FridgeSlotCard from "@/components/meal/FridgeSlotCard.vue";
 import SaturdayPrepCard from "@/components/meal/SaturdayPrepCard.vue";
 import type { GeneratedPlan } from "@/types/randomizer.types";
 
+const router = useRouter();
 const store = useRandomizerStore();
 
 const warningDismissed = ref(false);
@@ -27,6 +29,14 @@ function handleSwap(slotKey: keyof GeneratedPlan) {
 
 function handleConfirm() {
   store.confirmPlan();
+}
+
+function navigateToShoppingList() {
+  router.push("/meal/shopping");
+}
+
+function navigateToPrepDay() {
+  router.push("/meal/prep");
 }
 
 function handleRegenerateAll() {
@@ -421,15 +431,37 @@ function formatValue(value: string): string {
         style="z-index: 9999"
       >
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div class="flex justify-center gap-4">
+          <div class="flex justify-between items-center">
+            <!-- Left aligned: Save as Favorite -->
             <button
               @click="handleSaveAsFavorite"
-              class="px-6 py-3 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg flex items-center gap-2"
+              disabled
+              class="px-6 py-3 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg flex items-center gap-2 opacity-50 cursor-not-allowed"
               style="background: var(--paper); color: var(--ink); border: 1px solid var(--rule)"
             >
               <span>⭐</span>
               <span>Save as Favorite</span>
             </button>
+
+            <!-- Center: View Shopping List and View Prep Day -->
+            <div class="flex gap-4">
+              <button
+                @click="navigateToShoppingList"
+                class="px-6 py-3 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg"
+                style="background: var(--blue); color: var(--paper)"
+              >
+                🛒 View Shopping List
+              </button>
+              <button
+                @click="navigateToPrepDay"
+                class="px-6 py-3 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg"
+                style="background: var(--green); color: var(--paper)"
+              >
+                👨‍🍳 View Prep Day
+              </button>
+            </div>
+
+            <!-- Right aligned: Generate Next Week -->
             <button
               @click="handleGenerate"
               class="px-6 py-3 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg"
