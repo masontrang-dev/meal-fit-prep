@@ -28,7 +28,7 @@ The application has two primary modules:
 - **Offline capable.** Shopping list and meal plan must work without an internet connection.
 - **Whole foods only.** No integration with calorie-counting APIs or ultra-processed food databases. This is a clean eating plan, not a generic diet tracker.
 - **DASH-friendly defaults.** Low-sodium guidance baked into recipes and notes throughout.
-- **PKD awareness.** Potassium, phosphorus, and sodium flagged in nutrient views. Not a medical tool — flagging only, with a standing recommendation to consult a nephrologist.
+- **Health awareness.** Potassium, phosphorus, and sodium flagged in nutrient views for those with specific dietary needs. Not a medical tool — flagging only, with a standing recommendation to consult a healthcare provider.
 
 ---
 
@@ -531,12 +531,6 @@ Each card displays:
 
 ### 4.7 Nutrients & Health Tab
 
-#### PKD Warning Banner
-
-Persistent prominent callout at the top:
-
-> **PKD (Polycystic Kidney Disease) — Important:** This plan is built on whole foods and aligns directionally with DASH principles. However, PKD dietary needs vary by kidney function stage (GFR). Potassium, phosphorus, and total daily protein need calibration to your specific labs. Bring this plan to your nephrologist or a renal dietitian. Ask specifically about your current GFR, potassium and phosphorus tolerance, and whether your protein target needs adjusting.
-
 #### DASH Diet Alignment Note
 
 - Use low-sodium soy sauce throughout (regular = ~900mg sodium/tbsp; low-sodium = ~450mg; coconut aminos = lower still)
@@ -545,20 +539,20 @@ Persistent prominent callout at the top:
 
 #### Nutrient Status Table
 
-| Nutrient     | Status                      | Main Sources                                 | Notes                                                                                      |
-| ------------ | --------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Protein      | ✅ Well covered             | Fish, chicken, steak, lentils, quinoa        | ~100–130g/day. Discuss total target with nephrologist — PKD may warrant moderation         |
-| Omega-3s     | ✅ Well covered             | Salmon 3–4×/week                             | Reduces exercise inflammation, supports workout recovery                                   |
-| Fiber        | ✅ Well covered             | Lentils, brown rice, quinoa, broccoli, beans | 25–35g/day. Supports gut health, satiety, stable training energy                           |
-| Iron         | ✅ Well covered             | Steak 2×/week, lentils, quinoa               | Heme iron from steak absorbs best. Bell peppers and lemon boost non-heme absorption        |
-| Magnesium    | ✅ Good                     | Brown rice, lentils, salmon, quinoa          | Important for muscle function and sleep. Exercise increases needs                          |
-| Zinc         | ✅ Good                     | Steak, chicken, lentils                      | Supports immune function and recovery                                                      |
-| B Vitamins   | ✅ Well covered             | All animal proteins, lentils, quinoa         | B12 from animal proteins. B6 and folate from lentils and quinoa                            |
-| Vitamin D    | ⚠️ Worth monitoring         | Salmon provides some                         | Most people are deficient. Consider D3 1,000–2,000 IU/day — discuss with doctor            |
-| Potassium    | ⚠️ PKD: discuss with doctor | Salmon, lentils, sweet potato, quinoa        | Moderate-to-high potassium foods. Nephrologist may advise limiting based on GFR            |
-| Phosphorus   | ⚠️ PKD: discuss with doctor | Fish, chicken, lentils                       | High-protein diets tend to be high in phosphorus. Monitor if labs indicate elevated levels |
-| Sodium       | ⚠️ Actively manage          | Soy sauce, seasoning blends                  | Low-sodium soy sauce throughout. DASH target: under 1,500–2,300mg/day                      |
-| Antioxidants | 🔴 Improve with variety     | Broccoli, bell peppers                       | Rotate vegetables weekly (see vegetable rotation panel) to improve micronutrient diversity |
+| Nutrient     | Status                  | Main Sources                                 | Notes                                                                                      |
+| ------------ | ----------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Protein      | ✅ Well covered         | Fish, chicken, steak, lentils, quinoa        | ~100–130g/day. Discuss total target with your doctor if you have specific dietary needs    |
+| Omega-3s     | ✅ Well covered         | Salmon 3–4×/week                             | Reduces exercise inflammation, supports workout recovery                                   |
+| Fiber        | ✅ Well covered         | Lentils, brown rice, quinoa, broccoli, beans | 25–35g/day. Supports gut health, satiety, stable training energy                           |
+| Iron         | ✅ Well covered         | Steak 2×/week, lentils, quinoa               | Heme iron from steak absorbs best. Bell peppers and lemon boost non-heme absorption        |
+| Magnesium    | ✅ Good                 | Brown rice, lentils, salmon, quinoa          | Important for muscle function and sleep. Exercise increases needs                          |
+| Zinc         | ✅ Good                 | Steak, chicken, lentils                      | Supports immune function and recovery                                                      |
+| B Vitamins   | ✅ Well covered         | All animal proteins, lentils, quinoa         | B12 from animal proteins. B6 and folate from lentils and quinoa                            |
+| Vitamin D    | ⚠️ Worth monitoring     | Salmon provides some                         | Most people are deficient. Consider D3 1,000–2,000 IU/day — discuss with doctor            |
+| Potassium    | ⚠️ Discuss with doctor  | Salmon, lentils, sweet potato, quinoa        | Moderate-to-high potassium foods. Your doctor may advise limiting based on your needs      |
+| Phosphorus   | ⚠️ Discuss with doctor  | Fish, chicken, lentils                       | High-protein diets tend to be high in phosphorus. Monitor if labs indicate elevated levels |
+| Sodium       | ⚠️ Actively manage      | Soy sauce, seasoning blends                  | Low-sodium soy sauce throughout. DASH target: under 1,500–2,300mg/day                      |
+| Antioxidants | 🔴 Improve with variety | Broccoli, bell peppers                       | Rotate vegetables weekly (see vegetable rotation panel) to improve micronutrient diversity |
 
 #### Fitness Plan Connection
 
@@ -567,9 +561,9 @@ Persistent prominent callout at the top:
 - Omega-3s from salmon 3–4×/week actively reduce muscle soreness — especially relevant during early weeks returning to training
 - Cardio creates calorie deficit → burns fat. Strength training builds muscle → raises resting metabolism. This plan fuels both.
 
-#### PKD & Water Note
+#### Hydration Note
 
-> High water intake is one of the most evidence-backed interventions for slowing PKD progression. Target 80–100 oz (2.5–3 liters) per day. Use thirst and pale yellow urine color as real-time indicators.
+> High water intake supports overall health and performance. Target 80–100 oz (2.5–3 liters) per day. Use thirst and pale yellow urine color as real-time indicators.
 
 ---
 

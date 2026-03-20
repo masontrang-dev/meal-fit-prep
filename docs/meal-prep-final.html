@@ -1,1083 +1,2523 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Weekly Meal Prep — For Two</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Jost:wght@300;400;500;600&display=swap');
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weekly Meal Prep — For Two</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Jost:wght@300;400;500;600&display=swap");
 
-:root {
-  --bg: #f8f4ef;
-  --paper: #fffefb;
-  --ink: #1e1a15;
-  --muted: #8c7f70;
-  --rule: #e6ddd2;
-  --green: #3b6e4c;
-  --green-light: #edf5f0;
-  --green-mid: #c8dfd0;
-  --orange: #c25520;
-  --orange-light: #fdf1ec;
-  --blue: #1d4a7c;
-  --blue-light: #ecf2fa;
-  --gold: #9c720e;
-  --gold-light: #fdf7e8;
-  --plum: #5c3570;
-  --plum-light: #f5f0fa;
-  --red: #8b2222;
-  --red-light: #fdf0f0;
-  --cast: #7a1f4a;
-  --cast-light: #fceef5;
-}
+      :root {
+        --bg: #f8f4ef;
+        --paper: #fffefb;
+        --ink: #1e1a15;
+        --muted: #8c7f70;
+        --rule: #e6ddd2;
+        --green: #3b6e4c;
+        --green-light: #edf5f0;
+        --green-mid: #c8dfd0;
+        --orange: #c25520;
+        --orange-light: #fdf1ec;
+        --blue: #1d4a7c;
+        --blue-light: #ecf2fa;
+        --gold: #9c720e;
+        --gold-light: #fdf7e8;
+        --plum: #5c3570;
+        --plum-light: #f5f0fa;
+        --red: #8b2222;
+        --red-light: #fdf0f0;
+        --cast: #7a1f4a;
+        --cast-light: #fceef5;
+      }
 
-* { margin:0; padding:0; box-sizing:border-box; }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: 'Jost', sans-serif;
-  font-weight: 300;
-  line-height: 1.6;
-  min-height: 100vh;
-}
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Jost", sans-serif;
+        font-weight: 300;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
 
-/* ── MASTHEAD ── */
-.masthead {
-  background: var(--ink);
-  color: var(--bg);
-  padding: 36px 32px 28px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: end;
-  gap: 24px;
-  border-bottom: 3px solid var(--green);
-}
+      /* ── MASTHEAD ── */
+      .masthead {
+        background: var(--ink);
+        color: var(--bg);
+        padding: 36px 32px 28px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: end;
+        gap: 24px;
+        border-bottom: 3px solid var(--green);
+      }
 
-.mast-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.2rem, 5vw, 3.8rem);
-  font-weight: 700;
-  line-height: 0.95;
-  letter-spacing: -0.01em;
-}
+      .mast-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.2rem, 5vw, 3.8rem);
+        font-weight: 700;
+        line-height: 0.95;
+        letter-spacing: -0.01em;
+      }
 
-.mast-title em { font-style: italic; color: #a8d4b8; }
+      .mast-title em {
+        font-style: italic;
+        color: #a8d4b8;
+      }
 
-.mast-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 14px;
-}
+      .mast-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 14px;
+      }
 
-.mpill {
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
-  padding: 3px 10px;
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
+      .mpill {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 3px 10px;
+        font-size: 0.68rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
 
-.mast-meta {
-  text-align: right;
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
-  line-height: 2.2;
-}
+      .mast-meta {
+        text-align: right;
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+        line-height: 2.2;
+      }
 
-/* ── NAV ── */
-.nav-wrap {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--ink);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.nav-wrap::-webkit-scrollbar { display:none; }
+      /* ── NAV ── */
+      .nav-wrap {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--ink);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .nav-wrap::-webkit-scrollbar {
+        display: none;
+      }
 
-.nav {
-  display: flex;
-  padding: 0 16px;
-  min-width: max-content;
-}
+      .nav {
+        display: flex;
+        padding: 0 16px;
+        min-width: max-content;
+      }
 
-.nav-btn {
-  padding: 12px 16px;
-  font-family: 'Jost', sans-serif;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border: none;
-  background: transparent;
-  color: rgba(255,255,255,0.4);
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  transition: all 0.15s;
-  white-space: nowrap;
-}
+      .nav-btn {
+        padding: 12px 16px;
+        font-family: "Jost", sans-serif;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        border: none;
+        background: transparent;
+        color: rgba(255, 255, 255, 0.4);
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        transition: all 0.15s;
+        white-space: nowrap;
+      }
 
-.nav-btn:hover { color: rgba(255,255,255,0.8); }
-.nav-btn.active { color: #a8d4b8; border-bottom-color: #a8d4b8; }
+      .nav-btn:hover {
+        color: rgba(255, 255, 255, 0.8);
+      }
+      .nav-btn.active {
+        color: #a8d4b8;
+        border-bottom-color: #a8d4b8;
+      }
 
-/* ── PAGE / VIEWS ── */
-.page { max-width: 980px; margin: 0 auto; padding: 36px 24px 100px; }
-.view { display:none; animation: fadein 0.2s ease; }
-.view.active { display:block; }
-@keyframes fadein { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:none; } }
+      /* ── PAGE / VIEWS ── */
+      .page {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 36px 24px 100px;
+      }
+      .view {
+        display: none;
+        animation: fadein 0.2s ease;
+      }
+      .view.active {
+        display: block;
+      }
+      @keyframes fadein {
+        from {
+          opacity: 0;
+          transform: translateY(4px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
 
-/* ── SECTION LABEL ── */
-.slabel {
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted);
-  border-top: 1px solid var(--rule);
-  padding-top: 10px;
-  margin: 32px 0 16px;
-}
+      /* ── SECTION LABEL ── */
+      .slabel {
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--muted);
+        border-top: 1px solid var(--rule);
+        padding-top: 10px;
+        margin: 32px 0 16px;
+      }
 
-/* ── CALLOUTS ── */
-.callout {
-  border: 1px solid var(--rule);
-  border-left: 3px solid var(--green);
-  background: var(--green-light);
-  padding: 13px 17px;
-  font-size: 0.83rem;
-  line-height: 1.7;
-  margin-bottom: 12px;
-}
-.callout strong { font-weight: 600; }
-.callout.orange { border-left-color:var(--orange); background:var(--orange-light); }
-.callout.blue   { border-left-color:var(--blue);   background:var(--blue-light); }
-.callout.gold   { border-left-color:var(--gold);   background:var(--gold-light); }
-.callout.red    { border-left-color:var(--red);    background:var(--red-light); }
-.callout.plum   { border-left-color:var(--plum);   background:var(--plum-light); }
-.callout.cast   { border-left-color:var(--cast);   background:var(--cast-light); }
+      /* ── CALLOUTS ── */
+      .callout {
+        border: 1px solid var(--rule);
+        border-left: 3px solid var(--green);
+        background: var(--green-light);
+        padding: 13px 17px;
+        font-size: 0.83rem;
+        line-height: 1.7;
+        margin-bottom: 12px;
+      }
+      .callout strong {
+        font-weight: 600;
+      }
+      .callout.orange {
+        border-left-color: var(--orange);
+        background: var(--orange-light);
+      }
+      .callout.blue {
+        border-left-color: var(--blue);
+        background: var(--blue-light);
+      }
+      .callout.gold {
+        border-left-color: var(--gold);
+        background: var(--gold-light);
+      }
+      .callout.red {
+        border-left-color: var(--red);
+        background: var(--red-light);
+      }
+      .callout.plum {
+        border-left-color: var(--plum);
+        background: var(--plum-light);
+      }
+      .callout.cast {
+        border-left-color: var(--cast);
+        background: var(--cast-light);
+      }
 
-/* ── PROTEIN CARDS ── */
-.protein-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:28px; }
+      /* ── PROTEIN CARDS ── */
+      .protein-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 28px;
+      }
 
-.pcard { border:1px solid var(--rule); background:var(--paper); overflow:hidden; }
-.pcard-head { padding:16px 18px 12px; }
-.pcard-icon { font-size:1.6rem; display:block; margin-bottom:6px; }
-.pcard-name { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:700; }
-.pcard-sub { font-size:0.67rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; margin-top:2px; opacity:.7; }
-.pcard-body { padding:0 18px 16px; font-size:0.81rem; line-height:1.7; }
-.pcard-body strong { font-weight:600; }
-.pstat { display:inline-block; background:var(--bg); border:1px solid var(--rule); padding:2px 8px; font-size:0.69rem; font-weight:600; margin-top:8px; margin-right:4px; }
+      .pcard {
+        border: 1px solid var(--rule);
+        background: var(--paper);
+        overflow: hidden;
+      }
+      .pcard-head {
+        padding: 16px 18px 12px;
+      }
+      .pcard-icon {
+        font-size: 1.6rem;
+        display: block;
+        margin-bottom: 6px;
+      }
+      .pcard-name {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+      }
+      .pcard-sub {
+        font-size: 0.67rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-top: 2px;
+        opacity: 0.7;
+      }
+      .pcard-body {
+        padding: 0 18px 16px;
+        font-size: 0.81rem;
+        line-height: 1.7;
+      }
+      .pcard-body strong {
+        font-weight: 600;
+      }
+      .pstat {
+        display: inline-block;
+        background: var(--bg);
+        border: 1px solid var(--rule);
+        padding: 2px 8px;
+        font-size: 0.69rem;
+        font-weight: 600;
+        margin-top: 8px;
+        margin-right: 4px;
+      }
 
-.pcard.fish    .pcard-head { background:var(--blue-light); }   .pcard.fish    .pcard-name,.pcard.fish    .pcard-sub { color:var(--blue); }
-.pcard.chicken .pcard-head { background:var(--orange-light); } .pcard.chicken .pcard-name,.pcard.chicken .pcard-sub { color:var(--orange); }
-.pcard.steak   .pcard-head { background:var(--gold-light); }   .pcard.steak   .pcard-name,.pcard.steak   .pcard-sub { color:var(--gold); }
+      .pcard.fish .pcard-head {
+        background: var(--blue-light);
+      }
+      .pcard.fish .pcard-name,
+      .pcard.fish .pcard-sub {
+        color: var(--blue);
+      }
+      .pcard.chicken .pcard-head {
+        background: var(--orange-light);
+      }
+      .pcard.chicken .pcard-name,
+      .pcard.chicken .pcard-sub {
+        color: var(--orange);
+      }
+      .pcard.steak .pcard-head {
+        background: var(--gold-light);
+      }
+      .pcard.steak .pcard-name,
+      .pcard.steak .pcard-sub {
+        color: var(--gold);
+      }
 
-/* ── GRAIN TABLE ── */
-.data-table { width:100%; border-collapse:collapse; font-size:0.81rem; background:var(--paper); border:1px solid var(--rule); margin-bottom:20px; }
-.data-table th { background:var(--ink); color:var(--bg); padding:10px 14px; text-align:left; font-size:0.62rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; }
-.data-table td { padding:11px 14px; border-bottom:1px solid var(--rule); vertical-align:top; line-height:1.55; }
-.data-table tr:last-child td { border-bottom:none; }
-.data-table tr:hover td { background:var(--bg); }
+      /* ── GRAIN TABLE ── */
+      .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.81rem;
+        background: var(--paper);
+        border: 1px solid var(--rule);
+        margin-bottom: 20px;
+      }
+      .data-table th {
+        background: var(--ink);
+        color: var(--bg);
+        padding: 10px 14px;
+        text-align: left;
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .data-table td {
+        padding: 11px 14px;
+        border-bottom: 1px solid var(--rule);
+        vertical-align: top;
+        line-height: 1.55;
+      }
+      .data-table tr:last-child td {
+        border-bottom: none;
+      }
+      .data-table tr:hover td {
+        background: var(--bg);
+      }
 
-.badge { display:inline-block; padding:2px 8px; font-size:0.67rem; font-weight:600; border-radius:2px; }
-.b-best  { background:var(--green-light); color:var(--green); border:1px solid var(--green-mid); }
-.b-good  { background:var(--gold-light);  color:var(--gold);  border:1px solid #e8d090; }
-.b-make  { background:var(--blue-light);  color:var(--blue);  border:1px solid #b8cce8; }
+      .badge {
+        display: inline-block;
+        padding: 2px 8px;
+        font-size: 0.67rem;
+        font-weight: 600;
+        border-radius: 2px;
+      }
+      .b-best {
+        background: var(--green-light);
+        color: var(--green);
+        border: 1px solid var(--green-mid);
+      }
+      .b-good {
+        background: var(--gold-light);
+        color: var(--gold);
+        border: 1px solid #e8d090;
+      }
+      .b-make {
+        background: var(--blue-light);
+        color: var(--blue);
+        border: 1px solid #b8cce8;
+      }
 
-/* ── VEG ROTATION ── */
-.veg-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:20px; }
-.veg-card { background:var(--paper); border:1px solid var(--rule); padding:12px 14px; font-size:0.79rem; }
-.veg-name { font-weight:600; font-size:0.84rem; margin-bottom:4px; }
-.veg-tag { display:inline-block; font-size:0.62rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; padding:1px 6px; border-radius:2px; margin-bottom:6px; }
-.veg-default { background:var(--green-light); color:var(--green); }
-.veg-swap    { background:var(--gold-light);  color:var(--gold); }
-.veg-note { color:var(--muted); font-size:0.75rem; line-height:1.5; }
+      /* ── VEG ROTATION ── */
+      .veg-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .veg-card {
+        background: var(--paper);
+        border: 1px solid var(--rule);
+        padding: 12px 14px;
+        font-size: 0.79rem;
+      }
+      .veg-name {
+        font-weight: 600;
+        font-size: 0.84rem;
+        margin-bottom: 4px;
+      }
+      .veg-tag {
+        display: inline-block;
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 1px 6px;
+        border-radius: 2px;
+        margin-bottom: 6px;
+      }
+      .veg-default {
+        background: var(--green-light);
+        color: var(--green);
+      }
+      .veg-swap {
+        background: var(--gold-light);
+        color: var(--gold);
+      }
+      .veg-note {
+        color: var(--muted);
+        font-size: 0.75rem;
+        line-height: 1.5;
+      }
 
-/* ── SHOPPING ── */
-.shop-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:20px; }
-.shop-card { background:var(--paper); border:1px solid var(--rule); padding:16px 18px; }
-.shop-card-title { font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:700; margin-bottom:10px; padding-bottom:8px; border-bottom:1px solid var(--rule); }
-.shop-items { list-style:none; }
-.shop-item { display:flex; align-items:flex-start; gap:9px; padding:5px 0; border-bottom:1px solid var(--rule); font-size:0.8rem; cursor:pointer; transition:opacity 0.15s; }
-.shop-item:last-child { border-bottom:none; }
-.shop-item.checked { opacity:.35; text-decoration:line-through; }
-.shop-cb { width:15px; height:15px; border:1.5px solid var(--rule); border-radius:2px; flex-shrink:0; margin-top:2px; display:flex; align-items:center; justify-content:center; font-size:0.58rem; transition:all 0.15s; }
-.shop-item.checked .shop-cb { background:var(--green); border-color:var(--green); color:white; }
-.shop-item.checked .shop-cb::after { content:'✓'; }
-.shop-item-name { flex:1; line-height:1.4; }
-.shop-item-qty { font-size:0.7rem; color:var(--muted); font-weight:600; white-space:nowrap; }
+      /* ── SHOPPING ── */
+      .shop-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+      .shop-card {
+        background: var(--paper);
+        border: 1px solid var(--rule);
+        padding: 16px 18px;
+      }
+      .shop-card-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--rule);
+      }
+      .shop-items {
+        list-style: none;
+      }
+      .shop-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 9px;
+        padding: 5px 0;
+        border-bottom: 1px solid var(--rule);
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: opacity 0.15s;
+      }
+      .shop-item:last-child {
+        border-bottom: none;
+      }
+      .shop-item.checked {
+        opacity: 0.35;
+        text-decoration: line-through;
+      }
+      .shop-cb {
+        width: 15px;
+        height: 15px;
+        border: 1.5px solid var(--rule);
+        border-radius: 2px;
+        flex-shrink: 0;
+        margin-top: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.58rem;
+        transition: all 0.15s;
+      }
+      .shop-item.checked .shop-cb {
+        background: var(--green);
+        border-color: var(--green);
+        color: white;
+      }
+      .shop-item.checked .shop-cb::after {
+        content: "✓";
+      }
+      .shop-item-name {
+        flex: 1;
+        line-height: 1.4;
+      }
+      .shop-item-qty {
+        font-size: 0.7rem;
+        color: var(--muted);
+        font-weight: 600;
+        white-space: nowrap;
+      }
 
-/* ── TIMELINE ── */
-.timeline { position:relative; padding-left:32px; margin-bottom:28px; }
-.timeline::before { content:''; position:absolute; left:10px; top:6px; bottom:6px; width:2px; background:var(--rule); }
-.tl-item { position:relative; margin-bottom:24px; }
-.tl-dot { position:absolute; left:-28px; top:4px; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.6rem; font-weight:700; color:white; z-index:1; }
-.tl-time { font-size:0.63rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:3px; }
-.tl-title { font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:700; margin-bottom:5px; }
-.tl-body { font-size:0.81rem; line-height:1.75; color:#5c5045; }
-.tl-body strong { color:var(--ink); font-weight:600; }
-.tl-body ol,.tl-body ul { margin:8px 0 8px 18px; line-height:2.1; }
+      /* ── TIMELINE ── */
+      .timeline {
+        position: relative;
+        padding-left: 32px;
+        margin-bottom: 28px;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 10px;
+        top: 6px;
+        bottom: 6px;
+        width: 2px;
+        background: var(--rule);
+      }
+      .tl-item {
+        position: relative;
+        margin-bottom: 24px;
+      }
+      .tl-dot {
+        position: absolute;
+        left: -28px;
+        top: 4px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.6rem;
+        font-weight: 700;
+        color: white;
+        z-index: 1;
+      }
+      .tl-time {
+        font-size: 0.63rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 3px;
+      }
+      .tl-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+      .tl-body {
+        font-size: 0.81rem;
+        line-height: 1.75;
+        color: #5c5045;
+      }
+      .tl-body strong {
+        color: var(--ink);
+        font-weight: 600;
+      }
+      .tl-body ol,
+      .tl-body ul {
+        margin: 8px 0 8px 18px;
+        line-height: 2.1;
+      }
 
-/* ── EMERGENCY BOX ── */
-.emergency-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px; }
-.em-card { background:var(--paper); border:1px solid var(--rule); border-left:3px solid var(--muted); padding:13px 15px; }
-.em-num { font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:700; color:var(--rule); line-height:1; }
-.em-title { font-weight:600; font-size:0.85rem; margin:4px 0; }
-.em-desc { font-size:0.78rem; line-height:1.6; color:var(--muted); }
+      /* ── EMERGENCY BOX ── */
+      .emergency-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .em-card {
+        background: var(--paper);
+        border: 1px solid var(--rule);
+        border-left: 3px solid var(--muted);
+        padding: 13px 15px;
+      }
+      .em-num {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--rule);
+        line-height: 1;
+      }
+      .em-title {
+        font-weight: 600;
+        font-size: 0.85rem;
+        margin: 4px 0;
+      }
+      .em-desc {
+        font-size: 0.78rem;
+        line-height: 1.6;
+        color: var(--muted);
+      }
 
-/* ── MEAL PLAN ── */
-.meal-table { width:100%; border-collapse:collapse; font-size:0.8rem; background:var(--paper); border:1px solid var(--rule); margin-bottom:20px; }
-.meal-table th { background:var(--ink); color:var(--bg); padding:10px 13px; text-align:left; font-size:0.62rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; }
-.meal-table td { padding:11px 13px; border-bottom:1px solid var(--rule); vertical-align:top; line-height:1.55; }
-.meal-table tr:last-child td { border-bottom:none; }
-.meal-table tr:hover td { background:var(--bg); }
-.day-col { font-weight:600; font-size:0.8rem; white-space:nowrap; color:var(--ink); }
-.day-note { display:block; font-size:0.68rem; color:var(--muted); font-weight:300; margin-top:1px; }
+      /* ── MEAL PLAN ── */
+      .meal-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.8rem;
+        background: var(--paper);
+        border: 1px solid var(--rule);
+        margin-bottom: 20px;
+      }
+      .meal-table th {
+        background: var(--ink);
+        color: var(--bg);
+        padding: 10px 13px;
+        text-align: left;
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .meal-table td {
+        padding: 11px 13px;
+        border-bottom: 1px solid var(--rule);
+        vertical-align: top;
+        line-height: 1.55;
+      }
+      .meal-table tr:last-child td {
+        border-bottom: none;
+      }
+      .meal-table tr:hover td {
+        background: var(--bg);
+      }
+      .day-col {
+        font-weight: 600;
+        font-size: 0.8rem;
+        white-space: nowrap;
+        color: var(--ink);
+      }
+      .day-note {
+        display: block;
+        font-size: 0.68rem;
+        color: var(--muted);
+        font-weight: 300;
+        margin-top: 1px;
+      }
 
-.pt { display:inline-block; padding:2px 8px; font-size:0.67rem; font-weight:600; border-radius:2px; margin-bottom:3px; }
-.pt-fish    { background:var(--blue-light);  color:var(--blue); }
-.pt-chicken { background:var(--orange-light); color:var(--orange); }
-.pt-steak   { background:var(--gold-light);  color:var(--gold); }
-.pt-flex    { background:var(--green-light); color:var(--green); }
-.pt-cast    { background:var(--cast-light);  color:var(--cast); }
+      .pt {
+        display: inline-block;
+        padding: 2px 8px;
+        font-size: 0.67rem;
+        font-weight: 600;
+        border-radius: 2px;
+        margin-bottom: 3px;
+      }
+      .pt-fish {
+        background: var(--blue-light);
+        color: var(--blue);
+      }
+      .pt-chicken {
+        background: var(--orange-light);
+        color: var(--orange);
+      }
+      .pt-steak {
+        background: var(--gold-light);
+        color: var(--gold);
+      }
+      .pt-flex {
+        background: var(--green-light);
+        color: var(--green);
+      }
+      .pt-cast {
+        background: var(--cast-light);
+        color: var(--cast);
+      }
 
-/* ── CAST IRON ── */
-.cast-header { background:var(--cast); color:white; padding:18px 22px; margin-bottom:0; }
-.cast-header-title { font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:700; }
-.cast-header-sub { font-size:0.7rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; opacity:.7; margin-top:3px; }
+      /* ── CAST IRON ── */
+      .cast-header {
+        background: var(--cast);
+        color: white;
+        padding: 18px 22px;
+        margin-bottom: 0;
+      }
+      .cast-header-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+      .cast-header-sub {
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        opacity: 0.7;
+        margin-top: 3px;
+      }
 
-.cast-card { background:var(--paper); border:1px solid var(--rule); border-top:none; padding:18px 22px; margin-bottom:16px; }
-.cast-body { font-size:0.82rem; line-height:1.8; }
-.cast-body strong { font-weight:600; }
-.cast-body ol { margin:10px 0 10px 20px; line-height:2.1; }
+      .cast-card {
+        background: var(--paper);
+        border: 1px solid var(--rule);
+        border-top: none;
+        padding: 18px 22px;
+        margin-bottom: 16px;
+      }
+      .cast-body {
+        font-size: 0.82rem;
+        line-height: 1.8;
+      }
+      .cast-body strong {
+        font-weight: 600;
+      }
+      .cast-body ol {
+        margin: 10px 0 10px 20px;
+        line-height: 2.1;
+      }
 
-.marinade-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px; }
-.m-card { background:var(--paper); border:1px solid var(--rule); overflow:hidden; }
-.m-card-head { padding:12px 16px 10px; display:flex; justify-content:space-between; align-items:flex-start; }
-.m-card-name { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:700; }
-.m-card-for { font-size:0.67rem; color:var(--muted); font-weight:500; margin-top:2px; }
-.m-timing { font-size:0.64rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:3px 8px; border-radius:2px; white-space:nowrap; flex-shrink:0; }
-.t-sunday { background:var(--green-light); color:var(--green); border:1px solid var(--green-mid); }
-.t-tuesday { background:var(--gold-light); color:var(--gold); border:1px solid #e8d090; }
-.m-card-body { padding:0 16px 14px; }
-.m-ing-label { font-size:0.62rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:5px; }
-.m-ing-list { list-style:none; font-size:0.79rem; line-height:1.9; }
-.m-ing-list li::before { content:'· '; color:var(--green); }
-.m-note { font-size:0.75rem; color:#6a5a4a; font-style:italic; margin-top:8px; padding-top:8px; border-top:1px solid var(--rule); }
+      .marinade-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-top: 16px;
+      }
+      .m-card {
+        background: var(--paper);
+        border: 1px solid var(--rule);
+        overflow: hidden;
+      }
+      .m-card-head {
+        padding: 12px 16px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+      .m-card-name {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+      }
+      .m-card-for {
+        font-size: 0.67rem;
+        color: var(--muted);
+        font-weight: 500;
+        margin-top: 2px;
+      }
+      .m-timing {
+        font-size: 0.64rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 3px 8px;
+        border-radius: 2px;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .t-sunday {
+        background: var(--green-light);
+        color: var(--green);
+        border: 1px solid var(--green-mid);
+      }
+      .t-tuesday {
+        background: var(--gold-light);
+        color: var(--gold);
+        border: 1px solid #e8d090;
+      }
+      .m-card-body {
+        padding: 0 16px 14px;
+      }
+      .m-ing-label {
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 5px;
+      }
+      .m-ing-list {
+        list-style: none;
+        font-size: 0.79rem;
+        line-height: 1.9;
+      }
+      .m-ing-list li::before {
+        content: "· ";
+        color: var(--green);
+      }
+      .m-note {
+        font-size: 0.75rem;
+        color: #6a5a4a;
+        font-style: italic;
+        margin-top: 8px;
+        padding-top: 8px;
+        border-top: 1px solid var(--rule);
+      }
 
-/* ── SAUCES ── */
-.sauce-section { margin-bottom:30px; }
-.sauce-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:13px; }
-.s-card { background:var(--paper); border:1px solid var(--rule); overflow:hidden; }
-.s-card-top { padding:14px 16px 10px; }
-.s-name { font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:700; }
-.s-for { font-size:0.65rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); margin-top:2px; margin-bottom:0; }
-.s-card-body { padding:0 16px 14px; }
-.s-ing-label { font-size:0.61rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin:10px 0 5px; }
-.s-ing-list { list-style:none; font-size:0.78rem; line-height:1.9; }
-.s-ing-list li::before { content:'· '; color:var(--green); }
-.s-storage { font-size:0.74rem; margin-top:9px; padding-top:8px; border-top:1px solid var(--rule); line-height:1.5; }
-.s-storage-badge { display:inline-block; font-size:0.62rem; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; padding:2px 7px; border-radius:2px; margin-right:5px; }
-.sb-pantry { background:#f0f4e8; color:#4a6020; border:1px solid #c8d8a0; }
-.sb-fridge { background:var(--blue-light); color:var(--blue); border:1px solid #b8cce8; }
-.sb-batch  { background:var(--cast-light); color:var(--cast); border:1px solid #e8b8d0; }
+      /* ── SAUCES ── */
+      .sauce-section {
+        margin-bottom: 30px;
+      }
+      .sauce-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 13px;
+      }
+      .s-card {
+        background: var(--paper);
+        border: 1px solid var(--rule);
+        overflow: hidden;
+      }
+      .s-card-top {
+        padding: 14px 16px 10px;
+      }
+      .s-name {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+      }
+      .s-for {
+        font-size: 0.65rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-top: 2px;
+        margin-bottom: 0;
+      }
+      .s-card-body {
+        padding: 0 16px 14px;
+      }
+      .s-ing-label {
+        font-size: 0.61rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin: 10px 0 5px;
+      }
+      .s-ing-list {
+        list-style: none;
+        font-size: 0.78rem;
+        line-height: 1.9;
+      }
+      .s-ing-list li::before {
+        content: "· ";
+        color: var(--green);
+      }
+      .s-storage {
+        font-size: 0.74rem;
+        margin-top: 9px;
+        padding-top: 8px;
+        border-top: 1px solid var(--rule);
+        line-height: 1.5;
+      }
+      .s-storage-badge {
+        display: inline-block;
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        padding: 2px 7px;
+        border-radius: 2px;
+        margin-right: 5px;
+      }
+      .sb-pantry {
+        background: #f0f4e8;
+        color: #4a6020;
+        border: 1px solid #c8d8a0;
+      }
+      .sb-fridge {
+        background: var(--blue-light);
+        color: var(--blue);
+        border: 1px solid #b8cce8;
+      }
+      .sb-batch {
+        background: var(--cast-light);
+        color: var(--cast);
+        border: 1px solid #e8b8d0;
+      }
 
-/* ── NUTRIENTS ── */
-.nutr-table { width:100%; border-collapse:collapse; font-size:0.8rem; background:var(--paper); border:1px solid var(--rule); margin-bottom:20px; }
-.nutr-table th { background:var(--ink); color:var(--bg); padding:10px 14px; text-align:left; font-size:0.62rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; }
-.nutr-table td { padding:10px 14px; border-bottom:1px solid var(--rule); vertical-align:top; line-height:1.55; }
-.nutr-table tr:last-child td { border-bottom:none; }
-.nutr-table tr:hover td { background:var(--bg); }
-.ns { display:inline-block; padding:2px 8px; font-size:0.66rem; font-weight:600; border-radius:2px; }
-.ns-good  { background:var(--green-light); color:var(--green); }
-.ns-watch { background:var(--gold-light);  color:var(--gold); }
-.ns-low   { background:var(--red-light);   color:var(--red); }
+      /* ── NUTRIENTS ── */
+      .nutr-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.8rem;
+        background: var(--paper);
+        border: 1px solid var(--rule);
+        margin-bottom: 20px;
+      }
+      .nutr-table th {
+        background: var(--ink);
+        color: var(--bg);
+        padding: 10px 14px;
+        text-align: left;
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .nutr-table td {
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--rule);
+        vertical-align: top;
+        line-height: 1.55;
+      }
+      .nutr-table tr:last-child td {
+        border-bottom: none;
+      }
+      .nutr-table tr:hover td {
+        background: var(--bg);
+      }
+      .ns {
+        display: inline-block;
+        padding: 2px 8px;
+        font-size: 0.66rem;
+        font-weight: 600;
+        border-radius: 2px;
+      }
+      .ns-good {
+        background: var(--green-light);
+        color: var(--green);
+      }
+      .ns-watch {
+        background: var(--gold-light);
+        color: var(--gold);
+      }
+      .ns-low {
+        background: var(--red-light);
+        color: var(--red);
+      }
 
-/* ── STORAGE ── */
-.store-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-.store-card { background:var(--paper); border:1px solid var(--rule); padding:14px 17px; font-size:0.8rem; line-height:1.7; }
-.store-title { font-weight:600; font-size:0.84rem; margin-bottom:6px; border-bottom:1px solid var(--rule); padding-bottom:6px; }
-.store-days { display:inline-block; font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:700; color:var(--green); margin-right:4px; }
+      /* ── STORAGE ── */
+      .store-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .store-card {
+        background: var(--paper);
+        border: 1px solid var(--rule);
+        padding: 14px 17px;
+        font-size: 0.8rem;
+        line-height: 1.7;
+      }
+      .store-title {
+        font-weight: 600;
+        font-size: 0.84rem;
+        margin-bottom: 6px;
+        border-bottom: 1px solid var(--rule);
+        padding-bottom: 6px;
+      }
+      .store-days {
+        display: inline-block;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--green);
+        margin-right: 4px;
+      }
 
-@media(max-width:640px){
-  .protein-grid,.marinade-grid,.sauce-grid { grid-template-columns:1fr; }
-  .shop-grid,.store-grid,.emergency-grid { grid-template-columns:1fr; }
-  .veg-grid { grid-template-columns:1fr 1fr; }
-  .masthead { grid-template-columns:1fr; }
-  .mast-meta { text-align:left; margin-top:12px; }
-  .meal-table th:nth-child(4),.meal-table td:nth-child(4) { display:none; }
-}
-</style>
-</head>
-<body>
-
-<div class="masthead">
-  <div>
-    <div class="mast-title">Meal Prep<br><em>for Two</em></div>
-    <div class="mast-pills">
-      <span class="mpill">6 Lunches + 6 Dinners</span>
-      <span class="mpill">Whole Foods</span>
-      <span class="mpill">DASH Friendly</span>
-      <span class="mpill">Sunday Prep + Wed Cast Iron</span>
+      @media (max-width: 640px) {
+        .protein-grid,
+        .marinade-grid,
+        .sauce-grid {
+          grid-template-columns: 1fr;
+        }
+        .shop-grid,
+        .store-grid,
+        .emergency-grid {
+          grid-template-columns: 1fr;
+        }
+        .veg-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .masthead {
+          grid-template-columns: 1fr;
+        }
+        .mast-meta {
+          text-align: left;
+          margin-top: 12px;
+        }
+        .meal-table th:nth-child(4),
+        .meal-table td:nth-child(4) {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="masthead">
+      <div>
+        <div class="mast-title">Meal Prep<br /><em>for Two</em></div>
+        <div class="mast-pills">
+          <span class="mpill">6 Lunches + 6 Dinners</span>
+          <span class="mpill">Whole Foods</span>
+          <span class="mpill">DASH Friendly</span>
+          <span class="mpill">Sunday Prep + Wed Cast Iron</span>
+        </div>
+      </div>
+      <div class="mast-meta">
+        Fish · Chicken · Steak<br />
+        Brown Rice · Quinoa · Lentils<br />
+        2 People · San Diego
+      </div>
     </div>
-  </div>
-  <div class="mast-meta">
-    Fish · Chicken · Steak<br>
-    Brown Rice · Quinoa · Lentils<br>
-    2 People · San Diego
-  </div>
-</div>
 
-<div class="nav-wrap">
-  <div class="nav">
-    <button class="nav-btn active" onclick="show('proteins',this)">Proteins & Grains</button>
-    <button class="nav-btn" onclick="show('shopping',this)">Shopping List</button>
-    <button class="nav-btn" onclick="show('prepday',this)">Prep Day</button>
-    <button class="nav-btn" onclick="show('mealplan',this)">Meal Plan</button>
-    <button class="nav-btn" onclick="show('castiran',this)">Cast Iron Night</button>
-    <button class="nav-btn" onclick="show('sauces',this)">Sauces</button>
-    <button class="nav-btn" onclick="show('nutrients',this)">Nutrients & Health</button>
-    <button class="nav-btn" onclick="show('storage',this)">Storage</button>
-  </div>
-</div>
+    <div class="nav-wrap">
+      <div class="nav">
+        <button class="nav-btn active" onclick="show('proteins', this)">
+          Proteins & Grains
+        </button>
+        <button class="nav-btn" onclick="show('shopping', this)">
+          Shopping List
+        </button>
+        <button class="nav-btn" onclick="show('prepday', this)">
+          Prep Day
+        </button>
+        <button class="nav-btn" onclick="show('mealplan', this)">
+          Meal Plan
+        </button>
+        <button class="nav-btn" onclick="show('castiran', this)">
+          Cast Iron Night
+        </button>
+        <button class="nav-btn" onclick="show('sauces', this)">Sauces</button>
+        <button class="nav-btn" onclick="show('nutrients', this)">
+          Nutrients & Health
+        </button>
+        <button class="nav-btn" onclick="show('storage', this)">Storage</button>
+      </div>
+    </div>
 
-<div class="page">
-
-<!-- ════════════════════════════════
+    <div class="page">
+      <!-- ════════════════════════════════
      PROTEINS & GRAINS
 ════════════════════════════════ -->
-<div class="view active" id="view-proteins">
+      <div class="view active" id="view-proteins">
+        <div class="callout">
+          <strong>Scaled for 2 people, 6 days:</strong> Roughly 12 protein
+          servings per week — fish (4–5 meals), chicken (4–5 meals), steak (2–3
+          meals). Wednesday's cast iron covers one dinner fresh off the pan.
+          Everything else is reheated from Sunday prep. Breakfasts are not
+          specified — eat what works each morning.
+        </div>
 
-  <div class="callout"><strong>Scaled for 2 people, 6 days:</strong> Roughly 12 protein servings per week — fish (4–5 meals), chicken (4–5 meals), steak (2–3 meals). Wednesday's cast iron covers one dinner fresh off the pan. Everything else is reheated from Sunday prep. Breakfasts are not specified — eat what works each morning.</div>
+        <div class="slabel">Fish</div>
+        <div class="protein-grid" style="grid-template-columns: 1fr 1fr">
+          <div class="pcard fish" style="grid-column: span 2">
+            <div
+              class="pcard-head"
+              style="
+                display: grid;
+                grid-template-columns: auto 1fr;
+                gap: 16px;
+                align-items: start;
+              "
+            >
+              <div><span class="pcard-icon">🐟</span></div>
+              <div>
+                <div class="pcard-name">Fish</div>
+                <div class="pcard-sub" style="color: var(--blue)">
+                  4–5 meals · 2 people · ~3–3.5 lbs/week
+                </div>
+              </div>
+            </div>
+            <div
+              class="pcard-body"
+              style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px"
+            >
+              <div>
+                <strong>Buy:</strong> Frozen salmon fillets, tilapia, cod, or
+                mahi-mahi. Individually vacuum-sealed — thaw overnight in
+                fridge. No scaling, no deboning on standard fillets. Costco
+                frozen salmon bag is best value. Trader Joe's individual fillets
+                are convenient.<br /><br /><strong
+                  >Eat earlier in the week</strong
+                >
+                — cooked fish keeps only 3–4 days. Mon–Wed lunches and dinners
+                are ideal.
+              </div>
+              <div>
+                <strong>Cooking:</strong> Pat dry, season (see Sauces tab), bake
+                at 400°F for 12–15 min on foil-lined sheet pan. Don't crowd the
+                pan.<br /><br /><strong>Never reheated on high heat</strong> —
+                50% microwave power, 90 sec. Or oven at 275°F covered with foil
+                for 10 min.
+                <div>
+                  <span class="pstat">~30g protein / 6oz</span
+                  ><span class="pstat">Omega-3s</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-  <div class="slabel">Fish</div>
-  <div class="protein-grid" style="grid-template-columns:1fr 1fr;">
-    <div class="pcard fish" style="grid-column:span 2">
-      <div class="pcard-head" style="display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;">
-        <div><span class="pcard-icon">🐟</span></div>
-        <div>
-          <div class="pcard-name">Fish</div>
-          <div class="pcard-sub" style="color:var(--blue)">4–5 meals · 2 people · ~3–3.5 lbs/week</div>
+        <div class="slabel">Chicken</div>
+        <div class="protein-grid">
+          <div class="pcard chicken">
+            <div class="pcard-head">
+              <span class="pcard-icon">🍗</span>
+              <div class="pcard-name">Thighs</div>
+              <div class="pcard-sub" style="color: var(--orange)">
+                Best for Sunday batch
+              </div>
+            </div>
+            <div class="pcard-body">
+              <strong>Why thighs for prep:</strong> Higher fat content keeps
+              them moist when reheated. Much harder to overcook than breast.
+              Flavor holds better through day 4–5 in the fridge.<br /><br />
+              <strong>Amount:</strong> ~2–2.5 lbs for Sunday batch. Reserve ~1
+              lb separately for Wednesday's cast iron marinade.<br /><br />
+              <strong>Cooking:</strong> 375°F for 35–40 min. Season well and
+              they're nearly impossible to ruin.
+              <div>
+                <span class="pstat">~30g protein / 4oz</span
+                ><span class="pstat">Most forgiving</span>
+              </div>
+            </div>
+          </div>
+          <div class="pcard chicken">
+            <div class="pcard-head">
+              <span class="pcard-icon">🍗</span>
+              <div class="pcard-name">Breast</div>
+              <div class="pcard-sub" style="color: var(--orange)">
+                Best for cast iron or fresh cook
+              </div>
+            </div>
+            <div class="pcard-body">
+              <strong>Why breast for cast iron:</strong> Leaner (better for
+              weight loss goals), great when eaten fresh off the pan — no
+              reheating dryness issue.<br /><br />
+              <strong>Prep tips if batch cooking:</strong> Pound to even
+              thickness before baking. Pull at exactly 165°F. Store with a
+              little sauce in the container. Reheat at 50% microwave power
+              only.<br /><br />
+              <strong>Optional:</strong> One rotisserie chicken (~$7–8) = 4–5
+              shredded portions instantly for Mon–Tue lunches.
+              <div>
+                <span class="pstat">~35g protein / 4oz</span
+                ><span class="pstat">Leanest option</span>
+              </div>
+            </div>
+          </div>
+          <div class="pcard chicken" style="grid-column: span 1">
+            <div class="pcard-head">
+              <span class="pcard-icon">🛒</span>
+              <div class="pcard-name">Total Chicken</div>
+              <div class="pcard-sub" style="color: var(--orange)">
+                Weekly quantity
+              </div>
+            </div>
+            <div class="pcard-body">
+              Buy <strong>3.5–4 lbs total</strong> per week. Roughly:<br /><br />
+              · 2–2.5 lbs thighs for Sunday oven batch<br />
+              · 1 lb thighs or breast reserved for Wednesday cast iron
+              marinade<br /><br />
+              Keep remainder in freezer for future weeks if buying in bulk at
+              Costco.
+              <div><span class="pstat">Costco bulk = best value</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slabel">Steak</div>
+        <div class="protein-grid" style="grid-template-columns: 1fr 1fr">
+          <div class="pcard steak" style="grid-column: span 2">
+            <div
+              class="pcard-head"
+              style="
+                display: grid;
+                grid-template-columns: auto 1fr;
+                gap: 16px;
+                align-items: start;
+              "
+            >
+              <div><span class="pcard-icon">🥩</span></div>
+              <div>
+                <div class="pcard-name">
+                  Steak — Always Cast Iron, Never Oven
+                </div>
+                <div class="pcard-sub" style="color: var(--gold)">
+                  2–3 meals · 2 people · 1.5–2 lbs/week
+                </div>
+              </div>
+            </div>
+            <div
+              class="pcard-body"
+              style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px"
+            >
+              <div>
+                <strong>Buy:</strong> Flank or sirloin — leaner cuts, excellent
+                sliced thin over bowls. One 1.5–2 lb flank steak = 4–6 portions
+                for two.<br /><br /><strong>Why always cast iron:</strong> The
+                high dry heat of a cast iron creates the Maillard reaction crust
+                that makes steak taste like steak. An oven can't replicate this
+                on a thin cut. Flank and sirloin are ideal for the cast iron
+                method.
+              </div>
+              <div>
+                <strong>Strategy:</strong> Marinate Sunday (use a Sunday-safe
+                marinade — see Cast Iron tab) and cook Wednesday for peak
+                freshness and flavor. Leftovers serve as Thursday lunch.<br /><br /><strong
+                  >Cook to medium</strong
+                >
+                — not well done. A proper sear is fine; heavily
+                blackened/charred is what to avoid. Rest 5 min before slicing.
+                <div>
+                  <span class="pstat">~32g protein / 4oz</span
+                  ><span class="pstat">Iron + zinc</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slabel">
+          Grains & Legumes — All Cooked Sunday, No Preservatives
+        </div>
+        <div class="callout blue">
+          All whole foods. Cook brown rice and quinoa in your rice cooker.
+          Lentils cook on the stovetop in 22 minutes with no soaking.
+          <strong>All three are cooked Sunday</strong> — no mid-week grain
+          sessions needed. The only mid-week cooking is Wednesday's 13-minute
+          cast iron dinner. <strong>Rinse quinoa well before cooking</strong> —
+          it has a natural bitter coating (saponin) that washing removes.
+        </div>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Grain / Legume</th>
+              <th>Key Nutrients</th>
+              <th>Cook Method & Time</th>
+              <th>Weekly Use</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Brown Rice</strong></td>
+              <td>
+                Fiber, magnesium, B vitamins. Slower digesting than white rice —
+                sustained energy for training.
+              </td>
+              <td>
+                Rice cooker · 45–50 min. Cook large batch Sunday — keeps 5 days
+                refrigerated.
+              </td>
+              <td>Mon + Tue meals. Base for any bowl.</td>
+              <td><span class="badge b-best">Best</span></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Quinoa</strong><br /><span
+                  style="font-size: 0.72rem; color: var(--muted)"
+                  >Rinse well first</span
+                >
+              </td>
+              <td>
+                Complete protein (~8g/cup cooked). Only grain with all 9
+                essential amino acids. High iron and magnesium.
+              </td>
+              <td>
+                Rice cooker or stovetop · 15–18 min. Cook Sunday — keeps 5–6
+                days.
+              </td>
+              <td>Wed + Thu meals. Especially good with fish.</td>
+              <td><span class="badge b-best">Best</span></td>
+            </tr>
+            <tr>
+              <td><strong>Green / Brown Lentils</strong></td>
+              <td>
+                18g protein + 16g fiber per cup cooked. Cheapest protein source
+                on this list. Very filling. No soaking needed.
+              </td>
+              <td>
+                Stovetop · Sauté onion + garlic in olive oil 3 min → add 1.5
+                cups lentils + 3 cups broth + cumin + salt → simmer covered 22
+                min. Cook Sunday.
+              </td>
+              <td>Thu + Fri + Sat meals. Excellent base for bowl or side.</td>
+              <td><span class="badge b-best">Best</span></td>
+            </tr>
+            <tr>
+              <td><strong>Jasmine Rice</strong></td>
+              <td>
+                Lighter and easier to digest. Lower fiber than brown but still a
+                clean whole-food carb. Good post-workout option.
+              </td>
+              <td>
+                Rice cooker · 20 min. Swap in any week you want something
+                lighter.
+              </td>
+              <td>
+                Optional. Good for taco night or when you want a lighter side.
+              </td>
+              <td><span class="badge b-good">Good</span></td>
+            </tr>
+            <tr>
+              <td><strong>Dried Pinto Beans (Refried)</strong></td>
+              <td>
+                High fiber + plant protein. Homemade version has zero additives.
+                Freezes perfectly in portions.
+              </td>
+              <td>
+                Soak overnight → simmer 1 hr with onion + garlic + cumin → mash.
+                Make a large batch, freeze in portions — future weeks are zero
+                effort.
+              </td>
+              <td>Saturday taco night. Freeze leftovers for future weeks.</td>
+              <td><span class="badge b-make">Worth making</span></td>
+            </tr>
+            <tr>
+              <td><strong>Canned Black Beans</strong></td>
+              <td>
+                Drain and rinse removes most sodium. Zero-effort backup side.
+              </td>
+              <td>
+                Zero cook — drain, rinse, optionally warm with cumin + garlic
+                powder.
+              </td>
+              <td>Any day as a quick side. Good with brown rice on Tue.</td>
+              <td><span class="badge b-good">Good</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="slabel">Vegetable Rotation</div>
+        <div class="callout gold">
+          Broccoli is the default — it's the most available pre-cut and
+          pre-washed option and holds up best through the week. Swap in one of
+          the alternatives below any week you want variety. All are available
+          pre-cut or require minimal prep.
+        </div>
+
+        <div class="veg-grid">
+          <div class="veg-card">
+            <div class="veg-name">Broccoli Florets</div>
+            <div><span class="veg-tag veg-default">Default</span></div>
+            <div class="veg-note">
+              Pre-cut bags everywhere. Roast at 425°F 18 min or steam 4 min.
+              Holds well 4–5 days.
+            </div>
+          </div>
+          <div class="veg-card">
+            <div class="veg-name">Asparagus</div>
+            <div><span class="veg-tag veg-swap">Swap</span></div>
+            <div class="veg-note">
+              Snap off woody ends — only prep needed. Roast 12 min at 425°F.
+              Great with salmon.
+            </div>
+          </div>
+          <div class="veg-card">
+            <div class="veg-name">Zucchini</div>
+            <div><span class="veg-tag veg-swap">Swap</span></div>
+            <div class="veg-note">
+              Pre-sliced bags available. Roasts in 15 min. Mild flavor pairs
+              with any protein.
+            </div>
+          </div>
+          <div class="veg-card">
+            <div class="veg-name">Green Beans</div>
+            <div><span class="veg-tag veg-swap">Swap</span></div>
+            <div class="veg-note">
+              Frozen bags, steam in 4 min. No prep at all. Good fiber and
+              crunch.
+            </div>
+          </div>
+          <div class="veg-card">
+            <div class="veg-name">Snap Peas</div>
+            <div><span class="veg-tag veg-swap">Swap</span></div>
+            <div class="veg-note">
+              Pre-washed bags. Eat raw or lightly sauté 3 min. High vitamin C.
+            </div>
+          </div>
+          <div class="veg-card">
+            <div class="veg-name">Cauliflower</div>
+            <div><span class="veg-tag veg-swap">Swap</span></div>
+            <div class="veg-note">
+              Pre-cut or frozen florets. Roasts like broccoli — 400°F 20 min.
+              Very filling.
+            </div>
+          </div>
+          <div class="veg-card">
+            <div class="veg-name">Bok Choy</div>
+            <div><span class="veg-tag veg-swap">Swap</span></div>
+            <div class="veg-note">
+              Baby bok choy, halved — no chopping. Sauté with garlic 5 min.
+              Great with Asian marinades.
+            </div>
+          </div>
+          <div class="veg-card">
+            <div class="veg-name">Frozen Stir-Fry Blend</div>
+            <div><span class="veg-tag veg-swap">Wildcard</span></div>
+            <div class="veg-note">
+              Bag of mixed veg — steam or sauté 5 min. Good color and nutrient
+              variety with zero thought.
+            </div>
+          </div>
         </div>
       </div>
-      <div class="pcard-body" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-        <div><strong>Buy:</strong> Frozen salmon fillets, tilapia, cod, or mahi-mahi. Individually vacuum-sealed — thaw overnight in fridge. No scaling, no deboning on standard fillets. Costco frozen salmon bag is best value. Trader Joe's individual fillets are convenient.<br><br><strong>Eat earlier in the week</strong> — cooked fish keeps only 3–4 days. Mon–Wed lunches and dinners are ideal.</div>
-        <div><strong>Cooking:</strong> Pat dry, season (see Sauces tab), bake at 400°F for 12–15 min on foil-lined sheet pan. Don't crowd the pan.<br><br><strong>Never reheated on high heat</strong> — 50% microwave power, 90 sec. Or oven at 275°F covered with foil for 10 min.<div><span class="pstat">~30g protein / 6oz</span><span class="pstat">Omega-3s</span></div></div>
-      </div>
-    </div>
-  </div>
 
-  <div class="slabel">Chicken</div>
-  <div class="protein-grid">
-    <div class="pcard chicken">
-      <div class="pcard-head">
-        <span class="pcard-icon">🍗</span>
-        <div class="pcard-name">Thighs</div>
-        <div class="pcard-sub" style="color:var(--orange)">Best for Sunday batch</div>
-      </div>
-      <div class="pcard-body">
-        <strong>Why thighs for prep:</strong> Higher fat content keeps them moist when reheated. Much harder to overcook than breast. Flavor holds better through day 4–5 in the fridge.<br><br>
-        <strong>Amount:</strong> ~2–2.5 lbs for Sunday batch. Reserve ~1 lb separately for Wednesday's cast iron marinade.<br><br>
-        <strong>Cooking:</strong> 375°F for 35–40 min. Season well and they're nearly impossible to ruin.
-        <div><span class="pstat">~30g protein / 4oz</span><span class="pstat">Most forgiving</span></div>
-      </div>
-    </div>
-    <div class="pcard chicken">
-      <div class="pcard-head">
-        <span class="pcard-icon">🍗</span>
-        <div class="pcard-name">Breast</div>
-        <div class="pcard-sub" style="color:var(--orange)">Best for cast iron or fresh cook</div>
-      </div>
-      <div class="pcard-body">
-        <strong>Why breast for cast iron:</strong> Leaner (better for weight loss goals), great when eaten fresh off the pan — no reheating dryness issue.<br><br>
-        <strong>Prep tips if batch cooking:</strong> Pound to even thickness before baking. Pull at exactly 165°F. Store with a little sauce in the container. Reheat at 50% microwave power only.<br><br>
-        <strong>Optional:</strong> One rotisserie chicken (~$7–8) = 4–5 shredded portions instantly for Mon–Tue lunches.
-        <div><span class="pstat">~35g protein / 4oz</span><span class="pstat">Leanest option</span></div>
-      </div>
-    </div>
-    <div class="pcard chicken" style="grid-column:span 1">
-      <div class="pcard-head">
-        <span class="pcard-icon">🛒</span>
-        <div class="pcard-name">Total Chicken</div>
-        <div class="pcard-sub" style="color:var(--orange)">Weekly quantity</div>
-      </div>
-      <div class="pcard-body">
-        Buy <strong>3.5–4 lbs total</strong> per week. Roughly:<br><br>
-        · 2–2.5 lbs thighs for Sunday oven batch<br>
-        · 1 lb thighs or breast reserved for Wednesday cast iron marinade<br><br>
-        Keep remainder in freezer for future weeks if buying in bulk at Costco.
-        <div><span class="pstat">Costco bulk = best value</span></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="slabel">Steak</div>
-  <div class="protein-grid" style="grid-template-columns:1fr 1fr;">
-    <div class="pcard steak" style="grid-column:span 2">
-      <div class="pcard-head" style="display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;">
-        <div><span class="pcard-icon">🥩</span></div>
-        <div>
-          <div class="pcard-name">Steak — Always Cast Iron, Never Oven</div>
-          <div class="pcard-sub" style="color:var(--gold)">2–3 meals · 2 people · 1.5–2 lbs/week</div>
-        </div>
-      </div>
-      <div class="pcard-body" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-        <div><strong>Buy:</strong> Flank or sirloin — leaner cuts, excellent sliced thin over bowls. One 1.5–2 lb flank steak = 4–6 portions for two.<br><br><strong>Why always cast iron:</strong> The high dry heat of a cast iron creates the Maillard reaction crust that makes steak taste like steak. An oven can't replicate this on a thin cut. Flank and sirloin are ideal for the cast iron method.</div>
-        <div><strong>Strategy:</strong> Marinate Sunday (use a Sunday-safe marinade — see Cast Iron tab) and cook Wednesday for peak freshness and flavor. Leftovers serve as Thursday lunch.<br><br><strong>Cook to medium</strong> — not well done. A proper sear is fine; heavily blackened/charred is what to avoid. Rest 5 min before slicing.
-        <div><span class="pstat">~32g protein / 4oz</span><span class="pstat">Iron + zinc</span></div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="slabel">Grains & Legumes — All Cooked Sunday, No Preservatives</div>
-  <div class="callout blue">All whole foods. Cook brown rice and quinoa in your rice cooker. Lentils cook on the stovetop in 22 minutes with no soaking. <strong>All three are cooked Sunday</strong> — no mid-week grain sessions needed. The only mid-week cooking is Wednesday's 13-minute cast iron dinner. <strong>Rinse quinoa well before cooking</strong> — it has a natural bitter coating (saponin) that washing removes.</div>
-
-  <table class="data-table">
-    <thead><tr><th>Grain / Legume</th><th>Key Nutrients</th><th>Cook Method & Time</th><th>Weekly Use</th><th></th></tr></thead>
-    <tbody>
-      <tr><td><strong>Brown Rice</strong></td><td>Fiber, magnesium, B vitamins. Slower digesting than white rice — sustained energy for training.</td><td>Rice cooker · 45–50 min. Cook large batch Sunday — keeps 5 days refrigerated.</td><td>Mon + Tue meals. Base for any bowl.</td><td><span class="badge b-best">Best</span></td></tr>
-      <tr><td><strong>Quinoa</strong><br><span style="font-size:0.72rem;color:var(--muted)">Rinse well first</span></td><td>Complete protein (~8g/cup cooked). Only grain with all 9 essential amino acids. High iron and magnesium.</td><td>Rice cooker or stovetop · 15–18 min. Cook Sunday — keeps 5–6 days.</td><td>Wed + Thu meals. Especially good with fish.</td><td><span class="badge b-best">Best</span></td></tr>
-      <tr><td><strong>Green / Brown Lentils</strong></td><td>18g protein + 16g fiber per cup cooked. Cheapest protein source on this list. Very filling. No soaking needed.</td><td>Stovetop · Sauté onion + garlic in olive oil 3 min → add 1.5 cups lentils + 3 cups broth + cumin + salt → simmer covered 22 min. Cook Sunday.</td><td>Thu + Fri + Sat meals. Excellent base for bowl or side.</td><td><span class="badge b-best">Best</span></td></tr>
-      <tr><td><strong>Jasmine Rice</strong></td><td>Lighter and easier to digest. Lower fiber than brown but still a clean whole-food carb. Good post-workout option.</td><td>Rice cooker · 20 min. Swap in any week you want something lighter.</td><td>Optional. Good for taco night or when you want a lighter side.</td><td><span class="badge b-good">Good</span></td></tr>
-      <tr><td><strong>Dried Pinto Beans (Refried)</strong></td><td>High fiber + plant protein. Homemade version has zero additives. Freezes perfectly in portions.</td><td>Soak overnight → simmer 1 hr with onion + garlic + cumin → mash. Make a large batch, freeze in portions — future weeks are zero effort.</td><td>Saturday taco night. Freeze leftovers for future weeks.</td><td><span class="badge b-make">Worth making</span></td></tr>
-      <tr><td><strong>Canned Black Beans</strong></td><td>Drain and rinse removes most sodium. Zero-effort backup side.</td><td>Zero cook — drain, rinse, optionally warm with cumin + garlic powder.</td><td>Any day as a quick side. Good with brown rice on Tue.</td><td><span class="badge b-good">Good</span></td></tr>
-    </tbody>
-  </table>
-
-  <div class="slabel">Vegetable Rotation</div>
-  <div class="callout gold">Broccoli is the default — it's the most available pre-cut and pre-washed option and holds up best through the week. Swap in one of the alternatives below any week you want variety. All are available pre-cut or require minimal prep.</div>
-
-  <div class="veg-grid">
-    <div class="veg-card"><div class="veg-name">Broccoli Florets</div><div><span class="veg-tag veg-default">Default</span></div><div class="veg-note">Pre-cut bags everywhere. Roast at 425°F 18 min or steam 4 min. Holds well 4–5 days.</div></div>
-    <div class="veg-card"><div class="veg-name">Asparagus</div><div><span class="veg-tag veg-swap">Swap</span></div><div class="veg-note">Snap off woody ends — only prep needed. Roast 12 min at 425°F. Great with salmon.</div></div>
-    <div class="veg-card"><div class="veg-name">Zucchini</div><div><span class="veg-tag veg-swap">Swap</span></div><div class="veg-note">Pre-sliced bags available. Roasts in 15 min. Mild flavor pairs with any protein.</div></div>
-    <div class="veg-card"><div class="veg-name">Green Beans</div><div><span class="veg-tag veg-swap">Swap</span></div><div class="veg-note">Frozen bags, steam in 4 min. No prep at all. Good fiber and crunch.</div></div>
-    <div class="veg-card"><div class="veg-name">Snap Peas</div><div><span class="veg-tag veg-swap">Swap</span></div><div class="veg-note">Pre-washed bags. Eat raw or lightly sauté 3 min. High vitamin C.</div></div>
-    <div class="veg-card"><div class="veg-name">Cauliflower</div><div><span class="veg-tag veg-swap">Swap</span></div><div class="veg-note">Pre-cut or frozen florets. Roasts like broccoli — 400°F 20 min. Very filling.</div></div>
-    <div class="veg-card"><div class="veg-name">Bok Choy</div><div><span class="veg-tag veg-swap">Swap</span></div><div class="veg-note">Baby bok choy, halved — no chopping. Sauté with garlic 5 min. Great with Asian marinades.</div></div>
-    <div class="veg-card"><div class="veg-name">Frozen Stir-Fry Blend</div><div><span class="veg-tag veg-swap">Wildcard</span></div><div class="veg-note">Bag of mixed veg — steam or sauté 5 min. Good color and nutrient variety with zero thought.</div></div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════
+      <!-- ════════════════════════════════
      SHOPPING LIST
 ════════════════════════════════ -->
-<div class="view" id="view-shopping">
-  <div style="font-size:0.82rem;color:var(--muted);margin-bottom:16px;">For 2 people · 6 lunches + 6 dinners. Tap items to check off as you shop. Breakfasts not included — shop separately based on what you want that week. Check which marinade you're making this week and add those ingredients if not already in your pantry.</div>
-  <div class="shop-grid" id="shop-grid"></div>
-  <div class="callout"><strong>Costco runs worth it for:</strong> Frozen salmon bags, bulk chicken thighs, flank steak, lentils, quinoa, chia seeds. Roughly halves per-serving cost vs. regular grocery.</div>
-</div>
+      <div class="view" id="view-shopping">
+        <div
+          style="font-size: 0.82rem; color: var(--muted); margin-bottom: 16px"
+        >
+          For 2 people · 6 lunches + 6 dinners. Tap items to check off as you
+          shop. Breakfasts not included — shop separately based on what you want
+          that week. Check which marinade you're making this week and add those
+          ingredients if not already in your pantry.
+        </div>
+        <div class="shop-grid" id="shop-grid"></div>
+        <div class="callout">
+          <strong>Costco runs worth it for:</strong> Frozen salmon bags, bulk
+          chicken thighs, flank steak, lentils, quinoa, chia seeds. Roughly
+          halves per-serving cost vs. regular grocery.
+        </div>
+      </div>
 
-<!-- ════════════════════════════════
+      <!-- ════════════════════════════════
      PREP DAY
 ════════════════════════════════ -->
-<div class="view" id="view-prepday">
+      <div class="view" id="view-prepday">
+        <div
+          style="font-size: 0.82rem; color: var(--muted); margin-bottom: 22px"
+        >
+          Sunday afternoon · ~90–100 min total · mostly hands-off oven time.
+          <strong>Everything for the week is done here</strong> — including
+          Wednesday's cast iron setup. The only mid-week cooking after this is
+          the 13-minute Wednesday cast iron dinner.
+        </div>
 
-  <div style="font-size:0.82rem;color:var(--muted);margin-bottom:22px;">Sunday afternoon · ~90–100 min total · mostly hands-off oven time. <strong>Everything for the week is done here</strong> — including Wednesday's cast iron setup. The only mid-week cooking after this is the 13-minute Wednesday cast iron dinner.</div>
+        <div class="callout cast">
+          <strong>Cast iron setup is 100% Sunday.</strong> Marinate the
+          Wednesday protein now and refrigerate. Slice the Wednesday vegetables
+          now and store in a container. Wednesday evening you pull everything
+          from the fridge and cook — zero additional prep.
+        </div>
 
-  <div class="callout cast"><strong>Cast iron setup is 100% Sunday.</strong> Marinate the Wednesday protein now and refrigerate. Slice the Wednesday vegetables now and store in a container. Wednesday evening you pull everything from the fridge and cook — zero additional prep.</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot" style="background: var(--muted)">▸</div>
+            <div class="tl-time">Saturday Night</div>
+            <div class="tl-title">Two-Minute Saturday Setup</div>
+            <div class="tl-body">
+              Move frozen fish fillets from freezer to fridge — perfectly thawed
+              by Sunday afternoon. If making refried pinto beans this week,
+              cover 1 cup dried beans in water and soak overnight.
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot" style="background: var(--blue)">1</div>
+            <div class="tl-time">0 min · Start</div>
+            <div class="tl-title">
+              Rice Cooker On + Oven Preheat + Chop Everything
+            </div>
+            <div class="tl-body">
+              Start <strong>brown rice</strong> in rice cooker first — 45 min,
+              fully hands-off. Preheat oven to 400°F. Line two sheet pans with
+              foil.<br /><br />
+              <strong>Chop all aromatics in one session now:</strong>
+              <ul>
+                <li>
+                  Dice 1 large onion — half goes into lentils, half into
+                  Wednesday's cast iron container
+                </li>
+                <li>Mince 5–6 garlic cloves — divide same way</li>
+                <li>Slice bell peppers into strips for Wednesday</li>
+                <li>Slice mushrooms for Wednesday</li>
+              </ul>
+              Store Wednesday vegetables (onion half, garlic half, bell pepper
+              strips, mushrooms) in a labeled container in the fridge. You won't
+              touch them again until Wednesday.
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot" style="background: var(--cast)">2</div>
+            <div class="tl-time">15 min · 2 minutes active</div>
+            <div class="tl-title">Wednesday Marinade — Do It Now</div>
+            <div class="tl-body">
+              Set aside ~1 lb chicken thighs or steak for Wednesday. Mix your
+              chosen marinade (see Cast Iron tab). Pour over protein in a
+              zip-lock bag, squeeze out air, label
+              <em>"Wednesday,"</em> refrigerate.<br /><br />
+              <strong>Safe to marinate from Sunday:</strong> Soy Garlic Ginger,
+              Smoked Paprika Garlic — oil and soy-based, no significant acid,
+              flavor only improves over 2–5 days.<br /><br />
+              <strong>Marinate Tuesday instead if choosing:</strong> Lime Cumin
+              or Balsamic Herb — citrus and vinegar-based acids will break down
+              protein texture if left more than 1–2 days.
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot" style="background: var(--orange)">3</div>
+            <div class="tl-time">18 min · Active</div>
+            <div class="tl-title">Season All Proteins for Sunday Batch</div>
+            <div class="tl-body">
+              <strong>Fish (~3 lbs):</strong> Pat completely dry with paper
+              towel — critical for good baking. Coat lightly with olive oil,
+              season (see Sauces tab). Flat on foil-lined sheet pan, don't
+              crowd.<br /><br />
+              <strong>Chicken thighs (~2–2.5 lbs):</strong> Season with olive
+              oil + Italian herbs + minced garlic + salt + pepper. Place on
+              second sheet pan alongside broccoli florets tossed in olive oil +
+              salt.<br /><br />
+              <strong>Quinoa:</strong> Rinse in fine mesh strainer under cold
+              water for 30 seconds. Add to rice cooker with 1:1.5 ratio water
+              after brown rice finishes, or cook simultaneously on stovetop (15
+              min).
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot" style="background: var(--green)">4</div>
+            <div class="tl-time">28 min · Hands Off</div>
+            <div class="tl-title">
+              Everything in the Oven + Lentils on Stovetop
+            </div>
+            <div class="tl-body">
+              Fish: <strong>12–15 min</strong>. Chicken + broccoli:
+              <strong>35–40 min</strong>. Set timers and step away.<br /><br />
+              <strong>While oven runs — start lentils:</strong> In a medium pot,
+              heat 1 tbsp olive oil over medium. Sauté the lentil-portion of
+              diced onion and garlic 3 min until soft. Add 1.5 cups dry lentils
+              + 3 cups low-sodium broth + 1 tsp cumin + ½ tsp salt. Bring to
+              boil, reduce to low, cover and simmer 22 min. They'll be done
+              around the same time as the chicken.
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot" style="background: var(--gold)">5</div>
+            <div class="tl-time">65 min · Active</div>
+            <div class="tl-title">Pull, Rest, Cool, Portion</div>
+            <div class="tl-body">
+              Fish comes out first. Chicken + broccoli a few minutes later.
+              Lentils come off the stovetop.<br /><br />
+              <strong
+                >Critical: let everything cool 10 minutes before lidding
+                containers.</strong
+              >
+              Sealing hot food traps steam and makes everything soggy and
+              unappealing by Monday.<br /><br />
+              Portion into containers — 2 portions per container (one lunch for
+              both of you) or individual containers if preferred. Label by day
+              or protein type. Brown rice and quinoa into their own containers.
+              Lentils into a separate container.
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot" style="background: var(--ink)">✓</div>
+            <div class="tl-time">~90–100 min · Done</div>
+            <div class="tl-title">What's Now in Your Fridge</div>
+            <div class="tl-body">
+              · Cooked fish containers (eat Mon–Wed)<br />
+              · Cooked chicken containers (eat Mon–Fri)<br />
+              · Brown rice batch<br />
+              · Quinoa batch<br />
+              · Lentil batch<br />
+              · Wednesday protein marinating in labeled zip-lock<br />
+              · Wednesday vegetables pre-sliced in labeled container<br /><br />
+              <strong>The rest of the week:</strong> Wednesday evening is 13
+              minutes of active cooking. Everything else is open container +
+              reheat.
+            </div>
+          </div>
+        </div>
 
-  <div class="timeline">
-    <div class="tl-item">
-      <div class="tl-dot" style="background:var(--muted)">▸</div>
-      <div class="tl-time">Saturday Night</div>
-      <div class="tl-title">Two-Minute Saturday Setup</div>
-      <div class="tl-body">Move frozen fish fillets from freezer to fridge — perfectly thawed by Sunday afternoon. If making refried pinto beans this week, cover 1 cup dried beans in water and soak overnight.</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot" style="background:var(--blue)">1</div>
-      <div class="tl-time">0 min · Start</div>
-      <div class="tl-title">Rice Cooker On + Oven Preheat + Chop Everything</div>
-      <div class="tl-body">
-        Start <strong>brown rice</strong> in rice cooker first — 45 min, fully hands-off. Preheat oven to 400°F. Line two sheet pans with foil.<br><br>
-        <strong>Chop all aromatics in one session now:</strong>
-        <ul>
-          <li>Dice 1 large onion — half goes into lentils, half into Wednesday's cast iron container</li>
-          <li>Mince 5–6 garlic cloves — divide same way</li>
-          <li>Slice bell peppers into strips for Wednesday</li>
-          <li>Slice mushrooms for Wednesday</li>
-        </ul>
-        Store Wednesday vegetables (onion half, garlic half, bell pepper strips, mushrooms) in a labeled container in the fridge. You won't touch them again until Wednesday.
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot" style="background:var(--cast)">2</div>
-      <div class="tl-time">15 min · 2 minutes active</div>
-      <div class="tl-title">Wednesday Marinade — Do It Now</div>
-      <div class="tl-body">
-        Set aside ~1 lb chicken thighs or steak for Wednesday. Mix your chosen marinade (see Cast Iron tab). Pour over protein in a zip-lock bag, squeeze out air, label <em>"Wednesday,"</em> refrigerate.<br><br>
-        <strong>Safe to marinate from Sunday:</strong> Soy Garlic Ginger, Smoked Paprika Garlic — oil and soy-based, no significant acid, flavor only improves over 2–5 days.<br><br>
-        <strong>Marinate Tuesday instead if choosing:</strong> Lime Cumin or Balsamic Herb — citrus and vinegar-based acids will break down protein texture if left more than 1–2 days.
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot" style="background:var(--orange)">3</div>
-      <div class="tl-time">18 min · Active</div>
-      <div class="tl-title">Season All Proteins for Sunday Batch</div>
-      <div class="tl-body">
-        <strong>Fish (~3 lbs):</strong> Pat completely dry with paper towel — critical for good baking. Coat lightly with olive oil, season (see Sauces tab). Flat on foil-lined sheet pan, don't crowd.<br><br>
-        <strong>Chicken thighs (~2–2.5 lbs):</strong> Season with olive oil + Italian herbs + minced garlic + salt + pepper. Place on second sheet pan alongside broccoli florets tossed in olive oil + salt.<br><br>
-        <strong>Quinoa:</strong> Rinse in fine mesh strainer under cold water for 30 seconds. Add to rice cooker with 1:1.5 ratio water after brown rice finishes, or cook simultaneously on stovetop (15 min).
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot" style="background:var(--green)">4</div>
-      <div class="tl-time">28 min · Hands Off</div>
-      <div class="tl-title">Everything in the Oven + Lentils on Stovetop</div>
-      <div class="tl-body">
-        Fish: <strong>12–15 min</strong>. Chicken + broccoli: <strong>35–40 min</strong>. Set timers and step away.<br><br>
-        <strong>While oven runs — start lentils:</strong> In a medium pot, heat 1 tbsp olive oil over medium. Sauté the lentil-portion of diced onion and garlic 3 min until soft. Add 1.5 cups dry lentils + 3 cups low-sodium broth + 1 tsp cumin + ½ tsp salt. Bring to boil, reduce to low, cover and simmer 22 min. They'll be done around the same time as the chicken.
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot" style="background:var(--gold)">5</div>
-      <div class="tl-time">65 min · Active</div>
-      <div class="tl-title">Pull, Rest, Cool, Portion</div>
-      <div class="tl-body">
-        Fish comes out first. Chicken + broccoli a few minutes later. Lentils come off the stovetop.<br><br>
-        <strong>Critical: let everything cool 10 minutes before lidding containers.</strong> Sealing hot food traps steam and makes everything soggy and unappealing by Monday.<br><br>
-        Portion into containers — 2 portions per container (one lunch for both of you) or individual containers if preferred. Label by day or protein type. Brown rice and quinoa into their own containers. Lentils into a separate container.
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot" style="background:var(--ink)">✓</div>
-      <div class="tl-time">~90–100 min · Done</div>
-      <div class="tl-title">What's Now in Your Fridge</div>
-      <div class="tl-body">
-        · Cooked fish containers (eat Mon–Wed)<br>
-        · Cooked chicken containers (eat Mon–Fri)<br>
-        · Brown rice batch<br>
-        · Quinoa batch<br>
-        · Lentil batch<br>
-        · Wednesday protein marinating in labeled zip-lock<br>
-        · Wednesday vegetables pre-sliced in labeled container<br><br>
-        <strong>The rest of the week:</strong> Wednesday evening is 13 minutes of active cooking. Everything else is open container + reheat.
-      </div>
-    </div>
-  </div>
+        <div class="slabel">
+          Emergency Week — When Sunday Prep Doesn't Happen
+        </div>
+        <div class="callout orange">
+          <strong>Life happens.</strong> If you miss a Sunday, these five meals
+          require no prep and can be assembled in 10 minutes or less from pantry
+          staples and a quick grocery stop.
+        </div>
 
-  <div class="slabel">Emergency Week — When Sunday Prep Doesn't Happen</div>
-  <div class="callout orange"><strong>Life happens.</strong> If you miss a Sunday, these five meals require no prep and can be assembled in 10 minutes or less from pantry staples and a quick grocery stop.</div>
+        <div class="emergency-grid">
+          <div class="em-card">
+            <div class="em-num">01</div>
+            <div class="em-title">Rotisserie Chicken + Bagged Salad</div>
+            <div class="em-desc">
+              Buy a whole rotisserie chicken (~$7). Shred over a pre-washed
+              salad kit. Add canned black beans. Done in 5 minutes, zero
+              cooking.
+            </div>
+          </div>
+          <div class="em-card">
+            <div class="em-num">02</div>
+            <div class="em-title">Canned Tuna + Rice + Frozen Veg</div>
+            <div class="em-desc">
+              Drain canned tuna, season with olive oil + lemon + salt. Rice
+              cooker on. Steam frozen veg bag in microwave 4 min. Complete meal
+              in 20 min hands-off.
+            </div>
+          </div>
+          <div class="em-card">
+            <div class="em-num">03</div>
+            <div class="em-title">Frozen Fish + Microwave Sweet Potato</div>
+            <div class="em-desc">
+              Thaw frozen fillet in cold water 30 min. Season and bake 15 min at
+              400°F. Microwave sweet potato 5 min simultaneously. Two
+              ingredients, no prep.
+            </div>
+          </div>
+          <div class="em-card">
+            <div class="em-num">04</div>
+            <div class="em-title">Eggs + Black Beans + Rice</div>
+            <div class="em-desc">
+              Scramble 3 eggs. Warm canned black beans with cumin. Rice cooker
+              or microwave rice. High protein, zero shopping needed if pantry is
+              stocked.
+            </div>
+          </div>
+          <div class="em-card" style="grid-column: span 2">
+            <div class="em-num">05</div>
+            <div class="em-title">One-Pot Lentil Soup</div>
+            <div class="em-desc">
+              Sauté onion + garlic 3 min. Add 1 cup dry lentils + 3 cups broth +
+              diced canned tomatoes + cumin + smoked paprika. Simmer 25 min.
+              Serves 2 generously with no other sides needed. Keeps 5 days —
+              this becomes tomorrow's lunch too.
+            </div>
+          </div>
+        </div>
+      </div>
 
-  <div class="emergency-grid">
-    <div class="em-card">
-      <div class="em-num">01</div>
-      <div class="em-title">Rotisserie Chicken + Bagged Salad</div>
-      <div class="em-desc">Buy a whole rotisserie chicken (~$7). Shred over a pre-washed salad kit. Add canned black beans. Done in 5 minutes, zero cooking.</div>
-    </div>
-    <div class="em-card">
-      <div class="em-num">02</div>
-      <div class="em-title">Canned Tuna + Rice + Frozen Veg</div>
-      <div class="em-desc">Drain canned tuna, season with olive oil + lemon + salt. Rice cooker on. Steam frozen veg bag in microwave 4 min. Complete meal in 20 min hands-off.</div>
-    </div>
-    <div class="em-card">
-      <div class="em-num">03</div>
-      <div class="em-title">Frozen Fish + Microwave Sweet Potato</div>
-      <div class="em-desc">Thaw frozen fillet in cold water 30 min. Season and bake 15 min at 400°F. Microwave sweet potato 5 min simultaneously. Two ingredients, no prep.</div>
-    </div>
-    <div class="em-card">
-      <div class="em-num">04</div>
-      <div class="em-title">Eggs + Black Beans + Rice</div>
-      <div class="em-desc">Scramble 3 eggs. Warm canned black beans with cumin. Rice cooker or microwave rice. High protein, zero shopping needed if pantry is stocked.</div>
-    </div>
-    <div class="em-card" style="grid-column:span 2">
-      <div class="em-num">05</div>
-      <div class="em-title">One-Pot Lentil Soup</div>
-      <div class="em-desc">Sauté onion + garlic 3 min. Add 1 cup dry lentils + 3 cups broth + diced canned tomatoes + cumin + smoked paprika. Simmer 25 min. Serves 2 generously with no other sides needed. Keeps 5 days — this becomes tomorrow's lunch too.</div>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════
+      <!-- ════════════════════════════════
      MEAL PLAN
 ════════════════════════════════ -->
-<div class="view" id="view-mealplan">
+      <div class="view" id="view-mealplan">
+        <div
+          style="font-size: 0.82rem; color: var(--muted); margin-bottom: 16px"
+        >
+          All portions for 2 people. Breakfasts are flexible — not specified.
+          Wednesday dinner is always the cast iron fresh-cook session. Thursday
+          steak lunch uses Wednesday's cast iron leftovers.
+        </div>
 
-  <div style="font-size:0.82rem;color:var(--muted);margin-bottom:16px;">All portions for 2 people. Breakfasts are flexible — not specified. Wednesday dinner is always the cast iron fresh-cook session. Thursday steak lunch uses Wednesday's cast iron leftovers.</div>
+        <table class="meal-table">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Lunch (×2)</th>
+              <th>Dinner (×2)</th>
+              <th>Grain / Side</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="day-col">Monday</td>
+              <td>
+                <span class="pt pt-fish">Fish</span><br />Baked salmon +
+                broccoli
+              </td>
+              <td>
+                <span class="pt pt-chicken">Chicken</span><br />Chicken thigh +
+                roasted veg
+              </td>
+              <td>Brown rice</td>
+            </tr>
+            <tr>
+              <td class="day-col">Tuesday</td>
+              <td>
+                <span class="pt pt-chicken">Chicken</span><br />Chicken + salad
+                kit
+              </td>
+              <td>
+                <span class="pt pt-fish">Fish</span><br />Tilapia or cod +
+                broccoli
+              </td>
+              <td>Brown rice + black beans</td>
+            </tr>
+            <tr>
+              <td class="day-col">Wednesday</td>
+              <td>
+                <span class="pt pt-fish">Fish</span><br />Salmon + quinoa bowl +
+                veg
+              </td>
+              <td>
+                <span class="pt pt-cast">🔥 Cast Iron</span><br />Marinated
+                chicken or steak, seared fresh + mushrooms + bell pepper
+              </td>
+              <td>Quinoa (from Sunday)</td>
+            </tr>
+            <tr>
+              <td class="day-col">Thursday</td>
+              <td>
+                <span class="pt pt-steak">Steak</span><br />Cast iron leftovers
+                + quinoa + veg<span class="day-note"
+                  >Only works if steak was Wednesday's cast iron</span
+                >
+              </td>
+              <td>
+                <span class="pt pt-chicken">Chicken</span><br />Chicken thigh +
+                lentils + broccoli
+              </td>
+              <td>Quinoa or lentils</td>
+            </tr>
+            <tr>
+              <td class="day-col">Friday</td>
+              <td>
+                <span class="pt pt-chicken">Chicken</span><br />Last chicken
+                portions + salad kit
+              </td>
+              <td>
+                <span class="pt pt-fish">Fish</span><br />Salmon + lentils +
+                sautéed mushrooms &amp; onions
+              </td>
+              <td>Lentils (from Sunday)</td>
+            </tr>
+            <tr>
+              <td class="day-col">Saturday</td>
+              <td>
+                <span class="pt pt-flex">Flex</span><br />Remaining proteins or
+                dine out
+              </td>
+              <td>
+                <span class="pt pt-flex">Flex</span><br />Refried bean tacos,
+                dine out, or cook fresh
+              </td>
+              <td>Jasmine rice or tortillas</td>
+            </tr>
+          </tbody>
+        </table>
 
-  <table class="meal-table">
-    <thead><tr><th>Day</th><th>Lunch (×2)</th><th>Dinner (×2)</th><th>Grain / Side</th></tr></thead>
-    <tbody>
-      <tr>
-        <td class="day-col">Monday</td>
-        <td><span class="pt pt-fish">Fish</span><br>Baked salmon + broccoli</td>
-        <td><span class="pt pt-chicken">Chicken</span><br>Chicken thigh + roasted veg</td>
-        <td>Brown rice</td>
-      </tr>
-      <tr>
-        <td class="day-col">Tuesday</td>
-        <td><span class="pt pt-chicken">Chicken</span><br>Chicken + salad kit</td>
-        <td><span class="pt pt-fish">Fish</span><br>Tilapia or cod + broccoli</td>
-        <td>Brown rice + black beans</td>
-      </tr>
-      <tr>
-        <td class="day-col">Wednesday</td>
-        <td><span class="pt pt-fish">Fish</span><br>Salmon + quinoa bowl + veg</td>
-        <td><span class="pt pt-cast">🔥 Cast Iron</span><br>Marinated chicken or steak, seared fresh + mushrooms + bell pepper</td>
-        <td>Quinoa (from Sunday)</td>
-      </tr>
-      <tr>
-        <td class="day-col">Thursday</td>
-        <td><span class="pt pt-steak">Steak</span><br>Cast iron leftovers + quinoa + veg<span class="day-note">Only works if steak was Wednesday's cast iron</span></td>
-        <td><span class="pt pt-chicken">Chicken</span><br>Chicken thigh + lentils + broccoli</td>
-        <td>Quinoa or lentils</td>
-      </tr>
-      <tr>
-        <td class="day-col">Friday</td>
-        <td><span class="pt pt-chicken">Chicken</span><br>Last chicken portions + salad kit</td>
-        <td><span class="pt pt-fish">Fish</span><br>Salmon + lentils + sautéed mushrooms &amp; onions</td>
-        <td>Lentils (from Sunday)</td>
-      </tr>
-      <tr>
-        <td class="day-col">Saturday</td>
-        <td><span class="pt pt-flex">Flex</span><br>Remaining proteins or dine out</td>
-        <td><span class="pt pt-flex">Flex</span><br>Refried bean tacos, dine out, or cook fresh</td>
-        <td>Jasmine rice or tortillas</td>
-      </tr>
-    </tbody>
-  </table>
+        <div class="callout">
+          <strong>Thursday steak note:</strong> Thursday lunch uses Wednesday's
+          cast iron leftover steak. If you used chicken for the cast iron
+          instead of steak, adjust Thursday lunch to chicken or use a remaining
+          protein from the week. Don't place steak at Thursday lunch if it was
+          cooked on Sunday — by Thursday that's day 4 and at the edge of the
+          safe window.
+        </div>
+        <div class="callout gold">
+          <strong>Saturday refried bean taco night:</strong> Soak pinto beans
+          Saturday morning. Simmer 1 hour that afternoon with the diced onion +
+          garlic + cumin + salt. Mash to desired texture. Serve with remaining
+          chicken or steak, salsa, avocado. Freeze leftover beans in portions —
+          future taco nights are zero effort.
+        </div>
+      </div>
 
-  <div class="callout"><strong>Thursday steak note:</strong> Thursday lunch uses Wednesday's cast iron leftover steak. If you used chicken for the cast iron instead of steak, adjust Thursday lunch to chicken or use a remaining protein from the week. Don't place steak at Thursday lunch if it was cooked on Sunday — by Thursday that's day 4 and at the edge of the safe window.</div>
-  <div class="callout gold"><strong>Saturday refried bean taco night:</strong> Soak pinto beans Saturday morning. Simmer 1 hour that afternoon with the diced onion + garlic + cumin + salt. Mash to desired texture. Serve with remaining chicken or steak, salsa, avocado. Freeze leftover beans in portions — future taco nights are zero effort.</div>
-</div>
-
-<!-- ════════════════════════════════
+      <!-- ════════════════════════════════
      CAST IRON NIGHT
 ════════════════════════════════ -->
-<div class="view" id="view-castiran">
+      <div class="view" id="view-castiran">
+        <div class="cast-header">
+          <div class="cast-header-title">🔥 Wednesday Cast Iron Night</div>
+          <div class="cast-header-sub">
+            Everything prepped Sunday · 13 minutes to cook Wednesday · Fresh
+            dinner mid-week
+          </div>
+        </div>
 
-  <div class="cast-header">
-    <div class="cast-header-title">🔥 Wednesday Cast Iron Night</div>
-    <div class="cast-header-sub">Everything prepped Sunday · 13 minutes to cook Wednesday · Fresh dinner mid-week</div>
-  </div>
+        <div class="cast-card">
+          <div class="cast-body">
+            <strong>What you do on Sunday (5 min total):</strong>
+            <ol>
+              <li>
+                Choose protein: ~1 lb chicken thighs, chicken breast, or flank
+                steak (feeds 2)
+              </li>
+              <li>Mix marinade of choice (see below — 1 minute)</li>
+              <li>
+                Pour over protein in zip-lock bag, squeeze out air, label
+                "Wednesday," refrigerate
+              </li>
+              <li>
+                Slice bell peppers, mushrooms, and onion — store in separate
+                labeled container in fridge
+              </li>
+            </ol>
+            <br />
+            <strong>What you do on Wednesday (13 min):</strong>
+            <ol>
+              <li>
+                Pull marinated protein and vegetable container from fridge
+              </li>
+              <li>
+                Pat protein lightly dry with paper towel — improves browning
+              </li>
+              <li>
+                Heat cast iron on high 2 minutes until just beginning to smoke
+              </li>
+              <li>
+                Add a small drizzle of avocado oil — high smoke point, ideal for
+                cast iron
+              </li>
+              <li>
+                <strong>Chicken thighs or breast:</strong> 4–5 min per side.
+                <strong>Flank steak:</strong> 3–4 min per side. Don't move it —
+                let the crust form
+              </li>
+              <li>
+                Last 2 minutes: add the pre-sliced veg around the protein — they
+                pick up all the pan flavor
+              </li>
+              <li>
+                Rest 3–5 min before slicing. Don't skip this — it keeps the
+                juices inside
+              </li>
+              <li>
+                Serve over quinoa or brown rice (already made from Sunday)
+              </li>
+            </ol>
+            <br />
+            <strong>Steak is always cast iron — never oven.</strong> A thin cut
+            like flank or sirloin needs the intense dry heat of cast iron to
+            develop a proper crust. The oven produces a very different
+            (inferior) result for steak.
+          </div>
+        </div>
 
-  <div class="cast-card">
-    <div class="cast-body">
-      <strong>What you do on Sunday (5 min total):</strong>
-      <ol>
-        <li>Choose protein: ~1 lb chicken thighs, chicken breast, or flank steak (feeds 2)</li>
-        <li>Mix marinade of choice (see below — 1 minute)</li>
-        <li>Pour over protein in zip-lock bag, squeeze out air, label "Wednesday," refrigerate</li>
-        <li>Slice bell peppers, mushrooms, and onion — store in separate labeled container in fridge</li>
-      </ol>
-      <br>
-      <strong>What you do on Wednesday (13 min):</strong>
-      <ol>
-        <li>Pull marinated protein and vegetable container from fridge</li>
-        <li>Pat protein lightly dry with paper towel — improves browning</li>
-        <li>Heat cast iron on high 2 minutes until just beginning to smoke</li>
-        <li>Add a small drizzle of avocado oil — high smoke point, ideal for cast iron</li>
-        <li><strong>Chicken thighs or breast:</strong> 4–5 min per side. <strong>Flank steak:</strong> 3–4 min per side. Don't move it — let the crust form</li>
-        <li>Last 2 minutes: add the pre-sliced veg around the protein — they pick up all the pan flavor</li>
-        <li>Rest 3–5 min before slicing. Don't skip this — it keeps the juices inside</li>
-        <li>Serve over quinoa or brown rice (already made from Sunday)</li>
-      </ol>
-      <br>
-      <strong>Steak is always cast iron — never oven.</strong> A thin cut like flank or sirloin needs the intense dry heat of cast iron to develop a proper crust. The oven produces a very different (inferior) result for steak.
-    </div>
-  </div>
+        <div class="slabel">Marinade Options — Rotate Week to Week</div>
+        <div class="callout">
+          <strong>Sunday-safe marinades:</strong> Soy Garlic Ginger and Smoked
+          Paprika Garlic are oil and soy-based with no significant acid — they
+          can marinate safely for 2–5 days and actually improve with time.
+          <strong>Tuesday-only marinades:</strong> Lime Cumin and Balsamic Herb
+          contain citrus juice and vinegar — acids break down protein texture if
+          left more than 1–2 days on chicken (slightly longer on steak).
+        </div>
 
-  <div class="slabel">Marinade Options — Rotate Week to Week</div>
-  <div class="callout"><strong>Sunday-safe marinades:</strong> Soy Garlic Ginger and Smoked Paprika Garlic are oil and soy-based with no significant acid — they can marinate safely for 2–5 days and actually improve with time. <strong>Tuesday-only marinades:</strong> Lime Cumin and Balsamic Herb contain citrus juice and vinegar — acids break down protein texture if left more than 1–2 days on chicken (slightly longer on steak).</div>
+        <div class="marinade-grid">
+          <div class="m-card">
+            <div class="m-card-head">
+              <div>
+                <div class="m-card-name">Soy Garlic Ginger</div>
+                <div class="m-card-for">
+                  Chicken thighs or breast · Best all-around
+                </div>
+              </div>
+              <span class="m-timing t-sunday">✓ Sunday Safe</span>
+            </div>
+            <div class="m-card-body">
+              <div class="m-ing-label">Ingredients (feeds 2)</div>
+              <ul class="m-ing-list">
+                <li>3 tbsp low-sodium soy sauce</li>
+                <li>1 tbsp sesame oil</li>
+                <li>1 tsp honey</li>
+                <li>3 garlic cloves, minced</li>
+                <li>½ tsp ground ginger</li>
+                <li>Cracked black pepper to taste</li>
+              </ul>
+              <div class="m-note">
+                No significant acid — safe from Sunday through Wednesday. Flavor
+                deepens over time. The smell when it hits a hot cast iron is
+                exceptional.
+              </div>
+            </div>
+          </div>
+          <div class="m-card">
+            <div class="m-card-head">
+              <div>
+                <div class="m-card-name">Smoked Paprika Garlic</div>
+                <div class="m-card-for">Flank steak · Bold and simple</div>
+              </div>
+              <span class="m-timing t-sunday">✓ Sunday Safe</span>
+            </div>
+            <div class="m-card-body">
+              <div class="m-ing-label">Ingredients (feeds 2)</div>
+              <ul class="m-ing-list">
+                <li>2 tbsp olive oil</li>
+                <li>1 tbsp smoked paprika</li>
+                <li>4 garlic cloves, minced</li>
+                <li>1 tsp ground cumin</li>
+                <li>½ tsp salt</li>
+                <li>½ tsp cracked black pepper</li>
+              </ul>
+              <div class="m-note">
+                Oil-based rub with no acid — safe from Sunday. Rub into steak
+                well on both sides. Excellent sliced thin over lentils or
+                quinoa.
+              </div>
+            </div>
+          </div>
+          <div class="m-card">
+            <div class="m-card-head">
+              <div>
+                <div class="m-card-name">Lime Cumin</div>
+                <div class="m-card-for">
+                  Chicken or steak · Mexican bowl style
+                </div>
+              </div>
+              <span class="m-timing t-tuesday">Tuesday Only</span>
+            </div>
+            <div class="m-card-body">
+              <div class="m-ing-label">Ingredients (feeds 2)</div>
+              <ul class="m-ing-list">
+                <li>Juice of 2 limes</li>
+                <li>2 tbsp olive oil</li>
+                <li>1 tsp ground cumin</li>
+                <li>1 tsp chili powder</li>
+                <li>½ tsp garlic powder</li>
+                <li>½ tsp salt</li>
+              </ul>
+              <div class="m-note">
+                Citrus acid will break down chicken texture after ~24 hrs.
+                Marinate Tuesday evening for Wednesday. Slightly more forgiving
+                on steak (up to 48 hrs). Serve over quinoa with black beans +
+                salsa.
+              </div>
+            </div>
+          </div>
+          <div class="m-card">
+            <div class="m-card-head">
+              <div>
+                <div class="m-card-name">Balsamic Herb</div>
+                <div class="m-card-for">Chicken thighs or sirloin</div>
+              </div>
+              <span class="m-timing t-tuesday">Tuesday Only</span>
+            </div>
+            <div class="m-card-body">
+              <div class="m-ing-label">Ingredients (feeds 2)</div>
+              <ul class="m-ing-list">
+                <li>2 tbsp balsamic vinegar</li>
+                <li>2 tbsp olive oil</li>
+                <li>1 tsp Dijon mustard</li>
+                <li>2 garlic cloves, minced</li>
+                <li>1 tsp dried rosemary</li>
+                <li>½ tsp dried thyme</li>
+                <li>½ tsp salt</li>
+              </ul>
+              <div class="m-note">
+                Vinegar-based — marinate Tuesday evening. Less acidic than lime
+                so slightly more forgiving, but still best kept under 48 hrs.
+                Excellent with mushrooms and bell pepper in the pan.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  <div class="marinade-grid">
-    <div class="m-card">
-      <div class="m-card-head">
-        <div><div class="m-card-name">Soy Garlic Ginger</div><div class="m-card-for">Chicken thighs or breast · Best all-around</div></div>
-        <span class="m-timing t-sunday">✓ Sunday Safe</span>
-      </div>
-      <div class="m-card-body">
-        <div class="m-ing-label">Ingredients (feeds 2)</div>
-        <ul class="m-ing-list">
-          <li>3 tbsp low-sodium soy sauce</li>
-          <li>1 tbsp sesame oil</li>
-          <li>1 tsp honey</li>
-          <li>3 garlic cloves, minced</li>
-          <li>½ tsp ground ginger</li>
-          <li>Cracked black pepper to taste</li>
-        </ul>
-        <div class="m-note">No significant acid — safe from Sunday through Wednesday. Flavor deepens over time. The smell when it hits a hot cast iron is exceptional.</div>
-      </div>
-    </div>
-    <div class="m-card">
-      <div class="m-card-head">
-        <div><div class="m-card-name">Smoked Paprika Garlic</div><div class="m-card-for">Flank steak · Bold and simple</div></div>
-        <span class="m-timing t-sunday">✓ Sunday Safe</span>
-      </div>
-      <div class="m-card-body">
-        <div class="m-ing-label">Ingredients (feeds 2)</div>
-        <ul class="m-ing-list">
-          <li>2 tbsp olive oil</li>
-          <li>1 tbsp smoked paprika</li>
-          <li>4 garlic cloves, minced</li>
-          <li>1 tsp ground cumin</li>
-          <li>½ tsp salt</li>
-          <li>½ tsp cracked black pepper</li>
-        </ul>
-        <div class="m-note">Oil-based rub with no acid — safe from Sunday. Rub into steak well on both sides. Excellent sliced thin over lentils or quinoa.</div>
-      </div>
-    </div>
-    <div class="m-card">
-      <div class="m-card-head">
-        <div><div class="m-card-name">Lime Cumin</div><div class="m-card-for">Chicken or steak · Mexican bowl style</div></div>
-        <span class="m-timing t-tuesday">Tuesday Only</span>
-      </div>
-      <div class="m-card-body">
-        <div class="m-ing-label">Ingredients (feeds 2)</div>
-        <ul class="m-ing-list">
-          <li>Juice of 2 limes</li>
-          <li>2 tbsp olive oil</li>
-          <li>1 tsp ground cumin</li>
-          <li>1 tsp chili powder</li>
-          <li>½ tsp garlic powder</li>
-          <li>½ tsp salt</li>
-        </ul>
-        <div class="m-note">Citrus acid will break down chicken texture after ~24 hrs. Marinate Tuesday evening for Wednesday. Slightly more forgiving on steak (up to 48 hrs). Serve over quinoa with black beans + salsa.</div>
-      </div>
-    </div>
-    <div class="m-card">
-      <div class="m-card-head">
-        <div><div class="m-card-name">Balsamic Herb</div><div class="m-card-for">Chicken thighs or sirloin</div></div>
-        <span class="m-timing t-tuesday">Tuesday Only</span>
-      </div>
-      <div class="m-card-body">
-        <div class="m-ing-label">Ingredients (feeds 2)</div>
-        <ul class="m-ing-list">
-          <li>2 tbsp balsamic vinegar</li>
-          <li>2 tbsp olive oil</li>
-          <li>1 tsp Dijon mustard</li>
-          <li>2 garlic cloves, minced</li>
-          <li>1 tsp dried rosemary</li>
-          <li>½ tsp dried thyme</li>
-          <li>½ tsp salt</li>
-        </ul>
-        <div class="m-note">Vinegar-based — marinate Tuesday evening. Less acidic than lime so slightly more forgiving, but still best kept under 48 hrs. Excellent with mushrooms and bell pepper in the pan.</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════
+      <!-- ════════════════════════════════
      SAUCES
 ════════════════════════════════ -->
-<div class="view" id="view-sauces">
-  <div style="font-size:0.82rem;color:var(--muted);margin-bottom:20px;">All whole-food ingredients — no preservatives. Quantities for ~2 portions (one meal for two people). Each sauce includes storage and batch-making guidance. Rotating across the week prevents flavor fatigue.</div>
+      <div class="view" id="view-sauces">
+        <div
+          style="font-size: 0.82rem; color: var(--muted); margin-bottom: 20px"
+        >
+          All whole-food ingredients — no preservatives. Quantities for ~2
+          portions (one meal for two people). Each sauce includes storage and
+          batch-making guidance. Rotating across the week prevents flavor
+          fatigue.
+        </div>
 
-  <div class="sauce-section">
-    <div class="slabel" style="margin-top:0">For Fish</div>
-    <div class="sauce-grid">
-      <div class="s-card">
-        <div class="s-card-top"><div class="s-name">Lemon Garlic</div><div class="s-for">All fish · The reliable baseline</div></div>
-        <div class="s-card-body">
-          <div class="s-ing-label">Ingredients</div>
-          <ul class="s-ing-list">
-            <li>2 tbsp olive oil</li>
-            <li>Juice of 1 lemon</li>
-            <li>3 garlic cloves, minced</li>
-            <li>½ tsp salt</li>
-            <li>¼ tsp black pepper</li>
-            <li>1 tbsp fresh or dried parsley</li>
-          </ul>
-          <div class="s-storage"><span class="s-storage-badge sb-fridge">Fridge</span><span class="s-storage-badge sb-batch">Batchable</span> Make with garlic powder instead of fresh garlic to extend shelf life to 2–3 weeks refrigerated. With fresh garlic, use within 5–7 days. Drizzle over fish before baking.</div>
+        <div class="sauce-section">
+          <div class="slabel" style="margin-top: 0">For Fish</div>
+          <div class="sauce-grid">
+            <div class="s-card">
+              <div class="s-card-top">
+                <div class="s-name">Lemon Garlic</div>
+                <div class="s-for">All fish · The reliable baseline</div>
+              </div>
+              <div class="s-card-body">
+                <div class="s-ing-label">Ingredients</div>
+                <ul class="s-ing-list">
+                  <li>2 tbsp olive oil</li>
+                  <li>Juice of 1 lemon</li>
+                  <li>3 garlic cloves, minced</li>
+                  <li>½ tsp salt</li>
+                  <li>¼ tsp black pepper</li>
+                  <li>1 tbsp fresh or dried parsley</li>
+                </ul>
+                <div class="s-storage">
+                  <span class="s-storage-badge sb-fridge">Fridge</span
+                  ><span class="s-storage-badge sb-batch">Batchable</span> Make
+                  with garlic powder instead of fresh garlic to extend shelf
+                  life to 2–3 weeks refrigerated. With fresh garlic, use within
+                  5–7 days. Drizzle over fish before baking.
+                </div>
+              </div>
+            </div>
+            <div class="s-card">
+              <div class="s-card-top">
+                <div class="s-name">Cajun Spice Rub</div>
+                <div class="s-for">Tilapia or cod · Bold and smoky</div>
+              </div>
+              <div class="s-card-body">
+                <div class="s-ing-label">Ingredients</div>
+                <ul class="s-ing-list">
+                  <li>1 tsp smoked paprika</li>
+                  <li>½ tsp cayenne pepper</li>
+                  <li>½ tsp garlic powder</li>
+                  <li>½ tsp onion powder</li>
+                  <li>½ tsp dried oregano</li>
+                  <li>½ tsp salt</li>
+                  <li>1 tbsp olive oil (to bind when applying)</li>
+                </ul>
+                <div class="s-storage">
+                  <span class="s-storage-badge sb-pantry">Pantry</span
+                  ><span class="s-storage-badge sb-batch">Make a big jar</span>
+                  All dry spices — store in a sealed jar indefinitely. Mix a
+                  large batch and keep in the pantry. Never measure individual
+                  spices again.
+                </div>
+              </div>
+            </div>
+            <div class="s-card">
+              <div class="s-card-top">
+                <div class="s-name">Soy Ginger Glaze</div>
+                <div class="s-for">Salmon especially · Applied last 5 min</div>
+              </div>
+              <div class="s-card-body">
+                <div class="s-ing-label">Ingredients</div>
+                <ul class="s-ing-list">
+                  <li>2 tbsp low-sodium soy sauce</li>
+                  <li>1 tsp sesame oil</li>
+                  <li>1 tsp honey</li>
+                  <li>½ tsp garlic powder</li>
+                  <li>½ tsp ground ginger</li>
+                </ul>
+                <div class="s-storage">
+                  <span class="s-storage-badge sb-fridge">Fridge</span
+                  ><span class="s-storage-badge sb-batch">Batchable</span> Keeps
+                  2–3 weeks refrigerated — soy sauce acts as preservative. Make
+                  a jar and keep in fridge. Brush onto fish for the last 5 min
+                  of baking only — honey burns if added at the start.
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="s-card">
-        <div class="s-card-top"><div class="s-name">Cajun Spice Rub</div><div class="s-for">Tilapia or cod · Bold and smoky</div></div>
-        <div class="s-card-body">
-          <div class="s-ing-label">Ingredients</div>
-          <ul class="s-ing-list">
-            <li>1 tsp smoked paprika</li>
-            <li>½ tsp cayenne pepper</li>
-            <li>½ tsp garlic powder</li>
-            <li>½ tsp onion powder</li>
-            <li>½ tsp dried oregano</li>
-            <li>½ tsp salt</li>
-            <li>1 tbsp olive oil (to bind when applying)</li>
-          </ul>
-          <div class="s-storage"><span class="s-storage-badge sb-pantry">Pantry</span><span class="s-storage-badge sb-batch">Make a big jar</span> All dry spices — store in a sealed jar indefinitely. Mix a large batch and keep in the pantry. Never measure individual spices again.</div>
-        </div>
-      </div>
-      <div class="s-card">
-        <div class="s-card-top"><div class="s-name">Soy Ginger Glaze</div><div class="s-for">Salmon especially · Applied last 5 min</div></div>
-        <div class="s-card-body">
-          <div class="s-ing-label">Ingredients</div>
-          <ul class="s-ing-list">
-            <li>2 tbsp low-sodium soy sauce</li>
-            <li>1 tsp sesame oil</li>
-            <li>1 tsp honey</li>
-            <li>½ tsp garlic powder</li>
-            <li>½ tsp ground ginger</li>
-          </ul>
-          <div class="s-storage"><span class="s-storage-badge sb-fridge">Fridge</span><span class="s-storage-badge sb-batch">Batchable</span> Keeps 2–3 weeks refrigerated — soy sauce acts as preservative. Make a jar and keep in fridge. Brush onto fish for the last 5 min of baking only — honey burns if added at the start.</div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="sauce-section">
-    <div class="slabel">For Chicken</div>
-    <div class="sauce-grid">
-      <div class="s-card">
-        <div class="s-card-top"><div class="s-name">Italian Herb</div><div class="s-for">Sunday batch · The workhorse</div></div>
-        <div class="s-card-body">
-          <div class="s-ing-label">Ingredients</div>
-          <ul class="s-ing-list">
-            <li>2 tbsp olive oil</li>
-            <li>1½ tsp Italian seasoning blend</li>
-            <li>3 garlic cloves, minced</li>
-            <li>Zest of ½ lemon</li>
-            <li>½ tsp salt</li>
-            <li>¼ tsp black pepper</li>
-          </ul>
-          <div class="s-storage"><span class="s-storage-badge sb-pantry">Pantry (dry version)</span><span class="s-storage-badge sb-batch">Batchable</span> Make the dry blend (Italian seasoning + garlic powder + salt + pepper) in bulk and store in pantry indefinitely. Add fresh garlic and olive oil when applying. Rub all over thighs and bake.</div>
+        <div class="sauce-section">
+          <div class="slabel">For Chicken</div>
+          <div class="sauce-grid">
+            <div class="s-card">
+              <div class="s-card-top">
+                <div class="s-name">Italian Herb</div>
+                <div class="s-for">Sunday batch · The workhorse</div>
+              </div>
+              <div class="s-card-body">
+                <div class="s-ing-label">Ingredients</div>
+                <ul class="s-ing-list">
+                  <li>2 tbsp olive oil</li>
+                  <li>1½ tsp Italian seasoning blend</li>
+                  <li>3 garlic cloves, minced</li>
+                  <li>Zest of ½ lemon</li>
+                  <li>½ tsp salt</li>
+                  <li>¼ tsp black pepper</li>
+                </ul>
+                <div class="s-storage">
+                  <span class="s-storage-badge sb-pantry"
+                    >Pantry (dry version)</span
+                  ><span class="s-storage-badge sb-batch">Batchable</span> Make
+                  the dry blend (Italian seasoning + garlic powder + salt +
+                  pepper) in bulk and store in pantry indefinitely. Add fresh
+                  garlic and olive oil when applying. Rub all over thighs and
+                  bake.
+                </div>
+              </div>
+            </div>
+            <div class="s-card">
+              <div class="s-card-top">
+                <div class="s-name">Honey Mustard</div>
+                <div class="s-for">Thighs · Sweet and savory</div>
+              </div>
+              <div class="s-card-body">
+                <div class="s-ing-label">Ingredients</div>
+                <ul class="s-ing-list">
+                  <li>2 tbsp Dijon mustard</li>
+                  <li>1 tbsp honey</li>
+                  <li>½ tsp garlic powder</li>
+                  <li>¼ tsp salt</li>
+                  <li>¼ tsp black pepper</li>
+                  <li>1 tbsp olive oil</li>
+                </ul>
+                <div class="s-storage">
+                  <span class="s-storage-badge sb-fridge">Fridge</span
+                  ><span class="s-storage-badge sb-batch">Batchable</span> Keeps
+                  2–3 weeks refrigerated. Dijon is already preserved so the
+                  blend is very stable. Make a small jar at the start of the
+                  month.
+                </div>
+              </div>
+            </div>
+            <div class="s-card">
+              <div class="s-card-top">
+                <div class="s-name">Mexican Dry Rub</div>
+                <div class="s-for">Bowl nights · Chipotle-style</div>
+              </div>
+              <div class="s-card-body">
+                <div class="s-ing-label">Ingredients</div>
+                <ul class="s-ing-list">
+                  <li>1 tsp ground cumin</li>
+                  <li>1 tsp chili powder</li>
+                  <li>½ tsp garlic powder</li>
+                  <li>½ tsp onion powder</li>
+                  <li>½ tsp smoked paprika</li>
+                  <li>½ tsp salt</li>
+                  <li>1 tbsp olive oil (to bind when applying)</li>
+                </ul>
+                <div class="s-storage">
+                  <span class="s-storage-badge sb-pantry">Pantry</span
+                  ><span class="s-storage-badge sb-batch">Make a big jar</span>
+                  All dry spices — best candidate for a large pantry batch. This
+                  blend lasts months sealed in a jar. Add olive oil only when
+                  applying to chicken. Serve over rice with black beans.
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="s-card">
-        <div class="s-card-top"><div class="s-name">Honey Mustard</div><div class="s-for">Thighs · Sweet and savory</div></div>
-        <div class="s-card-body">
-          <div class="s-ing-label">Ingredients</div>
-          <ul class="s-ing-list">
-            <li>2 tbsp Dijon mustard</li>
-            <li>1 tbsp honey</li>
-            <li>½ tsp garlic powder</li>
-            <li>¼ tsp salt</li>
-            <li>¼ tsp black pepper</li>
-            <li>1 tbsp olive oil</li>
-          </ul>
-          <div class="s-storage"><span class="s-storage-badge sb-fridge">Fridge</span><span class="s-storage-badge sb-batch">Batchable</span> Keeps 2–3 weeks refrigerated. Dijon is already preserved so the blend is very stable. Make a small jar at the start of the month.</div>
-        </div>
-      </div>
-      <div class="s-card">
-        <div class="s-card-top"><div class="s-name">Mexican Dry Rub</div><div class="s-for">Bowl nights · Chipotle-style</div></div>
-        <div class="s-card-body">
-          <div class="s-ing-label">Ingredients</div>
-          <ul class="s-ing-list">
-            <li>1 tsp ground cumin</li>
-            <li>1 tsp chili powder</li>
-            <li>½ tsp garlic powder</li>
-            <li>½ tsp onion powder</li>
-            <li>½ tsp smoked paprika</li>
-            <li>½ tsp salt</li>
-            <li>1 tbsp olive oil (to bind when applying)</li>
-          </ul>
-          <div class="s-storage"><span class="s-storage-badge sb-pantry">Pantry</span><span class="s-storage-badge sb-batch">Make a big jar</span> All dry spices — best candidate for a large pantry batch. This blend lasts months sealed in a jar. Add olive oil only when applying to chicken. Serve over rice with black beans.</div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="sauce-section">
-    <div class="slabel">For Steak</div>
-    <div class="sauce-grid">
-      <div class="s-card">
-        <div class="s-card-top"><div class="s-name">Classic Salt & Pepper</div><div class="s-for">Any cut · Always works</div></div>
-        <div class="s-card-body">
-          <div class="s-ing-label">Ingredients</div>
-          <ul class="s-ing-list">
-            <li>1 tsp coarse sea salt or kosher salt</li>
-            <li>1 tsp cracked black pepper</li>
-            <li>1 tbsp avocado oil (for the pan)</li>
-            <li>1 tbsp butter (add last minute, baste)</li>
-            <li>1 garlic clove, smashed (optional, in pan)</li>
-          </ul>
-          <div class="s-storage"><span class="s-storage-badge sb-pantry">Pantry</span> No batch needed — these are pantry staples. Apply salt and pepper directly to steak and press in firmly before cooking.</div>
+        <div class="sauce-section">
+          <div class="slabel">For Steak</div>
+          <div class="sauce-grid">
+            <div class="s-card">
+              <div class="s-card-top">
+                <div class="s-name">Classic Salt & Pepper</div>
+                <div class="s-for">Any cut · Always works</div>
+              </div>
+              <div class="s-card-body">
+                <div class="s-ing-label">Ingredients</div>
+                <ul class="s-ing-list">
+                  <li>1 tsp coarse sea salt or kosher salt</li>
+                  <li>1 tsp cracked black pepper</li>
+                  <li>1 tbsp avocado oil (for the pan)</li>
+                  <li>1 tbsp butter (add last minute, baste)</li>
+                  <li>1 garlic clove, smashed (optional, in pan)</li>
+                </ul>
+                <div class="s-storage">
+                  <span class="s-storage-badge sb-pantry">Pantry</span> No batch
+                  needed — these are pantry staples. Apply salt and pepper
+                  directly to steak and press in firmly before cooking.
+                </div>
+              </div>
+            </div>
+            <div class="s-card">
+              <div class="s-card-top">
+                <div class="s-name">Fresh Chimichurri</div>
+                <div class="s-for">Flank steak · Spoon over at serving</div>
+              </div>
+              <div class="s-card-body">
+                <div class="s-ing-label">Ingredients</div>
+                <ul class="s-ing-list">
+                  <li>½ cup fresh parsley, finely chopped</li>
+                  <li>3 garlic cloves, minced</li>
+                  <li>3 tbsp olive oil</li>
+                  <li>1 tbsp red wine vinegar</li>
+                  <li>¼ tsp red pepper flakes</li>
+                  <li>¼ tsp salt</li>
+                </ul>
+                <div class="s-storage">
+                  <span class="s-storage-badge sb-fridge">Fridge</span> Fresh
+                  parsley degrades — use within 5–7 days. Not ideal for long
+                  batches. Make weekly during Sunday prep (takes 3 min) or buy
+                  Trader Joe's chimichurri jar as a reliable shortcut.
+                </div>
+              </div>
+            </div>
+            <div class="s-card">
+              <div class="s-card-top">
+                <div class="s-name">Soy Garlic Pan Sauce</div>
+                <div class="s-for">Cast iron steak or chicken</div>
+              </div>
+              <div class="s-card-body">
+                <div class="s-ing-label">Ingredients</div>
+                <ul class="s-ing-list">
+                  <li>2 tbsp low-sodium soy sauce</li>
+                  <li>1 tbsp sesame oil</li>
+                  <li>2 garlic cloves, minced</li>
+                  <li>1 tsp honey</li>
+                  <li>½ tsp ground ginger</li>
+                </ul>
+                <div class="s-storage">
+                  <span class="s-storage-badge sb-fridge">Fridge</span
+                  ><span class="s-storage-badge sb-batch">Batchable</span> Keeps
+                  2–3 weeks refrigerated. Use as the cast iron Wednesday
+                  marinade or pour into the hot pan after cooking to deglaze —
+                  instant sauce over everything.
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="s-card">
-        <div class="s-card-top"><div class="s-name">Fresh Chimichurri</div><div class="s-for">Flank steak · Spoon over at serving</div></div>
-        <div class="s-card-body">
-          <div class="s-ing-label">Ingredients</div>
-          <ul class="s-ing-list">
-            <li>½ cup fresh parsley, finely chopped</li>
-            <li>3 garlic cloves, minced</li>
-            <li>3 tbsp olive oil</li>
-            <li>1 tbsp red wine vinegar</li>
-            <li>¼ tsp red pepper flakes</li>
-            <li>¼ tsp salt</li>
-          </ul>
-          <div class="s-storage"><span class="s-storage-badge sb-fridge">Fridge</span> Fresh parsley degrades — use within 5–7 days. Not ideal for long batches. Make weekly during Sunday prep (takes 3 min) or buy Trader Joe's chimichurri jar as a reliable shortcut.</div>
-        </div>
-      </div>
-      <div class="s-card">
-        <div class="s-card-top"><div class="s-name">Soy Garlic Pan Sauce</div><div class="s-for">Cast iron steak or chicken</div></div>
-        <div class="s-card-body">
-          <div class="s-ing-label">Ingredients</div>
-          <ul class="s-ing-list">
-            <li>2 tbsp low-sodium soy sauce</li>
-            <li>1 tbsp sesame oil</li>
-            <li>2 garlic cloves, minced</li>
-            <li>1 tsp honey</li>
-            <li>½ tsp ground ginger</li>
-          </ul>
-          <div class="s-storage"><span class="s-storage-badge sb-fridge">Fridge</span><span class="s-storage-badge sb-batch">Batchable</span> Keeps 2–3 weeks refrigerated. Use as the cast iron Wednesday marinade or pour into the hot pan after cooking to deglaze — instant sauce over everything.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- ════════════════════════════════
+      <!-- ════════════════════════════════
      NUTRIENTS & HEALTH
 ════════════════════════════════ -->
-<div class="view" id="view-nutrients">
+      <div class="view" id="view-nutrients">
+        <div class="slabel">DASH Diet Alignment</div>
+        <div class="callout blue">
+          DASH emphasizes lean proteins, whole grains, vegetables, and reduced
+          sodium. This plan aligns well with two key practices:
+          <strong>(1) use low-sodium soy sauce throughout</strong> — regular soy
+          sauce has ~900mg sodium per tablespoon, low-sodium cuts that roughly
+          in half, coconut aminos cuts it further.
+          <strong>(2) Season with herbs and citrus rather than salt</strong>
+          wherever possible. Target under 1,500–2,300mg total sodium daily.
+        </div>
 
-  <div class="callout red"><strong>PKD (Polycystic Kidney Disease) — Important:</strong> This plan is built on whole foods and aligns directionally with DASH principles. However, PKD dietary needs vary significantly by kidney function stage (GFR). Potassium, phosphorus, and total daily protein all need calibration to your specific labs. Before committing to this plan, bring it printed to your nephrologist or a renal dietitian. Ask specifically about your current GFR, your potassium and phosphorus tolerance, and whether your protein target needs adjusting. The structure here is sound — the individual quantities may need tuning.</div>
+        <table class="nutr-table">
+          <thead>
+            <tr>
+              <th>Nutrient</th>
+              <th>Status</th>
+              <th>Main Sources in This Plan</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Protein</strong></td>
+              <td><span class="ns ns-good">Well covered</span></td>
+              <td>Fish, chicken, steak, lentils, quinoa</td>
+              <td>
+                ~100–130g/day from this plan. Discuss total protein target with
+                your doctor if you have specific dietary needs.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Omega-3s</strong></td>
+              <td><span class="ns ns-good">Well covered</span></td>
+              <td>Salmon 3–4×/week</td>
+              <td>
+                Actively reduces exercise-related inflammation and supports
+                recovery between workouts. One of the most evidence-backed
+                nutritional supports for your training level.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Fiber</strong></td>
+              <td><span class="ns ns-good">Well covered</span></td>
+              <td>Lentils, brown rice, quinoa, broccoli, beans</td>
+              <td>
+                25–35g/day target well met. Supports gut health, satiety, and
+                blood sugar regulation — important for sustained energy during
+                training.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Iron</strong></td>
+              <td><span class="ns ns-good">Well covered</span></td>
+              <td>Steak 2×/week, lentils, quinoa</td>
+              <td>
+                Heme iron from steak absorbs most efficiently. Non-heme iron
+                from lentils + quinoa absorbs better when eaten alongside
+                vitamin C — bell peppers and lemon juice in this plan help.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Magnesium</strong></td>
+              <td><span class="ns ns-good">Good</span></td>
+              <td>Brown rice, lentils, salmon, quinoa</td>
+              <td>
+                Important for muscle function, sleep quality, and energy
+                production. Exercise increases magnesium needs — this plan
+                covers it well.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Zinc</strong></td>
+              <td><span class="ns ns-good">Good</span></td>
+              <td>Steak, chicken, lentils</td>
+              <td>
+                Supports immune function and recovery. Well covered by 1–2 steak
+                meals per week.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>B Vitamins</strong></td>
+              <td><span class="ns ns-good">Well covered</span></td>
+              <td>All animal proteins, lentils, quinoa</td>
+              <td>
+                B12 (animal proteins only — well covered). B6 and folate from
+                lentils and quinoa.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Vitamin D</strong></td>
+              <td><span class="ns ns-watch">Worth monitoring</span></td>
+              <td>Salmon provides some</td>
+              <td>
+                Most people are deficient. Salmon helps but likely not
+                sufficient alone. Consider Vitamin D3 supplement (1,000–2,000
+                IU/day) — discuss with your doctor.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Potassium</strong></td>
+              <td><span class="ns ns-watch">Discuss with doctor</span></td>
+              <td>Salmon, lentils, sweet potato, quinoa</td>
+              <td>
+                These are moderate-to-high potassium foods. Your doctor may
+                advise limiting based on your needs.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Phosphorus</strong></td>
+              <td><span class="ns ns-watch">Discuss with doctor</span></td>
+              <td>Fish, chicken, lentils</td>
+              <td>
+                High-protein diets tend to be high in phosphorus. Monitor if
+                your labs indicate elevated levels.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Sodium</strong></td>
+              <td><span class="ns ns-watch">Actively manage</span></td>
+              <td>Soy sauce, seasoning blends</td>
+              <td>
+                Use low-sodium soy sauce throughout. Season with herbs and
+                citrus rather than extra salt. DASH target: under
+                1,500–2,300mg/day total.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Antioxidants</strong></td>
+              <td><span class="ns ns-low">Improve with variety</span></td>
+              <td>Broccoli, bell peppers</td>
+              <td>
+                Rotating vegetables week to week (see vegetable rotation in
+                Proteins tab) significantly improves micronutrient diversity at
+                no extra cost or effort.
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-  <div class="slabel">DASH Diet Alignment</div>
-  <div class="callout blue">DASH emphasizes lean proteins, whole grains, vegetables, and reduced sodium. This plan aligns well with two key practices: <strong>(1) use low-sodium soy sauce throughout</strong> — regular soy sauce has ~900mg sodium per tablespoon, low-sodium cuts that roughly in half, coconut aminos cuts it further. <strong>(2) Season with herbs and citrus rather than salt</strong> wherever possible. Target under 1,500–2,300mg total sodium daily.</div>
+        <div class="slabel">How This Supports Your Fitness Plan</div>
+        <div class="callout">
+          <strong>Post-workout eating:</strong> Eat a prepped container within
+          30–60 minutes after treadmill or strength sessions. Protein supports
+          muscle repair; the complex carbs replenish energy stores. Any
+          container from this plan works perfectly.
+        </div>
+        <div class="callout">
+          <strong>Pre-workout fuel:</strong> Eat a grain-containing meal 1–2
+          hours before a session. Brown rice, quinoa, or lentils all provide
+          sustained energy without a spike-and-crash.
+        </div>
+        <div class="callout">
+          <strong>Omega-3s and recovery:</strong> Salmon 3–4× per week actively
+          reduces the muscle soreness from exercise. Particularly relevant in
+          the early weeks of returning to training after your ankle injury.
+        </div>
+        <div class="callout gold">
+          <strong>The full picture:</strong> Cardio burns fat through a calorie
+          deficit. Strength training builds muscle that raises resting
+          metabolism. This meal plan fuels both — protein to build and preserve
+          muscle, complex carbs for training energy, healthy fats for hormone
+          support. The combination is meaningfully more effective than any
+          single piece alone.
+        </div>
+        <div class="callout plum">
+          <strong>Hydration:</strong> Your habit of refilling a 32oz bottle
+          throughout the day is excellent for overall health and performance —
+          keep it up regardless of how other dietary details evolve.
+        </div>
+      </div>
 
-  <table class="nutr-table">
-    <thead><tr><th>Nutrient</th><th>Status</th><th>Main Sources in This Plan</th><th>Notes</th></tr></thead>
-    <tbody>
-      <tr><td><strong>Protein</strong></td><td><span class="ns ns-good">Well covered</span></td><td>Fish, chicken, steak, lentils, quinoa</td><td>~100–130g/day from this plan. Discuss total protein target with nephrologist — PKD may warrant a more moderate level depending on your stage.</td></tr>
-      <tr><td><strong>Omega-3s</strong></td><td><span class="ns ns-good">Well covered</span></td><td>Salmon 3–4×/week</td><td>Actively reduces exercise-related inflammation and supports recovery between workouts. One of the most evidence-backed nutritional supports for your training level.</td></tr>
-      <tr><td><strong>Fiber</strong></td><td><span class="ns ns-good">Well covered</span></td><td>Lentils, brown rice, quinoa, broccoli, beans</td><td>25–35g/day target well met. Supports gut health, satiety, and blood sugar regulation — important for sustained energy during training.</td></tr>
-      <tr><td><strong>Iron</strong></td><td><span class="ns ns-good">Well covered</span></td><td>Steak 2×/week, lentils, quinoa</td><td>Heme iron from steak absorbs most efficiently. Non-heme iron from lentils + quinoa absorbs better when eaten alongside vitamin C — bell peppers and lemon juice in this plan help.</td></tr>
-      <tr><td><strong>Magnesium</strong></td><td><span class="ns ns-good">Good</span></td><td>Brown rice, lentils, salmon, quinoa</td><td>Important for muscle function, sleep quality, and energy production. Exercise increases magnesium needs — this plan covers it well.</td></tr>
-      <tr><td><strong>Zinc</strong></td><td><span class="ns ns-good">Good</span></td><td>Steak, chicken, lentils</td><td>Supports immune function and recovery. Well covered by 1–2 steak meals per week.</td></tr>
-      <tr><td><strong>B Vitamins</strong></td><td><span class="ns ns-good">Well covered</span></td><td>All animal proteins, lentils, quinoa</td><td>B12 (animal proteins only — well covered). B6 and folate from lentils and quinoa.</td></tr>
-      <tr><td><strong>Vitamin D</strong></td><td><span class="ns ns-watch">Worth monitoring</span></td><td>Salmon provides some</td><td>Most people are deficient. Salmon helps but likely not sufficient alone. Consider Vitamin D3 supplement (1,000–2,000 IU/day) — discuss with your doctor, especially relevant for PKD.</td></tr>
-      <tr><td><strong>Potassium</strong></td><td><span class="ns ns-watch">PKD: Discuss with doctor</span></td><td>Salmon, lentils, sweet potato, quinoa</td><td>These are moderate-to-high potassium foods. Depending on your GFR and labs, your nephrologist may advise limiting specific items.</td></tr>
-      <tr><td><strong>Phosphorus</strong></td><td><span class="ns ns-watch">PKD: Discuss with doctor</span></td><td>Fish, chicken, lentils</td><td>High-protein diets tend to be high in phosphorus. Monitor if your labs indicate elevated levels.</td></tr>
-      <tr><td><strong>Sodium</strong></td><td><span class="ns ns-watch">Actively manage</span></td><td>Soy sauce, seasoning blends</td><td>Use low-sodium soy sauce throughout. Season with herbs and citrus rather than extra salt. DASH target: under 1,500–2,300mg/day total.</td></tr>
-      <tr><td><strong>Antioxidants</strong></td><td><span class="ns ns-low">Improve with variety</span></td><td>Broccoli, bell peppers</td><td>Rotating vegetables week to week (see vegetable rotation in Proteins tab) significantly improves micronutrient diversity at no extra cost or effort.</td></tr>
-    </tbody>
-  </table>
-
-  <div class="slabel">How This Supports Your Fitness Plan</div>
-  <div class="callout"><strong>Post-workout eating:</strong> Eat a prepped container within 30–60 minutes after treadmill or strength sessions. Protein supports muscle repair; the complex carbs replenish energy stores. Any container from this plan works perfectly.</div>
-  <div class="callout"><strong>Pre-workout fuel:</strong> Eat a grain-containing meal 1–2 hours before a session. Brown rice, quinoa, or lentils all provide sustained energy without a spike-and-crash.</div>
-  <div class="callout"><strong>Omega-3s and recovery:</strong> Salmon 3–4× per week actively reduces the muscle soreness from exercise. Particularly relevant in the early weeks of returning to training after your ankle injury.</div>
-  <div class="callout gold"><strong>The full picture:</strong> Cardio burns fat through a calorie deficit. Strength training builds muscle that raises resting metabolism. This meal plan fuels both — protein to build and preserve muscle, complex carbs for training energy, healthy fats for hormone support. The combination is meaningfully more effective than any single piece alone.</div>
-  <div class="callout plum"><strong>Water and PKD:</strong> High water intake is one of the most evidence-backed interventions for slowing PKD progression. Your habit of refilling a 32oz bottle throughout the day is genuinely one of the most impactful things you can do — keep it up regardless of how other dietary details evolve.</div>
-</div>
-
-<!-- ════════════════════════════════
+      <!-- ════════════════════════════════
      STORAGE
 ════════════════════════════════ -->
-<div class="view" id="view-storage">
+      <div class="view" id="view-storage">
+        <div class="slabel">Fridge Life by Food</div>
+        <div class="store-grid">
+          <div class="store-card">
+            <div class="store-title">🐟 Cooked Fish</div>
+            <span class="store-days">3–4 days</span> max. Eat Mon through Wed.
+            Don't prep more fish than you'll eat by Wednesday — cook Thursday or
+            Friday portions fresh mid-week if needed (15 min). Most
+            time-sensitive protein.
+          </div>
+          <div class="store-card">
+            <div class="store-title">🍗 Cooked Chicken Thighs</div>
+            <span class="store-days">4–5 days</span>. Most forgiving protein.
+            Sunday-cooked thighs are good through Friday. Splash of water before
+            microwaving + cover = stays moist.
+          </div>
+          <div class="store-card">
+            <div class="store-title">🍗 Cooked Chicken Breast</div>
+            <span class="store-days">3–4 days</span>. Dries out faster than
+            thighs. Store with a little sauce in the container. Reheat at 50%
+            microwave power only.
+          </div>
+          <div class="store-card">
+            <div class="store-title">🥩 Cooked Steak</div>
+            <span class="store-days">3–4 days</span>. Slice before storing —
+            reheats better thin. Splash of water + cover when microwaving. Also
+            excellent cold over quinoa or salad.
+          </div>
+          <div class="store-card">
+            <div class="store-title">🥩 Marinating Raw Protein</div>
+            <span class="store-days">2–5 days</span>. Sunday-marinated chicken
+            or steak (using Sunday-safe marinades) keeps safely until Wednesday
+            and improves in flavor. Tuesday-marinated citrus/vinegar marinades:
+            use within 24–48 hrs.
+          </div>
+          <div class="store-card">
+            <div class="store-title">🔪 Pre-Sliced Raw Vegetables</div>
+            <span class="store-days">4–5 days</span>. Bell peppers, mushrooms,
+            onions sliced Sunday keep fine in a sealed container through
+            Wednesday. No quality loss.
+          </div>
+          <div class="store-card">
+            <div class="store-title">🍚 Brown Rice (Cooked)</div>
+            <span class="store-days">5 days</span>. Cook large batch Sunday.
+            Keep covered. Reheat with splash of water, covered, 90 sec.
+          </div>
+          <div class="store-card">
+            <div class="store-title">🌾 Quinoa (Cooked)</div>
+            <span class="store-days">5–6 days</span>. Keeps longer than rice.
+            Great cold in salads. Cook Sunday with the rice.
+          </div>
+          <div class="store-card">
+            <div class="store-title">🌱 Lentils (Cooked)</div>
+            <span class="store-days">5 days</span>. Cook Sunday alongside
+            everything else. Reheat with a splash of broth if they've dried out.
+          </div>
+          <div class="store-card">
+            <div class="store-title">🥦 Roasted Vegetables</div>
+            <span class="store-days">4–5 days</span>. Cook slightly underdone
+            Sunday — they soften more when reheated. Keep in separate container
+            from proteins to prevent sogginess.
+          </div>
+          <div class="store-card">
+            <div class="store-title">🫘 Refried Beans (Cooked)</div>
+            <span class="store-days">5 days fridge · 3 months frozen</span>.
+            Make a large batch. Freeze in portions — future taco nights are zero
+            effort.
+          </div>
+          <div class="store-card">
+            <div class="store-title">🫙 Batch Sauces (Fridge)</div>
+            <span class="store-days">2–3 weeks</span>. Soy Ginger Glaze, Honey
+            Mustard, Soy Garlic Pan Sauce. Keep in sealed jars. Never store
+            fresh garlic in oil at room temperature.
+          </div>
+        </div>
 
-  <div class="slabel">Fridge Life by Food</div>
-  <div class="store-grid">
-    <div class="store-card"><div class="store-title">🐟 Cooked Fish</div><span class="store-days">3–4 days</span> max. Eat Mon through Wed. Don't prep more fish than you'll eat by Wednesday — cook Thursday or Friday portions fresh mid-week if needed (15 min). Most time-sensitive protein.</div>
-    <div class="store-card"><div class="store-title">🍗 Cooked Chicken Thighs</div><span class="store-days">4–5 days</span>. Most forgiving protein. Sunday-cooked thighs are good through Friday. Splash of water before microwaving + cover = stays moist.</div>
-    <div class="store-card"><div class="store-title">🍗 Cooked Chicken Breast</div><span class="store-days">3–4 days</span>. Dries out faster than thighs. Store with a little sauce in the container. Reheat at 50% microwave power only.</div>
-    <div class="store-card"><div class="store-title">🥩 Cooked Steak</div><span class="store-days">3–4 days</span>. Slice before storing — reheats better thin. Splash of water + cover when microwaving. Also excellent cold over quinoa or salad.</div>
-    <div class="store-card"><div class="store-title">🥩 Marinating Raw Protein</div><span class="store-days">2–5 days</span>. Sunday-marinated chicken or steak (using Sunday-safe marinades) keeps safely until Wednesday and improves in flavor. Tuesday-marinated citrus/vinegar marinades: use within 24–48 hrs.</div>
-    <div class="store-card"><div class="store-title">🔪 Pre-Sliced Raw Vegetables</div><span class="store-days">4–5 days</span>. Bell peppers, mushrooms, onions sliced Sunday keep fine in a sealed container through Wednesday. No quality loss.</div>
-    <div class="store-card"><div class="store-title">🍚 Brown Rice (Cooked)</div><span class="store-days">5 days</span>. Cook large batch Sunday. Keep covered. Reheat with splash of water, covered, 90 sec.</div>
-    <div class="store-card"><div class="store-title">🌾 Quinoa (Cooked)</div><span class="store-days">5–6 days</span>. Keeps longer than rice. Great cold in salads. Cook Sunday with the rice.</div>
-    <div class="store-card"><div class="store-title">🌱 Lentils (Cooked)</div><span class="store-days">5 days</span>. Cook Sunday alongside everything else. Reheat with a splash of broth if they've dried out.</div>
-    <div class="store-card"><div class="store-title">🥦 Roasted Vegetables</div><span class="store-days">4–5 days</span>. Cook slightly underdone Sunday — they soften more when reheated. Keep in separate container from proteins to prevent sogginess.</div>
-    <div class="store-card"><div class="store-title">🫘 Refried Beans (Cooked)</div><span class="store-days">5 days fridge · 3 months frozen</span>. Make a large batch. Freeze in portions — future taco nights are zero effort.</div>
-    <div class="store-card"><div class="store-title">🫙 Batch Sauces (Fridge)</div><span class="store-days">2–3 weeks</span>. Soy Ginger Glaze, Honey Mustard, Soy Garlic Pan Sauce. Keep in sealed jars. Never store fresh garlic in oil at room temperature.</div>
-  </div>
+        <div class="slabel">Reheating</div>
+        <div class="callout">
+          <strong>Fish:</strong> 50% microwave power, 90 sec. Or oven 275°F for
+          10 min covered with foil. High heat = rubbery and overpowering smell.
+        </div>
+        <div class="callout">
+          <strong>Chicken + Steak:</strong> Splash of water, loosely covered, 90
+          sec–2 min full power. Steak also excellent cold over quinoa or in a
+          salad — no reheating needed.
+        </div>
+        <div class="callout">
+          <strong>Grains + Lentils:</strong> Splash of water, covered, 60–90
+          sec. Fluff grains with a fork after heating.
+        </div>
+        <div class="callout gold">
+          <strong>Containers worth having:</strong> Glass 2-compartment meal
+          prep containers — protein and grain stay separate, microwave and
+          dishwasher safe. ~$25–30 for a set of 6 on Amazon. One large container
+          for each grain batch. That's the complete setup.
+        </div>
+      </div>
+    </div>
+    <!-- /page -->
 
-  <div class="slabel">Reheating</div>
-  <div class="callout"><strong>Fish:</strong> 50% microwave power, 90 sec. Or oven 275°F for 10 min covered with foil. High heat = rubbery and overpowering smell.</div>
-  <div class="callout"><strong>Chicken + Steak:</strong> Splash of water, loosely covered, 90 sec–2 min full power. Steak also excellent cold over quinoa or in a salad — no reheating needed.</div>
-  <div class="callout"><strong>Grains + Lentils:</strong> Splash of water, covered, 60–90 sec. Fluff grains with a fork after heating.</div>
-  <div class="callout gold"><strong>Containers worth having:</strong> Glass 2-compartment meal prep containers — protein and grain stay separate, microwave and dishwasher safe. ~$25–30 for a set of 6 on Amazon. One large container for each grain batch. That's the complete setup.</div>
-</div>
+    <script>
+      function show(id, btn) {
+        document
+          .querySelectorAll(".view")
+          .forEach((v) => v.classList.remove("active"));
+        document
+          .querySelectorAll(".nav-btn")
+          .forEach((b) => b.classList.remove("active"));
+        document.getElementById("view-" + id).classList.add("active");
+        btn.classList.add("active");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
 
-</div><!-- /page -->
+      const shopData = [
+        {
+          title: "🐟 Fish",
+          items: [
+            { n: "Frozen salmon fillets", q: "~2 lbs" },
+            { n: "Frozen tilapia or cod fillets", q: "~1.5 lbs" },
+            { n: "Frozen mahi-mahi (optional swap)", q: "~1 lb" },
+          ],
+        },
+        {
+          title: "🍗 Chicken",
+          items: [
+            { n: "Boneless skinless chicken thighs", q: "2.5–3 lbs" },
+            { n: "Chicken breast (for cast iron)", q: "~1 lb" },
+            { n: "Rotisserie chicken (optional shortcut)", q: "1 whole" },
+          ],
+        },
+        {
+          title: "🥩 Steak",
+          items: [{ n: "Flank steak or sirloin", q: "1.5–2 lbs" }],
+        },
+        {
+          title: "🥦 Vegetables",
+          items: [
+            { n: "Pre-cut broccoli florets", q: "3 bags" },
+            { n: "Pre-sliced mushrooms", q: "2 packs" },
+            { n: "Bell peppers", q: "3–4" },
+            { n: "Yellow onions", q: "2–3" },
+            { n: "Garlic bulb", q: "1–2 bulbs" },
+            { n: "Sweet potatoes", q: "4 medium" },
+            { n: "Pre-washed bagged salad kits", q: "2–3 bags" },
+            { n: "Swap veg (asparagus, zucchini, etc.)", q: "1 bag/bunch" },
+          ],
+        },
+        {
+          title: "🌾 Grains & Legumes",
+          items: [
+            { n: "Brown rice (dry)", q: "2 lb bag" },
+            { n: "Quinoa (dry)", q: "1 lb bag" },
+            { n: "Green or brown lentils (dry)", q: "1 lb bag" },
+            { n: "Dried pinto beans (optional)", q: "1 lb bag" },
+            { n: "Canned black beans (backup)", q: "2 cans" },
+          ],
+        },
+        {
+          title: "🧂 Pantry & Condiments",
+          items: [
+            { n: "Olive oil", q: "If low" },
+            { n: "Avocado oil (cast iron)", q: "1 bottle" },
+            { n: "Low-sodium soy sauce", q: "1 bottle" },
+            { n: "Sesame oil", q: "Small bottle" },
+            { n: "Honey", q: "If low" },
+            { n: "Dijon mustard", q: "If low" },
+            { n: "Balsamic vinegar", q: "If low" },
+            { n: "Red wine vinegar", q: "If low" },
+            { n: "Low-sodium chicken or veg broth", q: "1 carton" },
+          ],
+        },
+        {
+          title: "🌿 Spices & Herbs",
+          items: [
+            { n: "Smoked paprika", q: "If low" },
+            { n: "Ground cumin", q: "If low" },
+            { n: "Chili powder", q: "If low" },
+            { n: "Garlic powder", q: "If low" },
+            { n: "Onion powder", q: "If low" },
+            { n: "Italian seasoning blend", q: "If low" },
+            { n: "Dried rosemary + thyme", q: "If low" },
+            { n: "Cayenne pepper", q: "If low" },
+            { n: "Fresh parsley", q: "1 bunch" },
+            { n: "Lemons", q: "4–5" },
+            { n: "Limes", q: "3–4" },
+          ],
+        },
+      ];
 
-<script>
-function show(id, btn) {
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('view-' + id).classList.add('active');
-  btn.classList.add('active');
-  window.scrollTo({top:0, behavior:'smooth'});
-}
-
-const shopData = [
-  { title:'🐟 Fish', items:[
-    {n:'Frozen salmon fillets',q:'~2 lbs'},
-    {n:'Frozen tilapia or cod fillets',q:'~1.5 lbs'},
-    {n:'Frozen mahi-mahi (optional swap)',q:'~1 lb'},
-  ]},
-  { title:'🍗 Chicken', items:[
-    {n:'Boneless skinless chicken thighs',q:'2.5–3 lbs'},
-    {n:'Chicken breast (for cast iron)',q:'~1 lb'},
-    {n:'Rotisserie chicken (optional shortcut)',q:'1 whole'},
-  ]},
-  { title:'🥩 Steak', items:[
-    {n:'Flank steak or sirloin',q:'1.5–2 lbs'},
-  ]},
-  { title:'🥦 Vegetables', items:[
-    {n:'Pre-cut broccoli florets',q:'3 bags'},
-    {n:'Pre-sliced mushrooms',q:'2 packs'},
-    {n:'Bell peppers',q:'3–4'},
-    {n:'Yellow onions',q:'2–3'},
-    {n:'Garlic bulb',q:'1–2 bulbs'},
-    {n:'Sweet potatoes',q:'4 medium'},
-    {n:'Pre-washed bagged salad kits',q:'2–3 bags'},
-    {n:'Swap veg (asparagus, zucchini, etc.)',q:'1 bag/bunch'},
-  ]},
-  { title:'🌾 Grains & Legumes', items:[
-    {n:'Brown rice (dry)',q:'2 lb bag'},
-    {n:'Quinoa (dry)',q:'1 lb bag'},
-    {n:'Green or brown lentils (dry)',q:'1 lb bag'},
-    {n:'Dried pinto beans (optional)',q:'1 lb bag'},
-    {n:'Canned black beans (backup)',q:'2 cans'},
-  ]},
-  { title:'🧂 Pantry & Condiments', items:[
-    {n:'Olive oil',q:'If low'},
-    {n:'Avocado oil (cast iron)',q:'1 bottle'},
-    {n:'Low-sodium soy sauce',q:'1 bottle'},
-    {n:'Sesame oil',q:'Small bottle'},
-    {n:'Honey',q:'If low'},
-    {n:'Dijon mustard',q:'If low'},
-    {n:'Balsamic vinegar',q:'If low'},
-    {n:'Red wine vinegar',q:'If low'},
-    {n:'Low-sodium chicken or veg broth',q:'1 carton'},
-  ]},
-  { title:'🌿 Spices & Herbs', items:[
-    {n:'Smoked paprika',q:'If low'},
-    {n:'Ground cumin',q:'If low'},
-    {n:'Chili powder',q:'If low'},
-    {n:'Garlic powder',q:'If low'},
-    {n:'Onion powder',q:'If low'},
-    {n:'Italian seasoning blend',q:'If low'},
-    {n:'Dried rosemary + thyme',q:'If low'},
-    {n:'Cayenne pepper',q:'If low'},
-    {n:'Fresh parsley',q:'1 bunch'},
-    {n:'Lemons',q:'4–5'},
-    {n:'Limes',q:'3–4'},
-  ]},
-];
-
-const saved = JSON.parse(localStorage.getItem('mealprep_final') || '{}');
-const grid = document.getElementById('shop-grid');
-shopData.forEach((cat, ci) => {
-  const card = document.createElement('div');
-  card.className = 'shop-card';
-  card.innerHTML = `<div class="shop-card-title">${cat.title}</div>`;
-  const ul = document.createElement('ul');
-  ul.className = 'shop-items';
-  cat.items.forEach((item, ii) => {
-    const key = `${ci}-${ii}`;
-    const li = document.createElement('li');
-    li.className = 'shop-item' + (saved[key] ? ' checked' : '');
-    li.innerHTML = `<div class="shop-cb"></div><span class="shop-item-name">${item.n}</span><span class="shop-item-qty">${item.q}</span>`;
-    li.addEventListener('click', () => {
-      li.classList.toggle('checked');
-      saved[key] = li.classList.contains('checked');
-      localStorage.setItem('mealprep_final', JSON.stringify(saved));
-    });
-    ul.appendChild(li);
-  });
-  card.appendChild(ul);
-  grid.appendChild(card);
-});
-</script>
-</body>
+      const saved = JSON.parse(localStorage.getItem("mealprep_final") || "{}");
+      const grid = document.getElementById("shop-grid");
+      shopData.forEach((cat, ci) => {
+        const card = document.createElement("div");
+        card.className = "shop-card";
+        card.innerHTML = `<div class="shop-card-title">${cat.title}</div>`;
+        const ul = document.createElement("ul");
+        ul.className = "shop-items";
+        cat.items.forEach((item, ii) => {
+          const key = `${ci}-${ii}`;
+          const li = document.createElement("li");
+          li.className = "shop-item" + (saved[key] ? " checked" : "");
+          li.innerHTML = `<div class="shop-cb"></div><span class="shop-item-name">${item.n}</span><span class="shop-item-qty">${item.q}</span>`;
+          li.addEventListener("click", () => {
+            li.classList.toggle("checked");
+            saved[key] = li.classList.contains("checked");
+            localStorage.setItem("mealprep_final", JSON.stringify(saved));
+          });
+          ul.appendChild(li);
+        });
+        card.appendChild(ul);
+        grid.appendChild(card);
+      });
+    </script>
+  </body>
 </html>

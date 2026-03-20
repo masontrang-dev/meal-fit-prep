@@ -135,7 +135,7 @@ Add to `src/assets/main.css`:
     --plum: #5c3570;
     --plum-light: #f5f0fa;
 
-    /* Accent — Red (warnings / PKD) */
+    /* Accent — Red (warnings) */
     --red: #8b2222;
     --red-light: #fdf0f0;
 
@@ -379,7 +379,7 @@ src/
 │   │   ├── CalloutBox.vue        # Colored callout with variant prop
 │   │   ├── SectionLabel.vue      # Small all-caps section divider
 │   │   ├── DataTable.vue         # Styled table with slot-based columns
-│   │   ├── StatusBadge.vue       # Best / Good / Watch / PKD badges
+│   │   ├── StatusBadge.vue       # Best / Good / Watch badges
 │   │   ├── ProteinPill.vue       # Fish / Chicken / Steak / Cast Iron pill tag
 │   │   ├── StorageBadge.vue      # Pantry / Fridge / Batchable badge
 │   │   └── CheckItem.vue         # Tappable checkbox row (shopping list)
@@ -622,13 +622,6 @@ export const useSettingsStore = defineStore(
     const lastResetDate = ref<string | null>(null);
     // ISO date string of last weekly reset
 
-    const hasSeenPKDWarning = ref<boolean>(false);
-    // Suppress PKD banner after first acknowledgement if desired
-
-    function acknowledgedPKDWarning() {
-      hasSeenPKDWarning.value = true;
-    }
-
     function setServings(n: 1 | 2 | 3) {
       servings.value = n;
     }
@@ -636,8 +629,6 @@ export const useSettingsStore = defineStore(
     return {
       servings,
       lastResetDate,
-      hasSeenPKDWarning,
-      acknowledgedPKDWarning,
       setServings,
     };
   },
@@ -872,7 +863,7 @@ Example usage:
 
 ```vue
 <CalloutBox variant="red">
-  <strong>PKD Warning:</strong> Consult your nephrologist...
+  <strong>Warning:</strong> Consult your healthcare provider...
 </CalloutBox>
 ```
 
@@ -1082,7 +1073,7 @@ export default defineConfig({
 - [ ] MealPlanView — weekly table with protein pills and notes
 - [ ] CastIronView — Sunday setup, Wednesday steps, marinade cards
 - [ ] SaucesView — three sections, sauce cards with full ingredient lists and storage badges
-- [ ] NutrientsView — PKD callout, DASH note, nutrient status table, fitness connection callouts
+- [ ] NutrientsView — DASH note, nutrient status table, fitness connection callouts
 - [ ] StorageView — fridge life grid, reheating guide
 
 ### Phase 3 — Fitness Module

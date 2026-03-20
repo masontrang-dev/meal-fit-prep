@@ -7,7 +7,7 @@ export const nutrientStatus: NutrientRow[] = [
     statusLabel: "Well covered",
     sources: "Fish, chicken, steak, lentils, quinoa",
     notes:
-      "~100–130g/day from this plan. Discuss total protein target with nephrologist — PKD may warrant a more moderate level depending on your stage.",
+      "~100–130g/day from this plan. Discuss total protein target with your doctor if you have specific dietary needs.",
   },
   {
     nutrient: "Omega-3s",
@@ -61,12 +61,12 @@ export const nutrientStatus: NutrientRow[] = [
     statusLabel: "Worth monitoring",
     sources: "Salmon provides some",
     notes:
-      "Most people are deficient. Salmon helps but likely not sufficient alone. Consider Vitamin D3 supplement (1,000–2,000 IU/day) — discuss with your doctor, especially relevant for PKD.",
+      "Most people are deficient. Salmon helps but likely not sufficient alone. Consider Vitamin D3 supplement (1,000–2,000 IU/day) — discuss with your doctor.",
   },
   {
     nutrient: "Potassium",
     status: "watch",
-    statusLabel: "PKD: Discuss with doctor",
+    statusLabel: "Discuss with doctor",
     sources: "Salmon, lentils, sweet potato, quinoa",
     notes:
       "These are moderate-to-high potassium foods. Depending on your GFR and labs, your nephrologist may advise limiting specific items.",
@@ -74,7 +74,7 @@ export const nutrientStatus: NutrientRow[] = [
   {
     nutrient: "Phosphorus",
     status: "watch",
-    statusLabel: "PKD: Discuss with doctor",
+    statusLabel: "Discuss with doctor",
     sources: "Fish, chicken, lentils",
     notes:
       "High-protein diets tend to be high in phosphorus. Monitor if your labs indicate elevated levels.",

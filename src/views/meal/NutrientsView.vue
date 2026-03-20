@@ -1,33 +1,11 @@
 <script setup lang="ts">
 import { nutrientStatus } from "@/data/nutrients";
-import { useSettingsStore } from "@/stores/settingsStore";
 import NutrientTable from "@/components/meal/NutrientTable.vue";
 import CalloutBox from "@/components/ui/CalloutBox.vue";
-
-const settingsStore = useSettingsStore();
-
-const dismissPKDWarning = () => {
-  settingsStore.acknowledgedPKDWarning();
-};
 </script>
 
 <template>
   <div>
-    <!-- PKD Warning - Hidden for now -->
-    <!-- <CalloutBox v-if="!settingsStore.hasSeenPKDWarning" variant="red">
-      <div class="flex items-start justify-between gap-4">
-        <p class="flex-1">
-          <strong>PKD (Polycystic Kidney Disease) — Important:</strong> This plan is built on whole foods and aligns directionally with DASH principles. However, PKD dietary needs vary significantly by kidney function stage (GFR). Potassium, phosphorus, and total daily protein all need calibration to your specific labs. Before committing to this plan, bring it printed to your nephrologist or a renal dietitian. Ask specifically about your current GFR, your potassium and phosphorus tolerance, and whether your protein target needs adjusting. The structure here is sound — the individual quantities may need tuning.
-        </p>
-        <button
-          @click="dismissPKDWarning"
-          class="text-xs px-3 py-1 bg-[var(--red)] text-white rounded hover:opacity-90 transition-opacity whitespace-nowrap"
-        >
-          Dismiss
-        </button>
-      </div>
-    </CalloutBox> -->
-
     <section class="mb-6">
       <h3 class="section-label">DASH Diet Alignment</h3>
       <CalloutBox variant="blue">
@@ -86,10 +64,9 @@ const dismissPKDWarning = () => {
 
         <CalloutBox variant="plum">
           <p>
-            <strong>Water and PKD:</strong> High water intake is one of the most evidence-backed
-            interventions for slowing PKD progression. Your habit of refilling a 32oz bottle
-            throughout the day is genuinely one of the most impactful things you can do — keep it up
-            regardless of how other dietary details evolve.
+            <strong>Hydration:</strong> Your habit of refilling a 32oz bottle throughout the day is
+            excellent for overall health and performance — keep it up regardless of how other
+            dietary details evolve.
           </p>
         </CalloutBox>
       </div>

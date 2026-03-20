@@ -136,8 +136,7 @@ This implementation plan breaks down the development of the Meal Prep & Fitness 
 - [x] `src/stores/settingsStore.ts`:
   - `servings` (1 | 2 | 3, default: 2)
   - `lastResetDate` (string | null)
-  - `hasSeenPKDWarning` (boolean)
-  - `acknowledgedPKDWarning()`, `setServings(n)`
+  - `setServings(n)`
   - Enable persistence
 
 ### 3.4 Fitness Store (Placeholder) ✓ (COMPLETED)
@@ -342,11 +341,10 @@ This implementation plan breaks down the development of the Meal Prep & Fitness 
   - Sauce cards in each section
   - Storage badge legend
 - [x] `src/views/meal/NutrientsView.vue`:
-  - PKD warning banner (CalloutBox red variant)
   - DASH diet alignment note
   - Nutrient status table
   - Fitness plan connection callouts
-  - PKD & water note
+  - Hydration note
 - [x] `src/views/meal/StorageView.vue`:
   - Fridge life table
   - Reheating guide
@@ -379,7 +377,6 @@ This implementation plan breaks down the development of the Meal Prep & Fitness 
 
 ### 8.3 Settings Integration ✓ (COMPLETED)
 
-- [x] PKD warning acknowledgment (dismissible banner in Nutrients view)
 - [x] Servings selector (1/2/3 toggle in masthead)
 
 **Deliverable:** Fully interactive shopping list with persistent state.
