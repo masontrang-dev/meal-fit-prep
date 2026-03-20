@@ -17,14 +17,14 @@ function navigateToHome() {
         <div class="masthead-title-section">
           <button @click="navigateToHome" class="masthead-title-button">
             <h1 class="masthead-title">
-              Meal Prep<br /><em class="masthead-subtitle">for Two</em>
+              🥗 MealFit<br /><em class="masthead-subtitle">Smart Meal Prep</em>
             </h1>
           </button>
           <div class="masthead-pills">
-            <span class="pill">6 Lunches + 6 Dinners</span>
-            <span class="pill">Whole Foods</span>
-            <span class="pill">DASH Friendly</span>
-            <span class="pill">Sunday Prep + Wed Fresh Cook</span>
+            <span class="pill">Weekly Meal Plan</span>
+            <span class="pill">Whole Ingredients</span>
+            <span class="pill">Diet Friendly</span>
+            <span class="pill">Flexible Prep</span>
           </div>
         </div>
         <div class="masthead-meta">
