@@ -1,38 +1,66 @@
 import type { Ingredient, Sauce } from "@/types/meal.types";
 
 /**
+ * Convert ingredient amount to number, handling both string and number inputs
+ */
+function parseAmount(amount: number | string): number {
+  if (typeof amount === "number") {
+    return amount;
+  }
+  // Parse common fractions
+  const fractionMap: { [key: string]: number } = {
+    "¼": 0.25,
+    "½": 0.5,
+    "¾": 0.75,
+    "⅓": 0.333,
+    "⅔": 0.667,
+    "⅛": 0.125,
+  };
+
+  // Check if it's a fraction character
+  if (fractionMap[amount]) {
+    return fractionMap[amount];
+  }
+
+  // Try to parse as float
+  const parsed = parseFloat(amount);
+  return isNaN(parsed) ? 1 : parsed;
+}
+
+/**
  * Scale an ingredient quantity based on target protein weight and sauce scaling behavior
  */
 export function scaleIngredient(
   ingredient: Ingredient,
   sauce: Sauce,
-  targetLbs: number
+  targetLbs: number,
 ): { amount: number; unit: string } {
   const multiplier = targetLbs / sauce.baseYieldLbs;
+  const baseAmount = parseAmount(ingredient.amount);
 
   let scaledAmount: number;
 
   switch (ingredient.scalingBehavior) {
     case "linear":
-      scaledAmount = ingredient.amount * multiplier;
+      scaledAmount = baseAmount * multiplier;
       break;
 
     case "fixed":
-      scaledAmount = ingredient.amount;
+      scaledAmount = baseAmount;
       break;
 
     case "diminishing":
       const maxMultiplier = ingredient.maxMultiplier || 2.0;
       const cappedMultiplier = Math.min(multiplier, maxMultiplier);
-      scaledAmount = ingredient.amount * cappedMultiplier;
+      scaledAmount = baseAmount * cappedMultiplier;
       break;
 
     case "to-taste":
-      scaledAmount = ingredient.amount;
+      scaledAmount = baseAmount;
       break;
 
     default:
-      scaledAmount = ingredient.amount * multiplier;
+      scaledAmount = baseAmount * multiplier;
   }
 
   return {
@@ -94,11 +122,7 @@ export function formatAmount(amount: number, unit: string): string {
 /**
  * Format ingredient for display with scaled amount
  */
-export function formatIngredient(
-  ingredient: Ingredient,
-  sauce: Sauce,
-  targetLbs: number
-): string {
+export function formatIngredient(ingredient: Ingredient, sauce: Sauce, targetLbs: number): string {
   const scaled = scaleIngredient(ingredient, sauce, targetLbs);
   const formattedAmount = formatAmount(scaled.amount, scaled.unit);
 
@@ -129,7 +153,7 @@ export function formatIngredient(
  */
 export function getScaledIngredients(
   sauce: Sauce,
-  targetLbs: number
+  targetLbs: number,
 ): Array<{ formatted: string; ingredient: Ingredient; scaled: { amount: number; unit: string } }> {
   return sauce.ingredients.map((ingredient) => {
     const scaled = scaleIngredient(ingredient, sauce, targetLbs);

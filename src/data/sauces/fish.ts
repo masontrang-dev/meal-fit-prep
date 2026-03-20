@@ -252,9 +252,8 @@ export const fishSauces: Sauce[] = [
       },
       {
         amount: 0.25,
-        unit: "tsp",
-        name: "salt",
         unit: "to-taste",
+        name: "salt",
         scalingBehavior: "to-taste",
       },
     ],

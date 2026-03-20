@@ -88,7 +88,10 @@ export const useRandomizerStore = defineStore(
 
         case "batchFishSauce":
           const filteredFishSauces = excludeOvernight
-            ? fishSauces.filter((id: string) => getSauceById(id).marinating !== "overnight")
+            ? fishSauces.filter((id: string) => {
+                const sauce = getSauceById(id);
+                return sauce && sauce.marinating !== "overnight";
+              })
             : fishSauces;
           newValue = pickFrom("fishSauce", filteredFishSauces, tempHistory, engineSettings.value);
           break;
@@ -104,7 +107,10 @@ export const useRandomizerStore = defineStore(
 
         case "batchChickenSauce":
           const filteredChickenSauces = excludeOvernight
-            ? chickenSauces.filter((id: string) => getSauceById(id).marinating !== "overnight")
+            ? chickenSauces.filter((id: string) => {
+                const sauce = getSauceById(id);
+                return sauce && sauce.marinating !== "overnight";
+              })
             : chickenSauces;
           newValue = pickFrom(
             "chickenSauce",
@@ -133,7 +139,10 @@ export const useRandomizerStore = defineStore(
           const isShrimp = pendingPlan.value.castIronProtein === "shrimp";
           const saucePool = isShrimp ? shrimpSauces : castIronMarinades;
           const filteredCastIronSauces = excludeOvernight
-            ? saucePool.filter((id: string) => getSauceById(id).marinating !== "overnight")
+            ? saucePool.filter((id: string) => {
+                const sauce = getSauceById(id);
+                return sauce && sauce.marinating !== "overnight";
+              })
             : saucePool;
           newValue = pickFrom(
             "castIronMarinade",

@@ -266,7 +266,7 @@ function startOvenTimer(proteinType: string, label: string, durationMin: number,
     const offsetMin = sauce.applicationTiming === "last-ten" ? 10 : 5;
     sauceAlertAtMs = Date.now() + (durationMin - offsetMin) * 60 * 1000;
     sauceName = sauce.name;
-    sauceInstructions = sauce.applicationNote;
+    sauceInstructions = sauce.application;
   }
 
   timerStore.startTimer({

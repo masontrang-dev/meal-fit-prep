@@ -97,7 +97,7 @@ const handleClick = () => {
     <div
       class="text-sm text-[var(--ink)] italic border-t border-[var(--rule)] pt-3 leading-relaxed"
     >
-      {{ marinade.applicationNote }}
+      {{ marinade.application }}
     </div>
   </div>
 </template>

@@ -39,10 +39,10 @@ export type IngredientUnit =
   | "to-taste";
 
 export interface Ingredient {
-  amount: number;
+  amount: number | string;
   unit: IngredientUnit;
   name: string;
-  scalingBehavior: ScalingBehavior;
+  scalingBehavior?: ScalingBehavior;
   maxMultiplier?: number;
 }
 

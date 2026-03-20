@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { Sauce } from '@/types/meal.types'
+import { ref } from "vue";
+import type { Sauce } from "@/types/meal.types";
 
 const props = defineProps<{
-  sauce: Sauce
-  expanded?: boolean
-}>()
+  sauce: Sauce;
+  expanded?: boolean;
+}>();
 
 const emit = defineEmits<{
-  'mark-made': [sauceId: string]
-}>()
+  "mark-made": [sauceId: string];
+}>();
 
-const isExpanded = ref(props.expanded ?? false)
+const isExpanded = ref(props.expanded ?? false);
 
 function toggleExpand() {
-  isExpanded.value = !isExpanded.value
+  isExpanded.value = !isExpanded.value;
 }
 </script>
 
@@ -23,14 +23,12 @@ function toggleExpand() {
     <div class="sauce-header" @click="toggleExpand">
       <div class="sauce-name">{{ sauce.name }}</div>
       <button class="expand-btn" :aria-label="isExpanded ? 'Collapse' : 'Expand'">
-        {{ isExpanded ? '▲ Collapse' : '▼ Expand' }}
+        {{ isExpanded ? "▲ Collapse" : "▼ Expand" }}
       </button>
     </div>
-    
-    <div class="sauce-subtitle">
-      For: {{ sauce.bestFor }}
-    </div>
-    
+
+    <div class="sauce-subtitle">For: {{ sauce.bestFor }}</div>
+
     <div v-if="isExpanded" class="sauce-content">
       <div class="sauce-section">
         <div class="sauce-section-label">Ingredients:</div>
@@ -41,19 +39,18 @@ function toggleExpand() {
           </li>
         </ul>
       </div>
-      
+
       <div class="sauce-section">
         <div class="sauce-section-label">Method:</div>
-        <p class="sauce-method">{{ sauce.applicationNote }}</p>
+        <p class="sauce-method">{{ sauce.application }}</p>
       </div>
-      
+
       <div v-if="sauce.temperatureAdjustment.adjusted" class="sauce-temp-warning">
-        ⚠️ Oven at {{ sauce.temperatureAdjustment.tempF }}°F — {{ sauce.temperatureAdjustment.note }}
+        ⚠️ Oven at {{ sauce.temperatureAdjustment.tempF }}°F —
+        {{ sauce.temperatureAdjustment.note }}
       </div>
-      
-      <button @click="emit('mark-made', sauce.id)" class="btn-mark-made">
-        ✓ Mark as made
-      </button>
+
+      <button @click="emit('mark-made', sauce.id)" class="btn-mark-made">✓ Mark as made</button>
     </div>
   </div>
 </template>
@@ -81,7 +78,7 @@ function toggleExpand() {
 }
 
 .sauce-name {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: "Cormorant Garamond", serif;
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--ink);
@@ -136,7 +133,7 @@ function toggleExpand() {
 }
 
 .ingredient-list li::before {
-  content: '·';
+  content: "·";
   color: var(--green);
   font-weight: bold;
   display: inline-block;
