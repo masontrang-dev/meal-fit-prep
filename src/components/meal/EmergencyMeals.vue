@@ -19,6 +19,7 @@ const toggleExpanded = () => {
       @click="toggleExpanded"
       class="w-full flex items-center justify-between text-left min-h-[44px] py-2"
       :aria-expanded="isExpanded"
+      aria-label="Toggle emergency meals section"
     >
       <div>
         <h3 class="text-lg font-display font-semibold text-[var(--ink)] mb-1">

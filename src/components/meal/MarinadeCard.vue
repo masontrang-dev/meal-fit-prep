@@ -34,6 +34,7 @@ const handleClick = () => {
     @click="handleClick"
     role="button"
     :aria-pressed="isSelected"
+    :aria-label="`Select ${marinade.name} marinade`"
     tabindex="0"
     @keydown.enter="handleClick"
     @keydown.space.prevent="handleClick"

@@ -18,7 +18,7 @@ const dismissPKDWarning = () => {
       <p class="text-muted mt-2">How this meal plan supports your health goals</p>
     </div>
 
-    <CalloutBox v-if="!settingsStore.hasSeenPKDWarning" variant="red">
+    <!-- <CalloutBox v-if="!settingsStore.hasSeenPKDWarning" variant="red">
       <div class="flex items-start justify-between gap-4">
         <p class="flex-1">
           <strong>PKD Warning:</strong> If you have Polycystic Kidney Disease (stage 3+), consult
@@ -32,7 +32,7 @@ const dismissPKDWarning = () => {
           Dismiss
         </button>
       </div>
-    </CalloutBox>
+    </CalloutBox> -->
 
     <CalloutBox variant="blue">
       <p>

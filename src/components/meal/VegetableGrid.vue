@@ -41,6 +41,7 @@ const handleSelect = (vegName: string) => {
       @click="handleSelect(veg.name)"
       role="button"
       :aria-pressed="selectedVegetable === veg.name"
+      :aria-label="`Select ${veg.name} as this week's vegetable`"
       tabindex="0"
       @keydown.enter="handleSelect(veg.name)"
       @keydown.space.prevent="handleSelect(veg.name)"

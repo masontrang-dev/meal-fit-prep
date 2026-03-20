@@ -30,6 +30,7 @@ const handleToggle = () => {
       type="checkbox"
       :checked="isChecked"
       @change="handleToggle"
+      :aria-label="`${name}, ${quantity}`"
       class="w-5 h-5 min-w-[20px] min-h-[20px] rounded border-2 border-[var(--muted)] cursor-pointer accent-[var(--green)] flex-shrink-0 transition-all duration-150"
     />
     <div class="flex-1 min-w-0">
