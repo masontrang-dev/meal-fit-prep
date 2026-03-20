@@ -124,3 +124,33 @@ export interface StorageRow {
   window: string;
   notes: string;
 }
+
+export interface BatchRecipe {
+  ingredients: Ingredient[];
+  steps: string[];
+  makes: string;
+  keeps: string;
+  reheating: string;
+  alternativeMethod: string | null;
+}
+
+export interface BreakfastNutrients {
+  protein: string;
+  fiber: string;
+  omega3s: string;
+  antioxidants: string;
+  glycemicIndex: string;
+  morningPrepTime: string;
+}
+
+export interface Breakfast {
+  id: string;
+  name: string;
+  subtitle: string;
+  icon: string;
+  description: string;
+  batchRecipe: BatchRecipe;
+  nutrients: BreakfastNutrients;
+  toppings: string[];
+  granolaNotes?: string;
+}

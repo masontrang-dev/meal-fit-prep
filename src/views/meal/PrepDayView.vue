@@ -26,6 +26,14 @@ import CalloutBox from "@/components/ui/CalloutBox.vue";
       <PrepTimeline :steps="sundayPrepSteps" />
     </section>
 
+    <CalloutBox variant="green" class="mt-7">
+      <p>
+        <strong>Sunday breakfast prep:</strong> After portioning your meals, make the oat batch
+        and/or 5 chia pudding jars. Both take under 10 minutes combined and are covered in full on
+        the Breakfasts tab.
+      </p>
+    </CalloutBox>
+
     <section class="mt-8">
       <EmergencyMeals :meals="emergencyMeals" />
     </section>

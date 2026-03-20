@@ -15,7 +15,7 @@
           </RouterLink>
         </div>
       </div>
-      <div class="nav-section">
+      <!-- <div class="nav-section">
         <span class="nav-section-label">Fitness</span>
         <div class="nav-tabs">
           <RouterLink
@@ -28,29 +28,28 @@
             {{ item.label }}
           </RouterLink>
         </div>
-      </div>
+      </div> -->
     </div>
   </nav>
 </template>
 
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
-import type { NavItem } from '@/types/common.types'
+import { RouterLink } from "vue-router";
+import type { NavItem } from "@/types/common.types";
 
 const mealNavItems: NavItem[] = [
-  { label: 'Proteins & Grains', path: '/meal/proteins', section: 'meal' },
-  { label: 'Shopping List', path: '/meal/shopping', section: 'meal' },
-  { label: 'Prep Day', path: '/meal/prep', section: 'meal' },
-  { label: 'Meal Plan', path: '/meal/plan', section: 'meal' },
-  { label: 'Cast Iron', path: '/meal/cast-iron', section: 'meal' },
-  { label: 'Sauces', path: '/meal/sauces', section: 'meal' },
-  { label: 'Nutrients', path: '/meal/nutrients', section: 'meal' },
-  { label: 'Storage', path: '/meal/storage', section: 'meal' }
-]
+  { label: "Meal Plan", path: "/meal/plan", section: "meal" },
+  { label: "Proteins & Grains", path: "/meal/proteins", section: "meal" },
+  { label: "Shopping List", path: "/meal/shopping", section: "meal" },
+  { label: "Prep Day", path: "/meal/prep", section: "meal" },
+  { label: "Cast Iron", path: "/meal/cast-iron", section: "meal" },
+  { label: "Sauces", path: "/meal/sauces", section: "meal" },
+  { label: "Breakfasts", path: "/meal/breakfasts", section: "meal" },
+  { label: "Nutrients", path: "/meal/nutrients", section: "meal" },
+  { label: "Storage", path: "/meal/storage", section: "meal" },
+];
 
-const fitnessNavItems: NavItem[] = [
-  { label: 'Overview', path: '/fitness', section: 'fitness' }
-]
+const fitnessNavItems: NavItem[] = [{ label: "Fitness", path: "/fitness", section: "fitness" }];
 </script>
 
 <style scoped>
@@ -60,82 +59,70 @@ const fitnessNavItems: NavItem[] = [
   z-index: 100;
   background: var(--ink);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.app-nav::-webkit-scrollbar {
+  display: none;
 }
 
 .app-nav-inner {
   max-width: 980px;
   margin: 0 auto;
   display: flex;
-  gap: 2rem;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.app-nav-inner::-webkit-scrollbar {
-  display: none;
+  padding: 0 16px;
+  min-width: max-content;
 }
 
 .nav-section {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 0.75rem 0;
+  gap: 0;
   flex-shrink: 0;
 }
 
 .nav-section-label {
-  font-size: 0.7rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--muted);
-  padding: 0 1rem;
-  white-space: nowrap;
+  display: none;
 }
 
 .nav-tabs {
   display: flex;
-  gap: 0.25rem;
 }
 
 .nav-tab {
-  padding: 0.5rem 1rem;
-  font-size: 0.85rem;
-  font-weight: 400;
-  color: var(--bg);
+  padding: 12px 16px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.4);
   text-decoration: none;
-  border-radius: 4px;
-  transition: all 0.2s ease;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s;
   white-space: nowrap;
-  opacity: 0.7;
 }
 
 .nav-tab:hover {
-  opacity: 1;
-  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .nav-tab-active {
-  opacity: 1;
-  background: var(--green);
-  font-weight: 500;
+  color: #a8d4b8;
+  border-bottom-color: #a8d4b8;
 }
 
 @media (max-width: 768px) {
   .app-nav-inner {
-    gap: 1rem;
-    padding: 0 0.5rem;
-  }
-
-  .nav-section-label {
-    padding: 0 0.5rem;
-    font-size: 0.65rem;
+    padding: 0 12px;
   }
 
   .nav-tab {
-    padding: 0.4rem 0.75rem;
-    font-size: 0.8rem;
+    padding: 10px 12px;
+    font-size: 0.68rem;
   }
 }
 </style>

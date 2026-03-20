@@ -4,16 +4,16 @@
 
 @layer base {
   :root {
-    /* Backgrounds */
-    --bg: #f8f4ef;
-    --paper: #fffefb;
+    /* Backgrounds - warmer, more paper-like */
+    --bg: #f5f0e8;
+    --paper: #fffdf7;
 
-    /* Text */
-    --ink: #1e1a15;
-    --muted: #8c7f70;
+    /* Text - warmer browns */
+    --ink: #2a2318;
+    --muted: #8b7d6b;
 
-    /* Borders */
-    --rule: #e6ddd2;
+    /* Borders - softer, warmer */
+    --rule: #e0d5c7;
 
     /* Brand — Green (primary) */
     --green: #3b6e4c;

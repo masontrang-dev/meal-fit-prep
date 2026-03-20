@@ -18,7 +18,6 @@ import ServingsSelector from "@/components/ui/ServingsSelector.vue";
         <div class="masthead-meta">
           Fish · Chicken · Steak<br />
           Brown Rice · Quinoa · Lentils<br />
-          2 People · San Diego
         </div>
       </div>
     </div>
@@ -28,8 +27,9 @@ import ServingsSelector from "@/components/ui/ServingsSelector.vue";
 <style scoped>
 .masthead {
   background: var(--ink);
+  color: var(--bg);
+  padding: 36px 32px 28px;
   border-bottom: 3px solid var(--green);
-  padding: 1.5rem 1rem;
 }
 
 .masthead-inner {
@@ -38,10 +38,10 @@ import ServingsSelector from "@/components/ui/ServingsSelector.vue";
 }
 
 .masthead-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 24px;
 }
 
 .masthead-title-section {
@@ -49,62 +49,58 @@ import ServingsSelector from "@/components/ui/ServingsSelector.vue";
 }
 
 .masthead-title {
-  font-size: 2.25rem;
-  font-weight: 700;
-  color: var(--bg);
-  margin: 0;
   font-family: "Cormorant Garamond", serif;
-  line-height: 1.3;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  margin: 0;
 }
 
 .masthead-subtitle {
   font-style: italic;
-  font-weight: 400;
-  font-size: 2rem;
-  color: var(--green-mid);
+  color: #a8d4b8;
 }
 
 .masthead-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 6px;
+  margin-top: 14px;
 }
 
 .pill {
-  display: inline-block;
   background: rgba(255, 255, 255, 0.1);
-  color: var(--bg);
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
-  font-size: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 3px 10px;
+  font-size: 0.68rem;
   font-weight: 500;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .masthead-meta {
   text-align: right;
-  color: var(--bg);
-  font-size: 0.875rem;
-  line-height: 1.6;
-  opacity: 0.85;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 2.2;
 }
 
 @media (max-width: 768px) {
   .masthead {
-    padding: 1.25rem 1rem;
+    padding: 24px 20px;
   }
 
   .masthead-content {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .masthead-title {
-    font-size: 1.75rem;
+    grid-template-columns: 1fr;
   }
 
   .masthead-meta {
-    display: none;
+    text-align: left;
+    margin-top: 12px;
   }
 }
 </style>
