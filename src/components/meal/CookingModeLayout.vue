@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref, onMounted, onUnmounted, watch } from "vue";
 import TimerBar from "./TimerBar.vue";
+import HoveringTimers from "./HoveringTimers.vue";
 import type { ActiveTimer } from "@/stores/timerStore";
 
 const props = defineProps<{
@@ -21,6 +22,37 @@ const emit = defineEmits<{
   reset: [timerId: string];
   delete: [timerId: string];
 }>();
+
+const isAtBottom = ref(true);
+const showHoveringTimers = ref(false);
+
+const checkScrollPosition = () => {
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const windowHeight = window.innerHeight;
+  const documentHeight = document.documentElement.scrollHeight;
+
+  // Consider "at bottom" if within 100px of the bottom
+  isAtBottom.value = scrollTop + windowHeight >= documentHeight - 100;
+
+  // Show hovering timers on mobile only when not at bottom and there are active timers
+  const isMobile = window.innerWidth < 768;
+  const hasActiveTimers = props.timers.some((t) => !t.completed);
+  showHoveringTimers.value = isMobile && !isAtBottom.value && hasActiveTimers;
+};
+
+// Re-check when timers change
+watch(() => props.timers, checkScrollPosition, { deep: true });
+
+onMounted(() => {
+  window.addEventListener("scroll", checkScrollPosition);
+  window.addEventListener("resize", checkScrollPosition);
+  checkScrollPosition(); // Initial check
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", checkScrollPosition);
+  window.removeEventListener("resize", checkScrollPosition);
+});
 </script>
 
 <template>
@@ -48,6 +80,21 @@ const emit = defineEmits<{
         @delete="emit('delete', $event)"
       />
     </div>
+
+    <!-- Hovering timers for mobile when not at bottom -->
+    <HoveringTimers
+      v-if="showHoveringTimers"
+      :timers="timers"
+      @timer-click="emit('timer-click', $event)"
+      @sauce-alert-fired="emit('sauce-alert-fired', $event)"
+      @timer-completed="emit('timer-completed', $event)"
+      @confirm-sauce-applied="emit('confirm-sauce-applied', $event)"
+      @skip-sauce="emit('skip-sauce', $event)"
+      @pause="emit('pause', $event)"
+      @resume="emit('resume', $event)"
+      @reset="emit('reset', $event)"
+      @delete="emit('delete', $event)"
+    />
   </div>
 </template>
 
