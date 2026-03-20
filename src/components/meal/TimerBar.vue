@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import type { ActiveTimer } from "@/stores/timerStore";
 import CookTimer from "./CookTimer.vue";
 
@@ -20,6 +20,25 @@ const emit = defineEmits<{
 }>();
 
 const activeTimers = computed(() => props.timers.filter((t) => !t.completed));
+
+const timerRefs = ref<Record<string, HTMLElement>>({});
+
+function setTimerRef(timerId: string, el: any) {
+  if (el) {
+    timerRefs.value[timerId] = el;
+  }
+}
+
+function scrollToTimer(timerId: string) {
+  const timerEl = timerRefs.value[timerId];
+  if (timerEl) {
+    timerEl.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+}
+
+defineExpose({
+  scrollToTimer,
+});
 </script>
 
 <template>
@@ -29,6 +48,7 @@ const activeTimers = computed(() => props.timers.filter((t) => !t.completed));
       <div
         v-for="timer in activeTimers"
         :key="timer.id"
+        :ref="(el) => setTimerRef(timer.id, el)"
         class="timer-bar-item"
         @click="emit('timer-click', timer.id)"
       >

@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
 import TimerBar from "./TimerBar.vue";
+import CompactTimerToast from "./CompactTimerToast.vue";
 import type { ActiveTimer } from "@/stores/timerStore";
 
 const props = defineProps<{
@@ -21,6 +22,48 @@ const emit = defineEmits<{
   reset: [timerId: string];
   delete: [timerId: string];
 }>();
+
+const timerBarRef = ref<InstanceType<typeof TimerBar> | null>(null);
+const toastTimer = ref<ActiveTimer | null>(null);
+const showToast = ref(false);
+let toastTimeoutId: number | null = null;
+
+watch(
+  () => props.timers.length,
+  (newLength, oldLength) => {
+    if (newLength > oldLength && newLength > 0) {
+      const newestTimer = props.timers[props.timers.length - 1];
+      if (!newestTimer.completed) {
+        toastTimer.value = newestTimer;
+        showToast.value = true;
+
+        if (toastTimeoutId !== null) {
+          clearTimeout(toastTimeoutId);
+        }
+        toastTimeoutId = window.setTimeout(() => {
+          showToast.value = false;
+        }, 5000);
+      }
+    }
+  },
+);
+
+function handleToastClick() {
+  if (toastTimer.value && timerBarRef.value) {
+    timerBarRef.value.scrollToTimer(toastTimer.value.id);
+    showToast.value = false;
+    if (toastTimeoutId !== null) {
+      clearTimeout(toastTimeoutId);
+    }
+  }
+}
+
+function handleToastClose() {
+  showToast.value = false;
+  if (toastTimeoutId !== null) {
+    clearTimeout(toastTimeoutId);
+  }
+}
 </script>
 
 <template>
@@ -36,6 +79,7 @@ const emit = defineEmits<{
       </div>
 
       <TimerBar
+        ref="timerBarRef"
         :timers="timers"
         @timer-click="emit('timer-click', $event)"
         @sauce-alert-fired="emit('sauce-alert-fired', $event)"
@@ -48,6 +92,14 @@ const emit = defineEmits<{
         @delete="emit('delete', $event)"
       />
     </div>
+
+    <CompactTimerToast
+      v-if="toastTimer"
+      :timer="toastTimer"
+      :show="showToast"
+      @click="handleToastClick"
+      @close="handleToastClose"
+    />
   </div>
 </template>
 
