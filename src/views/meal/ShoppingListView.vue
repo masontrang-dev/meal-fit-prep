@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { shoppingList } from "@/data/shopping";
 import { useShoppingStore } from "@/stores/shoppingStore";
 import ShoppingCategory from "@/components/meal/ShoppingCategory.vue";
 import CalloutBox from "@/components/ui/CalloutBox.vue";
@@ -18,8 +17,8 @@ const categoryMap: Record<string, string> = {
 };
 
 const categories = computed(() => {
-  const grouped: Record<string, typeof shoppingList> = {};
-  shoppingList.forEach((item) => {
+  const grouped: Record<string, Array<(typeof store.allItems)[number]>> = {};
+  store.allItems.forEach((item) => {
     if (!grouped[item.category]) {
       grouped[item.category] = [];
     }

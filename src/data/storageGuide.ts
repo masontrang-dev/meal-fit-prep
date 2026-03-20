@@ -63,8 +63,29 @@ export const storageGuide: StorageRow[] = [
       ". Cook Sunday alongside everything else. Reheat with a splash of broth if they've dried out.",
   },
   {
+    food: "Chickpeas (Roasted)",
+    icon: "🫘",
+    window: "2 days crispy",
+    notes:
+      ". Keeps 2 days crispy. Re-roast at 425°F for 5 min to partially restore crunch. Best as salad topper or snack.",
+  },
+  {
+    food: "Chickpeas (Sautéed)",
+    icon: "🫘",
+    window: "5 days",
+    notes:
+      ". Store in sealed container refrigerated. Reheat with splash of broth if needed. Best as warm side alongside fish or chicken.",
+  },
+  {
+    food: "Cooked Shrimp",
+    icon: "🍤",
+    window: "3 days",
+    notes:
+      ". Reheat: 50% microwave power, 60 sec max. Or quick toss in warm pan with butter, 90 sec. Best eaten within 2 days for optimal texture.",
+  },
+  {
     food: "Roasted Vegetables",
-    icon: "�",
+    icon: "🥦",
     window: "4–5 days",
     notes:
       ". Cook slightly underdone Sunday — they soften more when reheated. Keep in separate container from proteins to prevent sogginess.",

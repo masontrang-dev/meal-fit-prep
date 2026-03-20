@@ -128,6 +128,52 @@ export const sauces: Sauce[] = [
     },
     applicationNote: "Melt over hot fish or add to pan while cooking",
   },
+  {
+    id: "herb-butter",
+    name: "Herb Butter",
+    bestFor: "Any fish — baked or cast iron",
+    proteinCategory: "fish",
+    ingredients: [
+      { amount: "2 tbsp", name: "unsalted butter" },
+      { amount: "1 tbsp", name: "olive oil" },
+      { amount: "2 cloves", name: "garlic, minced" },
+      { amount: "1 tsp", name: "fresh or dried thyme" },
+      { amount: "1 tsp", name: "fresh or dried parsley" },
+      { amount: "Juice of ½", name: "lemon" },
+      { amount: "¼ tsp", name: "salt" },
+      { amount: "¼ tsp", name: "black pepper" },
+    ],
+    storage: {
+      locations: ["fridge"],
+      batchable: false,
+      shelfLife: "5 days",
+      note: "Make fresh weekly",
+    },
+    applicationNote:
+      "Melt butter with olive oil in small pan over medium heat. Add garlic, cook 60 seconds until fragrant. Add herbs, lemon juice, salt, and pepper. Spoon over fish for the last 3 minutes of baking, or finish cast iron fish with it directly in the pan. Pairs with all fish varieties, especially cod and mahi-mahi. Brown rice, quinoa, asparagus, green beans.",
+  },
+  {
+    id: "miso-glaze",
+    name: "Miso Glaze",
+    bestFor: "Salmon especially — baked",
+    proteinCategory: "fish",
+    ingredients: [
+      { amount: "2 tbsp", name: "white miso paste" },
+      { amount: "1 tbsp", name: "low-sodium soy sauce" },
+      { amount: "1 tbsp", name: "honey" },
+      { amount: "1 tbsp", name: "rice vinegar" },
+      { amount: "1 tsp", name: "sesame oil" },
+      { amount: "½ tsp", name: "ground ginger" },
+    ],
+    storage: {
+      locations: ["fridge"],
+      batchable: true,
+      shelfLife: "2 weeks",
+      note: "White miso paste keeps months refrigerated",
+    },
+    applicationNote:
+      "Whisk all ingredients together. Spread over fish and marinate 30 min minimum (up to 4 hours refrigerated). Bake at 400°F for 12–15 min. Watch carefully — honey and miso can burn at high heat. Optional: broil last 2 minutes for a caramelized finish. Pairs with salmon, mahi-mahi. Quinoa, brown rice, bok choy, snap peas, edamame. Shopping note: Add white miso paste to pantry staples once this sauce enters rotation.",
+  },
 
   // ═══════════════════════════════════════════════════════════
   // FOR CHICKEN (HTML Priority)
@@ -237,6 +283,60 @@ export const sauces: Sauce[] = [
     },
     applicationNote: "Toss chicken in sauce after cooking",
   },
+  {
+    id: "teriyaki-glaze",
+    name: "Teriyaki Glaze",
+    bestFor: "Chicken thighs or breast — Sunday batch",
+    proteinCategory: "chicken",
+    ingredients: [
+      { amount: "3 tbsp", name: "low-sodium soy sauce" },
+      { amount: "1 tbsp", name: "honey" },
+      { amount: "1 tbsp", name: "rice vinegar" },
+      { amount: "1 tsp", name: "sesame oil" },
+      { amount: "½ tsp", name: "garlic powder" },
+      { amount: "½ tsp", name: "ground ginger" },
+      {
+        amount: "1 tsp",
+        name: "cornstarch mixed with 1 tbsp cold water (optional — for thickened glaze finish)",
+      },
+    ],
+    storage: {
+      locations: ["fridge"],
+      batchable: true,
+      shelfLife: "2 weeks",
+      note: "Sunday marinade: Yes — 2+ hours or overnight",
+    },
+    applicationNote:
+      "Combine all ingredients except cornstarch slurry. Marinate chicken overnight or minimum 2 hours. Bake at 375°F as normal. Optional glazed finish: heat remaining marinade in a small saucepan over medium heat, add cornstarch slurry, stir until thickened, brush over chicken in last 5 minutes of baking. Pairs with brown rice, quinoa, snap peas, bok choy, stir-fry veg blend, edamame. Note: Pairs naturally with Asian cast iron marinades the same week (Soy Garlic Ginger, Soy Ginger Glaze) for a cohesive weekly flavor theme without repetition. Shopping note: Add rice vinegar and cornstarch to pantry staples once this sauce enters rotation.",
+  },
+  {
+    id: "lemon-herb",
+    name: "Lemon Herb",
+    bestFor: "Chicken thighs or breast — Sunday batch",
+    proteinCategory: "chicken",
+    ingredients: [
+      { amount: "2 tbsp", name: "olive oil" },
+      { amount: "Juice of 1", name: "lemon" },
+      { amount: "Zest of ½", name: "lemon" },
+      { amount: "1 tsp", name: "dried oregano" },
+      { amount: "1 tsp", name: "dried thyme" },
+      {
+        amount: "3 cloves",
+        name: "garlic, minced (or ¾ tsp garlic powder for longer batch shelf life)",
+      },
+      { amount: "½ tsp", name: "salt" },
+      { amount: "¼ tsp", name: "black pepper" },
+      { amount: "1 tbsp", name: "fresh parsley, chopped (optional)" },
+    ],
+    storage: {
+      locations: ["fridge"],
+      batchable: true,
+      shelfLife: "1 week with fresh garlic, 2 weeks with garlic powder substitution",
+      note: "Sunday marinade: Yes — 2+ hours or overnight",
+    },
+    applicationNote:
+      "Combine all ingredients. Marinate chicken 2 hours minimum, overnight preferred. Bake thighs at 375°F for 35–40 min, breast at 375°F for 25–30 min. Bright, clean flavor — the most versatile chicken sauce in the pool. Pairs with quinoa, jasmine rice, asparagus, zucchini, green beans, snap peas. Note: Most Mediterranean of the chicken sauces. Pairs naturally with chimichurri steak or herb butter fish weeks for a cohesive weekly flavor theme.",
+  },
 
   // ═══════════════════════════════════════════════════════════
   // FOR STEAK (HTML Priority)
@@ -343,5 +443,97 @@ export const sauces: Sauce[] = [
       note: "Roll into log, slice as needed",
     },
     applicationNote: "Place pat on hot steak, let melt",
+  },
+
+  // ═══════════════════════════════════════════════════════════
+  // FOR SHRIMP — Pan Sauces Only
+  // ═══════════════════════════════════════════════════════════
+  {
+    id: "shrimp-garlic-butter",
+    name: "Garlic Butter (Shrimp)",
+    bestFor: "Shrimp — pan sauce",
+    proteinCategory: "shrimp",
+    ingredients: [
+      { amount: "2 tbsp", name: "butter" },
+      { amount: "3 cloves", name: "garlic, minced" },
+      { amount: "1 tbsp", name: "lemon juice" },
+      { amount: "1 tbsp", name: "fresh parsley, chopped" },
+      { amount: "¼ tsp", name: "salt" },
+      { amount: "¼ tsp", name: "black pepper" },
+    ],
+    storage: {
+      locations: ["fridge"],
+      batchable: false,
+      shelfLife: "N/A — make fresh",
+      note: "Shrimp pan sauces are not marinades — they are built in the cast iron pan after the shrimp is cooked. Never marinate shrimp ahead of time.",
+    },
+    applicationNote:
+      "Cook shrimp in cast iron pan until pink and opaque. Remove shrimp. Add butter and garlic to pan, cook 60 seconds. Add lemon juice and parsley. Return shrimp to pan, toss to coat. Classic, rich, pairs with any grain.",
+  },
+  {
+    id: "shrimp-cajun-butter",
+    name: "Cajun Butter (Shrimp)",
+    bestFor: "Shrimp — pan sauce",
+    proteinCategory: "shrimp",
+    ingredients: [
+      { amount: "2 tbsp", name: "butter" },
+      { amount: "1 tsp", name: "Cajun seasoning" },
+      { amount: "2 cloves", name: "garlic, minced" },
+      { amount: "1 tbsp", name: "lemon juice" },
+      { amount: "¼ tsp", name: "cayenne pepper (optional, for extra heat)" },
+    ],
+    storage: {
+      locations: ["fridge"],
+      batchable: false,
+      shelfLife: "N/A — make fresh",
+      note: "Shrimp pan sauces are not marinades — they are built in the cast iron pan after the shrimp is cooked. Never marinate shrimp ahead of time.",
+    },
+    applicationNote:
+      "Cook shrimp in cast iron pan until pink and opaque. Remove shrimp. Add butter, Cajun seasoning, and garlic to pan, cook 60 seconds. Add lemon juice. Return shrimp to pan, toss to coat. Bold, spicy, pairs with quinoa and bell pepper.",
+  },
+  {
+    id: "shrimp-soy-garlic-ginger",
+    name: "Soy Garlic Ginger (Shrimp)",
+    bestFor: "Shrimp — pan sauce",
+    proteinCategory: "shrimp",
+    ingredients: [
+      { amount: "2 tbsp", name: "low-sodium soy sauce" },
+      { amount: "1 tbsp", name: "sesame oil" },
+      { amount: "2 cloves", name: "garlic, minced" },
+      { amount: "1 tsp", name: "fresh ginger, grated" },
+      { amount: "1 tsp", name: "honey" },
+      { amount: "1 tsp", name: "rice vinegar" },
+    ],
+    storage: {
+      locations: ["fridge"],
+      batchable: false,
+      shelfLife: "N/A — make fresh",
+      note: "Shrimp pan sauces are not marinades — they are built in the cast iron pan after the shrimp is cooked. Never marinate shrimp ahead of time.",
+    },
+    applicationNote:
+      "Cook shrimp in cast iron pan until pink and opaque. Remove shrimp. Add garlic and ginger to pan, cook 30 seconds. Add soy sauce, sesame oil, honey, and rice vinegar. Simmer 60 seconds. Return shrimp to pan, toss to coat. Asian-leaning, pairs with rice and bok choy.",
+  },
+  {
+    id: "shrimp-lime-cumin",
+    name: "Lime Cumin (Shrimp)",
+    bestFor: "Shrimp — pan sauce",
+    proteinCategory: "shrimp",
+    ingredients: [
+      { amount: "2 tbsp", name: "butter or olive oil" },
+      { amount: "Juice of 1", name: "lime" },
+      { amount: "1 tsp", name: "ground cumin" },
+      { amount: "2 cloves", name: "garlic, minced" },
+      { amount: "¼ tsp", name: "chili powder" },
+      { amount: "¼ tsp", name: "salt" },
+      { amount: "1 tbsp", name: "fresh cilantro, chopped" },
+    ],
+    storage: {
+      locations: ["fridge"],
+      batchable: false,
+      shelfLife: "N/A — make fresh",
+      note: "Shrimp pan sauces are not marinades — they are built in the cast iron pan after the shrimp is cooked. Never marinate shrimp ahead of time.",
+    },
+    applicationNote:
+      "Cook shrimp in cast iron pan until pink and opaque. Remove shrimp. Add butter, garlic, cumin, and chili powder to pan, cook 60 seconds. Add lime juice and cilantro. Return shrimp to pan, toss to coat. Mexican-leaning, pairs with black beans and jasmine rice.",
   },
 ];

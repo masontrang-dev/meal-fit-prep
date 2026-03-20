@@ -39,6 +39,7 @@ import type { NavItem } from "@/types/common.types";
 
 const mealNavItems: NavItem[] = [
   { label: "Meal Plan", path: "/meal/plan", section: "meal" },
+  { label: "This Week's Fridge", path: "/meal/fridge", section: "meal" },
   { label: "Proteins & Grains", path: "/meal/proteins", section: "meal" },
   { label: "Shopping List", path: "/meal/shopping", section: "meal" },
   { label: "Prep Day", path: "/meal/prep", section: "meal" },

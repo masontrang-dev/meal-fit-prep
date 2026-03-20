@@ -1,6 +1,8 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { shoppingList } from "@/data/shopping";
+import type { GeneratedPlan } from "@/types/randomizer.types";
+import type { ShoppingItem } from "@/types/meal.types";
 
 export const useShoppingStore = defineStore(
   "shopping",
@@ -9,6 +11,7 @@ export const useShoppingStore = defineStore(
     const weekLabel = ref<string>(
       "Week of " + new Date().toLocaleDateString("en-US", { month: "short", day: "numeric" }),
     );
+    const dynamicItems = ref<ShoppingItem[]>([]);
 
     // Initialize items from shopping data if not already populated
     const initializeItems = () => {
@@ -34,19 +37,188 @@ export const useShoppingStore = defineStore(
         "Week of " + new Date().toLocaleDateString("en-US", { month: "short", day: "numeric" });
     };
 
+    // Update shopping list based on confirmed FridgeEngine plan
+    const updateFromPlan = (plan: GeneratedPlan) => {
+      const newDynamicItems: ShoppingItem[] = [];
+
+      // Batch fish
+      const fishName =
+        plan.batchFishVariety.charAt(0).toUpperCase() + plan.batchFishVariety.slice(1);
+      newDynamicItems.push({
+        id: `fish-${plan.batchFishVariety}`,
+        category: "Proteins",
+        name: `${fishName} fillets`,
+        quantity: "1.5 lbs (fresh or frozen)",
+      });
+
+      // Batch chicken
+      const chickenType = plan.batchChickenCut === "thighs" ? "Chicken thighs" : "Chicken breast";
+      newDynamicItems.push({
+        id: `chicken-${plan.batchChickenCut}`,
+        category: "Proteins",
+        name: `${chickenType} (boneless, skinless)`,
+        quantity: plan.batchChickenCut === "thighs" ? "2 lbs" : "1.5 lbs",
+      });
+
+      // Cast iron protein
+      if (plan.castIronProtein === "shrimp") {
+        newDynamicItems.push({
+          id: "shrimp",
+          category: "Proteins",
+          name: "Frozen raw shrimp, peeled and deveined",
+          quantity: "1–1.5 lbs",
+        });
+      } else if (
+        plan.castIronProtein === "flank-steak" ||
+        plan.castIronProtein === "sirloin-steak"
+      ) {
+        const steakType = plan.castIronProtein === "flank-steak" ? "Flank steak" : "Sirloin steak";
+        newDynamicItems.push({
+          id: `steak-${plan.castIronProtein}`,
+          category: "Proteins",
+          name: steakType,
+          quantity: "1–1.25 lbs",
+        });
+      } else if (
+        plan.castIronProtein !== plan.batchFishVariety &&
+        ["salmon", "tilapia", "cod", "mahi-mahi"].includes(plan.castIronProtein)
+      ) {
+        const castFishName =
+          plan.castIronProtein.charAt(0).toUpperCase() + plan.castIronProtein.slice(1);
+        newDynamicItems.push({
+          id: `fish-cast-${plan.castIronProtein}`,
+          category: "Proteins",
+          name: `${castFishName} fillets (for cast iron)`,
+          quantity: "0.75 lb",
+        });
+      }
+
+      // Roasting vegetable
+      const vegMap: Record<string, { name: string; quantity: string }> = {
+        broccoli: { name: "Broccoli florets", quantity: "2 bags (pre-cut)" },
+        asparagus: { name: "Asparagus", quantity: "1 bunch" },
+        zucchini: { name: "Zucchini", quantity: "2 medium" },
+        "green-beans": { name: "Green beans", quantity: "1 lb (fresh or frozen)" },
+        cauliflower: { name: "Cauliflower florets", quantity: "1 head or 1 bag pre-cut" },
+        "brussels-sprouts": { name: "Brussels sprouts", quantity: "1 lb" },
+        "snap-peas": { name: "Snap peas", quantity: "1 bag (pre-washed)" },
+        "bok-choy": { name: "Baby bok choy", quantity: "4–6 heads" },
+        "stir-fry-blend": { name: "Frozen stir-fry vegetable blend", quantity: "1 bag" },
+      };
+      const veg = vegMap[plan.roastingVeg];
+      if (veg) {
+        newDynamicItems.push({
+          id: `veg-${plan.roastingVeg}`,
+          category: "Vegetables",
+          name: veg.name,
+          quantity: veg.quantity,
+        });
+      }
+
+      // Grain
+      const grainMap: Record<string, { name: string; quantity: string }> = {
+        "brown-rice": { name: "Brown rice", quantity: "2 cups dry" },
+        quinoa: { name: "Quinoa", quantity: "1.5 cups dry" },
+        "jasmine-rice": { name: "Jasmine rice (white)", quantity: "1.5 cups dry" },
+      };
+      const grain = grainMap[plan.grain];
+      if (grain) {
+        newDynamicItems.push({
+          id: `grain-${plan.grain}`,
+          category: "Grains & Legumes",
+          name: grain.name,
+          quantity: grain.quantity,
+        });
+      }
+
+      // Legume
+      const legumeMap: Record<string, { name: string; quantity: string }> = {
+        lentils: { name: "Green or brown lentils (dry)", quantity: "1.5 cups dry" },
+        "black-beans": { name: "Canned black beans", quantity: "2 cans (15 oz each)" },
+        chickpeas: { name: "Canned chickpeas", quantity: "2 cans (15 oz each)" },
+        "pinto-beans": { name: "Dried pinto beans", quantity: "1 lb bag" },
+      };
+      const legume = legumeMap[plan.legume];
+      if (legume) {
+        newDynamicItems.push({
+          id: `legume-${plan.legume}`,
+          category: "Grains & Legumes",
+          name: legume.name,
+          quantity: legume.quantity,
+        });
+      }
+
+      // Sauce-specific ingredients
+      if (plan.batchFishSauce === "miso-glaze") {
+        newDynamicItems.push({
+          id: "miso-paste",
+          category: "Pantry",
+          name: "White miso paste",
+          quantity: "1 jar",
+        });
+      }
+
+      if (plan.batchChickenSauce === "teriyaki-glaze") {
+        newDynamicItems.push({
+          id: "rice-vinegar",
+          category: "Pantry",
+          name: "Rice vinegar",
+          quantity: "1 bottle",
+        });
+        newDynamicItems.push({
+          id: "cornstarch",
+          category: "Pantry",
+          name: "Cornstarch",
+          quantity: "1 box",
+        });
+      }
+
+      if (plan.castIronSauce === "lime-cumin" && plan.marinadeTiming === "tuesday") {
+        newDynamicItems.push({
+          id: "limes-extra",
+          category: "Vegetables",
+          name: "Limes",
+          quantity: "4",
+        });
+      }
+
+      dynamicItems.value = newDynamicItems;
+
+      // Initialize checked state for new items
+      newDynamicItems.forEach((item) => {
+        if (!(item.id in items.value)) {
+          items.value[item.id] = false;
+        }
+      });
+    };
+
+    const allItems = computed(() => {
+      // Combine static standing items with dynamic plan items
+      const standingItems = shoppingList.filter((item) =>
+        ["garlic", "onion", "lemon", "parsley", "olive-oil", "sesame-oil", "soy-sauce"].includes(
+          item.id,
+        ),
+      );
+
+      return [...dynamicItems.value, ...standingItems];
+    });
+
     const checkedCount = computed(() => {
       return Object.values(items.value).filter((checked) => checked).length;
     });
 
     const totalCount = computed(() => {
-      return Object.keys(items.value).length;
+      return allItems.value.length;
     });
 
     return {
       items,
       weekLabel,
+      dynamicItems,
+      allItems,
       toggle,
       resetWeek,
+      updateFromPlan,
       checkedCount,
       totalCount,
     };

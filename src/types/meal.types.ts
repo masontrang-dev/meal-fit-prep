@@ -1,6 +1,6 @@
 export type ProteinType = "fish" | "chicken-thigh" | "chicken-breast" | "steak";
 export type GrainType = "brown-rice" | "quinoa" | "jasmine-rice";
-export type LegumeType = "lentils" | "pinto-beans" | "black-beans";
+export type LegumeType = "lentils" | "pinto-beans" | "black-beans" | "chickpeas";
 export type BadgeVariant = "best" | "good" | "make";
 export type CalloutVariant = "green" | "orange" | "blue" | "gold" | "red" | "plum" | "cast";
 export type StorageLocation = "pantry" | "fridge";
@@ -104,7 +104,7 @@ export interface Sauce {
   id: string;
   name: string;
   bestFor: string;
-  proteinCategory: "fish" | "chicken" | "steak";
+  proteinCategory: "fish" | "chicken" | "steak" | "shrimp";
   ingredients: Ingredient[];
   storage: SauceStorageInfo;
   applicationNote: string;

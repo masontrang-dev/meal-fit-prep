@@ -33,6 +33,11 @@ const router = createRouter({
       component: () => import("../views/meal/MealPlanView.vue"),
     },
     {
+      path: "/meal/fridge",
+      name: "fridge",
+      component: () => import("../views/meal/FridgeView.vue"),
+    },
+    {
       path: "/meal/cast-iron",
       name: "cast-iron",
       component: () => import("../views/meal/CastIronView.vue"),
