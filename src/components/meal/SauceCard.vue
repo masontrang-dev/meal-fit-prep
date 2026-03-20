@@ -1,20 +1,18 @@
 <script setup lang="ts">
-import type { Sauce } from '@/types/meal.types'
-import StorageBadge from '@/components/ui/StorageBadge.vue'
+import type { Sauce } from "@/types/meal.types";
+import StorageBadge from "@/components/ui/StorageBadge.vue";
 
 defineProps<{
-  sauce: Sauce
-}>()
+  sauce: Sauce;
+}>();
 </script>
 
 <template>
-  <div class="card">
+  <div class="card p-4 sm:p-5">
     <h3 class="text-lg font-display font-semibold text-[var(--ink)] mb-1">
       {{ sauce.name }}
     </h3>
-    <p class="text-sm text-[var(--muted)] mb-4">
-      <strong>Best for:</strong> {{ sauce.bestFor }}
-    </p>
+    <p class="text-sm text-[var(--muted)] mb-4"><strong>Best for:</strong> {{ sauce.bestFor }}</p>
 
     <div class="mb-4">
       <h4 class="text-xs font-semibold uppercase tracking-wide text-[var(--muted)] mb-2">
@@ -24,7 +22,7 @@ defineProps<{
         <li
           v-for="(ingredient, idx) in sauce.ingredients"
           :key="idx"
-          class="text-sm text-[var(--ink)] flex"
+          class="text-sm text-[var(--ink)] flex flex-wrap sm:flex-nowrap gap-1"
         >
           <span class="font-medium min-w-[80px]">{{ ingredient.amount }}</span>
           <span>{{ ingredient.name }}</span>
@@ -44,13 +42,15 @@ defineProps<{
         />
         <StorageBadge v-if="sauce.storage.batchable" type="batch" />
       </div>
-      <p class="text-sm text-[var(--ink)]">
+      <p class="text-sm text-[var(--ink)] leading-relaxed">
         <strong>Shelf life:</strong> {{ sauce.storage.shelfLife }}
       </p>
-      <p class="text-xs text-[var(--muted)] mt-1">{{ sauce.storage.note }}</p>
+      <p class="text-xs text-[var(--muted)] mt-1 leading-relaxed">{{ sauce.storage.note }}</p>
     </div>
 
-    <div class="text-sm text-[var(--ink)] italic border-t border-[var(--rule)] pt-3">
+    <div
+      class="text-sm text-[var(--ink)] italic border-t border-[var(--rule)] pt-3 leading-relaxed"
+    >
       {{ sauce.applicationNote }}
     </div>
   </div>

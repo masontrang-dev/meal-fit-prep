@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import type { Protein } from '@/types/meal.types'
+import type { Protein } from "@/types/meal.types";
 
 defineProps<{
-  protein: Protein
-}>()
+  protein: Protein;
+}>();
 </script>
 
 <template>
-  <div class="card">
+  <div class="card p-4 sm:p-5 transition-shadow duration-200 hover:shadow-sm">
     <div class="flex items-start justify-between mb-3">
       <div>
         <h3 class="text-xl font-display font-semibold text-[var(--ink)] mb-1">
@@ -21,24 +21,20 @@ defineProps<{
 
     <div class="space-y-3">
       <div>
-        <h4 class="text-xs font-semibold uppercase tracking-wide text-[var(--muted)] mb-1">
-          Buy
-        </h4>
-        <p class="text-sm text-[var(--ink)]">{{ protein.buyGuidance }}</p>
+        <h4 class="text-xs font-semibold uppercase tracking-wide text-[var(--muted)] mb-1">Buy</h4>
+        <p class="text-sm text-[var(--ink)] leading-relaxed">{{ protein.buyGuidance }}</p>
       </div>
 
       <div>
-        <h4 class="text-xs font-semibold uppercase tracking-wide text-[var(--muted)] mb-1">
-          Cook
-        </h4>
-        <p class="text-sm text-[var(--ink)]">{{ protein.cookMethod }}</p>
+        <h4 class="text-xs font-semibold uppercase tracking-wide text-[var(--muted)] mb-1">Cook</h4>
+        <p class="text-sm text-[var(--ink)] leading-relaxed">{{ protein.cookMethod }}</p>
       </div>
 
       <div>
         <h4 class="text-xs font-semibold uppercase tracking-wide text-[var(--muted)] mb-1">
           Storage
         </h4>
-        <p class="text-sm text-[var(--ink)]">{{ protein.storageNote }}</p>
+        <p class="text-sm text-[var(--ink)] leading-relaxed">{{ protein.storageNote }}</p>
       </div>
 
       <div v-if="protein.stats.length > 0">

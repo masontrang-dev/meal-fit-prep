@@ -33,16 +33,16 @@ const handleReset = () => {
 
 <template>
   <div class="space-y-6">
-    <div class="flex items-center justify-between">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <div>
         <h2 class="text-2xl font-display font-semibold text-ink">Shopping List</h2>
         <p class="text-sm text-muted mt-1">{{ store.weekLabel }}</p>
       </div>
-      <div class="text-right">
+      <div class="flex flex-col sm:text-right gap-2">
         <p class="text-sm text-muted">{{ store.checkedCount }} / {{ store.totalCount }} items</p>
         <button
           @click="handleReset"
-          class="mt-2 px-4 py-2 text-sm bg-green text-white rounded hover:opacity-90 transition-opacity"
+          class="px-4 py-2 text-sm bg-green text-white rounded hover:opacity-90 transition-opacity min-h-[44px]"
         >
           Reset Week
         </button>

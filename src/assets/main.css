@@ -230,10 +230,31 @@
   }
 
   /* View fade-in animation */
-  .view-enter-active {
+  .view-enter-active,
+  .view-leave-active {
     @apply transition-all duration-200 ease-out;
   }
   .view-enter-from {
     @apply opacity-0 translate-y-1;
+  }
+  .view-leave-to {
+    @apply opacity-0 -translate-y-1;
+  }
+
+  /* Collapsible panel animations */
+  .collapse-enter-active,
+  .collapse-leave-active {
+    @apply transition-all duration-300 ease-in-out;
+    overflow: hidden;
+  }
+  .collapse-enter-from,
+  .collapse-leave-to {
+    @apply opacity-0;
+    max-height: 0;
+  }
+  .collapse-enter-to,
+  .collapse-leave-from {
+    @apply opacity-100;
+    max-height: 1000px;
   }
 }

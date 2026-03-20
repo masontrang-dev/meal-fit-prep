@@ -34,16 +34,21 @@ const handleSelect = (vegName: string) => {
     <div
       v-for="veg in vegetables"
       :key="veg.name"
-      class="card cursor-pointer transition-all hover:shadow-md"
+      class="card p-4 cursor-pointer transition-all duration-200 hover:shadow-md active:scale-[0.98]"
       :class="{
         'ring-2 ring-[var(--green)] bg-[var(--green-light)]': selectedVegetable === veg.name,
       }"
       @click="handleSelect(veg.name)"
+      role="button"
+      :aria-pressed="selectedVegetable === veg.name"
+      tabindex="0"
+      @keydown.enter="handleSelect(veg.name)"
+      @keydown.space.prevent="handleSelect(veg.name)"
     >
       <div class="flex items-start justify-between mb-3">
         <h3 class="text-lg font-display font-semibold text-[var(--ink)]">{{ veg.name }}</h3>
         <span
-          class="text-xs font-semibold uppercase px-2 py-1 rounded border"
+          class="text-xs font-semibold uppercase px-2 py-1 rounded border flex-shrink-0"
           :class="getTagClass(veg.tag)"
         >
           {{ getTagLabel(veg.tag) }}
@@ -55,14 +60,14 @@ const handleSelect = (vegName: string) => {
           <h4 class="text-xs font-semibold uppercase tracking-wide text-[var(--muted)] mb-1">
             Prep
           </h4>
-          <p class="text-sm text-[var(--ink)]">{{ veg.prepNote }}</p>
+          <p class="text-sm text-[var(--ink)] leading-relaxed">{{ veg.prepNote }}</p>
         </div>
 
         <div>
           <h4 class="text-xs font-semibold uppercase tracking-wide text-[var(--muted)] mb-1">
             Cook
           </h4>
-          <p class="text-sm text-[var(--ink)]">{{ veg.cookNote }}</p>
+          <p class="text-sm text-[var(--ink)] leading-relaxed">{{ veg.cookNote }}</p>
         </div>
       </div>
     </div>
