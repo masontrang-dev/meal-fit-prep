@@ -153,31 +153,31 @@ This implementation plan breaks down the development of the Meal Prep & Fitness 
 
 ---
 
-## Phase 4: Layout Components
+## Phase 4: Layout Components ✓ (COMPLETED)
 
 **Goal:** Build the app shell — masthead, navigation, and page wrapper.
 
-### 4.1 Core Layout
+### 4.1 Core Layout ✓ (COMPLETED)
 
-- [ ] `src/components/layout/AppMasthead.vue`:
+- [x] `src/components/layout/AppMasthead.vue`:
   - Dark background (`var(--ink)`) with green bottom border
   - Title: "Meal Prep" + italic "for Two"
   - Pills row: "6 Lunches + 6 Dinners", "Whole Foods", etc.
   - Meta column (right): protein/grain/location summary (hidden on mobile)
-- [ ] `src/components/layout/AppNav.vue`:
+- [x] `src/components/layout/AppNav.vue`:
   - Sticky top navigation, dark background
   - Two sections: Meal Prep tabs + Fitness tab
   - Active tab styling with green accent
   - Horizontal scroll on mobile
   - Uses `<RouterLink>` for navigation
-- [ ] `src/components/layout/AppPage.vue`:
+- [x] `src/components/layout/AppPage.vue`:
   - Max-width wrapper (980px)
   - Responsive padding
   - Centers content
 
-### 4.2 App Root
+### 4.2 App Root ✓ (COMPLETED)
 
-- [ ] Update `src/App.vue`:
+- [x] Update `src/App.vue`:
   - Render `AppMasthead`, `AppNav`, `AppPage`
   - `<RouterView>` with transition animation
   - Remove default Vue scaffolding content
