@@ -18,7 +18,7 @@ import ServingsSelector from "@/components/ui/ServingsSelector.vue";
         <div class="masthead-meta">
           Fish · Chicken · Steak<br />
           Brown Rice · Quinoa · Lentils<br />
-          <span style="text-transform: none">v1.0</span>
+          <span style="text-transform: none">v1.1</span>
         </div>
       </div>
     </div>
