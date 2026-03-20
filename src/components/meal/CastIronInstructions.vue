@@ -1,95 +1,47 @@
 <script setup lang="ts">
-import CalloutBox from '@/components/ui/CalloutBox.vue'
+import CalloutBox from "@/components/ui/CalloutBox.vue";
 </script>
 
 <template>
-  <div class="space-y-6">
-    <CalloutBox variant="cast">
-      <strong>🍳 Steak always uses cast iron.</strong> This is non-negotiable for proper crust and
-      flavor development.
-    </CalloutBox>
-
-    <div class="card">
-      <h3 class="text-lg font-display font-semibold text-[var(--ink)] mb-4">
-        Sunday Setup (5 min)
-      </h3>
-      <ol class="space-y-3 text-sm text-[var(--ink)]">
-        <li class="flex items-start">
-          <span class="font-semibold mr-2">1.</span>
-          <span
-            >Place <strong>cast iron skillet</strong> on stovetop (don't heat yet).</span
-          >
-        </li>
-        <li class="flex items-start">
-          <span class="font-semibold mr-2">2.</span>
-          <span
-            >Add a <strong>thin layer of oil</strong> (vegetable or canola, not olive).</span
-          >
-        </li>
-        <li class="flex items-start">
-          <span class="font-semibold mr-2">3.</span>
-          <span>Heat on <strong>medium</strong> for 2 minutes.</span>
-        </li>
-        <li class="flex items-start">
-          <span class="font-semibold mr-2">4.</span>
-          <span>Wipe out excess oil with paper towel.</span>
-        </li>
-        <li class="flex items-start">
-          <span class="font-semibold mr-2">5.</span>
-          <span>Store covered until Wednesday. This pre-seasons the pan.</span>
+  <div class="bg-[var(--paper)] border border-[var(--rule)] p-5">
+    <div class="text-sm leading-[1.75] text-[var(--ink)]">
+      <p class="mb-4">
+        <strong>What you do on Sunday (5 min total):</strong>
+      </p>
+      <ol class="list-decimal ml-5 mb-6 space-y-2">
+        <li>Choose protein: ~1 lb chicken thighs, chicken breast, or flank steak (feeds 2)</li>
+        <li>Mix marinade of choice (see below — 1 minute)</li>
+        <li>Pour over protein in zip-lock bag, squeeze out air, label "Wednesday," refrigerate</li>
+        <li>
+          Slice bell peppers, mushrooms, and onion — store in separate labeled container in fridge
         </li>
       </ol>
-    </div>
 
-    <div class="card">
-      <h3 class="text-lg font-display font-semibold text-[var(--ink)] mb-4">
-        Wednesday Cooking (13 min)
-      </h3>
-      <ol class="space-y-3 text-sm text-[var(--ink)]">
-        <li class="flex items-start">
-          <span class="font-semibold mr-2">1.</span>
-          <span
-            >Remove steak from fridge <strong>30 min before cooking</strong> (room temp).</span
-          >
+      <p class="mb-4">
+        <strong>What you do on Wednesday (13 min):</strong>
+      </p>
+      <ol class="list-decimal ml-5 mb-6 space-y-2">
+        <li>Pull marinated protein and vegetable container from fridge</li>
+        <li>Pat protein lightly dry with paper towel — improves browning</li>
+        <li>Heat cast iron on high 2 minutes until just beginning to smoke</li>
+        <li>Add a small drizzle of avocado oil — high smoke point, ideal for cast iron</li>
+        <li>
+          <strong>Chicken thighs or breast:</strong> 4–5 min per side.
+          <strong>Flank steak:</strong> 3–4 min per side. Don't move it — let the crust form
         </li>
-        <li class="flex items-start">
-          <span class="font-semibold mr-2">2.</span>
-          <span>Pat steak dry with paper towels. Season generously with salt and pepper.</span>
+        <li>
+          Last 2 minutes: add the pre-sliced veg around the protein — they pick up all the pan
+          flavor
         </li>
-        <li class="flex items-start">
-          <span class="font-semibold mr-2">3.</span>
-          <span
-            >Heat cast iron on <strong>high</strong> for 3 minutes (until smoking hot).</span
-          >
-        </li>
-        <li class="flex items-start">
-          <span class="font-semibold mr-2">4.</span>
-          <span
-            >Add steak. <strong>Do not move it.</strong> Sear 3–4 min per side for
-            medium-rare.</span
-          >
-        </li>
-        <li class="flex items-start">
-          <span class="font-semibold mr-2">5.</span>
-          <span
-            >Optional: Add butter, garlic, and thyme in last minute. Baste with spoon.</span
-          >
-        </li>
-        <li class="flex items-start">
-          <span class="font-semibold mr-2">6.</span>
-          <span
-            >Remove steak, <strong>rest 5 minutes</strong> on cutting board. Slice against the
-            grain.</span
-          >
-        </li>
-        <li class="flex items-start">
-          <span class="font-semibold mr-2">7.</span>
-          <span
-            >Save half for Thursday lunch. Store sliced steak in airtight container in
-            fridge.</span
-          >
-        </li>
+        <li>Rest 3–5 min before slicing. Don't skip this — it keeps the juices inside</li>
+        <li>Serve over quinoa or brown rice (already made from Sunday)</li>
       </ol>
+
+      <p>
+        <strong>Steak is always cast iron — never oven.</strong> A thin cut like flank or sirloin
+        needs the intense dry heat of cast iron to develop a proper crust. The oven produces a very
+        different (inferior) result for steak.
+      </p>
     </div>
   </div>
 </template>

@@ -9,6 +9,14 @@ import ConfirmDialog from "@/components/ui/ConfirmDialog.vue";
 const store = useShoppingStore();
 const showResetDialog = ref(false);
 
+const categoryMap: Record<string, string> = {
+  "🥩 Proteins": "Proteins",
+  "🌾 Grains & Legumes": "Grains & Legumes",
+  "🥦 Vegetables": "Vegetables",
+  "🧂 Pantry": "Pantry",
+  "🥛 Dairy": "Dairy",
+};
+
 const categories = computed(() => {
   const grouped: Record<string, typeof shoppingList> = {};
   shoppingList.forEach((item) => {
@@ -20,7 +28,13 @@ const categories = computed(() => {
   return grouped;
 });
 
-const categoryOrder = ["Proteins", "Grains & Legumes", "Vegetables", "Pantry", "Dairy"];
+const categoryOrder = [
+  "🥩 Proteins",
+  "🌾 Grains & Legumes",
+  "🥦 Vegetables",
+  "🧂 Pantry",
+  "🥛 Dairy",
+];
 
 const handleToggle = (itemId: string) => {
   store.toggle(itemId);
@@ -41,41 +55,39 @@ const cancelReset = () => {
 </script>
 
 <template>
-  <div class="space-y-6">
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-      <div>
-        <h2 class="text-2xl font-display font-semibold text-ink">Shopping List</h2>
-        <p class="text-sm text-muted mt-1">{{ store.weekLabel }}</p>
-      </div>
-      <div class="flex flex-col sm:text-right gap-2">
-        <p class="text-sm text-muted">{{ store.checkedCount }} / {{ store.totalCount }} items</p>
-        <button
-          @click="handleReset"
-          class="px-4 py-2 text-sm rounded hover:opacity-90 transition-opacity min-h-[44px]"
-          style="background-color: var(--green); color: white"
-          aria-label="Reset shopping list for new week"
-        >
-          Reset Week
-        </button>
-      </div>
+  <div>
+    <div class="flex items-center justify-between mb-4">
+      <p class="text-sm text-[var(--muted)] leading-relaxed flex-1">
+        For 2 people · 6 lunches + 6 dinners. Tap items to check off as you shop. Breakfasts not
+        included — shop separately based on what you want that week. Check which marinade you're
+        making this week and add those ingredients if not already in your pantry.
+      </p>
+      <button
+        @click="handleReset"
+        class="ml-4 px-4 py-2 text-sm rounded hover:opacity-90 transition-opacity min-h-[44px] whitespace-nowrap"
+        style="background-color: var(--green); color: white"
+        aria-label="Reset shopping list for new week"
+      >
+        Reset Week
+      </button>
     </div>
 
-    <CalloutBox variant="blue">
-      <p>
-        <strong>Marinade Selection:</strong> Choose one marinade from the Cast Iron tab and add
-        those ingredients to your list.
-      </p>
-    </CalloutBox>
-
-    <div class="space-y-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
       <ShoppingCategory
-        v-for="category in categoryOrder"
-        :key="category"
-        :category="category"
-        :items="categories[category] || []"
+        v-for="displayCategory in categoryOrder"
+        :key="displayCategory"
+        :category="displayCategory"
+        :items="categories[categoryMap[displayCategory] || ''] || []"
         @toggle="handleToggle"
       />
     </div>
+
+    <CalloutBox variant="green">
+      <p>
+        <strong>Costco runs worth it for:</strong> Frozen salmon bags, bulk chicken thighs, flank
+        steak, lentils, quinoa, chia seeds. Roughly halves per-serving cost vs. regular grocery.
+      </p>
+    </CalloutBox>
 
     <!-- Reset Confirmation Dialog -->
     <ConfirmDialog

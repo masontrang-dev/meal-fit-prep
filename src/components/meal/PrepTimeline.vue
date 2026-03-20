@@ -8,7 +8,10 @@ defineProps<{
 </script>
 
 <template>
-  <div class="space-y-0">
+  <div class="relative pl-8 mb-7">
+    <!-- Vertical timeline line -->
+    <div class="absolute left-[10px] top-[6px] bottom-[6px] w-[2px] bg-[var(--rule)]"></div>
+
     <PrepStepComponent v-for="step in steps" :key="step.id" :step="step" />
   </div>
 </template>

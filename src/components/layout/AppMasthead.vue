@@ -7,28 +7,18 @@ import ServingsSelector from "@/components/ui/ServingsSelector.vue";
     <div class="masthead-inner">
       <div class="masthead-content">
         <div class="masthead-title-section">
-          <h1 class="masthead-title">Meal Prep <span class="masthead-subtitle">for Two</span></h1>
+          <h1 class="masthead-title">Meal Prep<br /><em class="masthead-subtitle">for Two</em></h1>
           <div class="masthead-pills">
             <span class="pill">6 Lunches + 6 Dinners</span>
             <span class="pill">Whole Foods</span>
-            <span class="pill">Sunday Prep</span>
-            <span class="pill">DASH-Aligned</span>
+            <span class="pill">DASH Friendly</span>
+            <span class="pill">Sunday Prep + Wed Cast Iron</span>
           </div>
         </div>
         <div class="masthead-meta">
-          <ServingsSelector />
-          <div class="meta-row">
-            <span class="meta-label">Proteins:</span>
-            <span class="meta-value">Fish, Chicken, Steak</span>
-          </div>
-          <div class="meta-row">
-            <span class="meta-label">Grains:</span>
-            <span class="meta-value">Brown Rice, Quinoa, Jasmine</span>
-          </div>
-          <div class="meta-row">
-            <span class="meta-label">Location:</span>
-            <span class="meta-value">Fridge + Pantry</span>
-          </div>
+          Fish · Chicken · Steak<br />
+          Brown Rice · Quinoa · Lentils<br />
+          2 People · San Diego
         </div>
       </div>
     </div>
@@ -62,13 +52,15 @@ import ServingsSelector from "@/components/ui/ServingsSelector.vue";
   font-size: 2.25rem;
   font-weight: 700;
   color: var(--bg);
-  margin: 0 0 0.75rem 0;
-  line-height: 1.1;
+  margin: 0;
+  font-family: "Cormorant Garamond", serif;
+  line-height: 1.3;
 }
 
 .masthead-subtitle {
   font-style: italic;
-  font-weight: 600;
+  font-weight: 400;
+  font-size: 2rem;
   color: var(--green-mid);
 }
 
@@ -90,27 +82,11 @@ import ServingsSelector from "@/components/ui/ServingsSelector.vue";
 }
 
 .masthead-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  min-width: 240px;
-}
-
-.meta-row {
-  display: flex;
-  gap: 0.5rem;
-  font-size: 0.8rem;
-}
-
-.meta-label {
-  color: var(--muted);
-  font-weight: 600;
-  min-width: 70px;
-}
-
-.meta-value {
+  text-align: right;
   color: var(--bg);
-  font-weight: 300;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  opacity: 0.85;
 }
 
 @media (max-width: 768px) {

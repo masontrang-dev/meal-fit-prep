@@ -21,46 +21,32 @@ const handleMarinadeSelect = (id: string) => {
 </script>
 
 <template>
-  <div class="space-y-8">
-    <div>
-      <h2 class="text-2xl font-display font-semibold text-ink">Cast Iron Steak</h2>
-      <p class="text-muted mt-2">Wednesday dinner ritual: 13 minutes of perfection</p>
+  <div>
+    <!-- Cast Iron Header -->
+    <div class="bg-[var(--cast)] text-white px-6 py-5 -mx-6 -mt-6 mb-6">
+      <h2 class="font-display text-2xl font-bold">🔥 Wednesday Cast Iron Night</h2>
+      <p class="text-xs font-medium uppercase tracking-wider opacity-70 mt-1">
+        Everything prepped Sunday · 13 minutes to cook Wednesday · Fresh dinner mid-week
+      </p>
     </div>
 
     <CastIronInstructions />
 
-    <CalloutBox v-if="mealStore.selectedMarinade" variant="green">
-      <p>
-        <strong>Selected for this week:</strong>
-        {{ marinades.find((m) => m.id === mealStore.selectedMarinade)?.name }}
-        — Click to deselect or choose a different marinade below.
-      </p>
-    </CalloutBox>
+    <section class="mt-8">
+      <SectionLabel label="Marinade Options — Rotate Week to Week" />
+      <CalloutBox variant="blue" class="mb-4">
+        <p>
+          <strong>Sunday-safe marinades:</strong> Soy Garlic Ginger and Smoked Paprika Garlic are
+          oil and soy-based with no significant acid — they can marinate safely for 2–5 days and
+          actually improve with time. <strong>Tuesday-only marinades:</strong> Lime Cumin and
+          Balsamic Herb contain citrus juice and vinegar — acids break down protein texture if left
+          more than 1–2 days on chicken (slightly longer on steak).
+        </p>
+      </CalloutBox>
 
-    <section>
-      <SectionLabel label="Sunday Marinades" />
-      <p class="text-sm text-muted mb-4">
-        Choose one for Monday/Tuesday chicken meals — click to select
-      </p>
       <div class="grid gap-4 md:grid-cols-2">
         <MarinadeCard
-          v-for="marinade in sundayMarinades"
-          :key="marinade.id"
-          :marinade="marinade"
-          :is-selected="mealStore.selectedMarinade === marinade.id"
-          @select="handleMarinadeSelect"
-        />
-      </div>
-    </section>
-
-    <section>
-      <SectionLabel label="Tuesday Marinades" />
-      <p class="text-sm text-muted mb-4">
-        Prep Tuesday night for Wednesday/Thursday meals — click to select
-      </p>
-      <div class="grid gap-4 md:grid-cols-2">
-        <MarinadeCard
-          v-for="marinade in tuesdayMarinades"
+          v-for="marinade in marinades"
           :key="marinade.id"
           :marinade="marinade"
           :is-selected="mealStore.selectedMarinade === marinade.id"

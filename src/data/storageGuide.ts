@@ -1,64 +1,85 @@
-import type { StorageRow } from '@/types/meal.types'
+import type { StorageRow } from "@/types/meal.types";
 
 export const storageGuide: StorageRow[] = [
   {
-    food: 'Cooked Fish',
-    icon: '🐟',
-    window: '3 days',
-    notes: 'Reheat gently at 275°F for 10 min, or microwave 60 sec. Do not overheat.'
+    food: "Cooked Fish",
+    icon: "🐟",
+    window: "3–4 days",
+    notes:
+      "max. Eat Mon through Wed. Don't prep more fish than you'll eat by Wednesday — cook Thursday or Friday portions fresh mid-week if needed (15 min). Most time-sensitive protein.",
   },
   {
-    food: 'Cooked Chicken',
-    icon: '🍗',
-    window: '4 days',
-    notes: 'Reheat at 350°F for 12 min, or microwave 90 sec. Add splash of water to prevent drying.'
+    food: "Cooked Chicken Thighs",
+    icon: "🍗",
+    window: "4–5 days",
+    notes:
+      ". Most forgiving protein. Sunday-cooked thighs are good through Friday. Splash of water before microwaving + cover = stays moist.",
   },
   {
-    food: 'Cooked Steak',
-    icon: '🥩',
-    window: '4 days',
-    notes: 'Reheat at 250°F for 8 min, or microwave 45 sec. Slice before reheating for even warming.'
+    food: "Cooked Chicken Breast",
+    icon: "🍗",
+    window: "3–4 days",
+    notes:
+      ". Dries out faster than thighs. Store with a little sauce in the container. Reheat at 50% microwave power only.",
   },
   {
-    food: 'Brown Rice',
-    icon: '🍚',
-    window: '5 days',
-    notes: 'Microwave 90 sec with damp paper towel. Fluff with fork. Freezes well for 3 months.'
+    food: "Cooked Steak",
+    icon: "🥩",
+    window: "3–4 days",
+    notes:
+      ". Slice before storing — reheats better thin. Splash of water + cover when microwaving. Also excellent cold over quinoa or salad.",
   },
   {
-    food: 'Quinoa',
-    icon: '🌾',
-    window: '5 days',
-    notes: 'Microwave 60–90 sec. Add 1 tsp water if dry. Freezes well.'
+    food: "Marinating Raw Protein",
+    icon: "🥩",
+    window: "2–5 days",
+    notes:
+      ". Sunday-marinated chicken or steak (using Sunday-safe marinades) keeps safely until Wednesday and improves in flavor. Tuesday-marinated citrus/vinegar marinades: use within 24–48 hrs.",
   },
   {
-    food: 'Lentils',
-    icon: '🫘',
-    window: '5 days',
-    notes: 'Microwave 90 sec. May need splash of water or broth. Freezes well.'
+    food: "Pre-Sliced Raw Vegetables",
+    icon: "🔪",
+    window: "4–5 days",
+    notes:
+      ". Bell peppers, mushrooms, onions sliced Sunday keep fine in a sealed container through Wednesday. No quality loss.",
   },
   {
-    food: 'Cooked Vegetables',
-    icon: '🥦',
-    window: '4 days',
-    notes: 'Reheat at 400°F for 5–7 min to re-crisp, or microwave 60 sec. Best fresh.'
+    food: "Brown Rice (Cooked)",
+    icon: "🍚",
+    window: "5 days",
+    notes: ". Cook large batch Sunday. Keep covered. Reheat with splash of water, covered, 90 sec.",
   },
   {
-    food: 'Marinades (unused)',
-    icon: '🧂',
-    window: '1 week',
-    notes: 'Store in sealed container. Do not reuse marinade that touched raw meat.'
+    food: "Quinoa (Cooked)",
+    icon: "🌾",
+    window: "5–6 days",
+    notes: ". Keeps longer than rice. Great cold in salads. Cook Sunday with the rice.",
   },
   {
-    food: 'Sauces (yogurt-based)',
-    icon: '🥫',
-    window: '3 days',
-    notes: 'Lemon-dill, ranch-based sauces. Do not freeze. Make fresh or in small batches.'
+    food: "Lentils (Cooked)",
+    icon: "🌱",
+    window: "5 days",
+    notes:
+      ". Cook Sunday alongside everything else. Reheat with a splash of broth if they've dried out.",
   },
   {
-    food: 'Sauces (oil-based)',
-    icon: '🫙',
-    window: '1–2 weeks',
-    notes: 'Chimichurri, garlic butter. Very stable. Bring to room temp before serving.'
-  }
-]
+    food: "Roasted Vegetables",
+    icon: "�",
+    window: "4–5 days",
+    notes:
+      ". Cook slightly underdone Sunday — they soften more when reheated. Keep in separate container from proteins to prevent sogginess.",
+  },
+  {
+    food: "Refried Beans (Cooked)",
+    icon: "�",
+    window: "5 days fridge · 3 months frozen",
+    notes: ". Make a large batch. Freeze in portions — future taco nights are zero effort.",
+  },
+  {
+    food: "Batch Sauces (Fridge)",
+    icon: "🫙",
+    window: "2–3 weeks",
+    notes:
+      ". Soy Ginger Glaze, Honey Mustard, Soy Garlic Pan Sauce. Keep in sealed jars. Never store fresh garlic in oil at room temperature.",
+  },
+];

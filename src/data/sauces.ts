@@ -1,184 +1,347 @@
-import type { Sauce } from '@/types/meal.types'
+import type { Sauce } from "@/types/meal.types";
 
 export const sauces: Sauce[] = [
+  // ═══════════════════════════════════════════════════════════
+  // FOR FISH (HTML Priority)
+  // ═══════════════════════════════════════════════════════════
   {
-    id: 'lemon-dill',
-    name: 'Lemon-Dill Sauce',
-    bestFor: 'Salmon, cod',
-    proteinCategory: 'fish',
+    id: "lemon-garlic",
+    name: "Lemon Garlic",
+    bestFor: "All fish · The reliable baseline",
+    proteinCategory: "fish",
     ingredients: [
-      { amount: '3 tbsp', name: 'Greek yogurt' },
-      { amount: '1 tbsp', name: 'lemon juice' },
-      { amount: '1 tbsp', name: 'fresh dill, chopped' },
-      { amount: '1 clove', name: 'garlic, minced' },
-      { amount: '¼ tsp', name: 'salt' }
+      { amount: "2 tbsp", name: "olive oil" },
+      { amount: "Juice of 1", name: "lemon" },
+      { amount: "3 cloves", name: "garlic, minced" },
+      { amount: "½ tsp", name: "salt" },
+      { amount: "¼ tsp", name: "black pepper" },
+      { amount: "1 tbsp", name: "fresh or dried parsley" },
     ],
     storage: {
-      locations: ['fridge'],
+      locations: ["fridge"],
+      batchable: true,
+      shelfLife: "2–3 weeks (with garlic powder) or 5–7 days (fresh garlic)",
+      note: "Make with garlic powder instead of fresh garlic to extend shelf life",
+    },
+    applicationNote: "Drizzle over fish before baking",
+  },
+  {
+    id: "cajun-spice",
+    name: "Cajun Spice Rub",
+    bestFor: "Tilapia or cod · Bold and smoky",
+    proteinCategory: "fish",
+    ingredients: [
+      { amount: "1 tsp", name: "smoked paprika" },
+      { amount: "½ tsp", name: "cayenne pepper" },
+      { amount: "½ tsp", name: "garlic powder" },
+      { amount: "½ tsp", name: "onion powder" },
+      { amount: "½ tsp", name: "dried oregano" },
+      { amount: "½ tsp", name: "salt" },
+      { amount: "1 tbsp", name: "olive oil (to bind when applying)" },
+    ],
+    storage: {
+      locations: ["pantry"],
+      batchable: true,
+      shelfLife: "Indefinitely",
+      note: "All dry spices — store in a sealed jar",
+    },
+    applicationNote:
+      "Mix a large batch and keep in the pantry. Never measure individual spices again",
+  },
+  {
+    id: "soy-ginger-glaze",
+    name: "Soy Ginger Glaze",
+    bestFor: "Salmon especially · Applied last 5 min",
+    proteinCategory: "fish",
+    ingredients: [
+      { amount: "2 tbsp", name: "low-sodium soy sauce" },
+      { amount: "1 tsp", name: "sesame oil" },
+      { amount: "1 tsp", name: "honey" },
+      { amount: "½ tsp", name: "garlic powder" },
+      { amount: "½ tsp", name: "ground ginger" },
+    ],
+    storage: {
+      locations: ["fridge"],
+      batchable: true,
+      shelfLife: "2–3 weeks",
+      note: "Soy sauce acts as preservative",
+    },
+    applicationNote:
+      "Brush onto fish for the last 5 min of baking only — honey burns if added at the start",
+  },
+  {
+    id: "lemon-dill",
+    name: "Lemon Dill Sauce",
+    bestFor: "Salmon, cod",
+    proteinCategory: "fish",
+    ingredients: [
+      { amount: "3 tbsp", name: "Greek yogurt" },
+      { amount: "1 tbsp", name: "lemon juice" },
+      { amount: "1 tbsp", name: "fresh dill, chopped" },
+      { amount: "1 clove", name: "garlic, minced" },
+      { amount: "¼ tsp", name: "salt" },
+    ],
+    storage: {
+      locations: ["fridge"],
       batchable: false,
-      shelfLife: '3 days',
-      note: 'Make fresh, yogurt-based'
+      shelfLife: "3 days",
+      note: "Make fresh, yogurt-based",
     },
-    applicationNote: 'Drizzle over cooked fish just before serving'
+    applicationNote: "Drizzle over cooked fish just before serving",
   },
   {
-    id: 'mango-salsa',
-    name: 'Mango Salsa',
-    bestFor: 'White fish, salmon',
-    proteinCategory: 'fish',
+    id: "mango-salsa",
+    name: "Mango Salsa",
+    bestFor: "White fish, salmon",
+    proteinCategory: "fish",
     ingredients: [
-      { amount: '1 cup', name: 'mango, diced' },
-      { amount: '¼ cup', name: 'red onion, minced' },
-      { amount: '2 tbsp', name: 'cilantro, chopped' },
-      { amount: '1 tbsp', name: 'lime juice' },
-      { amount: '1', name: 'jalapeño, minced (optional)' }
+      { amount: "1 cup", name: "mango, diced" },
+      { amount: "¼ cup", name: "red onion, minced" },
+      { amount: "2 tbsp", name: "cilantro, chopped" },
+      { amount: "1 tbsp", name: "lime juice" },
+      { amount: "1", name: "jalapeño, minced (optional)" },
     ],
     storage: {
-      locations: ['fridge'],
+      locations: ["fridge"],
       batchable: false,
-      shelfLife: '2 days',
-      note: 'Best fresh, fruit oxidizes'
+      shelfLife: "2 days",
+      note: "Best fresh, fruit oxidizes",
     },
-    applicationNote: 'Spoon over fish after plating'
+    applicationNote: "Spoon over fish after plating",
   },
   {
-    id: 'garlic-butter',
-    name: 'Garlic Butter',
-    bestFor: 'Any fish',
-    proteinCategory: 'fish',
+    id: "garlic-butter",
+    name: "Garlic Butter",
+    bestFor: "Any fish",
+    proteinCategory: "fish",
     ingredients: [
-      { amount: '3 tbsp', name: 'butter' },
-      { amount: '3 cloves', name: 'garlic, minced' },
-      { amount: '1 tbsp', name: 'parsley, chopped' },
-      { amount: '1 tsp', name: 'lemon zest' }
+      { amount: "3 tbsp", name: "butter" },
+      { amount: "3 cloves", name: "garlic, minced" },
+      { amount: "1 tbsp", name: "parsley, chopped" },
+      { amount: "1 tsp", name: "lemon zest" },
     ],
     storage: {
-      locations: ['fridge', 'pantry'],
+      locations: ["fridge", "pantry"],
       batchable: true,
-      shelfLife: '1 week (fridge)',
-      note: 'Can make compound butter log'
+      shelfLife: "1 week (fridge)",
+      note: "Can make compound butter log",
     },
-    applicationNote: 'Melt over hot fish or add to pan while cooking'
+    applicationNote: "Melt over hot fish or add to pan while cooking",
   },
+
+  // ═══════════════════════════════════════════════════════════
+  // FOR CHICKEN (HTML Priority)
+  // ═══════════════════════════════════════════════════════════
   {
-    id: 'honey-mustard',
-    name: 'Honey-Mustard Glaze',
-    bestFor: 'Chicken thighs, chicken breast',
-    proteinCategory: 'chicken',
+    id: "italian-herb",
+    name: "Italian Herb",
+    bestFor: "Sunday batch · The workhorse",
+    proteinCategory: "chicken",
     ingredients: [
-      { amount: '2 tbsp', name: 'Dijon mustard' },
-      { amount: '2 tbsp', name: 'honey' },
-      { amount: '1 tbsp', name: 'olive oil' },
-      { amount: '1 tsp', name: 'apple cider vinegar' },
-      { amount: '¼ tsp', name: 'black pepper' }
+      { amount: "2 tbsp", name: "olive oil" },
+      { amount: "1½ tsp", name: "Italian seasoning blend" },
+      { amount: "3 cloves", name: "garlic, minced" },
+      { amount: "Zest of ½", name: "lemon" },
+      { amount: "½ tsp", name: "salt" },
+      { amount: "¼ tsp", name: "black pepper" },
     ],
     storage: {
-      locations: ['fridge', 'pantry'],
+      locations: ["pantry"],
       batchable: true,
-      shelfLife: '2 weeks',
-      note: 'Stable ingredients'
+      shelfLife: "Indefinitely (dry version)",
+      note: "Make the dry blend in bulk and store in pantry",
     },
-    applicationNote: 'Brush on during last 5 min of cooking'
+    applicationNote: "Add fresh garlic and olive oil when applying. Rub all over thighs and bake",
   },
   {
-    id: 'peanut-sauce',
-    name: 'Peanut Sauce',
-    bestFor: 'Chicken thighs',
-    proteinCategory: 'chicken',
+    id: "honey-mustard",
+    name: "Honey Mustard",
+    bestFor: "Thighs · Sweet and savory",
+    proteinCategory: "chicken",
     ingredients: [
-      { amount: '3 tbsp', name: 'peanut butter' },
-      { amount: '2 tbsp', name: 'soy sauce' },
-      { amount: '1 tbsp', name: 'lime juice' },
-      { amount: '1 tbsp', name: 'honey' },
-      { amount: '1 tsp', name: 'sesame oil' },
-      { amount: '1 clove', name: 'garlic, minced' },
-      { amount: '2 tbsp', name: 'water (to thin)' }
+      { amount: "2 tbsp", name: "Dijon mustard" },
+      { amount: "1 tbsp", name: "honey" },
+      { amount: "½ tsp", name: "garlic powder" },
+      { amount: "¼ tsp", name: "salt" },
+      { amount: "¼ tsp", name: "black pepper" },
+      { amount: "1 tbsp", name: "olive oil" },
     ],
     storage: {
-      locations: ['fridge'],
+      locations: ["fridge"],
       batchable: true,
-      shelfLife: '5 days',
-      note: 'Thickens when cold, add water to reheat'
+      shelfLife: "2–3 weeks",
+      note: "Dijon is already preserved so the blend is very stable",
     },
-    applicationNote: 'Drizzle over chicken or serve on the side'
+    applicationNote: "Make a small jar at the start of the month",
   },
   {
-    id: 'buffalo-ranch',
-    name: 'Buffalo-Ranch',
-    bestFor: 'Chicken breast, chicken thighs',
-    proteinCategory: 'chicken',
+    id: "mexican-dry-rub",
+    name: "Mexican Dry Rub",
+    bestFor: "Bowl nights · Chipotle-style",
+    proteinCategory: "chicken",
     ingredients: [
-      { amount: '3 tbsp', name: 'hot sauce (Frank\'s)' },
-      { amount: '2 tbsp', name: 'ranch dressing' },
-      { amount: '1 tbsp', name: 'butter, melted' }
+      { amount: "1 tsp", name: "ground cumin" },
+      { amount: "1 tsp", name: "chili powder" },
+      { amount: "½ tsp", name: "garlic powder" },
+      { amount: "½ tsp", name: "onion powder" },
+      { amount: "½ tsp", name: "smoked paprika" },
+      { amount: "½ tsp", name: "salt" },
+      { amount: "1 tbsp", name: "olive oil (to bind when applying)" },
     ],
     storage: {
-      locations: ['fridge'],
+      locations: ["pantry"],
+      batchable: true,
+      shelfLife: "Months",
+      note: "All dry spices — best candidate for a large pantry batch",
+    },
+    applicationNote:
+      "Add olive oil only when applying to chicken. Serve over rice with black beans",
+  },
+  {
+    id: "peanut-sauce",
+    name: "Peanut Sauce",
+    bestFor: "Chicken thighs",
+    proteinCategory: "chicken",
+    ingredients: [
+      { amount: "3 tbsp", name: "peanut butter" },
+      { amount: "2 tbsp", name: "soy sauce" },
+      { amount: "1 tbsp", name: "lime juice" },
+      { amount: "1 tbsp", name: "honey" },
+      { amount: "1 tsp", name: "sesame oil" },
+      { amount: "1 clove", name: "garlic, minced" },
+      { amount: "2 tbsp", name: "water (to thin)" },
+    ],
+    storage: {
+      locations: ["fridge"],
+      batchable: true,
+      shelfLife: "5 days",
+      note: "Thickens when cold, add water to reheat",
+    },
+    applicationNote: "Drizzle over chicken or serve on the side",
+  },
+  {
+    id: "buffalo-ranch",
+    name: "Buffalo-Ranch",
+    bestFor: "Chicken breast, chicken thighs",
+    proteinCategory: "chicken",
+    ingredients: [
+      { amount: "3 tbsp", name: "hot sauce (Frank's)" },
+      { amount: "2 tbsp", name: "ranch dressing" },
+      { amount: "1 tbsp", name: "butter, melted" },
+    ],
+    storage: {
+      locations: ["fridge"],
       batchable: false,
-      shelfLife: '3 days',
-      note: 'Dairy-based, use quickly'
+      shelfLife: "3 days",
+      note: "Dairy-based, use quickly",
     },
-    applicationNote: 'Toss chicken in sauce after cooking'
+    applicationNote: "Toss chicken in sauce after cooking",
   },
+
+  // ═══════════════════════════════════════════════════════════
+  // FOR STEAK (HTML Priority)
+  // ═══════════════════════════════════════════════════════════
   {
-    id: 'chimichurri',
-    name: 'Chimichurri',
-    bestFor: 'Steak (sirloin, flank)',
-    proteinCategory: 'steak',
+    id: "salt-pepper",
+    name: "Classic Salt & Pepper",
+    bestFor: "Any cut · Always works",
+    proteinCategory: "steak",
     ingredients: [
-      { amount: '1 cup', name: 'parsley, chopped' },
-      { amount: '¼ cup', name: 'olive oil' },
-      { amount: '3 tbsp', name: 'red wine vinegar' },
-      { amount: '4 cloves', name: 'garlic, minced' },
-      { amount: '1 tsp', name: 'red pepper flakes' },
-      { amount: '½ tsp', name: 'salt' }
+      { amount: "1 tsp", name: "coarse sea salt or kosher salt" },
+      { amount: "1 tsp", name: "cracked black pepper" },
+      { amount: "1 tbsp", name: "avocado oil (for the pan)" },
+      { amount: "1 tbsp", name: "butter (add last minute, baste)" },
+      { amount: "1 clove", name: "garlic, smashed (optional, in pan)" },
     ],
     storage: {
-      locations: ['fridge'],
-      batchable: true,
-      shelfLife: '1 week',
-      note: 'Oil-based, very stable'
-    },
-    applicationNote: 'Spoon over sliced steak just before serving'
-  },
-  {
-    id: 'red-wine-reduction',
-    name: 'Red Wine Reduction',
-    bestFor: 'Steak',
-    proteinCategory: 'steak',
-    ingredients: [
-      { amount: '½ cup', name: 'red wine' },
-      { amount: '2 tbsp', name: 'balsamic vinegar' },
-      { amount: '1 tbsp', name: 'butter' },
-      { amount: '1 tsp', name: 'fresh thyme' },
-      { amount: '1', name: 'shallot, minced' }
-    ],
-    storage: {
-      locations: ['fridge'],
+      locations: ["pantry"],
       batchable: false,
-      shelfLife: '3 days',
-      note: 'Best made fresh'
+      shelfLife: "N/A",
+      note: "No batch needed — these are pantry staples",
     },
-    applicationNote: 'Simmer until reduced by half, drizzle over steak'
+    applicationNote: "Apply salt and pepper directly to steak and press in firmly before cooking",
   },
   {
-    id: 'garlic-herb-butter',
-    name: 'Garlic-Herb Butter',
-    bestFor: 'Steak',
-    proteinCategory: 'steak',
+    id: "chimichurri",
+    name: "Fresh Chimichurri",
+    bestFor: "Flank steak · Spoon over at serving",
+    proteinCategory: "steak",
     ingredients: [
-      { amount: '4 tbsp', name: 'butter, softened' },
-      { amount: '3 cloves', name: 'garlic, minced' },
-      { amount: '1 tbsp', name: 'parsley, chopped' },
-      { amount: '1 tsp', name: 'rosemary, chopped' },
-      { amount: '¼ tsp', name: 'black pepper' }
+      { amount: "½ cup", name: "fresh parsley, finely chopped" },
+      { amount: "3 cloves", name: "garlic, minced" },
+      { amount: "3 tbsp", name: "olive oil" },
+      { amount: "1 tbsp", name: "red wine vinegar" },
+      { amount: "¼ tsp", name: "red pepper flakes" },
+      { amount: "¼ tsp", name: "salt" },
     ],
     storage: {
-      locations: ['fridge', 'pantry'],
-      batchable: true,
-      shelfLife: '2 weeks (fridge)',
-      note: 'Roll into log, slice as needed'
+      locations: ["fridge"],
+      batchable: false,
+      shelfLife: "5–7 days",
+      note: "Fresh parsley degrades — not ideal for long batches",
     },
-    applicationNote: 'Place pat on hot steak, let melt'
-  }
-]
+    applicationNote:
+      "Make weekly during Sunday prep (takes 3 min) or buy Trader Joe's chimichurri jar as a reliable shortcut",
+  },
+  {
+    id: "soy-garlic-pan-sauce",
+    name: "Soy Garlic Pan Sauce",
+    bestFor: "Cast iron steak or chicken",
+    proteinCategory: "steak",
+    ingredients: [
+      { amount: "2 tbsp", name: "low-sodium soy sauce" },
+      { amount: "1 tbsp", name: "sesame oil" },
+      { amount: "2 cloves", name: "garlic, minced" },
+      { amount: "1 tsp", name: "honey" },
+      { amount: "½ tsp", name: "ground ginger" },
+    ],
+    storage: {
+      locations: ["fridge"],
+      batchable: true,
+      shelfLife: "2–3 weeks",
+      note: "Soy sauce preserves well",
+    },
+    applicationNote:
+      "Use as the cast iron Wednesday marinade or pour into the hot pan after cooking to deglaze — instant sauce over everything",
+  },
+  {
+    id: "red-wine-reduction",
+    name: "Red Wine Reduction",
+    bestFor: "Steak",
+    proteinCategory: "steak",
+    ingredients: [
+      { amount: "½ cup", name: "red wine" },
+      { amount: "2 tbsp", name: "balsamic vinegar" },
+      { amount: "1 tbsp", name: "butter" },
+      { amount: "1 tsp", name: "fresh thyme" },
+      { amount: "1", name: "shallot, minced" },
+    ],
+    storage: {
+      locations: ["fridge"],
+      batchable: false,
+      shelfLife: "3 days",
+      note: "Best made fresh",
+    },
+    applicationNote: "Simmer until reduced by half, drizzle over steak",
+  },
+  {
+    id: "garlic-herb-butter",
+    name: "Garlic Herb Butter",
+    bestFor: "Steak",
+    proteinCategory: "steak",
+    ingredients: [
+      { amount: "4 tbsp", name: "butter, softened" },
+      { amount: "3 cloves", name: "garlic, minced" },
+      { amount: "1 tbsp", name: "parsley, chopped" },
+      { amount: "1 tsp", name: "rosemary, chopped" },
+      { amount: "¼ tsp", name: "black pepper" },
+    ],
+    storage: {
+      locations: ["fridge", "pantry"],
+      batchable: true,
+      shelfLife: "2 weeks (fridge)",
+      note: "Roll into log, slice as needed",
+    },
+    applicationNote: "Place pat on hot steak, let melt",
+  },
+];

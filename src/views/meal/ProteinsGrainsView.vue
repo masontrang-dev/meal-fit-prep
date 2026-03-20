@@ -43,7 +43,7 @@ const handleVegetableSelect = (vegName: string) => {
     </section>
 
     <section>
-      <SectionLabel label="Steak (1 meal/week)" />
+      <SectionLabel label="Beef" />
       <ProteinCard :protein="steak" />
       <CalloutBox variant="orange" class="mt-4">
         <p>

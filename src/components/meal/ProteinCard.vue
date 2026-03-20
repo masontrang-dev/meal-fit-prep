@@ -1,52 +1,85 @@
 <script setup lang="ts">
 import type { Protein } from "@/types/meal.types";
+import { computed } from "vue";
 
-defineProps<{
+const props = defineProps<{
   protein: Protein;
 }>();
+
+const headerStyle = computed(() => {
+  switch (props.protein.id) {
+    case "fish":
+      return {
+        background: "var(--blue-light)",
+        color: "var(--blue)",
+      };
+    case "chicken-thigh":
+    case "chicken-breast":
+      return {
+        background: "var(--orange-light)",
+        color: "var(--orange)",
+      };
+    case "steak":
+      return {
+        background: "var(--gold-light)",
+        color: "var(--gold)",
+      };
+    default:
+      return {
+        background: "var(--green-light)",
+        color: "var(--green)",
+      };
+  }
+});
+
+const formatText = (text: string): string => {
+  return text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+};
 </script>
 
 <template>
-  <div class="card p-4 sm:p-5 transition-shadow duration-200 hover:shadow-sm">
-    <div class="flex items-start justify-between mb-3">
-      <div>
-        <h3 class="text-xl font-display font-semibold text-[var(--ink)] mb-1">
-          {{ protein.icon }} {{ protein.name }}
+  <div class="card overflow-hidden transition-shadow duration-200 hover:shadow-sm">
+    <div
+      class="px-4 sm:px-5 py-4 flex items-start gap-4"
+      :style="{ background: headerStyle.background }"
+    >
+      <span class="text-2xl sm:text-3xl">{{ protein.icon }}</span>
+      <div class="flex-1">
+        <h3 class="text-xl font-display font-semibold mb-1" :style="{ color: headerStyle.color }">
+          {{ protein.name }}
         </h3>
-        <p class="text-sm text-[var(--muted)]">
+        <p
+          class="text-xs sm:text-sm font-semibold uppercase tracking-wide"
+          :style="{ color: headerStyle.color, opacity: 0.7 }"
+        >
           {{ protein.mealsPerWeek }} • {{ protein.weeklyQuantity }}
         </p>
       </div>
     </div>
 
-    <div class="space-y-3">
-      <div>
-        <h4 class="text-xs font-semibold uppercase tracking-wide text-[var(--muted)] mb-1">Buy</h4>
-        <p class="text-sm text-[var(--ink)] leading-relaxed">{{ protein.buyGuidance }}</p>
-      </div>
-
-      <div>
-        <h4 class="text-xs font-semibold uppercase tracking-wide text-[var(--muted)] mb-1">Cook</h4>
-        <p class="text-sm text-[var(--ink)] leading-relaxed">{{ protein.cookMethod }}</p>
-      </div>
-
-      <div>
-        <h4 class="text-xs font-semibold uppercase tracking-wide text-[var(--muted)] mb-1">
-          Storage
-        </h4>
-        <p class="text-sm text-[var(--ink)] leading-relaxed">{{ protein.storageNote }}</p>
-      </div>
-
-      <div v-if="protein.stats.length > 0">
-        <h4 class="text-xs font-semibold uppercase tracking-wide text-[var(--muted)] mb-1">
-          Why This Works
-        </h4>
-        <ul class="text-sm text-[var(--ink)] space-y-1">
-          <li v-for="(stat, idx) in protein.stats" :key="idx" class="flex items-start">
-            <span class="mr-2">•</span>
-            <span>{{ stat }}</span>
-          </li>
-        </ul>
+    <div class="px-4 sm:px-5 py-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-sm text-[var(--ink)] leading-relaxed">
+        <div>
+          <p
+            class="whitespace-pre-line"
+            v-html="'<strong>Buy:</strong> ' + formatText(protein.buyGuidance)"
+          ></p>
+        </div>
+        <div>
+          <p
+            class="whitespace-pre-line"
+            v-html="'<strong>Cooking:</strong> ' + formatText(protein.cookMethod)"
+          ></p>
+          <div v-if="protein.stats.length > 0" class="flex flex-wrap gap-2 mt-3">
+            <span
+              v-for="(stat, idx) in protein.stats"
+              :key="idx"
+              class="inline-block bg-[var(--bg)] border border-[var(--rule)] px-2 py-1 text-xs font-semibold"
+            >
+              {{ stat }}
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   </div>

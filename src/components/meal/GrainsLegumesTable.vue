@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import type { GrainOrLegume } from '@/types/meal.types'
-import StatusBadge from '@/components/ui/StatusBadge.vue'
-import CalloutBox from '@/components/ui/CalloutBox.vue'
+import type { GrainOrLegume } from "@/types/meal.types";
+import StatusBadge from "@/components/ui/StatusBadge.vue";
+import CalloutBox from "@/components/ui/CalloutBox.vue";
 
 defineProps<{
-  items: GrainOrLegume[]
-}>()
+  items: GrainOrLegume[];
+}>();
 
-const hasQuinoa = (items: GrainOrLegume[]) => items.some((item) => item.rinseWarning)
+const hasQuinoa = (items: GrainOrLegume[]) => items.some((item) => item.rinseWarning);
 </script>
 
 <template>
   <div>
-    <CalloutBox v-if="hasQuinoa(items)" variant="orange" class="mb-4">
+    <!-- <CalloutBox v-if="hasQuinoa(items)" variant="orange" class="mb-4">
       <strong>Quinoa rinse required:</strong> Always rinse quinoa in a fine-mesh strainer before
       cooking to remove bitter saponins.
-    </CalloutBox>
+    </CalloutBox> -->
 
     <div class="data-table">
       <table class="w-full">
@@ -36,7 +36,7 @@ const hasQuinoa = (items: GrainOrLegume[]) => items.some((item) => item.rinseWar
                 >⚠️</span
               >
             </td>
-            <td class="hidden md:table-cell text-sm text-[var(--muted)]">
+            <td class="hidden md:table-cell text-sm">
               {{ item.keyNutrients }}
             </td>
             <td class="text-sm">{{ item.cookMethod }}</td>

@@ -1,25 +1,29 @@
 <script setup lang="ts">
-import type { ShoppingItem } from '@/types/meal.types'
-import CheckItem from '@/components/ui/CheckItem.vue'
+import type { ShoppingItem } from "@/types/meal.types";
+import CheckItem from "@/components/ui/CheckItem.vue";
 
 defineProps<{
-  category: string
-  items: ShoppingItem[]
-}>()
+  category: string;
+  items: ShoppingItem[];
+}>();
 
 const emit = defineEmits<{
-  toggle: [itemId: string]
-}>()
+  toggle: [itemId: string];
+}>();
 
 const handleToggle = (itemId: string) => {
-  emit('toggle', itemId)
-}
+  emit("toggle", itemId);
+};
 </script>
 
 <template>
-  <div class="mb-6">
-    <h3 class="section-label">{{ category }}</h3>
-    <div class="bg-[var(--paper)] border border-[var(--rule)] rounded-lg overflow-hidden">
+  <div class="bg-[var(--paper)] border border-[var(--rule)] p-4">
+    <h3
+      class="font-display text-lg font-bold text-[var(--ink)] mb-2 pb-2 border-b border-[var(--rule)]"
+    >
+      {{ category }}
+    </h3>
+    <ul class="list-none">
       <CheckItem
         v-for="item in items"
         :key="item.id"
@@ -28,6 +32,6 @@ const handleToggle = (itemId: string) => {
         :quantity="item.quantity"
         @toggle="handleToggle"
       />
-    </div>
+    </ul>
   </div>
 </template>

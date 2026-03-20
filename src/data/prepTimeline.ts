@@ -1,52 +1,67 @@
-import type { PrepStep } from '@/types/meal.types'
+import type { PrepStep } from "@/types/meal.types";
 
 export const sundayPrepSteps: PrepStep[] = [
   {
-    id: 'step-1',
+    id: "step-0",
+    elapsedMin: null,
+    duration: "Saturday Night",
+    title: "Two-Minute Saturday Setup",
+    body: "Move frozen fish fillets from freezer to fridge — perfectly thawed by Sunday afternoon. If making refried pinto beans this week, cover 1 cup dried beans in water and soak overnight.",
+    dotColor: "var(--muted)",
+    dotLabel: "▸",
+  },
+  {
+    id: "step-1",
     elapsedMin: 0,
-    duration: '15 min',
-    title: 'Prep Proteins',
-    body: 'Remove all proteins from packaging. Pat dry with paper towels. **Portion fish** into 2 servings. **Trim chicken** if needed. Season steak lightly with salt and pepper, set aside for cast iron prep.',
-    dotColor: 'var(--blue)'
+    duration: "0 min · Start",
+    title: "Rice Cooker On + Oven Preheat + Chop Everything",
+    body: "Start **brown rice** in rice cooker first — 45 min, fully hands-off. Preheat oven to 400°F. Line two sheet pans with foil.\n\n**Chop all aromatics in one session now:**\n- Dice 1 large onion — half goes into lentils, half into Wednesday's cast iron container\n- Mince 5–6 garlic cloves — divide same way\n- Slice bell peppers into strips for Wednesday\n- Slice mushrooms for Wednesday\n\nStore Wednesday vegetables (onion half, garlic half, bell pepper strips, mushrooms) in a labeled container in the fridge. You won't touch them again until Wednesday.",
+    dotColor: "var(--blue)",
+    dotLabel: "1",
   },
   {
-    id: 'step-2',
+    id: "step-2",
     elapsedMin: 15,
-    duration: '10 min',
-    title: 'Marinade Prep',
-    body: 'Choose **one Sunday marinade** (soy-garlic-ginger or smoked paprika). Mix ingredients in a bowl. Place chicken thighs in a zip-top bag or container, pour marinade over, massage to coat. Refrigerate.',
-    dotColor: 'var(--orange)'
+    duration: "15 min · 2 minutes active",
+    title: "Wednesday Marinade — Do It Now",
+    body: 'Set aside ~1 lb chicken thighs or steak for Wednesday. Mix your chosen marinade (see Cast Iron tab). Pour over protein in a zip-lock bag, squeeze out air, label *"Wednesday,"* refrigerate.\n\n**Safe to marinate from Sunday:** Soy Garlic Ginger, Smoked Paprika Garlic — oil and soy-based, no significant acid, flavor only improves over 2–5 days.\n\n**Marinate Tuesday instead if choosing:** Lime Cumin or Balsamic Herb — citrus and vinegar-based acids will break down protein texture if left more than 1–2 days.',
+    dotColor: "var(--cast)",
+    dotLabel: "2",
   },
   {
-    id: 'step-3',
-    elapsedMin: 25,
-    duration: '20 min',
-    title: 'Cook Grains & Legumes',
-    body: 'Start **brown rice** (2 cups dry, 4 cups water, 45 min). While rice cooks, rinse and cook **quinoa** (1 cup dry, 2 cups water, 20 min). Cook **lentils** (1 cup dry, 3 cups water, 25 min). All can simmer simultaneously.',
-    dotColor: 'var(--green)'
+    id: "step-3",
+    elapsedMin: 18,
+    duration: "18 min · Active",
+    title: "Season All Proteins for Sunday Batch",
+    body: "**Fish (~3 lbs):** Pat completely dry with paper towel — critical for good baking. Coat lightly with olive oil, season (see Sauces tab). Flat on foil-lined sheet pan, don't crowd.\n\n**Chicken thighs (~2–2.5 lbs):** Season with olive oil + Italian herbs + minced garlic + salt + pepper. Place on second sheet pan alongside broccoli florets tossed in olive oil + salt.\n\n**Quinoa:** Rinse in fine mesh strainer under cold water for 30 seconds. Add to rice cooker with 1:1.5 ratio water after brown rice finishes, or cook simultaneously on stovetop (15 min).",
+    dotColor: "var(--orange)",
+    dotLabel: "3",
   },
   {
-    id: 'step-4',
-    elapsedMin: 45,
-    duration: '15 min',
-    title: 'Prep Vegetables',
-    body: 'Wash and cut **broccoli** (or your chosen vegetable) into florets. Store in container with damp paper towel. Prep any additional vegetables for the week. Slice bell peppers, trim green beans, etc.',
-    dotColor: 'var(--green)'
+    id: "step-4",
+    elapsedMin: 28,
+    duration: "28 min · Hands Off",
+    title: "Everything in the Oven + Lentils on Stovetop",
+    body: "Fish: **12–15 min**. Chicken + broccoli: **35–40 min**. Set timers and step away.\n\n**While oven runs — start lentils:** In a medium pot, heat 1 tbsp olive oil over medium. Sauté the lentil-portion of diced onion and garlic 3 min until soft. Add 1.5 cups dry lentils + 3 cups low-sodium broth + 1 tsp cumin + ½ tsp salt. Bring to boil, reduce to low, cover and simmer 22 min. They'll be done around the same time as the chicken.",
+    dotColor: "var(--green)",
+    dotLabel: "4",
   },
   {
-    id: 'step-5',
-    elapsedMin: 60,
-    duration: '10 min',
-    title: 'Portion & Store',
-    body: 'Divide cooked grains and legumes into **6 containers** (lunch + dinner portions). Let cool slightly before sealing. Label containers with day and grain type. Stack in fridge.',
-    dotColor: 'var(--gold)'
+    id: "step-5",
+    elapsedMin: 65,
+    duration: "65 min · Active",
+    title: "Pull, Rest, Cool, Portion",
+    body: "Fish comes out first. Chicken + broccoli a few minutes later. Lentils come off the stovetop.\n\n**Critical: let everything cool 10 minutes before lidding containers.** Sealing hot food traps steam and makes everything soggy and unappealing by Monday.\n\nPortion into containers — 2 portions per container (one lunch for both of you) or individual containers if preferred. Label by day or protein type. Brown rice and quinoa into their own containers. Lentils into a separate container.",
+    dotColor: "var(--gold)",
+    dotLabel: "5",
   },
   {
-    id: 'step-6',
-    elapsedMin: 70,
-    duration: '5 min',
-    title: 'Cast Iron Setup',
-    body: 'Place **cast iron skillet** on stovetop. Add thin layer of oil. Heat on medium for 2 minutes, wipe out excess. This pre-seasons the pan for Wednesday\'s steak. Store covered until Wednesday.',
-    dotColor: 'var(--cast)'
-  }
-]
+    id: "step-6",
+    elapsedMin: 90,
+    duration: "~90–100 min · Done",
+    title: "What's Now in Your Fridge",
+    body: "· Cooked fish containers (eat Mon–Wed)\n· Cooked chicken containers (eat Mon–Fri)\n· Brown rice batch\n· Quinoa batch\n· Lentil batch\n· Wednesday protein marinating in labeled zip-lock\n· Wednesday vegetables pre-sliced in labeled container\n\n**The rest of the week:** Wednesday evening is 13 minutes of active cooking. Everything else is open container + reheat.",
+    dotColor: "var(--ink)",
+    dotLabel: "✓",
+  },
+];
