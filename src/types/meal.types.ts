@@ -24,9 +24,26 @@ export interface TemperatureAdjustment {
   note?: string; // e.g. 'Reduce to 375°F to prevent honey burning'
 }
 
+export type ScalingBehavior = "linear" | "fixed" | "diminishing" | "to-taste";
+
+export type IngredientUnit =
+  | "tsp"
+  | "tbsp"
+  | "cup"
+  | "oz"
+  | "lb"
+  | "g"
+  | "clove"
+  | "piece"
+  | "pinch"
+  | "to-taste";
+
 export interface Ingredient {
-  amount: string;
+  amount: number;
+  unit: IngredientUnit;
   name: string;
+  scalingBehavior: ScalingBehavior;
+  maxMultiplier?: number;
 }
 
 export interface Protein {
@@ -113,18 +130,31 @@ export interface SauceStorageInfo {
   note: string;
 }
 
+export interface PairsWith {
+  proteins: string[];
+  grains: string[];
+  vegetables: string[];
+}
+
 export interface Sauce {
   id: string;
   name: string;
+  section: "fish" | "chicken" | "cast-iron" | "shrimp";
   bestFor: string;
-  proteinCategory: "fish" | "chicken" | "steak" | "shrimp";
+  flavorProfile: string;
+  baseYieldLbs: number;
+  scalingBehavior: ScalingBehavior;
   ingredients: Ingredient[];
-  storage: SauceStorageInfo;
-  applicationNote: string;
-  marinating: MarinadeRequirement;
-  sundaySafe: boolean;
+  method: string[];
+  application: string;
   applicationTiming: ApplicationTiming;
   temperatureAdjustment: TemperatureAdjustment;
+  pairsWith: PairsWith;
+  storage: SauceStorageInfo;
+  marinating: MarinadeRequirement;
+  sundaySafe: boolean;
+  tips?: string;
+  dualUse?: string;
 }
 
 export interface NutrientRow {

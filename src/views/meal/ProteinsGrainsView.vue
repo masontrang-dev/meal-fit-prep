@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import { proteins } from "@/data/proteins";
 import { grainsAndLegumes } from "@/data/grainsLegumes";
 import { vegetables } from "@/data/vegetables";
@@ -19,10 +20,69 @@ const steak = proteins.find((p) => p.id === "steak")!;
 const handleVegetableSelect = (vegName: string) => {
   mealStore.setVegetable(vegName);
 };
+
+// Welcome box state - persisted in localStorage
+const showWelcome = ref(localStorage.getItem("hideWelcome") !== "true");
+
+const dismissWelcome = () => {
+  showWelcome.value = false;
+  localStorage.setItem("hideWelcome", "true");
+};
 </script>
 
 <template>
   <div class="space-y-8">
+    <!-- Welcome Box -->
+    <div
+      v-if="showWelcome"
+      class="card p-6 border-2"
+      style="border-color: var(--green); background-color: var(--green-bg)"
+    >
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1">
+          <h3 class="text-xl font-display font-semibold text-[var(--ink)] mb-3">
+            👋 Welcome to Meal Fit Prep
+          </h3>
+          <div class="space-y-3 text-sm text-[var(--ink)] leading-relaxed">
+            <p>
+              <strong
+                >This is a complete meal prep system designed for 2 people eating 6 lunches + 6
+                dinners per week.</strong
+              >
+            </p>
+            <p>
+              <strong>How it works:</strong> Generate a randomized weekly plan in the
+              <strong>Meal Plan</strong> tab. The system selects proteins, sauces, grains, and
+              vegetables while avoiding recent repeats. Confirm your plan to auto-populate the
+              <strong>Shopping List</strong> with exact quantities.
+            </p>
+            <p>
+              <strong>Sunday Prep Day:</strong> Batch-cook fish (2 meals), chicken (3 meals),
+              grains, and legumes. Wednesday is cast iron night — steak or shrimp cooked fresh in a
+              cast iron skillet.
+            </p>
+            <p>
+              <strong>Sauces & Marinades:</strong> All sauces include ingredient scaling based on
+              protein weight. Check off sauces you've already batched to automatically remove their
+              ingredients from the shopping list.
+            </p>
+            <p>
+              <strong>This Overview tab</strong> shows all available proteins, grains, legumes, and
+              vegetables with cooking instructions and nutritional info.
+            </p>
+          </div>
+        </div>
+        <button
+          @click="dismissWelcome"
+          class="text-[var(--muted)] hover:text-[var(--ink)] transition-colors text-xl leading-none"
+          aria-label="Dismiss welcome message"
+          title="Dismiss"
+        >
+          ✕
+        </button>
+      </div>
+    </div>
+
     <section>
       <SectionLabel label="Fish (2 meals/week)" />
       <ProteinCard :protein="fish" />

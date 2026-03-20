@@ -1,8 +1,9 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { shoppingList } from "@/data/shopping";
+import { getSauceById } from "@/data/sauces";
 import type { GeneratedPlan } from "@/types/randomizer.types";
-import type { ShoppingItem } from "@/types/meal.types";
+import type { ShoppingItem, Sauce } from "@/types/meal.types";
 
 export const useShoppingStore = defineStore(
   "shopping",
@@ -12,6 +13,8 @@ export const useShoppingStore = defineStore(
       "Week of " + new Date().toLocaleDateString("en-US", { month: "short", day: "numeric" }),
     );
     const dynamicItems = ref<ShoppingItem[]>([]);
+    const sauceItems = ref<Array<{ id: string; name: string; batchable: boolean }>>([]);
+    const batchedSauces = ref<Record<string, boolean>>({});
 
     // Initialize items from shopping data if not already populated
     const initializeItems = () => {
@@ -33,8 +36,60 @@ export const useShoppingStore = defineStore(
       Object.keys(items.value).forEach((key) => {
         items.value[key] = false;
       });
+      Object.keys(batchedSauces.value).forEach((key) => {
+        batchedSauces.value[key] = false;
+      });
       weekLabel.value =
         "Week of " + new Date().toLocaleDateString("en-US", { month: "short", day: "numeric" });
+    };
+
+    const toggleSauceBatch = (sauceId: string) => {
+      batchedSauces.value[sauceId] = !batchedSauces.value[sauceId];
+    };
+
+    // Helper to extract ingredients from a sauce
+    const extractSauceIngredients = (sauce: Sauce): ShoppingItem[] => {
+      const ingredients: ShoppingItem[] = [];
+
+      sauce.ingredients.forEach((ingredient) => {
+        const ingredientId = `sauce-${sauce.id}-${ingredient.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+
+        // Determine category based on ingredient type
+        let category = "Pantry";
+        if (
+          [
+            "garlic",
+            "onion",
+            "ginger",
+            "lemon",
+            "lime",
+            "parsley",
+            "cilantro",
+            "dill",
+            "thyme",
+            "rosemary",
+            "mango",
+            "jalapeño",
+          ].some((fresh) => ingredient.name.toLowerCase().includes(fresh))
+        ) {
+          category = "Vegetables";
+        } else if (
+          ["butter", "yogurt", "ranch"].some((dairy) =>
+            ingredient.name.toLowerCase().includes(dairy),
+          )
+        ) {
+          category = "Dairy";
+        }
+
+        ingredients.push({
+          id: ingredientId,
+          category,
+          name: ingredient.name,
+          quantity: `${ingredient.amount} ${ingredient.unit}`,
+        });
+      });
+
+      return ingredients;
     };
 
     // Update shopping list based on confirmed FridgeEngine plan
@@ -166,40 +221,38 @@ export const useShoppingStore = defineStore(
         });
       }
 
-      // Sauce-specific ingredients
-      if (plan.batchFishSauce === "miso-glaze") {
-        newDynamicItems.push({
-          id: "miso-paste",
-          category: "Pantry",
-          name: "White miso paste",
-          quantity: "1 jar",
-        });
-      }
+      // Dynamic sauce ingredients extraction
+      const selectedSauces = [plan.batchFishSauce, plan.batchChickenSauce, plan.castIronSauce];
 
-      if (plan.batchChickenSauce === "teriyaki-glaze") {
-        newDynamicItems.push({
-          id: "rice-vinegar",
-          category: "Pantry",
-          name: "Rice vinegar",
-          quantity: "1 bottle",
-        });
-        newDynamicItems.push({
-          id: "cornstarch",
-          category: "Pantry",
-          name: "Cornstarch",
-          quantity: "1 box",
-        });
-      }
+      const newSauceItems: Array<{ id: string; name: string; batchable: boolean }> = [];
 
-      if (plan.castIronSauce === "lime-cumin" && plan.marinadeTiming === "tuesday") {
-        newDynamicItems.push({
-          id: "limes-extra",
-          category: "Vegetables",
-          name: "Limes",
-          quantity: "4",
-        });
-      }
+      selectedSauces.forEach((sauceId) => {
+        try {
+          const sauce = getSauceById(sauceId);
+          if (sauce) {
+            newSauceItems.push({
+              id: sauce.id,
+              name: sauce.name,
+              batchable: sauce.storage.batchable,
+            });
 
+            // Initialize batched status if not exists
+            if (!(sauce.id in batchedSauces.value)) {
+              batchedSauces.value[sauce.id] = false;
+            }
+
+            // Only add ingredients if sauce is NOT already batched
+            if (!batchedSauces.value[sauce.id]) {
+              const sauceIngredients = extractSauceIngredients(sauce);
+              newDynamicItems.push(...sauceIngredients);
+            }
+          }
+        } catch (error) {
+          console.warn(`Sauce not found: ${sauceId}`);
+        }
+      });
+
+      sauceItems.value = newSauceItems;
       dynamicItems.value = newDynamicItems;
 
       // Initialize checked state for new items
@@ -233,8 +286,11 @@ export const useShoppingStore = defineStore(
       items,
       weekLabel,
       dynamicItems,
+      sauceItems,
+      batchedSauces,
       allItems,
       toggle,
+      toggleSauceBatch,
       resetWeek,
       updateFromPlan,
       checkedCount,

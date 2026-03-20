@@ -1,8 +1,16 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
+import { onMounted } from "vue";
 import AppMasthead from "./components/layout/AppMasthead.vue";
 import AppNav from "./components/layout/AppNav.vue";
 import AppPage from "./components/layout/AppPage.vue";
+import { useTimerStore } from "./stores/timerStore";
+
+const timerStore = useTimerStore();
+
+onMounted(() => {
+  timerStore.reconcileOnMount();
+});
 </script>
 
 <template>

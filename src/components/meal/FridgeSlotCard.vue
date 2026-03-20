@@ -6,6 +6,7 @@ const props = defineProps<{
   slotKey: keyof GeneratedPlan;
   value: string;
   detail?: string;
+  sauceKey?: keyof GeneratedPlan;
   eatBy?: string;
   isCastIron?: boolean;
   marinadeTiming?: string;
@@ -14,6 +15,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   swap: [slotKey: keyof GeneratedPlan];
+  swapSauce: [slotKey: keyof GeneratedPlan];
 }>();
 
 function formatValue(value: string): string {
@@ -39,11 +41,31 @@ function formatValue(value: string): string {
         <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-1">
           {{ slotLabel }}
         </h3>
-        <p class="text-lg font-semibold text-gray-900">{{ formatValue(value) }}</p>
-        <p v-if="detail" class="text-sm text-gray-600 mt-1">{{ detail }}</p>
+        <div class="flex items-center gap-2">
+          <p class="text-lg font-semibold text-gray-900">{{ formatValue(value) }}</p>
+          <button
+            v-if="!isConfirmed && sauceKey"
+            @click="emit('swap', slotKey)"
+            class="px-2 py-1 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-50 transition-colors"
+            :title="`Swap ${slotLabel.toLowerCase()}`"
+          >
+            🔀
+          </button>
+        </div>
+        <div v-if="detail" class="flex items-center gap-2 mt-1">
+          <p class="text-sm text-gray-600">{{ detail }}</p>
+          <button
+            v-if="!isConfirmed && sauceKey"
+            @click="emit('swapSauce', sauceKey)"
+            class="px-2 py-1 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-50 transition-colors"
+            title="Swap sauce only"
+          >
+            🔀
+          </button>
+        </div>
       </div>
       <button
-        v-if="!isConfirmed"
+        v-if="!isConfirmed && !sauceKey"
         @click="emit('swap', slotKey)"
         class="ml-3 px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors flex items-center gap-1.5"
         :title="`Swap ${slotLabel}`"

@@ -9,7 +9,7 @@ import type {
   SaturdayPrepItem,
 } from "@/types/randomizer.types";
 import type { Sauce } from "@/types/meal.types";
-import { allSauces } from "@/data/sauces";
+import { sauces } from "@/data/sauces";
 
 export const fishVarieties: FishVariety[] = ["salmon", "tilapia", "cod", "mahi-mahi"];
 
@@ -39,18 +39,18 @@ export const castIronMarinades = [
   "smoked-paprika-garlic",
   "lime-cumin",
   "balsamic-herb",
-  "salt-pepper",
+  "classic-salt-pepper", // Updated from "salt-pepper"
   "garlic-herb-butter",
   "red-wine-reduction",
-  "chimichurri",
+  "fresh-chimichurri", // Updated from "chimichurri"
   "soy-garlic-pan-sauce",
 ];
 
 export const shrimpSauces = [
-  "shrimp-garlic-butter",
-  "shrimp-cajun-butter",
-  "shrimp-soy-garlic-ginger",
-  "shrimp-lime-cumin",
+  "garlic-butter-shrimp",
+  "cajun-butter",
+  "soy-garlic-ginger", // Shared with cast-iron
+  "lime-cumin", // Shared with cast-iron
 ];
 
 export const roastingVegetables: WeightedOption[] = [
@@ -90,7 +90,7 @@ export const sundaySafeMarinades = [
   "shrimp-cajun-butter",
 ];
 
-function pickFrom(
+export function pickFrom(
   slotKey: string,
   pool: string[],
   history: WeekHistory[],
@@ -117,7 +117,7 @@ function pickFrom(
   return eligible[Math.floor(Math.random() * eligible.length)]!;
 }
 
-function pickWeighted(
+export function pickWeighted(
   slotKey: string,
   pool: WeightedOption[],
   history: WeekHistory[],
@@ -141,7 +141,7 @@ function pickWeighted(
   return eligible[eligible.length - 1]!.value;
 }
 
-function getWeeksSince(proteinType: string, history: WeekHistory[]): number {
+export function getWeeksSince(proteinType: string, history: WeekHistory[]): number {
   for (let i = history.length - 1; i >= 0; i--) {
     const week = history[i];
     if (!week) continue;
@@ -158,7 +158,7 @@ function getWeeksSince(proteinType: string, history: WeekHistory[]): number {
   return 999;
 }
 
-function buildCastIronPool({
+export function buildCastIronPool({
   fishVarieties,
   batchFishVariety,
   batchChickenCut,
@@ -197,7 +197,7 @@ function buildCastIronPool({
 }
 
 function getSauceById(id: string): Sauce {
-  const sauce = allSauces.find((s) => s.id === id);
+  const sauce = sauces.find((s: Sauce) => s.id === id);
   if (!sauce) throw new Error(`Sauce not found: ${id}`);
   return sauce;
 }
@@ -290,7 +290,7 @@ export function runFridgeEngine(
             protein: batchChickenCut,
             sauce: batchChickenSauce,
             sauceName: chickenSauceData.name,
-            instructions: chickenSauceData.applicationNote,
+            instructions: chickenSauceData.application,
             note: "Batch chicken — marinate Saturday night for Sunday bake",
           },
         ]
@@ -301,7 +301,7 @@ export function runFridgeEngine(
             protein: castIronProtein,
             sauce: castIronSauce,
             sauceName: castIronSauceData.name,
-            instructions: castIronSauceData.applicationNote,
+            instructions: castIronSauceData.application,
             note: "Cast iron protein — marinate Saturday night. Sunday-safe marinade — stays in fridge until Wednesday.",
           },
         ]

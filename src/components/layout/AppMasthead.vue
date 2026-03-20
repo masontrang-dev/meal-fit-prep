@@ -12,12 +12,13 @@ import ServingsSelector from "@/components/ui/ServingsSelector.vue";
             <span class="pill">6 Lunches + 6 Dinners</span>
             <span class="pill">Whole Foods</span>
             <span class="pill">DASH Friendly</span>
-            <span class="pill">Sunday Prep + Wed Cast Iron</span>
+            <span class="pill">Sunday Prep + Wed Fresh Cook</span>
           </div>
         </div>
         <div class="masthead-meta">
           Fish · Chicken · Steak<br />
           Brown Rice · Quinoa · Lentils<br />
+          <span style="text-transform: none">v1.0</span>
         </div>
       </div>
     </div>

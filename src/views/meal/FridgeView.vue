@@ -200,28 +200,34 @@ function formatValue(value: string): string {
           <FridgeSlotCard
             slot-label="Batch Fish"
             slot-key="batchFishVariety"
+            sauce-key="batchFishSauce"
             :value="store.pendingPlan!.batchFishVariety"
             :detail="`Sauce: ${formatValue(store.pendingPlan!.batchFishSauce)}`"
             eat-by="Eat by Day 3"
             @swap="handleSwap"
+            @swap-sauce="handleSwap"
           />
           <FridgeSlotCard
             slot-label="Batch Chicken"
             slot-key="batchChickenCut"
+            sauce-key="batchChickenSauce"
             :value="store.pendingPlan!.batchChickenCut"
             :detail="`Sauce: ${formatValue(store.pendingPlan!.batchChickenSauce)}`"
             eat-by="Eat by Day 5"
             @swap="handleSwap"
+            @swap-sauce="handleSwap"
           />
           <FridgeSlotCard
             slot-label="Cast Iron Protein"
             slot-key="castIronProtein"
+            sauce-key="castIronSauce"
             :value="store.pendingPlan!.castIronProtein"
             :detail="`${formatValue(store.pendingPlan!.castIronSauce)}`"
             eat-by="Wednesday evening"
             :is-cast-iron="true"
             :marinade-timing="store.pendingPlan!.marinadeTiming"
             @swap="handleSwap"
+            @swap-sauce="handleSwap"
           />
         </div>
       </div>

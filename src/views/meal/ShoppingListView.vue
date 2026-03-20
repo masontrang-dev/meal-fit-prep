@@ -57,9 +57,8 @@ const cancelReset = () => {
   <div>
     <div class="flex items-center justify-between mb-4">
       <p class="text-sm text-[var(--muted)] leading-relaxed flex-1">
-        For 2 people · 6 lunches + 6 dinners. Tap items to check off as you shop. Breakfasts not
-        included — shop separately based on what you want that week. Check which marinade you're
-        making this week and add those ingredients if not already in your pantry.
+        For 2 people · 6 lunches + 6 dinners. Check off sauces you already have batched to remove
+        their ingredients from the list.
       </p>
       <button
         @click="handleReset"
@@ -69,6 +68,46 @@ const cancelReset = () => {
       >
         Reset Week
       </button>
+    </div>
+
+    <!-- Sauce Batch Checklist -->
+    <div v-if="store.sauceItems && store.sauceItems.length > 0" class="card p-4 mb-5">
+      <h3 class="text-lg font-display font-semibold text-[var(--ink)] mb-3">
+        🍯 Sauces & Marinades This Week
+      </h3>
+      <p class="text-sm text-[var(--muted)] mb-3">
+        Check off sauces you already have batched. Their ingredients will be removed from the
+        shopping list below.
+      </p>
+      <div class="space-y-2">
+        <label
+          v-for="sauce in store.sauceItems"
+          :key="sauce.id"
+          class="flex items-center gap-3 p-3 rounded cursor-pointer hover:bg-[var(--paper)] transition-colors"
+          :class="{ 'bg-[var(--paper)]': store.batchedSauces[sauce.id] }"
+        >
+          <input
+            type="checkbox"
+            :checked="store.batchedSauces[sauce.id]"
+            @change="store.toggleSauceBatch(sauce.id)"
+            class="w-5 h-5 rounded border-2 border-[var(--rule)] cursor-pointer"
+          />
+          <div class="flex-1">
+            <span class="text-sm font-medium text-[var(--ink)]">{{ sauce.name }}</span>
+            <span
+              v-if="sauce.batchable"
+              class="ml-2 text-xs px-2 py-0.5 rounded"
+              style="background-color: var(--green-bg); color: var(--green)"
+            >
+              ♻️ Batchable
+            </span>
+            <span v-else class="ml-2 text-xs text-[var(--muted)]"> (Make fresh) </span>
+          </div>
+          <span v-if="store.batchedSauces[sauce.id]" class="text-xs text-[var(--green)]">
+            ✓ Already batched
+          </span>
+        </label>
+      </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">

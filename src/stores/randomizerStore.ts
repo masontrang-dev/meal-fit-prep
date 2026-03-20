@@ -6,7 +6,22 @@ import type {
   RepeatWindows,
   FridgeEngineSettings,
 } from "@/types/randomizer.types";
-import { runFridgeEngine } from "@/data/fridgeEngine";
+import {
+  runFridgeEngine,
+  pickFrom,
+  pickWeighted,
+  getWeeksSince,
+  buildCastIronPool,
+  fishVarieties,
+  fishSauces,
+  chickenSauces,
+  castIronMarinades,
+  shrimpSauces,
+  roastingVegetables,
+  grains,
+  legumes,
+} from "@/data/fridgeEngine";
+import { getSauceById } from "@/data/sauces";
 import { useShoppingStore } from "./shoppingStore";
 
 export const useRandomizerStore = defineStore(
@@ -62,11 +77,108 @@ export const useRandomizerStore = defineStore(
 
     function swapSlot(slotKey: keyof GeneratedPlan, excludeOvernight: boolean = false) {
       if (!pendingPlan.value) return;
-      const overrides = excludeOvernight ? { [slotKey]: { excludeOvernight } } : undefined;
-      const partial = runFridgeEngine(weekHistory.value, engineSettings.value, overrides);
+
+      const tempHistory = [...weekHistory.value, planToHistory(pendingPlan.value)];
+      let newValue: any;
+
+      switch (slotKey) {
+        case "batchFishVariety":
+          newValue = pickFrom("fishVariety", fishVarieties, tempHistory, engineSettings.value);
+          break;
+
+        case "batchFishSauce":
+          const filteredFishSauces = excludeOvernight
+            ? fishSauces.filter((id: string) => getSauceById(id).marinating !== "overnight")
+            : fishSauces;
+          newValue = pickFrom("fishSauce", filteredFishSauces, tempHistory, engineSettings.value);
+          break;
+
+        case "batchChickenCut":
+          newValue = pickFrom(
+            "chickenCut",
+            ["thighs", "breast"],
+            tempHistory,
+            engineSettings.value,
+          );
+          break;
+
+        case "batchChickenSauce":
+          const filteredChickenSauces = excludeOvernight
+            ? chickenSauces.filter((id: string) => getSauceById(id).marinating !== "overnight")
+            : chickenSauces;
+          newValue = pickFrom(
+            "chickenSauce",
+            filteredChickenSauces,
+            tempHistory,
+            engineSettings.value,
+          );
+          break;
+
+        case "castIronProtein":
+          const weeksSinceSteak = getWeeksSince("steak", tempHistory);
+          const weeksSinceShrimp = getWeeksSince("shrimp", tempHistory);
+          const castIronPool = buildCastIronPool({
+            fishVarieties,
+            batchFishVariety: pendingPlan.value.batchFishVariety,
+            batchChickenCut: pendingPlan.value.batchChickenCut,
+            steakEligible: weeksSinceSteak >= engineSettings.value.steakFrequencyWeeks,
+            shrimpEligible: weeksSinceShrimp >= engineSettings.value.shrimpFrequencyWeeks,
+            history: tempHistory,
+            settings: engineSettings.value,
+          });
+          newValue = pickFrom("castIronProtein", castIronPool, tempHistory, engineSettings.value);
+          break;
+
+        case "castIronSauce":
+          const isShrimp = pendingPlan.value.castIronProtein === "shrimp";
+          const saucePool = isShrimp ? shrimpSauces : castIronMarinades;
+          const filteredCastIronSauces = excludeOvernight
+            ? saucePool.filter((id: string) => getSauceById(id).marinating !== "overnight")
+            : saucePool;
+          newValue = pickFrom(
+            "castIronMarinade",
+            filteredCastIronSauces,
+            tempHistory,
+            engineSettings.value,
+          );
+          break;
+
+        case "roastingVeg1":
+          newValue = pickWeighted(
+            "roastingVeg1",
+            roastingVegetables,
+            tempHistory,
+            engineSettings.value,
+          );
+          break;
+
+        case "roastingVeg2":
+          const eligibleVeg2 = roastingVegetables.filter(
+            (v: any) => v.value !== pendingPlan.value!.roastingVeg1,
+          );
+          newValue = pickWeighted("roastingVeg2", eligibleVeg2, tempHistory, engineSettings.value);
+          break;
+
+        case "grain1":
+          newValue = pickWeighted("grain1", grains, tempHistory, engineSettings.value);
+          break;
+
+        case "grain2":
+          const eligibleGrain2 = grains.filter((g: any) => g.value !== pendingPlan.value!.grain1);
+          newValue = pickWeighted("grain2", eligibleGrain2, tempHistory, engineSettings.value);
+          break;
+
+        case "legume":
+          newValue = pickWeighted("legume", legumes, tempHistory, engineSettings.value);
+          break;
+
+        default:
+          return;
+      }
+
       pendingPlan.value = {
         ...pendingPlan.value,
-        ...partial,
+        [slotKey]: newValue,
       };
     }
 
