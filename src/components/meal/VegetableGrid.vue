@@ -1,0 +1,53 @@
+<script setup lang="ts">
+import type { Vegetable } from '@/types/meal.types'
+
+defineProps<{
+  vegetables: Vegetable[]
+}>()
+
+const getTagClass = (tag: 'default' | 'swap' | 'wildcard'): string => {
+  if (tag === 'default') return 'bg-green-100 text-green-800 border-green-300'
+  if (tag === 'swap') return 'bg-blue-100 text-blue-800 border-blue-300'
+  if (tag === 'wildcard') return 'bg-purple-100 text-purple-800 border-purple-300'
+  return ''
+}
+
+const getTagLabel = (tag: 'default' | 'swap' | 'wildcard'): string => {
+  if (tag === 'default') return 'Default'
+  if (tag === 'swap') return 'Swap'
+  if (tag === 'wildcard') return 'Wildcard'
+  return ''
+}
+</script>
+
+<template>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div v-for="veg in vegetables" :key="veg.name" class="card">
+      <div class="flex items-start justify-between mb-3">
+        <h3 class="text-lg font-display font-semibold text-[var(--ink)]">{{ veg.name }}</h3>
+        <span
+          class="text-xs font-semibold uppercase px-2 py-1 rounded border"
+          :class="getTagClass(veg.tag)"
+        >
+          {{ getTagLabel(veg.tag) }}
+        </span>
+      </div>
+
+      <div class="space-y-2">
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wide text-[var(--muted)] mb-1">
+            Prep
+          </h4>
+          <p class="text-sm text-[var(--ink)]">{{ veg.prepNote }}</p>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wide text-[var(--muted)] mb-1">
+            Cook
+          </h4>
+          <p class="text-sm text-[var(--ink)]">{{ veg.cookNote }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

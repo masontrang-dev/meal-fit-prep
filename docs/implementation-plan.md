@@ -227,69 +227,69 @@ This implementation plan breaks down the development of the Meal Prep & Fitness 
 
 ---
 
-## Phase 6: Meal Prep Components
+## Phase 6: Meal Prep Components ✓ (COMPLETED)
 
 **Goal:** Build domain-specific components for meal prep views.
 
-### 6.1 Protein & Grain Components
+### 6.1 Protein & Grain Components ✓ (COMPLETED)
 
-- [ ] `src/components/meal/ProteinCard.vue`:
+- [x] `src/components/meal/ProteinCard.vue`:
   - Props: `protein` (Protein)
   - Display: name, icon, buy guidance, cook method, stats
-- [ ] `src/components/meal/GrainsLegumesTable.vue`:
+- [x] `src/components/meal/GrainsLegumesTable.vue`:
   - Props: `items` (GrainOrLegume[])
   - Table with columns: name, nutrients, cook method, use, badge
   - Quinoa rinse warning callout
   - Displays both grains and legumes in single table
-- [ ] `src/components/meal/VegetableGrid.vue`:
+- [x] `src/components/meal/VegetableGrid.vue`:
   - Props: `vegetables` (Vegetable[])
   - Grid of cards with tag badges (default/swap/wildcard)
 
-### 6.2 Shopping & Prep Components
+### 6.2 Shopping & Prep Components ✓ (COMPLETED)
 
-- [ ] `src/components/meal/ShoppingCategory.vue`:
+- [x] `src/components/meal/ShoppingCategory.vue`:
   - Props: `category` (string), `items` (ShoppingItem[])
   - Renders category header + CheckItem list
-- [ ] `src/components/meal/PrepTimeline.vue`:
+- [x] `src/components/meal/PrepTimeline.vue`:
   - Props: `steps` (PrepStep[])
   - Vertical timeline with colored dots
   - Elapsed time + duration display
-- [ ] `src/components/meal/PrepStep.vue`:
+- [x] `src/components/meal/PrepStep.vue`:
   - Props: `step` (PrepStep)
   - Individual timeline step with expandable detail
-- [ ] `src/components/meal/EmergencyMeals.vue`:
+- [x] `src/components/meal/EmergencyMeals.vue`:
   - Props: `meals` (EmergencyMeal[])
   - Collapsible panel with fallback meal list
 
-### 6.3 Meal Plan Components
+### 6.3 Meal Plan Components ✓ (COMPLETED)
 
-- [ ] `src/components/meal/MealPlanTable.vue`:
+- [x] `src/components/meal/MealPlanTable.vue`:
   - Props: `days` (MealPlanDay[])
   - Weekly table with protein pills
   - Hide grain column on mobile
-- [ ] `src/components/meal/MealPlanRow.vue`:
+- [x] `src/components/meal/MealPlanRow.vue`:
   - Props: `day` (MealPlanDay)
   - Single day row with lunch/dinner/grain
 
-### 6.4 Cast Iron & Sauce Components
+### 6.4 Cast Iron & Sauce Components ✓ (COMPLETED)
 
-- [ ] `src/components/meal/CastIronInstructions.vue`:
+- [x] `src/components/meal/CastIronInstructions.vue`:
   - Sunday setup steps (5 min)
   - Wednesday cooking steps (13 min)
   - Prominent "steak always cast iron" callout
-- [ ] `src/components/meal/MarinadeCard.vue`:
+- [x] `src/components/meal/MarinadeCard.vue`:
   - Props: `marinade` (Marinade)
   - Name, timing badge, ingredients, note
-- [ ] `src/components/meal/SauceCard.vue`:
+- [x] `src/components/meal/SauceCard.vue`:
   - Props: `sauce` (Sauce)
   - Name, best for, ingredients, storage badges, shelf life
 
-### 6.5 Nutrient & Storage Components
+### 6.5 Nutrient & Storage Components ✓ (COMPLETED)
 
-- [ ] `src/components/meal/NutrientTable.vue`:
+- [x] `src/components/meal/NutrientTable.vue`:
   - Props: `nutrients` (NutrientRow[])
   - Status badges + sources + notes
-- [ ] `src/components/meal/StorageGuide.vue`:
+- [x] `src/components/meal/StorageGuide.vue`:
   - Props: `items` (StorageRow[])
   - Fridge life + reheating instructions
 
