@@ -44,15 +44,118 @@ export const useShoppingStore = defineStore(
     };
 
     const toggleSauceBatch = (sauceId: string) => {
-      batchedSauces.value[sauceId] = !batchedSauces.value[sauceId];
+      const wasBatched = batchedSauces.value[sauceId];
+      batchedSauces.value[sauceId] = !wasBatched;
+
+      // Get the sauce to access its ingredients
+      try {
+        const sauce = getSauceById(sauceId);
+        if (sauce) {
+          const sauceIngredients = extractSauceIngredients(sauce);
+          const ingredientIds = sauceIngredients.map((ing) => ing.id);
+
+          // Get all ingredients needed by unbatched sauces
+          const unbatchedSauceIngredients = new Set<string>();
+          sauceItems.value.forEach((sauceItem) => {
+            // Skip the sauce we're toggling and only look at unbatched sauces
+            if (sauceItem.id !== sauceId && !batchedSauces.value[sauceItem.id]) {
+              try {
+                const otherSauce = getSauceById(sauceItem.id);
+                if (otherSauce) {
+                  const otherIngredients = extractSauceIngredients(otherSauce);
+                  otherIngredients.forEach((ing) => unbatchedSauceIngredients.add(ing.id));
+                }
+              } catch (error) {
+                // Ignore if sauce not found
+              }
+            }
+          });
+
+          if (!wasBatched) {
+            // Sauce is now batched - check off its ingredients ONLY if not needed elsewhere
+            ingredientIds.forEach((id) => {
+              if (id in items.value && !unbatchedSauceIngredients.has(id)) {
+                items.value[id] = true;
+              }
+            });
+          } else {
+            // Sauce is now unbatched - uncheck its ingredients ONLY if not needed by other batched sauces
+            const batchedSauceIngredients = new Set<string>();
+            sauceItems.value.forEach((sauceItem) => {
+              if (sauceItem.id !== sauceId && batchedSauces.value[sauceItem.id]) {
+                try {
+                  const otherSauce = getSauceById(sauceItem.id);
+                  if (otherSauce) {
+                    const otherIngredients = extractSauceIngredients(otherSauce);
+                    otherIngredients.forEach((ing) => batchedSauceIngredients.add(ing.id));
+                  }
+                } catch (error) {
+                  // Ignore if sauce not found
+                }
+              }
+            });
+
+            ingredientIds.forEach((id) => {
+              if (id in items.value && !batchedSauceIngredients.has(id)) {
+                items.value[id] = false;
+              }
+            });
+          }
+        }
+      } catch (error) {
+        console.warn(`Sauce not found: ${sauceId}`);
+      }
     };
 
     // Helper to extract ingredients from a sauce
     const extractSauceIngredients = (sauce: Sauce): ShoppingItem[] => {
       const ingredients: ShoppingItem[] = [];
 
+      // Map sauce ingredient names to standing shopping list item IDs
+      const ingredientMapping: Record<string, string> = {
+        "low-sodium soy sauce": "soy-sauce",
+        "soy sauce": "soy-sauce",
+        "sesame oil": "sesame-oil",
+        "olive oil": "olive-oil",
+        honey: "honey",
+        garlic: "garlic",
+        onion: "onion",
+        ginger: "ginger",
+        "ground ginger": "ginger",
+        lemon: "lemon",
+        lime: "lime",
+        parsley: "parsley",
+        "fresh parsley": "parsley",
+        dill: "dill",
+        "fresh dill": "dill",
+        "rice vinegar": "rice-vinegar",
+        "balsamic vinegar": "balsamic-vinegar",
+        "dijon mustard": "dijon-mustard",
+        "smoked paprika": "smoked-paprika",
+        "ground cumin": "cumin",
+        cumin: "cumin",
+        "chili powder": "chili-powder",
+        "dried thyme": "dried-thyme",
+        thyme: "dried-thyme",
+        "greek yogurt": "greek-yogurt",
+        yogurt: "greek-yogurt",
+        butter: "butter",
+        "unsalted butter": "butter",
+      };
+
       sauce.ingredients.forEach((ingredient) => {
-        const ingredientId = `sauce-${sauce.id}-${ingredient.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+        const normalizedName = ingredient.name.toLowerCase();
+
+        // Check if this ingredient maps to a standing item
+        let ingredientId = `sauce-${sauce.id}-${normalizedName.replace(/[^a-z0-9]+/g, "-")}`;
+
+        // Try to find a match in the mapping
+        for (const [key, standingId] of Object.entries(ingredientMapping)) {
+          if (normalizedName.includes(key)) {
+            ingredientId = standingId;
+            break;
+          }
+        }
 
         // Determine category based on ingredient type
         let category = "Pantry";

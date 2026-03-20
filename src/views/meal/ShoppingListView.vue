@@ -24,6 +24,23 @@ const categories = computed(() => {
     }
     grouped[item.category]!.push(item);
   });
+
+  // Sort each category: unchecked items first, then checked items
+  Object.keys(grouped).forEach((category) => {
+    grouped[category] = grouped[category]!.sort((a, b) => {
+      const aChecked = store.items[a.id] || false;
+      const bChecked = store.items[b.id] || false;
+
+      // If one is checked and the other isn't, unchecked comes first
+      if (aChecked !== bChecked) {
+        return aChecked ? 1 : -1;
+      }
+
+      // Otherwise maintain original order
+      return 0;
+    });
+  });
+
   return grouped;
 });
 
@@ -57,8 +74,8 @@ const cancelReset = () => {
   <div>
     <div class="flex items-center justify-between mb-4">
       <p class="text-sm text-[var(--muted)] leading-relaxed flex-1">
-        For 2 people · 6 lunches + 6 dinners. Check off sauces you already have batched to remove
-        their ingredients from the list.
+        For 2 people · 6 lunches + 6 dinners. Check off sauces you already have batched to cross off
+        their ingredients and move them to the bottom of each category.
       </p>
       <button
         @click="handleReset"
@@ -76,8 +93,8 @@ const cancelReset = () => {
         🍯 Sauces & Marinades This Week
       </h3>
       <p class="text-sm text-[var(--muted)] mb-3">
-        Check off sauces you already have batched. Their ingredients will be removed from the
-        shopping list below.
+        Check off sauces you already have batched. Their ingredients will be crossed off and moved
+        to the bottom of each category.
       </p>
       <div class="space-y-2">
         <label
