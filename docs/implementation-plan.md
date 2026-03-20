@@ -109,13 +109,13 @@ This implementation plan breaks down the development of the Meal Prep & Fitness 
 
 ---
 
-## Phase 3: Pinia Stores
+## Phase 3: Pinia Stores ✓ (COMPLETED)
 
 **Goal:** Implement state management for shopping, meals, settings, and fitness (placeholder).
 
-### 3.1 Shopping Store
+### 3.1 Shopping Store ✓ (COMPLETED)
 
-- [ ] `src/stores/shoppingStore.ts`:
+- [x] `src/stores/shoppingStore.ts`:
   - `items` (Record<string, boolean>) — checked state
   - `weekLabel` (string) — current week display
   - `toggle(id)` — toggle item checked state
@@ -123,26 +123,26 @@ This implementation plan breaks down the development of the Meal Prep & Fitness 
   - `checkedCount`, `totalCount` computed properties
   - Enable persistence with `persist: true`
 
-### 3.2 Meal Store
+### 3.2 Meal Store ✓ (COMPLETED)
 
-- [ ] `src/stores/mealStore.ts`:
+- [x] `src/stores/mealStore.ts`:
   - `selectedMarinade` (MarinadeId | null)
   - `selectedVegetable` (string, default: 'broccoli')
   - `setMarinade(id)`, `setVegetable(name)`
   - Enable persistence
 
-### 3.3 Settings Store
+### 3.3 Settings Store ✓ (COMPLETED)
 
-- [ ] `src/stores/settingsStore.ts`:
+- [x] `src/stores/settingsStore.ts`:
   - `servings` (1 | 2 | 3, default: 2)
   - `lastResetDate` (string | null)
   - `hasSeenPKDWarning` (boolean)
   - `acknowledgedPKDWarning()`, `setServings(n)`
   - Enable persistence
 
-### 3.4 Fitness Store (Placeholder)
+### 3.4 Fitness Store (Placeholder) ✓ (COMPLETED)
 
-- [ ] `src/stores/fitnessStore.ts`:
+- [x] `src/stores/fitnessStore.ts`:
   - `milestones` (Record<number, boolean>)
   - `workoutLog` (any[] — to be typed later)
   - `currentWeek` (number, 1–11)
