@@ -1,35 +1,239 @@
-@import './base.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
-}
+@layer base {
+  :root {
+    /* Backgrounds */
+    --bg: #f8f4ef;
+    --paper: #fffefb;
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
-}
+    /* Text */
+    --ink: #1e1a15;
+    --muted: #8c7f70;
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+    /* Borders */
+    --rule: #e6ddd2;
+
+    /* Brand — Green (primary) */
+    --green: #3b6e4c;
+    --green-light: #edf5f0;
+    --green-mid: #c8dfd0;
+
+    /* Accent — Orange (chicken) */
+    --orange: #c25520;
+    --orange-light: #fdf1ec;
+
+    /* Accent — Blue (fish) */
+    --blue: #1d4a7c;
+    --blue-light: #ecf2fa;
+
+    /* Accent — Gold (steak / warnings) */
+    --gold: #9c720e;
+    --gold-light: #fdf7e8;
+
+    /* Accent — Plum (nutrients / health) */
+    --plum: #5c3570;
+    --plum-light: #f5f0fa;
+
+    /* Accent — Red (warnings / PKD) */
+    --red: #8b2222;
+    --red-light: #fdf0f0;
+
+    /* Accent — Cast Iron (Wednesday / maroon) */
+    --cast: #7a1f4a;
+    --cast-light: #fceef5;
+  }
+
+  html {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: "Jost", sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 700;
   }
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
+@layer components {
+  /* Section label — small all-caps with top border rule */
+  .section-label {
+    @apply text-[0.62rem] font-semibold tracking-[0.18em] uppercase border-t pt-[10px] mt-8 mb-4;
+    color: var(--muted);
+    border-color: var(--rule);
   }
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+  /* Callout variants */
+  .callout {
+    @apply border border-l-[3px] px-4 py-3 text-[0.83rem] leading-[1.7] mb-3;
+    border-color: var(--rule);
+    border-left-color: var(--green);
+    background: var(--green-light);
+  }
+  .callout strong {
+    @apply font-semibold;
+  }
+  .callout-orange {
+    border-left-color: var(--orange) !important;
+    background: var(--orange-light) !important;
+  }
+  .callout-blue {
+    border-left-color: var(--blue) !important;
+    background: var(--blue-light) !important;
+  }
+  .callout-gold {
+    border-left-color: var(--gold) !important;
+    background: var(--gold-light) !important;
+  }
+  .callout-red {
+    border-left-color: var(--red) !important;
+    background: var(--red-light) !important;
+  }
+  .callout-plum {
+    border-left-color: var(--plum) !important;
+    background: var(--plum-light) !important;
+  }
+  .callout-cast {
+    border-left-color: var(--cast) !important;
+    background: var(--cast-light) !important;
+  }
+
+  /* Protein type pill tags */
+  .pt-pill {
+    @apply inline-block px-2 py-[2px] text-[0.67rem] font-semibold rounded-sm mb-[3px];
+  }
+  .pt-pill-fish {
+    background: var(--blue-light);
+    color: var(--blue);
+  }
+  .pt-pill-chicken {
+    background: var(--orange-light);
+    color: var(--orange);
+  }
+  .pt-pill-steak {
+    background: var(--gold-light);
+    color: var(--gold);
+  }
+  .pt-pill-flex {
+    background: var(--green-light);
+    color: var(--green);
+  }
+  .pt-pill-cast {
+    background: var(--cast-light);
+    color: var(--cast);
+  }
+
+  /* Badge variants */
+  .badge {
+    @apply inline-block px-2 py-[2px] text-[0.67rem] font-semibold rounded-sm;
+  }
+  .badge-best {
+    background: var(--green-light);
+    color: var(--green);
+    border: 1px solid var(--green-mid);
+  }
+  .badge-good {
+    background: var(--gold-light);
+    color: var(--gold);
+    border: 1px solid #e8d090;
+  }
+  .badge-make {
+    background: var(--blue-light);
+    color: var(--blue);
+    border: 1px solid #b8cce8;
+  }
+
+  /* Storage / sauce badges */
+  .sb-pantry {
+    @apply inline-block text-[0.62rem] font-bold tracking-[0.07em] uppercase px-[7px] py-[2px] rounded-sm mr-1;
+    background: #f0f4e8;
+    color: #4a6020;
+    border: 1px solid #c8d8a0;
+  }
+  .sb-fridge {
+    @apply inline-block text-[0.62rem] font-bold tracking-[0.07em] uppercase px-[7px] py-[2px] rounded-sm mr-1;
+    background: var(--blue-light);
+    color: var(--blue);
+    border: 1px solid #b8cce8;
+  }
+  .sb-batch {
+    @apply inline-block text-[0.62rem] font-bold tracking-[0.07em] uppercase px-[7px] py-[2px] rounded-sm mr-1;
+    background: var(--cast-light);
+    color: var(--cast);
+    border: 1px solid #e8b8d0;
+  }
+
+  /* Nutrient status badges */
+  .ns-good {
+    @apply inline-block px-2 py-[2px] text-[0.66rem] font-semibold rounded-sm;
+    background: var(--green-light);
+    color: var(--green);
+  }
+  .ns-watch {
+    @apply inline-block px-2 py-[2px] text-[0.66rem] font-semibold rounded-sm;
+    background: var(--gold-light);
+    color: var(--gold);
+  }
+  .ns-low {
+    @apply inline-block px-2 py-[2px] text-[0.66rem] font-semibold rounded-sm;
+    background: var(--red-light);
+    color: var(--red);
+  }
+
+  /* Marinade timing badges */
+  .t-sunday {
+    @apply inline-block text-[0.64rem] font-bold tracking-[0.08em] uppercase px-2 py-[3px] rounded-sm whitespace-nowrap flex-shrink-0;
+    background: var(--green-light);
+    color: var(--green);
+    border: 1px solid var(--green-mid);
+  }
+  .t-tuesday {
+    @apply inline-block text-[0.64rem] font-bold tracking-[0.08em] uppercase px-2 py-[3px] rounded-sm whitespace-nowrap flex-shrink-0;
+    background: var(--gold-light);
+    color: var(--gold);
+    border: 1px solid #e8d090;
+  }
+
+  /* Page card / paper surface */
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+  }
+
+  /* Data tables */
+  .data-table {
+    @apply w-full text-[0.81rem];
+    border: 1px solid var(--rule);
+  }
+  .data-table th {
+    @apply text-left px-[14px] py-[10px] text-[0.62rem] font-semibold tracking-[0.12em] uppercase;
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .data-table td {
+    @apply px-[14px] py-[11px] align-top leading-[1.55];
+    border-bottom: 1px solid var(--rule);
+  }
+  .data-table tr:last-child td {
+    border-bottom: none;
+  }
+  .data-table tr:hover td {
+    background: var(--bg);
+  }
+
+  /* View fade-in animation */
+  .view-enter-active {
+    @apply transition-all duration-200 ease-out;
+  }
+  .view-enter-from {
+    @apply opacity-0 translate-y-1;
   }
 }
