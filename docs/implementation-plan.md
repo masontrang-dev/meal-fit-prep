@@ -361,26 +361,26 @@ This implementation plan breaks down the development of the Meal Prep & Fitness 
 
 ---
 
-## Phase 8: Interactivity & State Integration
+## Phase 8: Interactivity & State Integration ✓ (COMPLETED)
 
 **Goal:** Wire up Pinia stores to components for full interactivity.
 
-### 8.1 Shopping List Integration
+### 8.1 Shopping List Integration ✓ (COMPLETED)
 
-- [ ] Connect `CheckItem` to `shoppingStore.toggle()`
-- [ ] Display checked count in shopping list header
-- [ ] Implement weekly reset button functionality
-- [ ] Initialize shopping items from data file on first load
+- [x] Connect `CheckItem` to `shoppingStore.toggle()`
+- [x] Display checked count in shopping list header
+- [x] Implement weekly reset button functionality
+- [x] Initialize shopping items from data file on first load
 
-### 8.2 Meal Store Integration
+### 8.2 Meal Store Integration ✓ (COMPLETED)
 
-- [ ] Marinade selection UI (future enhancement placeholder)
-- [ ] Vegetable swap selection (future enhancement placeholder)
+- [x] Marinade selection UI (interactive cards with visual feedback)
+- [x] Vegetable swap selection (interactive grid with selection state)
 
-### 8.3 Settings Integration
+### 8.3 Settings Integration ✓ (COMPLETED)
 
-- [ ] PKD warning acknowledgment (if implementing dismissible banner)
-- [ ] Servings selector (future enhancement placeholder)
+- [x] PKD warning acknowledgment (dismissible banner in Nutrients view)
+- [x] Servings selector (1/2/3 toggle in masthead)
 
 **Deliverable:** Fully interactive shopping list with persistent state.
 

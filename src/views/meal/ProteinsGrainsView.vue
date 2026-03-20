@@ -1,17 +1,24 @@
 <script setup lang="ts">
-import { proteins } from '@/data/proteins'
-import { grainsAndLegumes } from '@/data/grainsLegumes'
-import { vegetables } from '@/data/vegetables'
-import ProteinCard from '@/components/meal/ProteinCard.vue'
-import GrainsLegumesTable from '@/components/meal/GrainsLegumesTable.vue'
-import VegetableGrid from '@/components/meal/VegetableGrid.vue'
-import SectionLabel from '@/components/ui/SectionLabel.vue'
-import CalloutBox from '@/components/ui/CalloutBox.vue'
+import { proteins } from "@/data/proteins";
+import { grainsAndLegumes } from "@/data/grainsLegumes";
+import { vegetables } from "@/data/vegetables";
+import { useMealStore } from "@/stores/mealStore";
+import ProteinCard from "@/components/meal/ProteinCard.vue";
+import GrainsLegumesTable from "@/components/meal/GrainsLegumesTable.vue";
+import VegetableGrid from "@/components/meal/VegetableGrid.vue";
+import SectionLabel from "@/components/ui/SectionLabel.vue";
+import CalloutBox from "@/components/ui/CalloutBox.vue";
 
-const fish = proteins.find(p => p.id === 'fish')!
-const chickenThigh = proteins.find(p => p.id === 'chicken-thigh')!
-const chickenBreast = proteins.find(p => p.id === 'chicken-breast')!
-const steak = proteins.find(p => p.id === 'steak')!
+const mealStore = useMealStore();
+
+const fish = proteins.find((p) => p.id === "fish")!;
+const chickenThigh = proteins.find((p) => p.id === "chicken-thigh")!;
+const chickenBreast = proteins.find((p) => p.id === "chicken-breast")!;
+const steak = proteins.find((p) => p.id === "steak")!;
+
+const handleVegetableSelect = (vegName: string) => {
+  mealStore.setVegetable(vegName);
+};
 </script>
 
 <template>
@@ -28,7 +35,10 @@ const steak = proteins.find(p => p.id === 'steak')!
         <ProteinCard :protein="chickenBreast" />
       </div>
       <CalloutBox variant="blue" class="mt-4">
-        <p><strong>Thighs vs. Breast:</strong> Thighs are more forgiving and flavorful. Breast is leaner but requires careful timing to avoid dryness.</p>
+        <p>
+          <strong>Thighs vs. Breast:</strong> Thighs are more forgiving and flavorful. Breast is
+          leaner but requires careful timing to avoid dryness.
+        </p>
       </CalloutBox>
     </section>
 
@@ -36,7 +46,10 @@ const steak = proteins.find(p => p.id === 'steak')!
       <SectionLabel label="Steak (1 meal/week)" />
       <ProteinCard :protein="steak" />
       <CalloutBox variant="orange" class="mt-4">
-        <p><strong>Cast Iron Required:</strong> Steak is always cooked Wednesday dinner in a cast iron skillet for the best crust. See the Cast Iron tab for detailed instructions.</p>
+        <p>
+          <strong>Cast Iron Required:</strong> Steak is always cooked Wednesday dinner in a cast
+          iron skillet for the best crust. See the Cast Iron tab for detailed instructions.
+        </p>
       </CalloutBox>
     </section>
 
@@ -47,9 +60,17 @@ const steak = proteins.find(p => p.id === 'steak')!
 
     <section>
       <SectionLabel label="Vegetable Rotation" />
-      <VegetableGrid :vegetables="vegetables" />
+      <VegetableGrid
+        :vegetables="vegetables"
+        :selected-vegetable="mealStore.selectedVegetable"
+        @select="handleVegetableSelect"
+      />
       <CalloutBox variant="green" class="mt-4">
-        <p><strong>Default:</strong> Broccoli is the go-to vegetable. <strong>Swap:</strong> Rotate through alternatives weekly. <strong>Wildcard:</strong> Carrots work with any protein.</p>
+        <p>
+          <strong>This week:</strong> {{ mealStore.selectedVegetable }} —
+          <strong>Default:</strong> Broccoli is the go-to vegetable. <strong>Swap:</strong> Rotate
+          through alternatives weekly. Click to select.
+        </p>
       </CalloutBox>
     </section>
   </div>

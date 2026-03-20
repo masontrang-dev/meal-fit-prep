@@ -1,37 +1,57 @@
-import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
+import { defineStore } from "pinia";
+import { computed, ref } from "vue";
+import { shoppingList } from "@/data/shopping";
 
-export const useShoppingStore = defineStore('shopping', () => {
-  const items = ref<Record<string, boolean>>({})
-  const weekLabel = ref<string>('Week of ' + new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' }))
+export const useShoppingStore = defineStore(
+  "shopping",
+  () => {
+    const items = ref<Record<string, boolean>>({});
+    const weekLabel = ref<string>(
+      "Week of " + new Date().toLocaleDateString("en-US", { month: "short", day: "numeric" }),
+    );
 
-  const toggle = (id: string) => {
-    items.value[id] = !items.value[id]
-  }
+    // Initialize items from shopping data if not already populated
+    const initializeItems = () => {
+      if (Object.keys(items.value).length === 0) {
+        shoppingList.forEach((item) => {
+          items.value[item.id] = false;
+        });
+      }
+    };
 
-  const resetWeek = () => {
-    Object.keys(items.value).forEach(key => {
-      items.value[key] = false
-    })
-    weekLabel.value = 'Week of ' + new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-  }
+    // Call initialization immediately
+    initializeItems();
 
-  const checkedCount = computed(() => {
-    return Object.values(items.value).filter(checked => checked).length
-  })
+    const toggle = (id: string) => {
+      items.value[id] = !items.value[id];
+    };
 
-  const totalCount = computed(() => {
-    return Object.keys(items.value).length
-  })
+    const resetWeek = () => {
+      Object.keys(items.value).forEach((key) => {
+        items.value[key] = false;
+      });
+      weekLabel.value =
+        "Week of " + new Date().toLocaleDateString("en-US", { month: "short", day: "numeric" });
+    };
 
-  return {
-    items,
-    weekLabel,
-    toggle,
-    resetWeek,
-    checkedCount,
-    totalCount
-  }
-}, {
-  persist: true
-})
+    const checkedCount = computed(() => {
+      return Object.values(items.value).filter((checked) => checked).length;
+    });
+
+    const totalCount = computed(() => {
+      return Object.keys(items.value).length;
+    });
+
+    return {
+      items,
+      weekLabel,
+      toggle,
+      resetWeek,
+      checkedCount,
+      totalCount,
+    };
+  },
+  {
+    persist: true,
+  },
+);

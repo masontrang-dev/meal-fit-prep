@@ -1,11 +1,13 @@
+<script setup lang="ts">
+import ServingsSelector from "@/components/ui/ServingsSelector.vue";
+</script>
+
 <template>
   <header class="masthead">
     <div class="masthead-inner">
       <div class="masthead-content">
         <div class="masthead-title-section">
-          <h1 class="masthead-title">
-            Meal Prep <span class="masthead-subtitle">for Two</span>
-          </h1>
+          <h1 class="masthead-title">Meal Prep <span class="masthead-subtitle">for Two</span></h1>
           <div class="masthead-pills">
             <span class="pill">6 Lunches + 6 Dinners</span>
             <span class="pill">Whole Foods</span>
@@ -14,6 +16,7 @@
           </div>
         </div>
         <div class="masthead-meta">
+          <ServingsSelector />
           <div class="meta-row">
             <span class="meta-label">Proteins:</span>
             <span class="meta-value">Fish, Chicken, Steak</span>
@@ -31,8 +34,6 @@
     </div>
   </header>
 </template>
-
-<script setup lang="ts"></script>
 
 <style scoped>
 .masthead {

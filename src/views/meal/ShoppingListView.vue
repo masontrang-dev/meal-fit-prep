@@ -20,6 +20,10 @@ const categories = computed(() => {
 
 const categoryOrder = ["Proteins", "Grains & Legumes", "Vegetables", "Pantry", "Dairy"];
 
+const handleToggle = (itemId: string) => {
+  store.toggle(itemId);
+};
+
 const handleReset = () => {
   if (confirm("Reset shopping list for a new week? This will uncheck all items.")) {
     store.resetWeek();
@@ -58,6 +62,7 @@ const handleReset = () => {
         :key="category"
         :category="category"
         :items="categories[category] || []"
+        @toggle="handleToggle"
       />
     </div>
   </div>

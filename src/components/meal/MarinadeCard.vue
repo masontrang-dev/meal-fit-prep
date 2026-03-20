@@ -1,30 +1,46 @@
 <script setup lang="ts">
-import type { Marinade } from '@/types/meal.types'
+import type { Marinade } from "@/types/meal.types";
 
-defineProps<{
-  marinade: Marinade
-}>()
+const props = defineProps<{
+  marinade: Marinade;
+  isSelected?: boolean;
+}>();
 
-const getTimingBadgeClass = (timing: 'sunday' | 'tuesday'): string => {
-  if (timing === 'sunday') return 't-sunday'
-  if (timing === 'tuesday') return 't-tuesday'
-  return ''
-}
+const emit = defineEmits<{
+  select: [id: string];
+}>();
 
-const getTimingLabel = (timing: 'sunday' | 'tuesday'): string => {
-  if (timing === 'sunday') return 'Sunday Prep'
-  if (timing === 'tuesday') return 'Tuesday Prep'
-  return ''
-}
+const getTimingBadgeClass = (timing: "sunday" | "tuesday"): string => {
+  if (timing === "sunday") return "t-sunday";
+  if (timing === "tuesday") return "t-tuesday";
+  return "";
+};
+
+const getTimingLabel = (timing: "sunday" | "tuesday"): string => {
+  if (timing === "sunday") return "Sunday Prep";
+  if (timing === "tuesday") return "Tuesday Prep";
+  return "";
+};
+
+const handleClick = () => {
+  emit("select", props.marinade.id);
+};
 </script>
 
 <template>
-  <div class="card">
+  <div
+    class="card cursor-pointer transition-all hover:shadow-md"
+    :class="{ 'ring-2 ring-[var(--green)] bg-[var(--green-light)]': isSelected }"
+    @click="handleClick"
+  >
     <div class="flex items-start justify-between mb-3">
       <h3 class="text-lg font-display font-semibold text-[var(--ink)]">
         {{ marinade.name }}
       </h3>
-      <span class="text-xs font-semibold uppercase px-2 py-1 rounded" :class="getTimingBadgeClass(marinade.timing)">
+      <span
+        class="text-xs font-semibold uppercase px-2 py-1 rounded"
+        :class="getTimingBadgeClass(marinade.timing)"
+      >
         {{ getTimingLabel(marinade.timing) }}
       </span>
     </div>
@@ -49,7 +65,10 @@ const getTimingLabel = (timing: 'sunday' | 'tuesday'): string => {
       </ul>
     </div>
 
-    <div v-if="marinade.note" class="text-sm text-[var(--ink)] italic border-t border-[var(--rule)] pt-3">
+    <div
+      v-if="marinade.note"
+      class="text-sm text-[var(--ink)] italic border-t border-[var(--rule)] pt-3"
+    >
       {{ marinade.note }}
     </div>
   </div>
