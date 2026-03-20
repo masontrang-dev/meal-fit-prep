@@ -1,26 +1,27 @@
 <script setup lang="ts">
-import type { GeneratedPlan } from '@/types/randomizer.types'
+import type { GeneratedPlan } from "@/types/randomizer.types";
 
 const props = defineProps<{
-  slotLabel: string
-  slotKey: keyof GeneratedPlan
-  value: string
-  detail?: string
-  eatBy?: string
-  isCastIron?: boolean
-  marinadeTiming?: string
-  isConfirmed?: boolean
-}>()
+  slotLabel: string;
+  slotKey: keyof GeneratedPlan;
+  value: string;
+  detail?: string;
+  eatBy?: string;
+  isCastIron?: boolean;
+  marinadeTiming?: string;
+  isConfirmed?: boolean;
+}>();
 
 const emit = defineEmits<{
-  swap: [slotKey: keyof GeneratedPlan]
-}>()
+  swap: [slotKey: keyof GeneratedPlan];
+}>();
 
 function formatValue(value: string): string {
+  if (!value) return "";
   return value
-    .split('-')
+    .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ')
+    .join(" ");
 }
 </script>
 
@@ -66,11 +67,11 @@ function formatValue(value: string): string {
       }"
     >
       {{
-        marinadeTiming === 'sunday'
-          ? '✓ Marinade Sunday'
-          : marinadeTiming === 'tuesday'
-            ? '⚠️ Marinade Tuesday Only'
-            : '🦐 Season Wednesday'
+        marinadeTiming === "sunday"
+          ? "✓ Marinade Sunday"
+          : marinadeTiming === "tuesday"
+            ? "⚠️ Marinade Tuesday Only"
+            : "🦐 Season Wednesday"
       }}
     </div>
   </div>

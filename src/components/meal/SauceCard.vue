@@ -12,6 +12,12 @@ defineProps<{
     <h3 class="text-lg font-display font-semibold text-[var(--ink)] mb-1">
       {{ sauce.name }}
     </h3>
+    <p v-if="sauce.marinating === 'minimum'" class="text-xs text-[var(--muted)] mb-2">
+      Marinate 30 min – 4 hrs
+    </p>
+    <p v-if="sauce.marinating === 'overnight'" class="text-xs mb-2" style="color: var(--gold)">
+      ⏰ Overnight marinade recommended
+    </p>
     <p class="text-sm text-[var(--muted)] mb-4"><strong>Best for:</strong> {{ sauce.bestFor }}</p>
 
     <div class="mb-4">

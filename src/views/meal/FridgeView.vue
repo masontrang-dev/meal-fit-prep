@@ -1,52 +1,69 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRandomizerStore } from '@/stores/randomizerStore'
-import FridgeEmptyState from '@/components/meal/FridgeEmptyState.vue'
-import FridgeSlotCard from '@/components/meal/FridgeSlotCard.vue'
-import type { GeneratedPlan } from '@/types/randomizer.types'
+import { computed, ref } from "vue";
+import { useRandomizerStore } from "@/stores/randomizerStore";
+import FridgeEmptyState from "@/components/meal/FridgeEmptyState.vue";
+import FridgeSlotCard from "@/components/meal/FridgeSlotCard.vue";
+import SaturdayPrepCard from "@/components/meal/SaturdayPrepCard.vue";
+import type { GeneratedPlan } from "@/types/randomizer.types";
 
-const store = useRandomizerStore()
+const store = useRandomizerStore();
+
+const warningDismissed = ref(false);
 
 const currentState = computed(() => {
-  if (store.hasPendingPlan) return 'pending'
-  if (store.hasConfirmedPlan) return 'confirmed'
-  if (store.hasFavoritePlan) return 'favorite'
-  return 'empty'
-})
+  if (store.hasPendingPlan) return "pending";
+  if (store.hasConfirmedPlan) return "confirmed";
+  if (store.hasFavoritePlan) return "favorite";
+  return "empty";
+});
 
 function handleGenerate() {
-  store.generatePlan()
+  store.generatePlan();
 }
 
 function handleSwap(slotKey: keyof GeneratedPlan) {
-  store.swapSlot(slotKey)
+  store.swapSlot(slotKey);
 }
 
 function handleConfirm() {
-  store.confirmPlan()
+  store.confirmPlan();
 }
 
 function handleRegenerateAll() {
-  store.generatePlan()
+  store.generatePlan();
 }
 
 function handleSaveAsFavorite() {
-  store.saveAsFavorite()
+  store.saveAsFavorite();
+}
+
+function handleSwapChickenSauce() {
+  store.swapSlot("batchChickenSauce", true);
+  warningDismissed.value = false;
+}
+
+function handleSwapCastIronSauce() {
+  store.swapSlot("castIronSauce", true);
+  warningDismissed.value = false;
+}
+
+function handleProceedAnyway() {
+  warningDismissed.value = true;
 }
 
 function formatValue(value: string): string {
   return value
-    .split('-')
+    .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ')
+    .join(" ");
 }
 </script>
 
 <template>
-  <div class="max-w-5xl mx-auto px-6 py-8">
-    <div class="mb-8">
-      <h1 class="text-3xl font-bold text-gray-900 mb-2">This Week's Fridge</h1>
-      <p class="text-gray-600">
+  <div class="space-y-6">
+    <div>
+      <h2 class="text-2xl font-display font-semibold text-ink">This Week's Fridge</h2>
+      <p class="text-muted mt-2">
         Your randomized weekly ingredient selection — proteins, sauces, grains, and legumes
       </p>
     </div>
@@ -60,70 +77,98 @@ function formatValue(value: string): string {
 
     <!-- State B: Favorite (no plan, but favorite exists) -->
     <div v-else-if="currentState === 'favorite'" class="space-y-6">
-      <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 flex items-start gap-3">
-        <span class="text-2xl">⭐</span>
-        <div class="flex-1">
-          <h3 class="font-semibold text-yellow-900 mb-1">Showing Saved Favorite</h3>
-          <p class="text-sm text-yellow-800">
-            No active plan this week. Displaying your saved favorite plan as reference.
-          </p>
+      <div class="callout callout-gold">
+        <strong>⭐ Showing Saved Favorite</strong><br />
+        No active plan this week. Displaying your saved favorite plan as reference.
+      </div>
+
+      <!-- Proteins -->
+      <div>
+        <div class="section-label">🍗 Proteins</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <FridgeSlotCard
+            slot-label="Batch Fish"
+            slot-key="batchFishVariety"
+            :value="store.favoritePlan!.batchFishVariety"
+            :detail="`Sauce: ${formatValue(store.favoritePlan!.batchFishSauce)}`"
+            eat-by="Eat by Day 3"
+            :is-confirmed="true"
+          />
+          <FridgeSlotCard
+            slot-label="Batch Chicken"
+            slot-key="batchChickenCut"
+            :value="store.favoritePlan!.batchChickenCut"
+            :detail="`Sauce: ${formatValue(store.favoritePlan!.batchChickenSauce)}`"
+            eat-by="Eat by Day 5"
+            :is-confirmed="true"
+          />
+          <FridgeSlotCard
+            slot-label="Cast Iron Protein"
+            slot-key="castIronProtein"
+            :value="store.favoritePlan!.castIronProtein"
+            :detail="`${formatValue(store.favoritePlan!.castIronSauce)}`"
+            eat-by="Wednesday evening"
+            :is-cast-iron="true"
+            :marinade-timing="store.favoritePlan!.marinadeTiming"
+            :is-confirmed="true"
+          />
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <FridgeSlotCard
-          slot-label="Batch Fish"
-          slot-key="batchFishVariety"
-          :value="store.favoritePlan!.batchFishVariety"
-          :detail="`Sauce: ${formatValue(store.favoritePlan!.batchFishSauce)}`"
-          eat-by="Eat by Day 3"
-          :is-confirmed="true"
-        />
-        <FridgeSlotCard
-          slot-label="Batch Chicken"
-          slot-key="batchChickenCut"
-          :value="store.favoritePlan!.batchChickenCut"
-          :detail="`Sauce: ${formatValue(store.favoritePlan!.batchChickenSauce)}`"
-          eat-by="Eat by Day 5"
-          :is-confirmed="true"
-        />
-        <FridgeSlotCard
-          slot-label="Cast Iron Protein"
-          slot-key="castIronProtein"
-          :value="store.favoritePlan!.castIronProtein"
-          :detail="`${formatValue(store.favoritePlan!.castIronSauce)}`"
-          eat-by="Wednesday evening"
-          :is-cast-iron="true"
-          :marinade-timing="store.favoritePlan!.marinadeTiming"
-          :is-confirmed="true"
-        />
-        <FridgeSlotCard
-          slot-label="Roasting Vegetable"
-          slot-key="roastingVeg"
-          :value="store.favoritePlan!.roastingVeg"
-          eat-by="Available all week"
-          :is-confirmed="true"
-        />
-        <FridgeSlotCard
-          slot-label="Grain"
-          slot-key="grain"
-          :value="store.favoritePlan!.grain"
-          eat-by="Cook Sunday, keeps 5-6 days"
-          :is-confirmed="true"
-        />
-        <FridgeSlotCard
-          slot-label="Legume"
-          slot-key="legume"
-          :value="store.favoritePlan!.legume"
-          eat-by="Cook Sunday, available all week"
-          :is-confirmed="true"
-        />
+      <!-- Vegetables -->
+      <div>
+        <div class="section-label">🥦 Vegetables</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <FridgeSlotCard
+            slot-label="Vegetable #1"
+            slot-key="roastingVeg1"
+            :value="store.favoritePlan!.roastingVeg1"
+            eat-by="Available all week"
+            :is-confirmed="true"
+          />
+          <FridgeSlotCard
+            slot-label="Vegetable #2"
+            slot-key="roastingVeg2"
+            :value="store.favoritePlan!.roastingVeg2"
+            eat-by="Available all week"
+            :is-confirmed="true"
+          />
+        </div>
+      </div>
+
+      <!-- Grains & Legumes -->
+      <div>
+        <div class="section-label">🌾 Grains & Legumes</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <FridgeSlotCard
+            slot-label="Grain #1"
+            slot-key="grain1"
+            :value="store.favoritePlan!.grain1"
+            eat-by="Cook Sunday, keeps 5-6 days"
+            :is-confirmed="true"
+          />
+          <FridgeSlotCard
+            slot-label="Grain #2"
+            slot-key="grain2"
+            :value="store.favoritePlan!.grain2"
+            eat-by="Cook Sunday, keeps 5-6 days"
+            :is-confirmed="true"
+          />
+          <FridgeSlotCard
+            slot-label="Legume"
+            slot-key="legume"
+            :value="store.favoritePlan!.legume"
+            eat-by="Cook Sunday, available all week"
+            :is-confirmed="true"
+          />
+        </div>
       </div>
 
       <div class="flex justify-center pt-4">
         <button
           @click="handleGenerate"
-          class="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+          class="px-6 py-3 font-medium rounded-lg transition-colors"
+          style="background: var(--blue); color: var(--paper)"
         >
           Generate New Week
         </button>
@@ -132,74 +177,123 @@ function formatValue(value: string): string {
 
     <!-- State C: Pending (generated, not confirmed) -->
     <div v-else-if="currentState === 'pending'" class="space-y-6">
-      <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-        <h3 class="font-semibold text-blue-900 mb-1">Review Your Week</h3>
-        <p class="text-sm text-blue-800">
-          Review the randomized plan below. Swap any slot you'd like to change, then confirm when
-          ready.
-        </p>
+      <!-- Late Generation Warning -->
+      <SaturdayPrepCard
+        v-if="store.lateGenerationWarning && !warningDismissed"
+        :items="store.pendingPlan!.saturdayPrepItems"
+        :is-late-generation="true"
+        @swap-chicken-sauce="handleSwapChickenSauce"
+        @swap-cast-iron-sauce="handleSwapCastIronSauce"
+        @proceed-anyway="handleProceedAnyway"
+      />
+
+      <div class="callout callout-blue">
+        <strong>Review Your Week</strong><br />
+        Review the randomized plan below. Swap any slot you'd like to change, then confirm when
+        ready.
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <FridgeSlotCard
-          slot-label="Batch Fish"
-          slot-key="batchFishVariety"
-          :value="store.pendingPlan!.batchFishVariety"
-          :detail="`Sauce: ${formatValue(store.pendingPlan!.batchFishSauce)}`"
-          eat-by="Eat by Day 3"
-          @swap="handleSwap"
-        />
-        <FridgeSlotCard
-          slot-label="Batch Chicken"
-          slot-key="batchChickenCut"
-          :value="store.pendingPlan!.batchChickenCut"
-          :detail="`Sauce: ${formatValue(store.pendingPlan!.batchChickenSauce)}`"
-          eat-by="Eat by Day 5"
-          @swap="handleSwap"
-        />
-        <FridgeSlotCard
-          slot-label="Cast Iron Protein"
-          slot-key="castIronProtein"
-          :value="store.pendingPlan!.castIronProtein"
-          :detail="`${formatValue(store.pendingPlan!.castIronSauce)}`"
-          eat-by="Wednesday evening"
-          :is-cast-iron="true"
-          :marinade-timing="store.pendingPlan!.marinadeTiming"
-          @swap="handleSwap"
-        />
-        <FridgeSlotCard
-          slot-label="Roasting Vegetable"
-          slot-key="roastingVeg"
-          :value="store.pendingPlan!.roastingVeg"
-          eat-by="Available all week"
-          @swap="handleSwap"
-        />
-        <FridgeSlotCard
-          slot-label="Grain"
-          slot-key="grain"
-          :value="store.pendingPlan!.grain"
-          eat-by="Cook Sunday, keeps 5-6 days"
-          @swap="handleSwap"
-        />
-        <FridgeSlotCard
-          slot-label="Legume"
-          slot-key="legume"
-          :value="store.pendingPlan!.legume"
-          eat-by="Cook Sunday, available all week"
-          @swap="handleSwap"
-        />
+      <!-- Proteins -->
+      <div>
+        <div class="section-label">🍗 Proteins</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <FridgeSlotCard
+            slot-label="Batch Fish"
+            slot-key="batchFishVariety"
+            :value="store.pendingPlan!.batchFishVariety"
+            :detail="`Sauce: ${formatValue(store.pendingPlan!.batchFishSauce)}`"
+            eat-by="Eat by Day 3"
+            @swap="handleSwap"
+          />
+          <FridgeSlotCard
+            slot-label="Batch Chicken"
+            slot-key="batchChickenCut"
+            :value="store.pendingPlan!.batchChickenCut"
+            :detail="`Sauce: ${formatValue(store.pendingPlan!.batchChickenSauce)}`"
+            eat-by="Eat by Day 5"
+            @swap="handleSwap"
+          />
+          <FridgeSlotCard
+            slot-label="Cast Iron Protein"
+            slot-key="castIronProtein"
+            :value="store.pendingPlan!.castIronProtein"
+            :detail="`${formatValue(store.pendingPlan!.castIronSauce)}`"
+            eat-by="Wednesday evening"
+            :is-cast-iron="true"
+            :marinade-timing="store.pendingPlan!.marinadeTiming"
+            @swap="handleSwap"
+          />
+        </div>
       </div>
+
+      <!-- Vegetables -->
+      <div>
+        <div class="section-label">🥦 Vegetables</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <FridgeSlotCard
+            slot-label="Vegetable #1"
+            slot-key="roastingVeg1"
+            :value="store.pendingPlan!.roastingVeg1"
+            eat-by="Available all week"
+            @swap="handleSwap"
+          />
+          <FridgeSlotCard
+            slot-label="Vegetable #2"
+            slot-key="roastingVeg2"
+            :value="store.pendingPlan!.roastingVeg2"
+            eat-by="Available all week"
+            @swap="handleSwap"
+          />
+        </div>
+      </div>
+
+      <!-- Grains & Legumes -->
+      <div>
+        <div class="section-label">🌾 Grains & Legumes</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <FridgeSlotCard
+            slot-label="Grain #1"
+            slot-key="grain1"
+            :value="store.pendingPlan!.grain1"
+            eat-by="Cook Sunday, keeps 5-6 days"
+            @swap="handleSwap"
+          />
+          <FridgeSlotCard
+            slot-label="Grain #2"
+            slot-key="grain2"
+            :value="store.pendingPlan!.grain2"
+            eat-by="Cook Sunday, keeps 5-6 days"
+            @swap="handleSwap"
+          />
+          <FridgeSlotCard
+            slot-label="Legume"
+            slot-key="legume"
+            :value="store.pendingPlan!.legume"
+            eat-by="Cook Sunday, available all week"
+            @swap="handleSwap"
+          />
+        </div>
+      </div>
+
+      <!-- Saturday Prep Reminder (if generated Saturday or earlier) -->
+      <SaturdayPrepCard
+        v-if="store.saturdayPrepRequired && !store.lateGenerationWarning"
+        :items="store.pendingPlan!.saturdayPrepItems"
+        :is-late-generation="false"
+      />
 
       <div class="flex justify-center gap-4 pt-4">
         <button
           @click="handleRegenerateAll"
-          class="px-6 py-3 bg-white text-gray-700 font-medium border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+          class="px-6 py-3 font-medium rounded-lg transition-colors"
+          style="background: var(--paper); color: var(--ink); border: 1px solid var(--rule)"
         >
           Regenerate All
         </button>
         <button
           @click="handleConfirm"
-          class="px-8 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors shadow-md"
+          class="px-8 py-3 font-medium rounded-lg transition-colors shadow-md"
+          style="background: var(--green); color: var(--paper)"
         >
           Confirm Week
         </button>
@@ -208,74 +302,106 @@ function formatValue(value: string): string {
 
     <!-- State D: Confirmed (locked) -->
     <div v-else-if="currentState === 'confirmed'" class="space-y-6">
-      <div class="bg-green-50 border border-green-200 rounded-lg p-4">
-        <h3 class="font-semibold text-green-900 mb-1">✓ This Week's Fridge</h3>
-        <p class="text-sm text-green-800">
-          Your plan is locked and ready. Shopping list has been updated.
-        </p>
+      <div class="callout">
+        <strong>✓ This Week's Fridge</strong><br />
+        Your plan is locked and ready. Shopping list has been updated.
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <FridgeSlotCard
-          slot-label="Batch Fish"
-          slot-key="batchFishVariety"
-          :value="store.confirmedPlan!.batchFishVariety"
-          :detail="`Sauce: ${formatValue(store.confirmedPlan!.batchFishSauce)}`"
-          eat-by="Eat by Day 3"
-          :is-confirmed="true"
-        />
-        <FridgeSlotCard
-          slot-label="Batch Chicken"
-          slot-key="batchChickenCut"
-          :value="store.confirmedPlan!.batchChickenCut"
-          :detail="`Sauce: ${formatValue(store.confirmedPlan!.batchChickenSauce)}`"
-          eat-by="Eat by Day 5"
-          :is-confirmed="true"
-        />
-        <FridgeSlotCard
-          slot-label="Cast Iron Protein"
-          slot-key="castIronProtein"
-          :value="store.confirmedPlan!.castIronProtein"
-          :detail="`${formatValue(store.confirmedPlan!.castIronSauce)}`"
-          eat-by="Wednesday evening"
-          :is-cast-iron="true"
-          :marinade-timing="store.confirmedPlan!.marinadeTiming"
-          :is-confirmed="true"
-        />
-        <FridgeSlotCard
-          slot-label="Roasting Vegetable"
-          slot-key="roastingVeg"
-          :value="store.confirmedPlan!.roastingVeg"
-          eat-by="Available all week"
-          :is-confirmed="true"
-        />
-        <FridgeSlotCard
-          slot-label="Grain"
-          slot-key="grain"
-          :value="store.confirmedPlan!.grain"
-          eat-by="Cook Sunday, keeps 5-6 days"
-          :is-confirmed="true"
-        />
-        <FridgeSlotCard
-          slot-label="Legume"
-          slot-key="legume"
-          :value="store.confirmedPlan!.legume"
-          eat-by="Cook Sunday, available all week"
-          :is-confirmed="true"
-        />
+      <!-- Proteins -->
+      <div>
+        <div class="section-label">🍗 Proteins</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <FridgeSlotCard
+            slot-label="Batch Fish"
+            slot-key="batchFishVariety"
+            :value="store.confirmedPlan!.batchFishVariety"
+            :detail="`Sauce: ${formatValue(store.confirmedPlan!.batchFishSauce)}`"
+            eat-by="Eat by Day 3"
+            :is-confirmed="true"
+          />
+          <FridgeSlotCard
+            slot-label="Batch Chicken"
+            slot-key="batchChickenCut"
+            :value="store.confirmedPlan!.batchChickenCut"
+            :detail="`Sauce: ${formatValue(store.confirmedPlan!.batchChickenSauce)}`"
+            eat-by="Eat by Day 5"
+            :is-confirmed="true"
+          />
+          <FridgeSlotCard
+            slot-label="Cast Iron Protein"
+            slot-key="castIronProtein"
+            :value="store.confirmedPlan!.castIronProtein"
+            :detail="`${formatValue(store.confirmedPlan!.castIronSauce)}`"
+            eat-by="Wednesday evening"
+            :is-cast-iron="true"
+            :marinade-timing="store.confirmedPlan!.marinadeTiming"
+            :is-confirmed="true"
+          />
+        </div>
+      </div>
+
+      <!-- Vegetables -->
+      <div>
+        <div class="section-label">🥦 Vegetables</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <FridgeSlotCard
+            slot-label="Vegetable #1"
+            slot-key="roastingVeg1"
+            :value="store.confirmedPlan!.roastingVeg1"
+            eat-by="Available all week"
+            :is-confirmed="true"
+          />
+          <FridgeSlotCard
+            slot-label="Vegetable #2"
+            slot-key="roastingVeg2"
+            :value="store.confirmedPlan!.roastingVeg2"
+            eat-by="Available all week"
+            :is-confirmed="true"
+          />
+        </div>
+      </div>
+
+      <!-- Grains & Legumes -->
+      <div>
+        <div class="section-label">🌾 Grains & Legumes</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <FridgeSlotCard
+            slot-label="Grain #1"
+            slot-key="grain1"
+            :value="store.confirmedPlan!.grain1"
+            eat-by="Cook Sunday, keeps 5-6 days"
+            :is-confirmed="true"
+          />
+          <FridgeSlotCard
+            slot-label="Grain #2"
+            slot-key="grain2"
+            :value="store.confirmedPlan!.grain2"
+            eat-by="Cook Sunday, keeps 5-6 days"
+            :is-confirmed="true"
+          />
+          <FridgeSlotCard
+            slot-label="Legume"
+            slot-key="legume"
+            :value="store.confirmedPlan!.legume"
+            eat-by="Cook Sunday, available all week"
+            :is-confirmed="true"
+          />
+        </div>
       </div>
 
       <div class="flex justify-center gap-4 pt-4">
         <button
           @click="handleSaveAsFavorite"
-          class="px-6 py-3 bg-white text-gray-700 font-medium border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2"
+          class="px-6 py-3 font-medium rounded-lg transition-colors flex items-center gap-2"
+          style="background: var(--paper); color: var(--ink); border: 1px solid var(--rule)"
         >
           <span>⭐</span>
           <span>Save as Favorite</span>
         </button>
         <button
           @click="handleGenerate"
-          class="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+          class="px-6 py-3 font-medium rounded-lg transition-colors"
+          style="background: var(--blue); color: var(--paper)"
         >
           Generate Next Week
         </button>

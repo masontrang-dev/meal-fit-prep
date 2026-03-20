@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { marinades } from "@/data/marinades";
+import { allSauces } from "@/data/sauces";
 import { useMealStore } from "@/stores/mealStore";
 import CastIronInstructions from "@/components/meal/CastIronInstructions.vue";
 import MarinadeCard from "@/components/meal/MarinadeCard.vue";
@@ -8,8 +8,21 @@ import CalloutBox from "@/components/ui/CalloutBox.vue";
 
 const mealStore = useMealStore();
 
-const sundayMarinades = marinades.filter((m) => m.timing === "sunday");
-const tuesdayMarinades = marinades.filter((m) => m.timing === "tuesday");
+const castIronMarinadeIds = [
+  "soy-garlic-ginger",
+  "smoked-paprika-garlic",
+  "lime-cumin",
+  "balsamic-herb",
+  "salt-pepper",
+  "garlic-herb-butter",
+  "red-wine-reduction",
+  "chimichurri",
+  "soy-garlic-pan-sauce",
+];
+
+const marinades = allSauces.filter((s) => castIronMarinadeIds.includes(s.id));
+const sundayMarinades = marinades.filter((m) => m.sundaySafe);
+const tuesdayMarinades = marinades.filter((m) => !m.sundaySafe);
 
 const handleMarinadeSelect = (id: string) => {
   if (mealStore.selectedMarinade === id) {

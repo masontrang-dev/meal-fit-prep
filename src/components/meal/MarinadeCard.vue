@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { Marinade } from "@/types/meal.types";
+import type { Sauce } from "@/types/meal.types";
 
 const props = defineProps<{
-  marinade: Marinade;
+  marinade: Sauce;
   isSelected?: boolean;
 }>();
 
@@ -10,17 +10,15 @@ const emit = defineEmits<{
   select: [id: string];
 }>();
 
-const getTimingBadgeClass = (timing: "sunday" | "tuesday"): string => {
-  if (timing === "sunday") return "t-sunday";
-  if (timing === "tuesday") return "t-tuesday";
-  return "";
-};
-
-const getTimingLabel = (timing: "sunday" | "tuesday"): string => {
-  if (timing === "sunday") return "Sunday Prep";
-  if (timing === "tuesday") return "Tuesday Prep";
-  return "";
-};
+function getMarinadeBadge(sauce: Sauce): { label: string; variant: string } {
+  if (sauce.marinating === "overnight" && sauce.sundaySafe) {
+    return { label: "Start Saturday", variant: "t-saturday" };
+  }
+  if (sauce.sundaySafe) {
+    return { label: "Sunday Safe", variant: "t-sunday" };
+  }
+  return { label: "Tuesday Only", variant: "t-tuesday" };
+}
 
 const handleClick = () => {
   emit("select", props.marinade.id);
@@ -45,9 +43,9 @@ const handleClick = () => {
       </h3>
       <span
         class="text-xs font-semibold uppercase px-2 py-1 rounded flex-shrink-0"
-        :class="getTimingBadgeClass(marinade.timing)"
+        :class="getMarinadeBadge(marinade).variant"
       >
-        {{ getTimingLabel(marinade.timing) }}
+        {{ getMarinadeBadge(marinade).label }}
       </span>
     </div>
 
@@ -72,10 +70,9 @@ const handleClick = () => {
     </div>
 
     <div
-      v-if="marinade.note"
       class="text-sm text-[var(--ink)] italic border-t border-[var(--rule)] pt-3 leading-relaxed"
     >
-      {{ marinade.note }}
+      {{ marinade.applicationNote }}
     </div>
   </div>
 </template>

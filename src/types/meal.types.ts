@@ -10,6 +10,7 @@ export type MarinadeId =
   | "lime-cumin"
   | "balsamic-herb";
 export type MarinadeTiming = "sunday" | "tuesday";
+export type MarinadeRequirement = "none" | "minimum" | "overnight";
 
 export interface Ingredient {
   amount: string;
@@ -108,6 +109,8 @@ export interface Sauce {
   ingredients: Ingredient[];
   storage: SauceStorageInfo;
   applicationNote: string;
+  marinating: MarinadeRequirement;
+  sundaySafe: boolean;
 }
 
 export interface NutrientRow {

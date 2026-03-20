@@ -6,7 +6,10 @@ import type {
   FishVariety,
   ChickenCut,
   CastIronProtein,
+  SaturdayPrepItem,
 } from "@/types/randomizer.types";
+import type { Sauce } from "@/types/meal.types";
+import { allSauces } from "@/data/sauces";
 
 export const fishVarieties: FishVariety[] = ["salmon", "tilapia", "cod", "mahi-mahi"];
 
@@ -36,14 +39,19 @@ export const castIronMarinades = [
   "smoked-paprika-garlic",
   "lime-cumin",
   "balsamic-herb",
-  "classic-salt-pepper",
+  "salt-pepper",
   "garlic-herb-butter",
   "red-wine-reduction",
-  "fresh-chimichurri",
+  "chimichurri",
   "soy-garlic-pan-sauce",
 ];
 
-export const shrimpSauces = ["garlic-butter", "cajun-butter", "soy-garlic-ginger", "lime-cumin"];
+export const shrimpSauces = [
+  "shrimp-garlic-butter",
+  "shrimp-cajun-butter",
+  "shrimp-soy-garlic-ginger",
+  "shrimp-lime-cumin",
+];
 
 export const roastingVegetables: WeightedOption[] = [
   { value: "broccoli", weight: 0.2 },
@@ -73,13 +81,13 @@ export const legumes: WeightedOption[] = [
 export const sundaySafeMarinades = [
   "soy-garlic-ginger",
   "smoked-paprika-garlic",
-  "classic-salt-pepper",
+  "salt-pepper",
   "garlic-herb-butter",
   "red-wine-reduction",
-  "fresh-chimichurri",
+  "chimichurri",
   "soy-garlic-pan-sauce",
-  "garlic-butter",
-  "cajun-butter",
+  "shrimp-garlic-butter",
+  "shrimp-cajun-butter",
 ];
 
 function pickFrom(
@@ -188,12 +196,23 @@ function buildCastIronPool({
   return filtered.length > 0 ? filtered : pool;
 }
 
+function getSauceById(id: string): Sauce {
+  const sauce = allSauces.find((s) => s.id === id);
+  if (!sauce) throw new Error(`Sauce not found: ${id}`);
+  return sauce;
+}
+
 export function runFridgeEngine(
   history: WeekHistory[],
   settings: FridgeEngineSettings,
+  overrides?: Partial<Record<keyof GeneratedPlan, { excludeOvernight?: boolean }>>,
 ): GeneratedPlan {
   const batchFishVariety = pickFrom("fishVariety", fishVarieties, history, settings) as FishVariety;
-  const batchFishSauce = pickFrom("fishSauce", fishSauces, history, settings);
+
+  const filteredFishSauces = overrides?.batchFishSauce?.excludeOvernight
+    ? fishSauces.filter((id) => getSauceById(id).marinating !== "overnight")
+    : fishSauces;
+  const batchFishSauce = pickFrom("fishSauce", filteredFishSauces, history, settings);
 
   const batchChickenCut = pickFrom(
     "chickenCut",
@@ -201,7 +220,11 @@ export function runFridgeEngine(
     history,
     settings,
   ) as ChickenCut;
-  const batchChickenSauce = pickFrom("chickenSauce", chickenSauces, history, settings);
+
+  const filteredChickenSauces = overrides?.batchChickenSauce?.excludeOvernight
+    ? chickenSauces.filter((id) => getSauceById(id).marinating !== "overnight")
+    : chickenSauces;
+  const batchChickenSauce = pickFrom("chickenSauce", filteredChickenSauces, history, settings);
 
   const weeksSinceSteak = getWeeksSince("steak", history);
   const weeksSinceShrimp = getWeeksSince("shrimp", history);
@@ -225,7 +248,11 @@ export function runFridgeEngine(
 
   const isShrimp = castIronProtein === "shrimp";
   const saucePool = isShrimp ? shrimpSauces : castIronMarinades;
-  const castIronSauce = pickFrom("castIronMarinade", saucePool, history, settings);
+
+  const filteredCastIronSauces = overrides?.castIronSauce?.excludeOvernight
+    ? saucePool.filter((id) => getSauceById(id).marinating !== "overnight")
+    : saucePool;
+  const castIronSauce = pickFrom("castIronMarinade", filteredCastIronSauces, history, settings);
 
   const marinadeTiming = isShrimp
     ? ("season-wednesday" as const)
@@ -235,9 +262,56 @@ export function runFridgeEngine(
 
   const requiresSundayMarinade = !isShrimp && sundaySafeMarinades.includes(castIronSauce);
 
-  const roastingVeg = pickWeighted("roastingVeg", roastingVegetables, history, settings);
-  const grain = pickWeighted("grain", grains, history, settings);
+  const roastingVeg1 = pickWeighted("roastingVeg1", roastingVegetables, history, settings);
+  const eligibleVeg2 = roastingVegetables.filter((v) => v.value !== roastingVeg1);
+  const roastingVeg2 = pickWeighted("roastingVeg2", eligibleVeg2, history, settings);
+
+  const grain1 = pickWeighted("grain1", grains, history, settings);
+  const eligibleGrain2 = grains.filter((g) => g.value !== grain1);
+  const grain2 = pickWeighted("grain2", eligibleGrain2, history, settings);
+
   const legume = pickWeighted("legume", legumes, history, settings);
+
+  // Step 9 — Detect overnight marinade requirements
+  const chickenSauceData = getSauceById(batchChickenSauce);
+  const castIronSauceData = getSauceById(castIronSauce);
+
+  const chickenNeedsOvernight = chickenSauceData.marinating === "overnight";
+
+  const castIronNeedsOvernight =
+    marinadeTiming !== "season-wednesday" && castIronSauceData.marinating === "overnight";
+
+  const saturdayPrepRequired = chickenNeedsOvernight || castIronNeedsOvernight;
+
+  const saturdayPrepItems: SaturdayPrepItem[] = [
+    ...(chickenNeedsOvernight
+      ? [
+          {
+            protein: batchChickenCut,
+            sauce: batchChickenSauce,
+            sauceName: chickenSauceData.name,
+            instructions: chickenSauceData.applicationNote,
+            note: "Batch chicken — marinate Saturday night for Sunday bake",
+          },
+        ]
+      : []),
+    ...(castIronNeedsOvernight && marinadeTiming === "sunday"
+      ? [
+          {
+            protein: castIronProtein,
+            sauce: castIronSauce,
+            sauceName: castIronSauceData.name,
+            instructions: castIronSauceData.applicationNote,
+            note: "Cast iron protein — marinate Saturday night. Sunday-safe marinade — stays in fridge until Wednesday.",
+          },
+        ]
+      : []),
+  ];
+
+  // Step 10 — Detect late generation (generated on Sunday)
+  const generatedOnSunday = new Date().getDay() === 0;
+
+  const lateGenerationWarning = generatedOnSunday && saturdayPrepRequired;
 
   return {
     batchFishVariety,
@@ -249,10 +323,15 @@ export function runFridgeEngine(
     marinadeTiming,
     requiresSundayMarinade,
     isShrimp,
-    roastingVeg: roastingVeg as any,
-    grain: grain as any,
+    roastingVeg1: roastingVeg1 as any,
+    roastingVeg2: roastingVeg2 as any,
+    grain1: grain1 as any,
+    grain2: grain2 as any,
     legume: legume as any,
     generatedAt: new Date().toISOString(),
     confirmedAt: null,
+    saturdayPrepRequired,
+    saturdayPrepItems,
+    lateGenerationWarning,
   };
 }

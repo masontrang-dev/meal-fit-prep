@@ -93,7 +93,7 @@ export const useShoppingStore = defineStore(
         });
       }
 
-      // Roasting vegetable
+      // Roasting vegetables (2 slots)
       const vegMap: Record<string, { name: string; quantity: string }> = {
         broccoli: { name: "Broccoli florets", quantity: "2 bags (pre-cut)" },
         asparagus: { name: "Asparagus", quantity: "1 bunch" },
@@ -105,29 +105,47 @@ export const useShoppingStore = defineStore(
         "bok-choy": { name: "Baby bok choy", quantity: "4–6 heads" },
         "stir-fry-blend": { name: "Frozen stir-fry vegetable blend", quantity: "1 bag" },
       };
-      const veg = vegMap[plan.roastingVeg];
-      if (veg) {
+      const veg1 = vegMap[plan.roastingVeg1];
+      if (veg1) {
         newDynamicItems.push({
-          id: `veg-${plan.roastingVeg}`,
+          id: `veg-${plan.roastingVeg1}`,
           category: "Vegetables",
-          name: veg.name,
-          quantity: veg.quantity,
+          name: veg1.name,
+          quantity: veg1.quantity,
+        });
+      }
+      const veg2 = vegMap[plan.roastingVeg2];
+      if (veg2) {
+        newDynamicItems.push({
+          id: `veg-${plan.roastingVeg2}`,
+          category: "Vegetables",
+          name: veg2.name,
+          quantity: veg2.quantity,
         });
       }
 
-      // Grain
+      // Grains (2 slots)
       const grainMap: Record<string, { name: string; quantity: string }> = {
         "brown-rice": { name: "Brown rice", quantity: "2 cups dry" },
         quinoa: { name: "Quinoa", quantity: "1.5 cups dry" },
         "jasmine-rice": { name: "Jasmine rice (white)", quantity: "1.5 cups dry" },
       };
-      const grain = grainMap[plan.grain];
-      if (grain) {
+      const grain1 = grainMap[plan.grain1];
+      if (grain1) {
         newDynamicItems.push({
-          id: `grain-${plan.grain}`,
+          id: `grain-${plan.grain1}`,
           category: "Grains & Legumes",
-          name: grain.name,
-          quantity: grain.quantity,
+          name: grain1.name,
+          quantity: grain1.quantity,
+        });
+      }
+      const grain2 = grainMap[plan.grain2];
+      if (grain2) {
+        newDynamicItems.push({
+          id: `grain-${plan.grain2}`,
+          category: "Grains & Legumes",
+          name: grain2.name,
+          quantity: grain2.quantity,
         });
       }
 

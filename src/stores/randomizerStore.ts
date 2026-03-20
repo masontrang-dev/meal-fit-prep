@@ -24,8 +24,10 @@ export const useRandomizerStore = defineStore(
       chickenSauce: 3,
       castIronProtein: 2,
       castIronMarinade: 3,
-      roastingVeg: 2,
-      grain: 2,
+      roastingVeg1: 2,
+      roastingVeg2: 2,
+      grain1: 2,
+      grain2: 2,
       legume: 3,
     });
 
@@ -44,16 +46,27 @@ export const useRandomizerStore = defineStore(
       shrimpFrequencyWeeks: shrimpFrequencyWeeks.value,
     }));
 
+    const saturdayPrepRequired = computed(() => pendingPlan.value?.saturdayPrepRequired ?? false);
+
+    const lateGenerationWarning = computed(() => pendingPlan.value?.lateGenerationWarning ?? false);
+
     function generatePlan() {
-      pendingPlan.value = runFridgeEngine(weekHistory.value, engineSettings.value);
+      // If regenerating an existing pending plan, add it to history temporarily
+      // to avoid repeating the same selections
+      const tempHistory = pendingPlan.value
+        ? [...weekHistory.value, planToHistory(pendingPlan.value)]
+        : weekHistory.value;
+
+      pendingPlan.value = runFridgeEngine(tempHistory, engineSettings.value);
     }
 
-    function swapSlot(slotKey: keyof GeneratedPlan) {
+    function swapSlot(slotKey: keyof GeneratedPlan, excludeOvernight: boolean = false) {
       if (!pendingPlan.value) return;
-      const partial = runFridgeEngine(weekHistory.value, engineSettings.value);
+      const overrides = excludeOvernight ? { [slotKey]: { excludeOvernight } } : undefined;
+      const partial = runFridgeEngine(weekHistory.value, engineSettings.value, overrides);
       pendingPlan.value = {
         ...pendingPlan.value,
-        [slotKey]: partial[slotKey],
+        ...partial,
       };
     }
 
@@ -87,8 +100,10 @@ export const useRandomizerStore = defineStore(
         chickenSauce: 3,
         castIronProtein: 2,
         castIronMarinade: 3,
-        roastingVeg: 2,
-        grain: 2,
+        roastingVeg1: 2,
+        roastingVeg2: 2,
+        grain1: 2,
+        grain2: 2,
         legume: 3,
       };
       steakFrequencyWeeks.value = 2;
@@ -104,8 +119,10 @@ export const useRandomizerStore = defineStore(
         chickenSauce: plan.batchChickenSauce,
         castIronProtein: plan.castIronProtein,
         castIronMarinade: plan.castIronSauce,
-        roastingVeg: plan.roastingVeg,
-        grain: plan.grain,
+        roastingVeg1: plan.roastingVeg1,
+        roastingVeg2: plan.roastingVeg2,
+        grain1: plan.grain1,
+        grain2: plan.grain2,
         legume: plan.legume,
         confirmedAt: plan.confirmedAt ?? new Date().toISOString(),
       };
@@ -124,6 +141,8 @@ export const useRandomizerStore = defineStore(
       hasFavoritePlan,
       hasPendingPlan,
       engineSettings,
+      saturdayPrepRequired,
+      lateGenerationWarning,
       generatePlan,
       swapSlot,
       confirmPlan,
