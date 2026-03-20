@@ -125,7 +125,7 @@ import { RouterLink } from "vue-router";
 import type { NavItem } from "@/types/common.types";
 
 const mealNavItems: NavItem[] = [
-  { label: "Overview", path: "/meal/proteins", section: "meal" },
+  { label: "Overview", path: "/overview", section: "meal" },
   { label: "Meal Plan", path: "/meal/fridge", section: "meal" },
   { label: "Shopping List", path: "/meal/shopping", section: "meal" },
   { label: "Prep Day", path: "/meal/prep", section: "meal" },
