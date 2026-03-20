@@ -288,22 +288,8 @@ function formatValue(value: string): string {
         :is-late-generation="false"
       />
 
-      <div class="flex justify-center gap-4 pt-4">
-        <button
-          @click="handleRegenerateAll"
-          class="px-6 py-3 font-medium rounded-lg transition-colors"
-          style="background: var(--paper); color: var(--ink); border: 1px solid var(--rule)"
-        >
-          Regenerate All
-        </button>
-        <button
-          @click="handleConfirm"
-          class="px-8 py-3 font-medium rounded-lg transition-colors shadow-md"
-          style="background: var(--green); color: var(--paper)"
-        >
-          Confirm Week
-        </button>
-      </div>
+      <!-- Spacer to prevent content from being hidden behind sticky buttons -->
+      <div class="h-24"></div>
     </div>
 
     <!-- State D: Confirmed (locked) -->
@@ -395,23 +381,65 @@ function formatValue(value: string): string {
         </div>
       </div>
 
-      <div class="flex justify-center gap-4 pt-4">
-        <button
-          @click="handleSaveAsFavorite"
-          class="px-6 py-3 font-medium rounded-lg transition-colors flex items-center gap-2"
-          style="background: var(--paper); color: var(--ink); border: 1px solid var(--rule)"
-        >
-          <span>⭐</span>
-          <span>Save as Favorite</span>
-        </button>
-        <button
-          @click="handleGenerate"
-          class="px-6 py-3 font-medium rounded-lg transition-colors"
-          style="background: var(--blue); color: var(--paper)"
-        >
-          Generate Next Week
-        </button>
-      </div>
+      <!-- Spacer to prevent content from being hidden behind sticky buttons -->
+      <div class="h-24"></div>
     </div>
+
+    <!-- Sticky Action Buttons for Pending State -->
+    <Teleport to="body">
+      <div
+        v-if="currentState === 'pending'"
+        class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg"
+        style="z-index: 9999"
+      >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div class="flex justify-center gap-4">
+            <button
+              @click="handleRegenerateAll"
+              class="px-6 py-3 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg"
+              style="background: var(--paper); color: var(--ink); border: 1px solid var(--rule)"
+            >
+              Regenerate All
+            </button>
+            <button
+              @click="handleConfirm"
+              class="px-8 py-3 font-medium rounded-lg transition-all shadow-md hover:scale-105 hover:shadow-xl"
+              style="background: var(--green); color: var(--paper)"
+            >
+              Confirm Week
+            </button>
+          </div>
+        </div>
+      </div>
+    </Teleport>
+
+    <!-- Sticky Action Buttons for Confirmed State -->
+    <Teleport to="body">
+      <div
+        v-if="currentState === 'confirmed'"
+        class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg"
+        style="z-index: 9999"
+      >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div class="flex justify-center gap-4">
+            <button
+              @click="handleSaveAsFavorite"
+              class="px-6 py-3 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg flex items-center gap-2"
+              style="background: var(--paper); color: var(--ink); border: 1px solid var(--rule)"
+            >
+              <span>⭐</span>
+              <span>Save as Favorite</span>
+            </button>
+            <button
+              @click="handleGenerate"
+              class="px-6 py-3 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg"
+              style="background: var(--blue); color: var(--paper)"
+            >
+              Generate Next Week
+            </button>
+          </div>
+        </div>
+      </div>
+    </Teleport>
   </div>
 </template>
