@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complete 11-Week Fitness Plan</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: #0e0f11;
+  --card: #15171b;
+  --card2: #1c1f25;
+  --border: #2a2d35;
+  --text: #e4e1da;
+  --muted: #5a6070;
+  --green: #4ade80;
+  --blue: #60a5fa;
+  --orange: #fb923c;
+  --yellow: #fbbf24;
+  --red: #f87171;
+  --teal: #2dd4bf;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Archivo', sans-serif;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+/* ── TOP NAV ── */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(14,15,17,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 52px;
+  gap: 12px;
+}
+
+.topbar-logo {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.topbar-logo span { color: var(--green); }
+
+.nav-tabs {
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-tabs::-webkit-scrollbar { display:none; }
+
+.nav-tab {
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 3px;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+
+.nav-tab:hover { color: var(--text); background: var(--card2); }
+.nav-tab.active { color: var(--bg); background: var(--green); }
+
+/* ── MAIN ── */
+.main { max-width: 960px; margin: 0 auto; padding: 32px 20px 100px; }
+
+/* ── VIEWS ── */
+.view { display: none; }
+.view.active { display: block; }
+
+/* ── HERO ── */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.hero-main {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 160px;
+}
+
+.hero-title {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.hero-title .accent { color: var(--green); }
+
+.hero-sub {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.hstat {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 18px;
+  text-align: center;
+}
+
+.hstat-n {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.8rem;
+  display: block;
+  line-height: 1;
+}
+
+.hstat-l {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-top: 4px;
+}
+
+/* ── PHASE STRIP ── */
+.phase-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+  margin-bottom: 32px;
+  overflow: hidden;
+}
+
+.pstrip {
+  padding: 16px 20px;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+.pstrip:last-child { border-right: none; }
+
+.pstrip-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+
+.pstrip-num {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.pstrip-name {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 2px;
+}
+
+.pstrip-weeks {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.pstrip-desc { font-size: 0.8rem; line-height: 1.5; }
+
+/* ── ANKLE WARNING ── */
+.ankle-warn {
+  background: #1f1a00;
+  border: 1px solid var(--yellow);
+  border-left: 3px solid var(--yellow);
+  padding: 12px 16px;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  color: #e8d888;
+}
+
+/* ── SECTION LABEL ── */
+.slabel {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+  margin: 32px 0 16px;
+}
+
+/* ── WEEK CARDS ── */
+.week-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.week-head {
+  display: grid;
+  grid-template-columns: 56px 1fr auto auto;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.week-head:hover { background: var(--card2); }
+
+.wnum {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.5rem;
+  color: var(--green);
+  line-height: 1;
+}
+
+.wtitle { font-size: 0.9rem; font-weight: 500; }
+.wphase-tag {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.tag-rebuild { background: rgba(96,165,250,0.15); color: var(--blue); border: 1px solid rgba(96,165,250,0.3); }
+.tag-build   { background: rgba(74,222,128,0.12); color: var(--green); border: 1px solid rgba(74,222,128,0.3); }
+.tag-peak    { background: rgba(251,146,60,0.15);  color: var(--orange); border: 1px solid rgba(251,146,60,0.3); }
+
+.warrow { color: var(--muted); font-size: 0.7rem; transition: transform 0.2s; }
+.warrow.open { transform: rotate(180deg); }
+
+.week-body {
+  display: none;
+  border-top: 1px solid var(--border);
+  padding: 0;
+}
+.week-body.open { display: block; }
+
+/* ── DAILY SCHEDULE TABLE ── */
+.day-table { width: 100%; border-collapse: collapse; }
+
+.day-table th {
+  background: var(--card2);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 8px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.day-table td {
+  padding: 11px 14px;
+  font-size: 0.83rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.day-table tr:last-child td { border-bottom: none; }
+.day-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+.day-name-cell { font-weight: 600; font-size: 0.78rem; white-space: nowrap; }
+
+.activity-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 2px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  margin-right: 4px;
+  margin-bottom: 2px;
+}
+
+.pill-cardio  { background: rgba(45,212,191,0.15); color: var(--teal);   border: 1px solid rgba(45,212,191,0.3); }
+.pill-push    { background: rgba(251,146,60,0.15);  color: var(--orange); border: 1px solid rgba(251,146,60,0.3); }
+.pill-pull    { background: rgba(96,165,250,0.15);  color: var(--blue);   border: 1px solid rgba(96,165,250,0.3); }
+.pill-rest    { background: rgba(90,96,112,0.15);   color: var(--muted);  border: 1px solid rgba(90,96,112,0.3); }
+.pill-combo   { background: rgba(251,191,36,0.15);  color: var(--yellow); border: 1px solid rgba(251,191,36,0.3); }
+
+.activity-detail { font-size: 0.78rem; color: var(--muted); margin-top: 3px; }
+
+.intensity-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+/* ── EXERCISE REFERENCE ── */
+.ex-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+  background: var(--card2);
+  padding: 4px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.ex-tab {
+  padding: 8px 20px;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  border-radius: 2px;
+  color: var(--muted);
+  transition: all 0.15s;
+  border: none;
+  background: transparent;
+  text-transform: uppercase;
+}
+
+.ex-tab.active { background: var(--green); color: var(--bg); }
+
+.ex-panel { display: none; }
+.ex-panel.active { display: block; }
+
+.ex-grid { display: grid; gap: 8px; }
+
+.ex-row {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 14px 18px;
+  display: grid;
+  grid-template-columns: 36px auto 1fr auto;
+  align-items: start;
+  gap: 14px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.ex-row:hover { border-color: var(--green); }
+.ex-row.open { border-color: var(--teal); }
+
+.ex-row-num {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.4rem;
+  color: var(--border);
+  line-height: 1;
+  padding-top: 2px;
+}
+
+.ex-type-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.ex-row-info {}
+.ex-row-name { font-weight: 600; font-size: 0.9rem; }
+.ex-row-target { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+.ex-row-sets {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.85rem;
+  color: var(--green);
+  white-space: nowrap;
+  text-align: right;
+  padding-top: 3px;
+}
+
+.ex-detail {
+  display: none;
+  grid-column: 1 / -1;
+  padding-top: 12px;
+  margin-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 0.81rem;
+  line-height: 1.7;
+  color: #8a9ab0;
+}
+
+.ex-row.open .ex-detail { display: block; }
+.ex-detail strong { color: var(--text); }
+
+.ftag {
+  display: inline-block;
+  background: var(--card2);
+  border: 1px solid var(--teal);
+  color: var(--teal);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 2px;
+  margin-right: 5px;
+}
+
+.supset-label {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange);
+  padding: 8px 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.supset-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--orange);
+  opacity: 0.25;
+}
+
+/* ── NUTRITION ── */
+.nutr-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.nutr-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 18px;
+}
+
+.nutr-card-title {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.nutr-list { list-style: none; font-size: 0.8rem; line-height: 1.9; }
+.nutr-list li::before { content: '→ '; color: var(--green); }
+
+/* ── MILESTONES ── */
+.ms-grid { display: grid; gap: 8px; }
+
+.ms-row {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+  display: grid;
+  grid-template-columns: 32px 1fr auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.ms-check {
+  width: 26px; height: 26px;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.ms-check.done { background: var(--green); border-color: var(--green); color: var(--bg); }
+.ms-check.done::after { content: '✓'; font-weight: 700; }
+
+.ms-text { font-size: 0.83rem; }
+.ms-week { font-size: 0.68rem; color: var(--muted); font-weight: 600; letter-spacing: 0.06em; white-space: nowrap; }
+
+/* ── PROGRESS CALLOUT ── */
+.callout {
+  background: var(--card);
+  border: 1px solid var(--green);
+  padding: 18px 22px;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+}
+
+.callout-icon { font-size: 1.6rem; line-height: 1; }
+.callout-title {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: var(--green);
+  margin-bottom: 5px;
+}
+.callout-body { font-size: 0.81rem; line-height: 1.7; color: #8a9ab0; }
+.callout-body strong { color: var(--text); }
+
+/* ── PROG TABLE ── */
+.prog-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  margin-bottom: 24px;
+}
+.prog-table th {
+  background: var(--card2);
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+.prog-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+  vertical-align: top;
+}
+.prog-table tr:last-child td { border-bottom: none; }
+.prog-table tr:hover td { background: var(--card2); }
+
+.prog-phase { font-family: 'Archivo Black', sans-serif; font-size: 0.95rem; }
+.p1 { color: var(--blue); }
+.p2 { color: var(--green); }
+.p3 { color: var(--orange); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .phase-strip { grid-template-columns: 1fr; }
+  .pstrip { border-right: none; border-bottom: 1px solid var(--border); }
+  .pstrip:last-child { border-bottom: none; }
+  .nutr-grid { grid-template-columns: 1fr; }
+  .week-head { grid-template-columns: 44px 1fr auto; }
+  .wphase-tag { display: none; }
+  .day-table th:nth-child(3), .day-table td:nth-child(3) { display: none; }
+  .topbar-logo { font-size: 0.85rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">June<span>Fit</span> Plan</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showView('overview', this)">Overview</button>
+    <button class="nav-tab" onclick="showView('schedule', this)">Weekly Schedule</button>
+    <button class="nav-tab" onclick="showView('exercises', this)">Exercises</button>
+    <button class="nav-tab" onclick="showView('nutrition', this)">Nutrition</button>
+    <button class="nav-tab" onclick="showView('milestones', this)">Milestones</button>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════ OVERVIEW ══════════════════ -->
+<div class="view active" id="view-overview">
+
+  <div class="hero">
+    <div class="hero-main">
+      <div>
+        <div class="hero-title">11-Week<br><span class="accent">Complete Plan</span></div>
+        <div class="hero-sub">Cardio + Strength + Nutrition · Mid-March → June</div>
+      </div>
+      <div style="font-size:0.78rem; color:var(--muted); margin-top:16px; line-height:1.8;">
+        5′7″ · 170 lbs starting · Goal: ~160 lbs &amp; visibly fit<br>
+        Treadmill cardio + home dumbbells · HOA gym
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><span class="hstat-n" style="color:var(--teal)">4–5×</span><span class="hstat-l">Sessions / Week</span></div>
+      <div class="hstat"><span class="hstat-n" style="color:var(--green)">~10</span><span class="hstat-l">Lbs Target Loss</span></div>
+      <div class="hstat"><span class="hstat-n" style="color:var(--orange)">2×</span><span class="hstat-l">Strength Days</span></div>
+      <div class="hstat"><span class="hstat-n" style="color:var(--blue)">3×</span><span class="hstat-l">Cardio Days</span></div>
+    </div>
+  </div>
+
+  <div class="ankle-warn">
+    ⚠️ <strong>Ankle Recovery:</strong> Keep inclines at 1–3% for the first 2 weeks. If you feel sharp ankle pain (not muscle soreness), drop incline and reduce time. Protecting the ankle in Phase 1 is what gets you to June strong.
+  </div>
+
+  <div class="phase-strip">
+    <div class="pstrip">
+      <div class="pstrip-bar" style="background:var(--blue)"></div>
+      <div class="pstrip-num">Phase 01</div>
+      <div class="pstrip-name" style="color:var(--blue)">Rebuild</div>
+      <div class="pstrip-weeks">Weeks 1–3 · March</div>
+      <div class="pstrip-desc">Re-establish the habit. 3 cardio days, strength begins Week 2. Easy effort, ankle priority. 35–45 min walks with gentle inclines.</div>
+    </div>
+    <div class="pstrip">
+      <div class="pstrip-bar" style="background:var(--green)"></div>
+      <div class="pstrip-num">Phase 02</div>
+      <div class="pstrip-name" style="color:var(--green)">Build</div>
+      <div class="pstrip-weeks">Weeks 4–8 · April–May</div>
+      <div class="pstrip-desc">Introduce intervals, steeper inclines, jogging segments. Full 2-day strength routine. Sessions 45–55 min. This is where transformation happens.</div>
+    </div>
+    <div class="pstrip">
+      <div class="pstrip-bar" style="background:var(--orange)"></div>
+      <div class="pstrip-num">Phase 03</div>
+      <div class="pstrip-name" style="color:var(--orange)">Peak</div>
+      <div class="pstrip-weeks">Weeks 9–11 · Late May–June</div>
+      <div class="pstrip-desc">Longer cardio, sustained challenges, heavier lifts. You'll look and feel noticeably different. Maintain intensity, don't add more.</div>
+    </div>
+  </div>
+
+  <div class="slabel">Your Weekly Template</div>
+  <div style="background:var(--card); border:1px solid var(--border); overflow:hidden; margin-bottom:24px;">
+    <table style="width:100%; border-collapse:collapse; font-size:0.83rem;">
+      <thead>
+        <tr style="background:var(--card2);">
+          <th style="padding:10px 16px; text-align:left; font-size:0.65rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--border);">Day</th>
+          <th style="padding:10px 16px; text-align:left; font-size:0.65rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--border);">Activity</th>
+          <th style="padding:10px 16px; text-align:left; font-size:0.65rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--border);">Location</th>
+          <th style="padding:10px 16px; text-align:left; font-size:0.65rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--border);">Duration</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:11px 16px; border-bottom:1px solid var(--border); font-weight:600;">Monday</td><td style="padding:11px 16px; border-bottom:1px solid var(--border);"><span class="activity-pill pill-cardio">Cardio</span> Treadmill walk/intervals</td><td style="padding:11px 16px; border-bottom:1px solid var(--border); color:var(--muted);">HOA Gym</td><td style="padding:11px 16px; border-bottom:1px solid var(--border); color:var(--muted);">35–55 min</td></tr>
+        <tr style="opacity:0.5"><td style="padding:11px 16px; border-bottom:1px solid var(--border); font-weight:600;">Tuesday</td><td style="padding:11px 16px; border-bottom:1px solid var(--border);"><span class="activity-pill pill-rest">Rest</span></td><td style="padding:11px 16px; border-bottom:1px solid var(--border); color:var(--muted);">—</td><td style="padding:11px 16px; border-bottom:1px solid var(--border); color:var(--muted);">—</td></tr>
+        <tr><td style="padding:11px 16px; border-bottom:1px solid var(--border); font-weight:600;">Wednesday</td><td style="padding:11px 16px; border-bottom:1px solid var(--border);"><span class="activity-pill pill-cardio">Cardio</span> Treadmill walk/intervals</td><td style="padding:11px 16px; border-bottom:1px solid var(--border); color:var(--muted);">HOA Gym</td><td style="padding:11px 16px; border-bottom:1px solid var(--border); color:var(--muted);">35–55 min</td></tr>
+        <tr><td style="padding:11px 16px; border-bottom:1px solid var(--border); font-weight:600;">Thursday</td><td style="padding:11px 16px; border-bottom:1px solid var(--border);"><span class="activity-pill pill-combo">Combo</span> Treadmill <em>then</em> Day A Strength (Push)</td><td style="padding:11px 16px; border-bottom:1px solid var(--border); color:var(--muted);">Gym → Home</td><td style="padding:11px 16px; border-bottom:1px solid var(--border); color:var(--muted);">35 min + 30 min</td></tr>
+        <tr style="opacity:0.5"><td style="padding:11px 16px; border-bottom:1px solid var(--border); font-weight:600;">Friday</td><td style="padding:11px 16px; border-bottom:1px solid var(--border);"><span class="activity-pill pill-rest">Rest</span></td><td style="padding:11px 16px; border-bottom:1px solid var(--border); color:var(--muted);">—</td><td style="padding:11px 16px; border-bottom:1px solid var(--border); color:var(--muted);">—</td></tr>
+        <tr><td style="padding:11px 16px; border-bottom:1px solid var(--border); font-weight:600;">Saturday</td><td style="padding:11px 16px; border-bottom:1px solid var(--border);"><span class="activity-pill pill-cardio">Cardio</span> Treadmill walk/intervals</td><td style="padding:11px 16px; border-bottom:1px solid var(--border); color:var(--muted);">HOA Gym</td><td style="padding:11px 16px; border-bottom:1px solid var(--border); color:var(--muted);">35–55 min</td></tr>
+        <tr><td style="padding:11px 16px; font-weight:600;">Sunday</td><td style="padding:11px 16px;"><span class="activity-pill pill-pull">Strength</span> Day B — Pull + Core (dumbbells)</td><td style="padding:11px 16px; color:var(--muted);">Home</td><td style="padding:11px 16px; color:var(--muted);">30–35 min</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <div class="callout-icon">🔥</div>
+    <div>
+      <div class="callout-title">Why This Combination Attacks Belly Fat</div>
+      <div class="callout-body">Cardio creates the <strong>calorie deficit</strong> that burns fat — including belly fat. Strength training builds muscle that <strong>raises your resting metabolism</strong>, so you burn more even on rest days. Together they're significantly more effective than either alone. The core work on Day B builds the underlying muscles so when the fat comes off, definition shows through.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════ SCHEDULE ══════════════════ -->
+<div class="view" id="view-schedule">
+  <div id="weeks-container"></div>
+</div>
+
+<!-- ══════════════════ EXERCISES ══════════════════ -->
+<div class="view" id="view-exercises">
+
+  <div class="ex-tabs">
+    <button class="ex-tab active" onclick="switchEx('push', this)">Day A · Push</button>
+    <button class="ex-tab" onclick="switchEx('pull', this)">Day B · Pull + Core</button>
+    <button class="ex-tab" onclick="switchEx('cardio', this)">Cardio Methods</button>
+  </div>
+
+  <!-- PUSH -->
+  <div class="ex-panel active" id="expanel-push">
+    <div style="font-size:0.82rem; color:var(--muted); margin-bottom:20px; line-height:1.6;">
+      <strong style="color:var(--text)">Thursday · ~30 min · At home after treadmill</strong><br>
+      Chest, Shoulders, Triceps — builds width and pressing strength. Do all A exercises as a superset, rest 2 min, repeat 3×.
+    </div>
+    <div class="ex-grid">
+      <div class="supset-label">Superset A1 + A2 — 3 rounds, then 2 min rest</div>
+      <div class="ex-row" onclick="this.classList.toggle('open')">
+        <div class="ex-row-num">A1</div>
+        <div class="ex-type-dot" style="background:var(--orange)"></div>
+        <div class="ex-row-info"><div class="ex-row-name">Dumbbell Floor Press</div><div class="ex-row-target">Chest · Triceps</div></div>
+        <div class="ex-row-sets">3 × 10–12</div>
+        <div class="ex-detail"><span class="ftag">Form</span> Lie on your back, hold DBs at chest, elbows ~45°. Press up, lower until elbows touch the floor. <strong>Fully replaces a bench press</strong> — limited range actually reduces shoulder strain.<br><br><span class="ftag">Weeks 1–3</span> 2 sets, find your weight. <span class="ftag">Weeks 4+</span> Add third set, increase weight when 12 reps feels easy for 2 sessions in a row.</div>
+      </div>
+      <div class="ex-row" onclick="this.classList.toggle('open')">
+        <div class="ex-row-num">A2</div>
+        <div class="ex-type-dot" style="background:var(--orange)"></div>
+        <div class="ex-row-info"><div class="ex-row-name">Overhead Dumbbell Press</div><div class="ex-row-target">Shoulders · Triceps</div></div>
+        <div class="ex-row-sets">3 × 10–12</div>
+        <div class="ex-detail"><span class="ftag">Form</span> Seated or standing, DBs at shoulder height palms forward. Press overhead until arms nearly straight. Brace core — don't arch lower back.<br><br><span class="ftag">Key cue</span> Keep elbows slightly in front of ears at the top — protects the rotator cuff.</div>
+      </div>
+
+      <div class="supset-label">Superset B1 + B2 — 3 rounds, then 2 min rest</div>
+      <div class="ex-row" onclick="this.classList.toggle('open')">
+        <div class="ex-row-num">B1</div>
+        <div class="ex-type-dot" style="background:var(--orange)"></div>
+        <div class="ex-row-info"><div class="ex-row-name">Lateral Raises</div><div class="ex-row-target">Side Delts — #1 exercise for shoulder width</div></div>
+        <div class="ex-row-sets">3 × 12–15</div>
+        <div class="ex-detail"><span class="ftag">Form</span> Stand, raise arms out to sides until parallel with floor, slight elbow bend. <strong>Go lighter than you think</strong> — most people use too much weight and lose the benefit.<br><br><span class="ftag">Why</span> This is what creates the "broad" shoulder look.</div>
+      </div>
+      <div class="ex-row" onclick="this.classList.toggle('open')">
+        <div class="ex-row-num">B2</div>
+        <div class="ex-type-dot" style="background:var(--orange)"></div>
+        <div class="ex-row-info"><div class="ex-row-name">Tricep Overhead Extension</div><div class="ex-row-target">Triceps — 2/3 of upper arm size</div></div>
+        <div class="ex-row-sets">3 × 12</div>
+        <div class="ex-detail"><span class="ftag">Form</span> Hold one DB with both hands overhead. Lower behind head by bending elbows, press back up. Keep elbows pointing forward — don't let them flare wide.</div>
+      </div>
+
+      <div class="supset-label">Finisher C1 — 2 sets to failure</div>
+      <div class="ex-row" onclick="this.classList.toggle('open')">
+        <div class="ex-row-num">C1</div>
+        <div class="ex-type-dot" style="background:var(--orange)"></div>
+        <div class="ex-row-info"><div class="ex-row-name">Push-Ups (wide then close grip)</div><div class="ex-row-target">Chest · Triceps · Core</div></div>
+        <div class="ex-row-sets">2 × max</div>
+        <div class="ex-detail"><span class="ftag">How to</span> 1 set wide grip (hands outside shoulders), 1 set close grip (hands under chest). Max reps until form breaks — even 5 reps is fine at first.<br><br><span class="ftag">Track this</span> Note your reps each week. Going from 5 to 20 push-ups over 11 weeks is very achievable and visible.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PULL + CORE -->
+  <div class="ex-panel" id="expanel-pull">
+    <div style="font-size:0.82rem; color:var(--muted); margin-bottom:20px; line-height:1.6;">
+      <strong style="color:var(--text)">Sunday · ~30–35 min · At home, no treadmill today</strong><br>
+      Back, Biceps, Core — improves posture, builds pulling strength, and directly works the midsection.
+    </div>
+    <div class="ex-grid">
+      <div class="supset-label">Superset A1 + A2 — 3 rounds, then 2 min rest</div>
+      <div class="ex-row" onclick="this.classList.toggle('open')">
+        <div class="ex-row-num">A1</div>
+        <div class="ex-type-dot" style="background:var(--blue)"></div>
+        <div class="ex-row-info"><div class="ex-row-name">Single-Arm Dumbbell Row</div><div class="ex-row-target">Upper Back · Lats · Biceps</div></div>
+        <div class="ex-row-sets">3 × 10 each</div>
+        <div class="ex-detail"><span class="ftag">Form</span> One hand on chair for support, pull DB elbow-to-hip. Lower slowly — the lowering phase is half the work. Keep back flat.<br><br><span class="ftag">Key cue</span> Think "elbow to hip" not "hand to shoulder." Most effective back exercise with dumbbells alone.</div>
+      </div>
+      <div class="ex-row" onclick="this.classList.toggle('open')">
+        <div class="ex-row-num">A2</div>
+        <div class="ex-type-dot" style="background:var(--blue)"></div>
+        <div class="ex-row-info"><div class="ex-row-name">Alternating Dumbbell Curl</div><div class="ex-row-target">Biceps</div></div>
+        <div class="ex-row-sets">3 × 10–12 each</div>
+        <div class="ex-detail"><span class="ftag">Form</span> Stand tall, curl one DB at a time. Rotate palm up as you curl (supinate). Don't swing — if swinging, weight is too heavy.<br><br><span class="ftag">Week 5+ variation</span> Try hammer curls (palms facing each other) alternating weeks — adds overall arm thickness.</div>
+      </div>
+
+      <div class="supset-label">Superset B1 + B2 — 3 rounds, then 2 min rest</div>
+      <div class="ex-row" onclick="this.classList.toggle('open')">
+        <div class="ex-row-num">B1</div>
+        <div class="ex-type-dot" style="background:var(--blue)"></div>
+        <div class="ex-row-info"><div class="ex-row-name">Dumbbell Reverse Fly</div><div class="ex-row-target">Rear Delts · Upper Back · Posture</div></div>
+        <div class="ex-row-sets">3 × 12–15</div>
+        <div class="ex-detail"><span class="ftag">Form</span> Hinge forward ~45°, raise arms out to sides with slight elbow bend. <strong>Very light weight</strong> — these are small muscles. Squeeze shoulder blades at top.<br><br><span class="ftag">Why it matters</span> Fixes rounded posture from sitting — you'll stand taller and look leaner immediately.</div>
+      </div>
+      <div class="ex-row" onclick="this.classList.toggle('open')">
+        <div class="ex-row-num">B2</div>
+        <div class="ex-type-dot" style="background:var(--blue)"></div>
+        <div class="ex-row-info"><div class="ex-row-name">Renegade Row</div><div class="ex-row-target">Back · Core · Stability</div></div>
+        <div class="ex-row-sets">3 × 6–8 each</div>
+        <div class="ex-detail"><span class="ftag">Form</span> Push-up position with hands on DBs. Row one DB to hip while other arm supports. Keep hips square — don't rotate.<br><br><span class="ftag">Progression</span> Start on knees if needed. Works entire core while training back simultaneously.</div>
+      </div>
+
+      <div class="supset-label">Core Circuit C1→C2→C3 — 3 rounds, minimal rest between exercises</div>
+      <div class="ex-row" onclick="this.classList.toggle('open')">
+        <div class="ex-row-num">C1</div>
+        <div class="ex-type-dot" style="background:var(--teal)"></div>
+        <div class="ex-row-info"><div class="ex-row-name">Dumbbell Russian Twist</div><div class="ex-row-target">Obliques — Side belly definition</div></div>
+        <div class="ex-row-sets">3 × 20</div>
+        <div class="ex-detail"><span class="ftag">Form</span> Sit with knees bent, lean back slightly. Hold one DB with both hands. Rotate side to side, touching DB to floor = 1 rep each side.<br><br>Directly targets the obliques — creates the defined "sides" look when body fat drops.</div>
+      </div>
+      <div class="ex-row" onclick="this.classList.toggle('open')">
+        <div class="ex-row-num">C2</div>
+        <div class="ex-type-dot" style="background:var(--teal)"></div>
+        <div class="ex-row-info"><div class="ex-row-name">Dead Bug</div><div class="ex-row-target">Deep Core — Flat stomach foundation</div></div>
+        <div class="ex-row-sets">3 × 10 each</div>
+        <div class="ex-detail"><span class="ftag">Form</span> Lie on back, arms up, knees at 90°. Lower opposite arm and leg toward floor while pressing lower back INTO the floor. Return and switch.<br><br>Trains the transverse abdominis — the deepest core muscle that "pulls in" the waistline. More effective for belly appearance than crunches.</div>
+      </div>
+      <div class="ex-row" onclick="this.classList.toggle('open')">
+        <div class="ex-row-num">C3</div>
+        <div class="ex-type-dot" style="background:var(--teal)"></div>
+        <div class="ex-row-info"><div class="ex-row-name">Plank</div><div class="ex-row-target">Full Core · Anti-sag</div></div>
+        <div class="ex-row-sets">3 × 20–60 sec</div>
+        <div class="ex-detail"><span class="ftag">Form</span> Forearms on floor, body in straight line. Don't let hips sag or pike. Breathe steadily. Start with 20 seconds — quality over duration.<br><br><span class="ftag">Progress</span> Add 5 seconds per week. Target 60 seconds by Week 11.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARDIO METHODS -->
+  <div class="ex-panel" id="expanel-cardio">
+    <div style="font-size:0.82rem; color:var(--muted); margin-bottom:20px; line-height:1.6;">
+      <strong style="color:var(--text)">Mon / Wed / Sat (+ Thu before strength)</strong><br>
+      Use these treadmill methods based on which phase you're in. All methods burn calories and reduce body fat.
+    </div>
+    <div class="ex-grid">
+      <div class="supset-label">Phase 1 — Weeks 1–3 (Rebuild)</div>
+      <div class="ex-row" onclick="this.classList.toggle('open')">
+        <div class="ex-row-num" style="font-size:1rem;color:var(--blue)">W1–3</div>
+        <div class="ex-type-dot" style="background:var(--blue)"></div>
+        <div class="ex-row-info"><div class="ex-row-name">Incline Walking</div><div class="ex-row-target">35–45 min · 1–4% incline · Easy pace</div></div>
+        <div class="ex-row-sets">3–4×/wk</div>
+        <div class="ex-detail"><span class="ftag">Pace</span> Comfortable — you can hold a full conversation. This is about rebuilding the habit and protecting the ankle.<br><br><span class="ftag">Incline progression</span> Week 1: 1–2%. Week 2: 2–3%. Week 3: 3–4%. Never push incline if ankle complains.</div>
+      </div>
+
+      <div class="supset-label">Phase 2 — Weeks 4–8 (Build)</div>
+      <div class="ex-row" onclick="this.classList.toggle('open')">
+        <div class="ex-row-num" style="font-size:1rem;color:var(--green)">W4–6</div>
+        <div class="ex-type-dot" style="background:var(--green)"></div>
+        <div class="ex-row-info"><div class="ex-row-name">Walk / Jog Intervals</div><div class="ex-row-target">40–45 min · 2 min walk / 1 min jog</div></div>
+        <div class="ex-row-sets">3–4×/wk</div>
+        <div class="ex-detail"><span class="ftag">How to</span> Walk at 3.0–3.5mph for 2 minutes, then jog at 4.5–5.5mph for 1 minute. Repeat for the duration.<br><br>Burns 20–30% more calories than steady-state walking. Ankle permitting — skip jog portions if it flares up.</div>
+      </div>
+      <div class="ex-row" onclick="this.classList.toggle('open')">
+        <div class="ex-row-num" style="font-size:1rem;color:var(--green)">W6–8</div>
+        <div class="ex-type-dot" style="background:var(--green)"></div>
+        <div class="ex-row-info"><div class="ex-row-name">Steep Incline Challenge</div><div class="ex-row-target">45–50 min · 6–8% incline · Moderate pace</div></div>
+        <div class="ex-row-sets">1–2×/wk</div>
+        <div class="ex-detail"><span class="ftag">The 12-3-30 method</span> 12% incline, 3.0 mph, 30 min. Don't hold the handrails — it reduces the calorie burn significantly.<br><br>Extremely high calorie burn with zero impact. Great for the Saturday long session.</div>
+      </div>
+
+      <div class="supset-label">Phase 3 — Weeks 9–11 (Peak)</div>
+      <div class="ex-row" onclick="this.classList.toggle('open')">
+        <div class="ex-row-num" style="font-size:1rem;color:var(--orange)">W9–11</div>
+        <div class="ex-type-dot" style="background:var(--orange)"></div>
+        <div class="ex-row-info"><div class="ex-row-name">Run / Walk Sustained</div><div class="ex-row-target">50–55 min · 1:1 walk/jog or steady jog</div></div>
+        <div class="ex-row-sets">3–4×/wk</div>
+        <div class="ex-detail"><span class="ftag">Goal</span> By Week 9–10, aim to jog for 5–10 minutes continuously before walking. By Week 11, see how long you can sustain a comfortable jog.<br><br>You'll have built the base — trust it and push a little.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ NUTRITION ══════════════════ -->
+<div class="view" id="view-nutrition">
+  <div class="callout" style="border-color:var(--yellow)">
+    <div class="callout-icon">🍽️</div>
+    <div>
+      <div class="callout-title" style="color:var(--yellow)">Nutrition = 70% of Your Results</div>
+      <div class="callout-body">You don't need a strict diet — you need a <strong>slight calorie deficit with high protein</strong>. This approach preserves muscle while losing fat, which is what creates the lean, defined look by June. No elimination, no obsession — just a few consistent habits.</div>
+    </div>
+  </div>
+
+  <div class="nutr-grid">
+    <div class="nutr-card">
+      <div class="nutr-card-title" style="color:var(--green)">📊 Daily Targets</div>
+      <ul class="nutr-list">
+        <li>1,800–2,000 calories/day</li>
+        <li>100–130g protein</li>
+        <li>80–100 oz water</li>
+        <li>7–8 hours sleep</li>
+        <li>Don't skip meals</li>
+      </ul>
+    </div>
+    <div class="nutr-card">
+      <div class="nutr-card-title" style="color:var(--blue)">✅ Prioritize</div>
+      <ul class="nutr-list">
+        <li>Protein at every meal</li>
+        <li>Eggs, chicken, Greek yogurt</li>
+        <li>Vegetables for volume</li>
+        <li>Fruit as sweet snacks</li>
+        <li>Eat before workouts</li>
+      </ul>
+    </div>
+    <div class="nutr-card">
+      <div class="nutr-card-title" style="color:var(--orange)">↓ Reduce (not eliminate)</div>
+      <ul class="nutr-list">
+        <li>Liquid calories (soda, alcohol)</li>
+        <li>Late-night snacking</li>
+        <li>Ultra-processed foods</li>
+        <li>Large refined carb portions</li>
+        <li>Mindless eating</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="slabel">Protein cheat sheet — hit 100–130g/day</div>
+  <div style="background:var(--card); border:1px solid var(--border); overflow:hidden; margin-bottom:24px;">
+    <table style="width:100%; border-collapse:collapse; font-size:0.82rem;">
+      <thead><tr style="background:var(--card2)">
+        <th style="padding:10px 16px; text-align:left; font-size:0.65rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--border);">Food</th>
+        <th style="padding:10px 16px; text-align:left; font-size:0.65rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--border);">Serving</th>
+        <th style="padding:10px 16px; text-align:left; font-size:0.65rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--border);">Protein</th>
+      </tr></thead>
+      <tbody>
+        <tr><td style="padding:10px 16px; border-bottom:1px solid var(--border);">Chicken breast</td><td style="padding:10px 16px; border-bottom:1px solid var(--border); color:var(--muted);">4 oz</td><td style="padding:10px 16px; border-bottom:1px solid var(--border); color:var(--green); font-weight:600;">~35g</td></tr>
+        <tr><td style="padding:10px 16px; border-bottom:1px solid var(--border);">Greek yogurt</td><td style="padding:10px 16px; border-bottom:1px solid var(--border); color:var(--muted);">1 cup</td><td style="padding:10px 16px; border-bottom:1px solid var(--border); color:var(--green); font-weight:600;">~20g</td></tr>
+        <tr><td style="padding:10px 16px; border-bottom:1px solid var(--border);">Eggs</td><td style="padding:10px 16px; border-bottom:1px solid var(--border); color:var(--muted);">3 large</td><td style="padding:10px 16px; border-bottom:1px solid var(--border); color:var(--green); font-weight:600;">~18g</td></tr>
+        <tr><td style="padding:10px 16px; border-bottom:1px solid var(--border);">Cottage cheese</td><td style="padding:10px 16px; border-bottom:1px solid var(--border); color:var(--muted);">½ cup</td><td style="padding:10px 16px; border-bottom:1px solid var(--border); color:var(--green); font-weight:600;">~14g</td></tr>
+        <tr><td style="padding:10px 16px; border-bottom:1px solid var(--border);">Tuna (canned)</td><td style="padding:10px 16px; border-bottom:1px solid var(--border); color:var(--muted);">1 can</td><td style="padding:10px 16px; border-bottom:1px solid var(--border); color:var(--green); font-weight:600;">~25g</td></tr>
+        <tr><td style="padding:10px 16px;">Protein shake</td><td style="padding:10px 16px; color:var(--muted);">1 scoop</td><td style="padding:10px 16px; color:var(--green); font-weight:600;">~25g</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════ MILESTONES ══════════════════ -->
+<div class="view" id="view-milestones">
+  <div class="callout">
+    <div class="callout-icon">🏆</div>
+    <div>
+      <div class="callout-title">Track Your Wins</div>
+      <div class="callout-body">Check off milestones as you hit them. Progress isn't always visible on the scale — <strong>track how your clothes fit, your energy levels, and your workout performance</strong>. These are often better indicators than weight.</div>
+    </div>
+  </div>
+  <div class="ms-grid" id="ms-grid"></div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+// ── NAV ──
+function showView(id, btn) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('view-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── EXERCISE TABS ──
+function switchEx(id, btn) {
+  document.querySelectorAll('.ex-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.ex-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('expanel-' + id).classList.add('active');
+}
+
+// ── WEEKS DATA ──
+const weeks = [
+  { num:1,  phase:'rebuild', title:'Back in the Saddle',
+    days:[
+      { day:'Mon', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Treadmill walk 33–35 min · 1–2% incline · easy pace' },
+      { day:'Tue', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'Full recovery — ankle priority this week' },
+      { day:'Wed', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Treadmill walk 35 min · 2% incline' },
+      { day:'Thu', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Treadmill walk 35 min · no strength yet (Week 1 grace)' },
+      { day:'Fri', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'—' },
+      { day:'Sat', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Treadmill walk 35 min · 2% incline' },
+      { day:'Sun', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'Light walk outside optional if ankle feels good' },
+    ]},
+  { num:2,  phase:'rebuild', title:'Finding the Rhythm',
+    days:[
+      { day:'Mon', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Walk 38 min · 2–3% incline' },
+      { day:'Tue', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'—' },
+      { day:'Wed', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Walk 40 min · 3% incline' },
+      { day:'Thu', type:'combo',   pill:'pill-combo',  label:'Combo',    detail:'Walk 35 min treadmill → Day A Push (2 sets each, learn form)' },
+      { day:'Fri', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'—' },
+      { day:'Sat', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Walk 40 min · 3% incline' },
+      { day:'Sun', type:'pull',    pill:'pill-pull',   label:'Strength', detail:'Day B Pull + Core (2 sets each, learn form)' },
+    ]},
+  { num:3,  phase:'rebuild', title:'Consistency is King',
+    days:[
+      { day:'Mon', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Walk 40 min · 3–4% incline' },
+      { day:'Tue', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'—' },
+      { day:'Wed', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Walk 42 min · 4% incline' },
+      { day:'Thu', type:'combo',   pill:'pill-combo',  label:'Combo',    detail:'Walk 38 min → Day A Push (2 sets, focus on form)' },
+      { day:'Fri', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'—' },
+      { day:'Sat', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Walk 42 min · 4% incline' },
+      { day:'Sun', type:'pull',    pill:'pill-pull',   label:'Strength', detail:'Day B Pull + Core (2 sets)' },
+    ]},
+  { num:4,  phase:'build', title:'Stepping It Up',
+    days:[
+      { day:'Mon', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Intervals: 2 min walk / 1 min jog · 40 min total' },
+      { day:'Tue', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'—' },
+      { day:'Wed', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Incline walk 45 min · 5% incline' },
+      { day:'Thu', type:'combo',   pill:'pill-combo',  label:'Combo',    detail:'Intervals 38 min → Day A Push (3 sets)' },
+      { day:'Fri', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'—' },
+      { day:'Sat', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Intervals 40 min · 2 min walk / 1 min jog' },
+      { day:'Sun', type:'pull',    pill:'pill-pull',   label:'Strength', detail:'Day B Pull + Core (3 sets)' },
+    ]},
+  { num:5,  phase:'build', title:'Building Momentum',
+    days:[
+      { day:'Mon', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Intervals 45 min · 2:1 walk/jog' },
+      { day:'Tue', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'—' },
+      { day:'Wed', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Incline 45 min · 5–6% — aim for 3 miles' },
+      { day:'Thu', type:'combo',   pill:'pill-combo',  label:'Combo',    detail:'Intervals 40 min → Day A Push (3 sets, increase weights)' },
+      { day:'Fri', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'—' },
+      { day:'Sat', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Intervals 45 min or 12-3-30 method' },
+      { day:'Sun', type:'pull',    pill:'pill-pull',   label:'Strength', detail:'Day B Pull + Core (3 sets)' },
+    ]},
+  { num:6,  phase:'build', title:'Halfway There 🎯',
+    days:[
+      { day:'Mon', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Intervals 45 min · 1.5:1 walk/jog' },
+      { day:'Tue', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'—' },
+      { day:'Wed', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Incline 50 min · 6% — push yourself' },
+      { day:'Thu', type:'combo',   pill:'pill-combo',  label:'Combo',    detail:'Intervals 42 min → Day A Push (3 sets, heavier)' },
+      { day:'Fri', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'—' },
+      { day:'Sat', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'12-3-30 method · 30 min + 15 min cooldown walk' },
+      { day:'Sun', type:'pull',    pill:'pill-pull',   label:'Strength', detail:'Day B Pull + Core (3 sets, heavier)' },
+    ]},
+  { num:7,  phase:'build', title:'Getting Stronger',
+    days:[
+      { day:'Mon', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Intervals 50 min · 1:1 walk/jog' },
+      { day:'Tue', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'—' },
+      { day:'Wed', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Incline 48 min · 7%' },
+      { day:'Thu', type:'combo',   pill:'pill-combo',  label:'Combo',    detail:'Intervals 45 min → Day A Push (3–4 sets)' },
+      { day:'Fri', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'—' },
+      { day:'Sat', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Intervals 50 min · 1:1 walk/jog' },
+      { day:'Sun', type:'pull',    pill:'pill-pull',   label:'Strength', detail:'Day B Pull + Core (3–4 sets)' },
+    ]},
+  { num:8,  phase:'build', title:'High Effort Week',
+    days:[
+      { day:'Mon', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Intervals 50 min · push jog segments longer' },
+      { day:'Tue', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'—' },
+      { day:'Wed', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Incline 50 min · 8%' },
+      { day:'Thu', type:'combo',   pill:'pill-combo',  label:'Combo',    detail:'Intervals 45 min → Day A Push (4 sets, 8–10 reps, heavier)' },
+      { day:'Fri', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'—' },
+      { day:'Sat', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'12-3-30 · 35 min + 15 min cooldown' },
+      { day:'Sun', type:'pull',    pill:'pill-pull',   label:'Strength', detail:'Day B Pull + Core (4 sets, 8–10 reps)' },
+    ]},
+  { num:9,  phase:'peak', title:'Peak Phase Begins 🔥',
+    days:[
+      { day:'Mon', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Run/walk 50 min · jog 5+ min continuously' },
+      { day:'Tue', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'—' },
+      { day:'Wed', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Incline 50 min · 8–9%' },
+      { day:'Thu', type:'combo',   pill:'pill-combo',  label:'Combo',    detail:'Run/walk 45 min → Day A Push (4 sets, heavy)' },
+      { day:'Fri', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'—' },
+      { day:'Sat', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Long session 55 min · intervals or sustained jog' },
+      { day:'Sun', type:'pull',    pill:'pill-pull',   label:'Strength', detail:'Day B Pull + Core (4 sets, heavy)' },
+    ]},
+  { num:10, phase:'peak', title:'Strong & Steady',
+    days:[
+      { day:'Mon', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Run/walk 55 min' },
+      { day:'Tue', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'—' },
+      { day:'Wed', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Incline challenge 50 min · max incline you can sustain' },
+      { day:'Thu', type:'combo',   pill:'pill-combo',  label:'Combo',    detail:'Run/walk 45 min → Day A Push (4 sets, heaviest yet)' },
+      { day:'Fri', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'—' },
+      { day:'Sat', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'55 min — go for a personal distance record' },
+      { day:'Sun', type:'pull',    pill:'pill-pull',   label:'Strength', detail:'Day B Pull + Core (4 sets, heaviest yet)' },
+    ]},
+  { num:11, phase:'peak', title:'June Ready 🎉',
+    days:[
+      { day:'Mon', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Run/walk 55 min · see how long you can jog' },
+      { day:'Tue', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'—' },
+      { day:'Wed', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Incline 50 min · reflect on Week 1 vs now' },
+      { day:'Thu', type:'combo',   pill:'pill-combo',  label:'Combo',    detail:'Run/walk 45 min → Day A Push — final session!' },
+      { day:'Fri', type:'rest',    pill:'pill-rest',   label:'Rest',     detail:'—' },
+      { day:'Sat', type:'cardio',  pill:'pill-cardio', label:'Cardio',   detail:'Celebration run/walk 55 min · you made it' },
+      { day:'Sun', type:'pull',    pill:'pill-pull',   label:'Strength', detail:'Day B final — go heavy, finish strong' },
+    ]},
+];
+
+const phaseTag = { rebuild:'tag-rebuild', build:'tag-build', peak:'tag-peak' };
+const phaseName = { rebuild:'Rebuild', build:'Build', peak:'Peak' };
+
+const container = document.getElementById('weeks-container');
+weeks.forEach((w, i) => {
+  const card = document.createElement('div');
+  card.className = 'week-card';
+
+  card.innerHTML = `
+    <div class="week-head" onclick="toggleWeek(this)">
+      <div class="wnum">${w.num}</div>
+      <div class="wtitle">${w.title}</div>
+      <span class="wphase-tag ${phaseTag[w.phase]}">${phaseName[w.phase]}</span>
+      <span class="warrow${i===0?' open':''}">▼</span>
+    </div>
+    <div class="week-body${i===0?' open':''}">
+      <table class="day-table">
+        <thead><tr>
+          <th>Day</th><th>Type</th><th>Activity</th>
+        </tr></thead>
+        <tbody>
+          ${w.days.map(d => `
+            <tr>
+              <td class="day-name-cell">${d.day}</td>
+              <td><span class="activity-pill ${d.pill}">${d.label}</span></td>
+              <td class="activity-detail">${d.detail}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+  container.appendChild(card);
+});
+
+function toggleWeek(head) {
+  const body = head.nextElementSibling;
+  const arrow = head.querySelector('.warrow');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  arrow.classList.toggle('open', !isOpen);
+}
+
+// ── MILESTONES ──
+const milestones = [
+  { week:'Wk 1', text:'Complete your first full week back (3+ sessions)' },
+  { week:'Wk 2', text:'First strength sessions done — form learned' },
+  { week:'Wk 3', text:'3 weeks in — the habit is forming' },
+  { week:'Wk 4', text:'First jogging intervals completed' },
+  { week:'Wk 5', text:'Hit 3 miles in a single treadmill session' },
+  { week:'Wk 6', text:'Down 3–4 lbs from start · visible shoulder definition' },
+  { week:'Wk 7', text:'Can sustain 7% incline for 20+ minutes' },
+  { week:'Wk 8', text:'8 weeks done — halfway to June fit 💪' },
+  { week:'Wk 9', text:'Jog for 5+ minutes without stopping' },
+  { week:'Wk 10', text:'Down 7–8 lbs · clothes fitting noticeably better' },
+  { week:'Wk 11', text:'June Fit achieved 🎉 — reflect on the journey' },
+];
+
+const saved = JSON.parse(localStorage.getItem('jf_milestones') || '{}');
+const msGrid = document.getElementById('ms-grid');
+milestones.forEach((m, i) => {
+  const row = document.createElement('div');
+  row.className = 'ms-row';
+  const check = document.createElement('div');
+  check.className = 'ms-check' + (saved[i] ? ' done' : '');
+  check.addEventListener('click', () => {
+    check.classList.toggle('done');
+    saved[i] = check.classList.contains('done');
+    localStorage.setItem('jf_milestones', JSON.stringify(saved));
+  });
+  row.innerHTML = `<div class="ms-text">${m.text}</div><div class="ms-week">${m.week}</div>`;
+  row.prepend(check);
+  msGrid.appendChild(row);
+});
+</script>
+</body>
+</html>

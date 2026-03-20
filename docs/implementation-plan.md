@@ -297,65 +297,65 @@ This implementation plan breaks down the development of the Meal Prep & Fitness 
 
 ---
 
-## Phase 7: Routing & Views
+## Phase 7: Routing & Views ✓ (COMPLETED)
 
 **Goal:** Configure routes and build all meal prep view pages.
 
-### 7.1 Router Configuration
+### 7.1 Router Configuration ✓ (COMPLETED)
 
-- [ ] Update `src/router/index.ts`:
+- [x] Update `src/router/index.ts`:
   - Use `createWebHashHistory` for static hosting
   - Redirect `/` to `/meal/proteins`
   - Define all `/meal/*` routes
   - Placeholder `/fitness` routes
   - Scroll behavior: smooth scroll to top on route change
 
-### 7.2 Meal Prep Views
+### 7.2 Meal Prep Views ✓ (COMPLETED)
 
-- [ ] `src/views/meal/ProteinsGrainsView.vue`:
+- [x] `src/views/meal/ProteinsGrainsView.vue`:
   - Fish section (full-width card)
   - Chicken section (thighs + breast cards + summary)
   - Steak section (cast iron warning)
   - Grains & legumes table
   - Vegetable rotation grid
-- [ ] `src/views/meal/ShoppingListView.vue`:
+- [x] `src/views/meal/ShoppingListView.vue`:
   - Week label display
   - Category groups with CheckItem components
   - Checked count / total count display
   - Reset week button
   - Marinade selection note
-- [ ] `src/views/meal/PrepDayView.vue`:
+- [x] `src/views/meal/PrepDayView.vue`:
   - Saturday night pre-step callout
   - Sunday timeline (6 steps)
   - Emergency meals panel (collapsible)
-- [ ] `src/views/meal/MealPlanView.vue`:
+- [x] `src/views/meal/MealPlanView.vue`:
   - Weekly meal plan table
   - Thursday steak note callout
   - Saturday taco night note
-- [ ] `src/views/meal/CastIronView.vue`:
+- [x] `src/views/meal/CastIronView.vue`:
   - Header with subtitle
   - Sunday setup instructions
   - Wednesday cooking instructions (13 min)
   - 4 marinade cards with timing badges
-- [ ] `src/views/meal/SaucesView.vue`:
+- [x] `src/views/meal/SaucesView.vue`:
   - Three sections: Fish / Chicken / Steak
   - Sauce cards in each section
   - Storage badge legend
-- [ ] `src/views/meal/NutrientsView.vue`:
+- [x] `src/views/meal/NutrientsView.vue`:
   - PKD warning banner (CalloutBox red variant)
   - DASH diet alignment note
   - Nutrient status table
   - Fitness plan connection callouts
   - PKD & water note
-- [ ] `src/views/meal/StorageView.vue`:
+- [x] `src/views/meal/StorageView.vue`:
   - Fridge life table
   - Reheating guide
   - Recommended containers note
 
-### 7.3 Fitness Views (Placeholder)
+### 7.3 Fitness Views (Placeholder) ✓ (COMPLETED)
 
-- [ ] Create placeholder view files in `src/views/fitness/`
-- [ ] Add "Coming Soon" message to fitness routes
+- [x] Create placeholder view files in `src/views/fitness/`
+- [x] Add "Coming Soon" message to fitness routes
 
 **Deliverable:** All meal prep views functional and navigable.
 
