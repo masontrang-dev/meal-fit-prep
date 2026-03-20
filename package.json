@@ -12,7 +12,11 @@
     "type-check": "vue-tsc --build",
     "lint": "run-s lint:*",
     "lint:oxlint": "oxlint . --fix",
-    "lint:eslint": "eslint . --fix --cache"
+    "lint:eslint": "eslint . --fix --cache",
+    "version:patch": "npm version patch && node update-version.js && git add . && git commit -m \"Bump version to v$(node -p \"require('./package.json').version\")\" && git push --follow-tags",
+    "version:minor": "npm version minor && node update-version.js && git add . && git commit -m \"Bump version to v$(node -p \"require('./package.json').version\")\" && git push --follow-tags",
+    "version:major": "npm version major && node update-version.js && git add . && git commit -m \"Bump version to v$(node -p \"require('./package.json').version\")\" && git push --follow-tags",
+    "deploy": "npm run version:patch && vercel --prod"
   },
   "dependencies": {
     "lucide-vue-next": "^0.577.0",

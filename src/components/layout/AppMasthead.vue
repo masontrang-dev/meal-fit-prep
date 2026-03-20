@@ -3,6 +3,7 @@ import { useRouter } from "vue-router";
 import ServingsSelector from "@/components/ui/ServingsSelector.vue";
 
 const router = useRouter();
+const version = "1.2.1"; // This will be updated automatically by deployment scripts
 
 function navigateToHome() {
   router.push("/overview");
@@ -29,7 +30,7 @@ function navigateToHome() {
         <div class="masthead-meta">
           Fish · Chicken · Steak<br />
           Brown Rice · Quinoa · Lentils<br />
-          <span style="text-transform: none">v1.2</span>
+          <span style="text-transform: none">v{{ version }}</span>
         </div>
       </div>
     </div>
