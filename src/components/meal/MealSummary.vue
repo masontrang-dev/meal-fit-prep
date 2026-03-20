@@ -131,7 +131,15 @@ const toggleExpanded = () => {
         <span>Weekly Meal Summary</span>
       </div>
       <button class="toggle-btn" :class="{ expanded: isExpanded }">
-        <span class="toggle-icon">{{ isExpanded ? "▼" : "▶" }}</span>
+        <svg class="toggle-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path
+            d="M4.5 3L7.5 6L4.5 9"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
       </button>
     </div>
 
@@ -209,13 +217,12 @@ const toggleExpanded = () => {
 }
 
 .toggle-icon {
-  font-size: 0.8rem;
   color: var(--muted);
   transition: transform 0.2s;
 }
 
 .toggle-btn.expanded .toggle-icon {
-  transform: rotate(180deg);
+  transform: rotate(90deg);
 }
 
 .summary-content {

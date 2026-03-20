@@ -11,6 +11,7 @@ const router = useRouter();
 const store = useRandomizerStore();
 
 const warningDismissed = ref(false);
+const showMoreActions = ref(false);
 
 const currentState = computed(() => {
   if (store.hasPendingPlan) return "pending";
@@ -37,6 +38,10 @@ function navigateToShoppingList() {
 
 function navigateToPrepDay() {
   router.push("/meal/prep");
+}
+
+function toggleMoreActions() {
+  showMoreActions.value = !showMoreActions.value;
 }
 
 function handleRegenerateAll() {
@@ -430,44 +435,94 @@ function formatValue(value: string): string {
         class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg"
         style="z-index: 9999"
       >
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div class="flex justify-between items-center">
-            <!-- Left aligned: Save as Favorite -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-4">
+          <!-- Mobile: Compact view -->
+          <div class="sm:hidden flex gap-2">
+            <button
+              @click="navigateToShoppingList"
+              class="flex-1 px-3 py-2 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg text-sm"
+              style="background: var(--blue); color: var(--paper)"
+            >
+              🛒 Shopping List
+            </button>
+            <button
+              @click="toggleMoreActions"
+              class="px-3 py-2 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg text-sm"
+              style="background: var(--paper); color: var(--ink); border: 1px solid var(--rule)"
+            >
+              {{ showMoreActions ? "Less" : "More" }}
+            </button>
+          </div>
+
+          <!-- Mobile: Expanded actions -->
+          <div v-if="showMoreActions" class="sm:hidden flex flex-col gap-2 mt-2">
+            <button
+              @click="navigateToPrepDay"
+              class="w-full px-3 py-2 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg text-sm"
+              style="background: var(--green); color: var(--paper)"
+            >
+              👨‍🍳 Prep Day
+            </button>
+            <button
+              @click="handleGenerate"
+              class="w-full px-3 py-2 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg text-sm"
+              style="background: var(--blue); color: var(--paper)"
+            >
+              Generate Next Week
+            </button>
             <button
               @click="handleSaveAsFavorite"
               disabled
-              class="px-6 py-3 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg flex items-center gap-2 opacity-50 cursor-not-allowed"
+              class="w-full px-3 py-2 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg flex items-center justify-center gap-2 opacity-50 cursor-not-allowed text-sm"
               style="background: var(--paper); color: var(--ink); border: 1px solid var(--rule)"
             >
               <span>⭐</span>
               <span>Save as Favorite</span>
             </button>
+          </div>
+
+          <!-- Desktop: Full layout -->
+          <div class="hidden sm:flex sm:justify-between sm:items-center gap-2">
+            <!-- Left aligned: Save as Favorite -->
+            <button
+              @click="handleSaveAsFavorite"
+              disabled
+              class="w-full sm:w-auto px-3 sm:px-6 py-2 sm:py-3 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg flex items-center justify-center gap-2 opacity-50 cursor-not-allowed text-sm"
+              style="background: var(--paper); color: var(--ink); border: 1px solid var(--rule)"
+            >
+              <span>⭐</span>
+              <span class="hidden sm:inline">Save as Favorite</span>
+              <span class="sm:hidden">Favorite</span>
+            </button>
 
             <!-- Center: View Shopping List and View Prep Day -->
-            <div class="flex gap-4">
+            <div class="hidden sm:flex sm:flex-row sm:gap-4">
               <button
                 @click="navigateToShoppingList"
-                class="px-6 py-3 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg"
+                class="w-full sm:w-auto px-3 sm:px-6 py-2 sm:py-3 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg text-sm"
                 style="background: var(--blue); color: var(--paper)"
               >
-                🛒 View Shopping List
+                🛒 <span class="hidden sm:inline">View Shopping List</span>
+                <span class="sm:hidden">Shopping List</span>
               </button>
               <button
                 @click="navigateToPrepDay"
-                class="px-6 py-3 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg"
+                class="w-full sm:w-auto px-3 sm:px-6 py-2 sm:py-3 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg text-sm"
                 style="background: var(--green); color: var(--paper)"
               >
-                👨‍🍳 View Prep Day
+                👨‍🍳 <span class="hidden sm:inline">View Prep Day</span>
+                <span class="sm:hidden">Prep Day</span>
               </button>
             </div>
 
             <!-- Right aligned: Generate Next Week -->
             <button
               @click="handleGenerate"
-              class="px-6 py-3 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg"
+              class="w-full sm:w-auto px-3 sm:px-6 py-2 sm:py-3 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg text-sm"
               style="background: var(--blue); color: var(--paper)"
             >
-              Generate Next Week
+              <span class="hidden sm:inline">Generate Next Week</span>
+              <span class="sm:hidden">Next Week</span>
             </button>
           </div>
         </div>

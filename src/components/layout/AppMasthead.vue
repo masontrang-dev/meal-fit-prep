@@ -1,5 +1,12 @@
 <script setup lang="ts">
+import { useRouter } from "vue-router";
 import ServingsSelector from "@/components/ui/ServingsSelector.vue";
+
+const router = useRouter();
+
+function navigateToHome() {
+  router.push("/overview");
+}
 </script>
 
 <template>
@@ -7,7 +14,11 @@ import ServingsSelector from "@/components/ui/ServingsSelector.vue";
     <div class="masthead-inner">
       <div class="masthead-content">
         <div class="masthead-title-section">
-          <h1 class="masthead-title">Meal Prep<br /><em class="masthead-subtitle">for Two</em></h1>
+          <button @click="navigateToHome" class="masthead-title-button">
+            <h1 class="masthead-title">
+              Meal Prep<br /><em class="masthead-subtitle">for Two</em>
+            </h1>
+          </button>
           <div class="masthead-pills">
             <span class="pill">6 Lunches + 6 Dinners</span>
             <span class="pill">Whole Foods</span>
@@ -47,6 +58,20 @@ import ServingsSelector from "@/components/ui/ServingsSelector.vue";
 
 .masthead-title-section {
   flex: 1;
+}
+
+.masthead-title-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  text-align: left;
+  transition: opacity 0.2s;
+}
+
+.masthead-title-button:hover {
+  opacity: 0.8;
 }
 
 .masthead-title {
