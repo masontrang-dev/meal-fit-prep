@@ -26,6 +26,8 @@ export const sauces: Sauce[] = [
     applicationNote: "Drizzle over fish before baking",
     marinating: "minimum",
     sundaySafe: false,
+    applicationTiming: "before",
+    temperatureAdjustment: { adjusted: false },
   },
   {
     id: "cajun-spice",
@@ -51,6 +53,8 @@ export const sauces: Sauce[] = [
       "Mix a large batch and keep in the pantry. Never measure individual spices again",
     marinating: "minimum",
     sundaySafe: false,
+    applicationTiming: "before",
+    temperatureAdjustment: { adjusted: false },
   },
   {
     id: "soy-ginger-glaze",
@@ -74,6 +78,8 @@ export const sauces: Sauce[] = [
       "Brush onto fish for the last 5 min of baking only — honey burns if added at the start",
     marinating: "none",
     sundaySafe: false,
+    applicationTiming: "last-ten",
+    temperatureAdjustment: { adjusted: false },
   },
   {
     id: "lemon-dill",
@@ -96,6 +102,8 @@ export const sauces: Sauce[] = [
     applicationNote: "Drizzle over cooked fish just before serving",
     marinating: "minimum",
     sundaySafe: false,
+    applicationTiming: "before",
+    temperatureAdjustment: { adjusted: false },
   },
   {
     id: "mango-salsa",
@@ -118,6 +126,8 @@ export const sauces: Sauce[] = [
     applicationNote: "Spoon over fish after plating",
     marinating: "none",
     sundaySafe: false,
+    applicationTiming: "serving",
+    temperatureAdjustment: { adjusted: false },
   },
   {
     id: "garlic-butter",
@@ -139,6 +149,8 @@ export const sauces: Sauce[] = [
     applicationNote: "Melt over hot fish or add to pan while cooking",
     marinating: "none",
     sundaySafe: false,
+    applicationTiming: "last-five",
+    temperatureAdjustment: { adjusted: false },
   },
   {
     id: "herb-butter",
@@ -165,6 +177,8 @@ export const sauces: Sauce[] = [
       "Melt butter with olive oil in small pan over medium heat. Add garlic, cook 60 seconds until fragrant. Add herbs, lemon juice, salt, and pepper. Spoon over fish for the last 3 minutes of baking, or finish cast iron fish with it directly in the pan. Pairs with all fish varieties, especially cod and mahi-mahi. Brown rice, quinoa, asparagus, green beans.",
     marinating: "none",
     sundaySafe: false,
+    applicationTiming: "last-five",
+    temperatureAdjustment: { adjusted: false },
   },
   {
     id: "miso-glaze",
@@ -189,6 +203,12 @@ export const sauces: Sauce[] = [
       "Whisk all ingredients together. Spread over fish and marinate 30 min minimum (up to 4 hours refrigerated). Bake at 400°F for 12–15 min. Watch carefully — honey and miso can burn at high heat. Optional: broil last 2 minutes for a caramelized finish. Pairs with salmon, mahi-mahi. Quinoa, brown rice, bok choy, snap peas, edamame. Shopping note: Add white miso paste to pantry staples once this sauce enters rotation.",
     marinating: "minimum",
     sundaySafe: false,
+    applicationTiming: "last-ten",
+    temperatureAdjustment: {
+      adjusted: true,
+      tempF: 375,
+      note: "Reduce to 375°F to prevent honey and miso burning",
+    },
   },
 
   // ═══════════════════════════════════════════════════════════
@@ -216,6 +236,8 @@ export const sauces: Sauce[] = [
     applicationNote: "Add fresh garlic and olive oil when applying. Rub all over thighs and bake",
     marinating: "overnight",
     sundaySafe: false,
+    applicationTiming: "before",
+    temperatureAdjustment: { adjusted: false },
   },
   {
     id: "honey-mustard",
@@ -239,6 +261,12 @@ export const sauces: Sauce[] = [
     applicationNote: "Make a small jar at the start of the month",
     marinating: "minimum",
     sundaySafe: false,
+    applicationTiming: "last-ten",
+    temperatureAdjustment: {
+      adjusted: true,
+      tempF: 375,
+      note: "Reduce to 375°F to prevent honey burning",
+    },
   },
   {
     id: "mexican-dry-rub",
@@ -264,6 +292,8 @@ export const sauces: Sauce[] = [
       "Add olive oil only when applying to chicken. Serve over rice with black beans",
     marinating: "minimum",
     sundaySafe: false,
+    applicationTiming: "before",
+    temperatureAdjustment: { adjusted: false },
   },
   {
     id: "peanut-sauce",
@@ -288,6 +318,8 @@ export const sauces: Sauce[] = [
     applicationNote: "Drizzle over chicken or serve on the side",
     marinating: "overnight",
     sundaySafe: false,
+    applicationTiming: "before",
+    temperatureAdjustment: { adjusted: false },
   },
   {
     id: "buffalo-ranch",
@@ -308,6 +340,8 @@ export const sauces: Sauce[] = [
     applicationNote: "Toss chicken in sauce after cooking",
     marinating: "minimum",
     sundaySafe: false,
+    applicationTiming: "before",
+    temperatureAdjustment: { adjusted: false },
   },
   {
     id: "teriyaki-glaze",
@@ -336,6 +370,12 @@ export const sauces: Sauce[] = [
       "Combine all ingredients except cornstarch slurry. Marinate chicken overnight or minimum 2 hours. Bake at 375°F as normal. Optional glazed finish: heat remaining marinade in a small saucepan over medium heat, add cornstarch slurry, stir until thickened, brush over chicken in last 5 minutes of baking. Pairs with brown rice, quinoa, snap peas, bok choy, stir-fry veg blend, edamame. Note: Pairs naturally with Asian cast iron marinades the same week (Soy Garlic Ginger, Soy Ginger Glaze) for a cohesive weekly flavor theme without repetition. Shopping note: Add rice vinegar and cornstarch to pantry staples once this sauce enters rotation.",
     marinating: "overnight",
     sundaySafe: false,
+    applicationTiming: "last-ten",
+    temperatureAdjustment: {
+      adjusted: true,
+      tempF: 375,
+      note: "Reduce to 375°F to prevent honey burning",
+    },
   },
   {
     id: "lemon-herb",
@@ -366,6 +406,8 @@ export const sauces: Sauce[] = [
       "Combine all ingredients. Marinate chicken 2 hours minimum, overnight preferred. Bake thighs at 375°F for 35–40 min, breast at 375°F for 25–30 min. Bright, clean flavor — the most versatile chicken sauce in the pool. Pairs with quinoa, jasmine rice, asparagus, zucchini, green beans, snap peas. Note: Most Mediterranean of the chicken sauces. Pairs naturally with chimichurri steak or herb butter fish weeks for a cohesive weekly flavor theme.",
     marinating: "overnight",
     sundaySafe: false,
+    applicationTiming: "before",
+    temperatureAdjustment: { adjusted: false },
   },
 
   // ═══════════════════════════════════════════════════════════
@@ -394,6 +436,8 @@ export const sauces: Sauce[] = [
       "Marinate Sunday night for Monday/Tuesday meals. Works beautifully with both chicken and fish.",
     marinating: "overnight",
     sundaySafe: true,
+    applicationTiming: "before",
+    temperatureAdjustment: { adjusted: false },
   },
   {
     id: "smoked-paprika-garlic",
@@ -417,6 +461,8 @@ export const sauces: Sauce[] = [
     applicationNote: "Bold, smoky flavor. Sunday marinade for early-week chicken meals.",
     marinating: "minimum",
     sundaySafe: true,
+    applicationTiming: "before",
+    temperatureAdjustment: { adjusted: false },
   },
   {
     id: "lime-cumin",
@@ -440,6 +486,8 @@ export const sauces: Sauce[] = [
     applicationNote: "Bright, zesty marinade. Prep Tuesday night for Wednesday/Thursday meals.",
     marinating: "minimum",
     sundaySafe: false,
+    applicationTiming: "before",
+    temperatureAdjustment: { adjusted: false },
   },
   {
     id: "balsamic-herb",
@@ -463,6 +511,8 @@ export const sauces: Sauce[] = [
     applicationNote: "Rich, savory marinade. Tuesday prep for mid-week proteins.",
     marinating: "minimum",
     sundaySafe: false,
+    applicationTiming: "before",
+    temperatureAdjustment: { adjusted: false },
   },
   {
     id: "salt-pepper",
@@ -485,6 +535,8 @@ export const sauces: Sauce[] = [
     applicationNote: "Apply salt and pepper directly to steak and press in firmly before cooking",
     marinating: "none",
     sundaySafe: true,
+    applicationTiming: "before",
+    temperatureAdjustment: { adjusted: false },
   },
   {
     id: "chimichurri",
@@ -509,6 +561,8 @@ export const sauces: Sauce[] = [
       "Make weekly during Sunday prep (takes 3 min) or buy Trader Joe's chimichurri jar as a reliable shortcut",
     marinating: "none",
     sundaySafe: true,
+    applicationTiming: "serving",
+    temperatureAdjustment: { adjusted: false },
   },
   {
     id: "soy-garlic-pan-sauce",
@@ -532,6 +586,8 @@ export const sauces: Sauce[] = [
       "Use as the cast iron Wednesday marinade or pour into the hot pan after cooking to deglaze — instant sauce over everything",
     marinating: "none",
     sundaySafe: true,
+    applicationTiming: "serving",
+    temperatureAdjustment: { adjusted: false },
   },
   {
     id: "red-wine-reduction",
@@ -554,6 +610,8 @@ export const sauces: Sauce[] = [
     applicationNote: "Simmer until reduced by half, drizzle over steak",
     marinating: "none",
     sundaySafe: true,
+    applicationTiming: "serving",
+    temperatureAdjustment: { adjusted: false },
   },
   {
     id: "garlic-herb-butter",
@@ -576,6 +634,8 @@ export const sauces: Sauce[] = [
     applicationNote: "Place pat on hot steak, let melt",
     marinating: "none",
     sundaySafe: true,
+    applicationTiming: "serving",
+    temperatureAdjustment: { adjusted: false },
   },
 
   // ═══════════════════════════════════════════════════════════
@@ -604,6 +664,8 @@ export const sauces: Sauce[] = [
       "Cook shrimp in cast iron pan until pink and opaque. Remove shrimp. Add butter and garlic to pan, cook 60 seconds. Add lemon juice and parsley. Return shrimp to pan, toss to coat. Classic, rich, pairs with any grain.",
     marinating: "none",
     sundaySafe: false,
+    applicationTiming: "serving",
+    temperatureAdjustment: { adjusted: false },
   },
   {
     id: "shrimp-cajun-butter",
@@ -627,6 +689,8 @@ export const sauces: Sauce[] = [
       "Cook shrimp in cast iron pan until pink and opaque. Remove shrimp. Add butter, Cajun seasoning, and garlic to pan, cook 60 seconds. Add lemon juice. Return shrimp to pan, toss to coat. Bold, spicy, pairs with quinoa and bell pepper.",
     marinating: "none",
     sundaySafe: false,
+    applicationTiming: "serving",
+    temperatureAdjustment: { adjusted: false },
   },
   {
     id: "shrimp-soy-garlic-ginger",
@@ -651,6 +715,8 @@ export const sauces: Sauce[] = [
       "Cook shrimp in cast iron pan until pink and opaque. Remove shrimp. Add garlic and ginger to pan, cook 30 seconds. Add soy sauce, sesame oil, honey, and rice vinegar. Simmer 60 seconds. Return shrimp to pan, toss to coat. Asian-leaning, pairs with rice and bok choy.",
     marinating: "none",
     sundaySafe: false,
+    applicationTiming: "serving",
+    temperatureAdjustment: { adjusted: false },
   },
   {
     id: "shrimp-lime-cumin",
@@ -676,6 +742,8 @@ export const sauces: Sauce[] = [
       "Cook shrimp in cast iron pan until pink and opaque. Remove shrimp. Add butter, garlic, cumin, and chili powder to pan, cook 60 seconds. Add lime juice and cilantro. Return shrimp to pan, toss to coat. Mexican-leaning, pairs with black beans and jasmine rice.",
     marinating: "none",
     sundaySafe: false,
+    applicationTiming: "serving",
+    temperatureAdjustment: { adjusted: false },
   },
 ];
 

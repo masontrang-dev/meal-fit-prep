@@ -12,6 +12,18 @@ export type MarinadeId =
 export type MarinadeTiming = "sunday" | "tuesday";
 export type MarinadeRequirement = "none" | "minimum" | "overnight";
 
+export type ApplicationTiming =
+  | "before" // Apply before cooking — standard temp throughout
+  | "last-ten" // Apply last 8–10 min — sugar or honey content
+  | "last-five" // Apply last 3–5 min — butter based
+  | "serving"; // Never cooked — spoon over at serving or pan finish
+
+export interface TemperatureAdjustment {
+  adjusted: boolean;
+  tempF?: number; // Override temperature e.g. 375 instead of 400
+  note?: string; // e.g. 'Reduce to 375°F to prevent honey burning'
+}
+
 export interface Ingredient {
   amount: string;
   name: string;
@@ -111,6 +123,8 @@ export interface Sauce {
   applicationNote: string;
   marinating: MarinadeRequirement;
   sundaySafe: boolean;
+  applicationTiming: ApplicationTiming;
+  temperatureAdjustment: TemperatureAdjustment;
 }
 
 export interface NutrientRow {

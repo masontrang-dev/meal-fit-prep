@@ -18,6 +18,43 @@ defineProps<{
     <p v-if="sauce.marinating === 'overnight'" class="text-xs mb-2" style="color: var(--gold)">
       ⏰ Overnight marinade recommended
     </p>
+
+    <!-- Application Timing Indicator -->
+    <div v-if="sauce.applicationTiming !== 'before'" class="mb-2">
+      <p
+        v-if="sauce.applicationTiming === 'last-ten'"
+        class="text-xs font-medium"
+        style="color: var(--orange)"
+      >
+        🍯 Apply last 8–10 min (sugar/honey content)
+      </p>
+      <p
+        v-if="sauce.applicationTiming === 'last-five'"
+        class="text-xs font-medium"
+        style="color: var(--orange)"
+      >
+        🧈 Apply last 3–5 min (butter-based)
+      </p>
+      <p
+        v-if="sauce.applicationTiming === 'serving'"
+        class="text-xs font-medium"
+        style="color: var(--plum)"
+      >
+        🍽️ Never cooked — spoon over at serving
+      </p>
+    </div>
+
+    <!-- Temperature Adjustment Warning -->
+    <div
+      v-if="sauce.temperatureAdjustment.adjusted"
+      class="mb-2 p-2 rounded"
+      style="background-color: var(--orange-bg); border: 1px solid var(--orange)"
+    >
+      <p class="text-xs font-semibold" style="color: var(--orange)">
+        🌡️ {{ sauce.temperatureAdjustment.note }}
+      </p>
+    </div>
+
     <p class="text-sm text-[var(--muted)] mb-4"><strong>Best for:</strong> {{ sauce.bestFor }}</p>
 
     <div class="mb-4">

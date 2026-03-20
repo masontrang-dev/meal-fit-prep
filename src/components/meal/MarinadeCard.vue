@@ -53,6 +53,31 @@ const handleClick = () => {
       <strong>Best for:</strong> {{ marinade.bestFor }}
     </p>
 
+    <!-- Application Timing Indicator -->
+    <div v-if="marinade.applicationTiming !== 'before'" class="mb-3">
+      <p
+        v-if="marinade.applicationTiming === 'last-ten'"
+        class="text-xs font-medium"
+        style="color: var(--orange)"
+      >
+        🍯 Apply last 8–10 min (sugar/honey content)
+      </p>
+      <p
+        v-if="marinade.applicationTiming === 'last-five'"
+        class="text-xs font-medium"
+        style="color: var(--orange)"
+      >
+        🧈 Apply last 3–5 min (butter-based)
+      </p>
+      <p
+        v-if="marinade.applicationTiming === 'serving'"
+        class="text-xs font-medium"
+        style="color: var(--plum)"
+      >
+        🍽️ Never cooked — spoon over at serving
+      </p>
+    </div>
+
     <div class="mb-4">
       <h4 class="text-xs font-semibold uppercase tracking-wide text-[var(--muted)] mb-2">
         Ingredients
