@@ -186,38 +186,38 @@ This implementation plan breaks down the development of the Meal Prep & Fitness 
 
 ---
 
-## Phase 5: Shared UI Components
+## Phase 5: Shared UI Components ✓ (COMPLETED)
 
 **Goal:** Build reusable UI components used across multiple views.
 
-### 5.1 Basic UI Components
+### 5.1 Basic UI Components ✓ (COMPLETED)
 
-- [ ] `src/components/ui/CalloutBox.vue`:
+- [x] `src/components/ui/CalloutBox.vue`:
   - Props: `variant` (CalloutVariant)
   - Slot: default content
   - Left border + tinted background per variant
-- [ ] `src/components/ui/SectionLabel.vue`:
+- [x] `src/components/ui/SectionLabel.vue`:
   - Small all-caps label with top border rule
   - Props: `label` (string)
-- [ ] `src/components/ui/StatusBadge.vue`:
+- [x] `src/components/ui/StatusBadge.vue`:
   - Props: `variant` ('best' | 'good' | 'make')
   - Renders styled badge pill
-- [ ] `src/components/ui/ProteinPill.vue`:
+- [x] `src/components/ui/ProteinPill.vue`:
   - Props: `type` (ProteinType | 'cast-iron' | 'flex')
   - Color-coded pill with icon/emoji
-- [ ] `src/components/ui/StorageBadge.vue`:
+- [x] `src/components/ui/StorageBadge.vue`:
   - Props: `type` ('pantry' | 'fridge' | 'batch')
   - Small uppercase badge
-- [ ] `src/components/ui/CheckItem.vue`:
+- [x] `src/components/ui/CheckItem.vue`:
   - Props: `itemId`, `name`, `quantity`
   - Emits: `toggle(itemId)`
   - Full-row tappable checkbox
   - Reads checked state from shoppingStore
   - Strikethrough + opacity when checked
 
-### 5.2 Data Display Components
+### 5.2 Data Display Components ✓ (COMPLETED)
 
-- [ ] `src/components/ui/DataTable.vue`:
+- [x] `src/components/ui/DataTable.vue`:
   - Slot-based table with styled headers
   - Responsive hover states
   - Props: `headers` (string[])
