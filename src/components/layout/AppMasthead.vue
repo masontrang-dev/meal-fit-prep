@@ -3,7 +3,7 @@ import { useRouter } from "vue-router";
 import ServingsSelector from "@/components/ui/ServingsSelector.vue";
 
 const router = useRouter();
-const version = "1.2.2"; // This will be updated automatically by deployment scripts
+const version = "1.3.0"; // This will be updated automatically by deployment scripts
 
 function navigateToHome() {
   router.push("/overview");
