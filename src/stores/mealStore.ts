@@ -15,6 +15,7 @@ export const useMealStore = defineStore(
     const selectedVegetables = ref<string[]>(["Broccoli"]);
     const selectedSauces = ref<string[]>([]);
     const selectedProteins = ref<SelectedProtein[]>([]);
+    const selectedGrains = ref<string[]>([]);
 
     const setMarinade = (id: MarinadeId | null) => {
       selectedMarinade.value = id;
@@ -50,17 +51,23 @@ export const useMealStore = defineStore(
       selectedProteins.value = [...proteins];
     };
 
+    const setGrains = (ids: string[]) => {
+      selectedGrains.value = [...ids];
+    };
+
     return {
       selectedMarinade,
       selectedVegetables,
       selectedSauces,
       selectedProteins,
+      selectedGrains,
       setMarinade,
       toggleVegetable,
       setVegetables,
       toggleSauce,
       setSauces,
       setProteins,
+      setGrains,
     };
   },
   {

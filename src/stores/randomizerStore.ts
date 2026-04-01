@@ -73,6 +73,13 @@ export const useRandomizerStore = defineStore(
         .join(" ");
     }
 
+    function formatGrainId(id: string): string {
+      return id
+        .split("-")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+    }
+
     function syncMealStore(plan: GeneratedPlan) {
       const mealStore = useMealStore();
       mealStore.setVegetables([formatVegId(plan.roastingVeg1), formatVegId(plan.roastingVeg2)]);
@@ -82,6 +89,11 @@ export const useRandomizerStore = defineStore(
         { role: "batch-fish", proteinId: plan.batchFishVariety, sauceId: plan.batchFishSauce },
         { role: "batch-chicken", proteinId: plan.batchChickenCut, sauceId: plan.batchChickenSauce },
         { role: "cast-iron", proteinId: plan.castIronProtein, sauceId: plan.castIronSauce },
+      ]);
+      mealStore.setGrains([
+        formatGrainId(plan.grain1),
+        formatGrainId(plan.grain2),
+        formatGrainId(plan.legume),
       ]);
     }
 

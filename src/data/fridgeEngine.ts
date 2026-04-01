@@ -60,9 +60,9 @@ export const roastingVegetables: WeightedOption[] = [
   { value: "green-beans", weight: 0.12 },
   { value: "cauliflower", weight: 0.12 },
   { value: "brussels-sprouts", weight: 0.1 },
-  { value: "snap-peas", weight: 0.1 },
-  { value: "bok-choy", weight: 0.07 },
-  { value: "stir-fry-blend", weight: 0.05 },
+  // { value: "snap-peas", weight: 0.1 },
+  // { value: "bok-choy", weight: 0.07 },
+  // { value: "stir-fry-blend", weight: 0.05 },
 ];
 
 export const grains: WeightedOption[] = [

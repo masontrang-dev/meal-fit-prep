@@ -4,17 +4,22 @@ import { useMealStore } from "@/stores/mealStore";
 import type { SelectedProtein } from "@/stores/mealStore";
 import { proteins } from "@/data/proteins";
 import { vegetables } from "@/data/vegetables";
+import { grainsAndLegumes } from "@/data/grainsLegumes";
 import { getSauceById } from "@/data/sauces";
-import type { Protein, Vegetable, Sauce } from "@/types/meal.types";
+import { useSauceInventoryStore } from "@/stores/sauceInventoryStore";
+import type { Protein, Vegetable, Sauce, GrainOrLegume } from "@/types/meal.types";
 import SauceRecipeCard from "@/components/meal/SauceRecipeCard.vue";
 import SectionLabel from "@/components/ui/SectionLabel.vue";
 
 const mealStore = useMealStore();
+const sauceInventory = useSauceInventoryStore();
 
 const isDesktop = typeof window !== "undefined" && window.innerWidth >= 768;
 const isExpanded = ref(isDesktop);
 const expandedProteins = ref<Record<string, boolean>>({});
-const expandedVegetables = ref<Record<string, boolean>>({});
+const expandedVegetables = ref(isDesktop);
+const expandedGrains = ref(isDesktop);
+const expandedSauces = ref(isDesktop);
 
 const toggleExpanded = () => {
   isExpanded.value = !isExpanded.value;
@@ -24,8 +29,24 @@ const toggleProtein = (id: string) => {
   expandedProteins.value[id] = !expandedProteins.value[id];
 };
 
-const toggleVegetable = (name: string) => {
-  expandedVegetables.value[name] = !expandedVegetables.value[name];
+const toggleVegetables = () => {
+  expandedVegetables.value = !expandedVegetables.value;
+};
+
+const toggleGrains = () => {
+  expandedGrains.value = !expandedGrains.value;
+};
+
+const toggleSauces = () => {
+  expandedSauces.value = !expandedSauces.value;
+};
+
+const toggleSauceMade = (sauceId: string) => {
+  sauceInventory.toggleStock(sauceId);
+};
+
+const isSauceMade = (sauceId: string) => {
+  return sauceInventory.isInStock(sauceId);
 };
 
 // Map plan protein IDs to the overview protein data
@@ -118,6 +139,22 @@ const selectedVegData = computed<Vegetable[]>(() => {
     .filter((v): v is Vegetable => v !== undefined);
 });
 
+// Resolved grain data from the grainsAndLegumes list
+const selectedGrainsData = computed<GrainOrLegume[]>(() => {
+  return mealStore.selectedGrains
+    .map((name) => {
+      // Try exact name match first (for grains)
+      let found = grainsAndLegumes.find((g) => g.name === name);
+      // If not found, try ID match (for legumes like "Lentils" -> "lentils")
+      if (!found) {
+        const id = name.toLowerCase().replace(/\s+/g, "-");
+        found = grainsAndLegumes.find((g) => g.id === id);
+      }
+      return found;
+    })
+    .filter((g): g is GrainOrLegume => g !== undefined);
+});
+
 // All sauces for the week, with role labels
 const batchSauces = computed(() => {
   const proteinMap = new Map(mealStore.selectedProteins.map((p) => [p.sauceId, p.role]));
@@ -173,27 +210,61 @@ const hasContent = computed(
     </div>
 
     <div class="recipes-content" :class="{ expanded: isExpanded }">
+      <!-- Grains & Legumes Section -->
+      <div v-if="selectedGrainsData.length > 0" class="recipe-section">
+        <div class="section-header">
+          <SectionLabel label="🌾 Grains & Legumes" />
+          <button class="section-toggle-btn" @click="toggleGrains">
+            {{ expandedGrains ? "▲ Collapse" : "▼ Expand" }}
+          </button>
+        </div>
+        <div class="veg-grid">
+          <div v-for="grain in selectedGrainsData" :key="grain.name" class="veg-card">
+            <div class="veg-header">
+              <div class="veg-name">{{ grain.name }}</div>
+            </div>
+            <div v-show="expandedGrains" class="veg-content">
+              <p class="detail-text">{{ grain.keyNutrients }}</p>
+              <p class="detail-text"><strong>Cook:</strong> {{ grain.cookMethod }}</p>
+              <p v-if="grain.cookTime" class="detail-text">
+                <strong>Time:</strong> {{ grain.cookTime }}
+              </p>
+              <p v-if="grain.rinseWarning" class="detail-text">
+                <strong>⚠️ Rinse before cooking</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- Vegetables Section -->
       <div v-if="selectedVegData.length > 0" class="recipe-section">
-        <SectionLabel label="🥦 Vegetables" />
+        <div class="section-header">
+          <SectionLabel label="🥦 Vegetables" />
+          <button class="section-toggle-btn" @click="toggleVegetables">
+            {{ expandedVegetables ? "▲ Collapse" : "▼ Expand" }}
+          </button>
+        </div>
         <div class="veg-grid">
           <div v-for="veg in selectedVegData" :key="veg.name" class="veg-card">
-            <div class="veg-header" @click="toggleVegetable(veg.name)">
+            <div class="veg-header">
               <div class="veg-name">{{ veg.name }}</div>
-              <button class="veg-expand-btn">
-                {{ (expandedVegetables[veg.name] ?? isDesktop) ? "▲ Collapse" : "▼ Expand" }}
-              </button>
             </div>
-            <div v-if="expandedVegetables[veg.name] ?? isDesktop" class="veg-content">
+            <div v-show="expandedVegetables" class="veg-content">
               <p class="detail-text"><strong>Prep:</strong> {{ veg.prepNote }}</p>
               <p class="detail-text"><strong>Cook:</strong> {{ veg.cookNote }}</p>
             </div>
           </div>
         </div>
       </div>
+
       <!-- Batch Sauces Section -->
       <div v-if="batchSauces.length > 0" class="recipe-section">
-        <SectionLabel label="🫙 Sauces" />
+        <div class="section-header">
+          <SectionLabel label="🫙 Sauces/Marinades" />
+          <button class="section-toggle-btn" @click="toggleSauces">
+            {{ expandedSauces ? "▲ Collapse" : "▼ Expand" }}
+          </button>
+        </div>
         <div class="sauce-grid">
           <div
             v-for="item in batchSauces"
@@ -202,7 +273,48 @@ const hasContent = computed(
             :class="`sauce-${item.variant}`"
           >
             <div class="sauce-role-badge" :class="`badge-${item.variant}`">{{ item.label }}</div>
-            <SauceRecipeCard :sauce="item.sauce" :expanded="isDesktop" />
+            <div class="sauce-card-header">
+              <div class="sauce-name">{{ item.sauce.name }}</div>
+            </div>
+            <!-- Section expanded + Card not made (show full details) -->
+            <div v-show="expandedSauces && !isSauceMade(item.sauce.id)" class="sauce-card-content">
+              <p class="detail-text">{{ item.sauce.flavorProfile }}</p>
+              <p class="detail-text"><strong>Best for:</strong> {{ item.sauce.bestFor }}</p>
+              <div class="sauce-section">
+                <div class="sauce-section-label">Ingredients:</div>
+                <ul class="ingredient-list">
+                  <li v-for="(ingredient, idx) in item.sauce.ingredients" :key="idx">
+                    <span class="ingredient-amount">{{ ingredient.amount }}</span>
+                    {{ ingredient.name }}
+                  </li>
+                </ul>
+              </div>
+              <div class="sauce-section">
+                <div class="sauce-section-label">Method:</div>
+                <p class="sauce-method">{{ item.sauce.application }}</p>
+              </div>
+              <div v-if="item.sauce.temperatureAdjustment.adjusted" class="sauce-temp-warning">
+                ⚠️ Oven at {{ item.sauce.temperatureAdjustment.tempF }}°F —
+                {{ item.sauce.temperatureAdjustment.note }}
+              </div>
+            </div>
+            <!-- Section expanded + Card made (show just title + method) -->
+            <div v-show="expandedSauces && isSauceMade(item.sauce.id)" class="sauce-card-collapsed">
+              <p class="sauce-method">{{ item.sauce.application }}</p>
+            </div>
+            <!-- Section collapsed -->
+            <div v-show="!expandedSauces" class="sauce-card-collapsed">
+              <!-- No content when section is collapsed - just title visible -->
+            </div>
+            <div class="sauce-footer">
+              <button
+                @click="toggleSauceMade(item.sauce.id)"
+                class="btn-mark-made"
+                :class="{ 'btn-made': isSauceMade(item.sauce.id) }"
+              >
+                {{ isSauceMade(item.sauce.id) ? "✓ Made" : "Mark as made" }}
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -464,6 +576,49 @@ const hasContent = computed(
   border-color: var(--cast);
 }
 
+.sauce-card-header {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.sauce-card-content {
+  padding: 16px;
+  flex: 1;
+}
+
+.sauce-card-collapsed {
+  padding: 0 16px 16px;
+  flex: 1;
+}
+
+.sauce-footer {
+  padding: 12px 16px;
+  border-top: 1px solid var(--rule);
+  background: var(--bg);
+}
+
+.btn-mark-made {
+  width: 100%;
+  padding: 10px 16px;
+  background: var(--green);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-mark-made:hover {
+  background: var(--green-mid);
+}
+
+.btn-mark-made.btn-made {
+  background: var(--green-light);
+  color: var(--green);
+}
+
 .sauce-role-badge {
   font-size: 0.7rem;
   font-weight: 700;
@@ -497,6 +652,32 @@ const hasContent = computed(
   gap: 12px;
 }
 
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section-toggle-btn {
+  background: none;
+  border: none;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.section-toggle-btn:hover {
+  background: var(--bg);
+  color: var(--ink);
+}
+
 .veg-card {
   border: 2px solid var(--green);
   border-radius: 8px;
@@ -509,12 +690,8 @@ const hasContent = computed(
   justify-content: space-between;
   align-items: center;
   padding: 14px 16px;
-  cursor: pointer;
+  cursor: default;
   transition: background 0.2s;
-}
-
-.veg-header:hover {
-  background: var(--bg);
 }
 
 .veg-name {
@@ -522,6 +699,22 @@ const hasContent = computed(
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--ink);
+}
+
+.sauce-name {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.sauce-section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-bottom: 8px;
 }
 
 .veg-expand-btn {

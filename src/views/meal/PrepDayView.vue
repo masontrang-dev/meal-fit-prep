@@ -467,9 +467,10 @@ function closeIngredientPopover() {
       @reset="handleResetTimer"
       @delete="handleDeleteTimer"
     >
-      <!-- Meal Summary in full-width slot -->
+      <!-- Meal Summary and Recipes in full-width slot -->
       <template #full-width>
         <MealSummary :plan="randomizerStore.confirmedPlan" />
+        <PrepDayRecipes />
       </template>
 
       <div class="cooking-content-area">

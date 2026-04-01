@@ -1,41 +1,34 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { computed } from "vue";
 import type { Sauce } from "@/types/meal.types";
 import { useSauceInventoryStore } from "@/stores/sauceInventoryStore";
 
 const props = defineProps<{
   sauce: Sauce;
-  expanded?: boolean;
 }>();
 
 const sauceInventory = useSauceInventoryStore();
 
 const isMade = computed(() => sauceInventory.isInStock(props.sauce.id));
 
-const isExpanded = ref(props.expanded ?? false);
+function toggleMade() {
+  sauceInventory.toggleStock(props.sauce.id);
+}
 
 // Keep emit for parent components that may want to react
 const emit = defineEmits<{
   "mark-made": [sauceId: string];
 }>();
-
-function toggleExpand() {
-  isExpanded.value = !isExpanded.value;
-}
 </script>
 
 <template>
   <div class="sauce-recipe-card">
-    <div class="sauce-header" @click="toggleExpand">
+    <div class="sauce-content">
       <div class="sauce-name">{{ sauce.name }}</div>
-      <button class="expand-btn" :aria-label="isExpanded ? 'Collapse' : 'Expand'">
-        {{ isExpanded ? "▲ Collapse" : "▼ Expand" }}
-      </button>
-    </div>
+      <p class="detail-text">{{ sauce.flavorProfile }}</p>
+      <p class="detail-text"><strong>Best for:</strong> {{ sauce.bestFor }}</p>
+      <p class="detail-text"><strong>Application:</strong> {{ sauce.application }}</p>
 
-    <div class="sauce-subtitle">For: {{ sauce.bestFor }}</div>
-
-    <div v-if="isExpanded" class="sauce-content">
       <div class="sauce-section">
         <div class="sauce-section-label">Ingredients:</div>
         <ul class="ingredient-list">
@@ -57,12 +50,8 @@ function toggleExpand() {
       </div>
     </div>
 
-    <div v-if="isExpanded" class="sauce-footer">
-      <button
-        @click.stop="sauceInventory.toggleStock(sauce.id)"
-        class="btn-mark-made"
-        :class="{ 'btn-made': isMade }"
-      >
+    <div class="sauce-footer">
+      <button @click="toggleMade" class="btn-mark-made" :class="{ 'btn-made': isMade }">
         {{ isMade ? "✓ Made" : "Mark as made" }}
       </button>
     </div>
