@@ -28,7 +28,7 @@ const handleToggle = () => {
     @click="handleToggle"
   >
     <div
-      class="w-4 h-4 min-w-[16px] border-[1.5px] border-[var(--rule)] rounded-sm flex items-center justify-center text-[0.58rem] mt-[2px] transition-all duration-150"
+      class="w-[18px] h-[18px] min-w-[18px] border-[1.5px] border-[var(--rule)] rounded-sm flex items-center justify-center text-[0.58rem] mt-[2px] transition-all duration-150"
       :class="{ 'bg-[var(--green)] border-[var(--green)] text-white': isChecked }"
     >
       <span v-if="isChecked">✓</span>

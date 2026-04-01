@@ -17,10 +17,8 @@ const handleToggle = (itemId: string) => {
 </script>
 
 <template>
-  <div class="bg-[var(--paper)] border border-[var(--rule)] p-4">
-    <h3
-      class="font-display text-lg font-bold text-[var(--ink)] mb-2 pb-2 border-b border-[var(--rule)]"
-    >
+  <div class="card p-4">
+    <h3 class="font-display text-lg font-semibold text-[var(--ink)] mb-3">
       {{ category }}
     </h3>
     <ul class="list-none">

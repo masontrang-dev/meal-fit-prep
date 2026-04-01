@@ -202,6 +202,12 @@
     color: var(--gold);
     border: 1px solid #e8d090;
   }
+  .sb-fresh {
+    @apply inline-block text-[0.62rem] font-bold tracking-[0.07em] uppercase px-[7px] py-[2px] rounded-sm mr-1;
+    background: var(--blue-light);
+    color: var(--blue);
+    border: 1px solid #b8cce8;
+  }
 
   /* Nutrient status badges */
   .ns-good {

@@ -16,6 +16,7 @@ import RecipePopover from "@/components/meal/RecipePopover.vue";
 import IngredientPopover from "@/components/meal/IngredientPopover.vue";
 import MealSummary from "@/components/meal/MealSummary.vue";
 import PrepDayRecipes from "@/components/meal/PrepDayRecipes.vue";
+import AppPage from "@/components/layout/AppPage.vue";
 import type { PrepStep, Sauce } from "@/types/meal.types";
 import type { GeneratedPlan } from "@/types/randomizer.types";
 
@@ -400,133 +401,147 @@ function closeIngredientPopover() {
 </script>
 
 <template>
-  <div>
-    <div v-if="!cookingMode">
-      <div class="flex justify-between items-center mb-6">
+  <AppPage>
+    <div class="max-w-[980px] mx-auto">
+      <div class="mb-8">
+        <h1 class="font-display text-3xl font-bold text-[var(--ink)] mb-4">Prep Day Timeline</h1>
         <p class="text-sm text-[var(--muted)] leading-relaxed">
           Sunday afternoon · ~90–100 min total · mostly hands-off oven time.
           <strong>Everything for the week is done here</strong> — including Wednesday's cast iron
           setup.
         </p>
-        <button
-          v-if="randomizerStore.confirmedPlan"
-          @click="startCookingMode"
-          class="btn-start-cooking"
-        >
-          ▶ Start Cooking
-        </button>
       </div>
 
-      <!-- Meal Summary below header section -->
-      <MealSummary :plan="randomizerStore.confirmedPlan" />
+      <div v-if="!cookingMode">
+        <div class="flex justify-between items-center mb-6">
+          <p class="text-xs font-medium text-[var(--muted)] leading-relaxed">
+            Follow the timeline below to prep all your meals for the week. Generate your plan in the
+            Fridge tab for a personalized timeline.
+          </p>
+          <button
+            v-if="randomizerStore.confirmedPlan"
+            @click="startCookingMode"
+            class="btn-start-cooking"
+          >
+            ▶ Start Cooking
+          </button>
+        </div>
 
-      <!-- Recipe details for this week's selections -->
-      <PrepDayRecipes />
-
-      <CalloutBox v-if="!randomizerStore.confirmedPlan" variant="gold" class="mb-7">
-        <p>
-          <strong>Generate your weekly plan first.</strong> Once you confirm your plan in the Fridge
-          tab, this Prep Day timeline will become dynamic and personalized to your selected meals.
-        </p>
-      </CalloutBox>
-
-      <CalloutBox v-else variant="cast" class="mb-7">
-        <p>
-          <strong>Cast iron setup is 100% Sunday.</strong> Marinate the Wednesday protein now and
-          refrigerate. Slice the Wednesday vegetables now and store in a container. Wednesday
-          evening you pull everything from the fridge and cook — zero additional prep.
-        </p>
-      </CalloutBox>
-
-      <section>
-        <PrepTimeline :steps="prepSteps" @ingredient-click="openIngredientPopover" />
-      </section>
-
-      <CalloutBox variant="green" class="mt-7">
-        <p>
-          <strong>Sunday breakfast prep:</strong> After portioning your meals, make the oat batch
-          and/or 5 chia pudding jars. Both take under 10 minutes combined and are covered in full on
-          the Breakfasts tab.
-        </p>
-      </CalloutBox>
-    </div>
-
-    <CookingModeLayout
-      v-else
-      :timers="timerStore.activeTimers"
-      :active-step-index="activeStepIndex"
-      :total-steps="prepSteps.length"
-      @exit="exitCookingMode"
-      @timer-click="handleTimerClick"
-      @sauce-alert-fired="handleSauceAlertFired"
-      @timer-completed="handleTimerCompleted"
-      @confirm-sauce-applied="confirmSauceApplied"
-      @skip-sauce="skipSauce"
-      @pause="handlePauseTimer"
-      @resume="handleResumeTimer"
-      @reset="handleResetTimer"
-      @delete="handleDeleteTimer"
-    >
-      <!-- Meal Summary and Recipes in full-width slot -->
-      <template #full-width>
+        <!-- Meal Summary below header section -->
         <MealSummary :plan="randomizerStore.confirmedPlan" />
+
+        <!-- Recipe details for this week's selections -->
         <PrepDayRecipes />
-      </template>
 
-      <div class="cooking-content-area">
-        <div class="cooking-steps">
-          <div class="section-label">ACTIVE STEP</div>
+        <CalloutBox v-if="!randomizerStore.confirmedPlan" variant="gold" class="mb-7">
+          <p>
+            <strong>Generate your weekly plan first.</strong> Once you confirm your plan in the
+            Fridge tab, this Prep Day timeline will become dynamic and personalized to your selected
+            meals.
+          </p>
+        </CalloutBox>
 
-          <div v-for="(step, index) in prepSteps" :key="step.id" class="step-wrapper">
-            <PrepTimeline :steps="[step]" @ingredient-click="openIngredientPopover" />
+        <CalloutBox v-else variant="cast" class="mb-7">
+          <p>
+            <strong>Cast iron setup is 100% Sunday.</strong> Marinate the Wednesday protein now and
+            refrigerate. Slice the Wednesday vegetables now and store in a container. Wednesday
+            evening you pull everything from the fridge and cook — zero additional prep.
+          </p>
+        </CalloutBox>
 
-            <!-- Timer buttons for oven step -->
-            <div v-if="step.id === 'step-4' && randomizerStore.confirmedPlan" class="timer-buttons">
-              <div class="timer-button-label">Start Timers:</div>
-              <button @click="startFishTimer" class="btn-timer">▶ Fish (15 min)</button>
-              <button @click="startChickenTimer" class="btn-timer">
-                ▶ Chicken ({{
-                  randomizerStore.confirmedPlan.batchChickenCut === "thighs" ? "40" : "30"
-                }}
-                min)
-              </button>
-              <button @click="startLentilTimer" class="btn-timer">
-                ▶
-                {{
-                  randomizerStore.confirmedPlan.legume.charAt(0).toUpperCase() +
-                  randomizerStore.confirmedPlan.legume.slice(1)
-                }}
-                ({{ standardCookConfig[randomizerStore.confirmedPlan.legume]?.durationMin || 22 }}
-                min)
-              </button>
+        <section>
+          <PrepTimeline :steps="prepSteps" @ingredient-click="openIngredientPopover" />
+        </section>
+
+        <CalloutBox variant="green" class="mt-7">
+          <p>
+            <strong>Sunday breakfast prep:</strong> After portioning your meals, make the oat batch
+            and/or 5 chia pudding jars. Both take under 10 minutes combined and are covered in full
+            on the Breakfasts tab.
+          </p>
+        </CalloutBox>
+      </div>
+
+      <CookingModeLayout
+        v-else
+        :timers="timerStore.activeTimers"
+        :active-step-index="activeStepIndex"
+        :total-steps="prepSteps.length"
+        @exit="exitCookingMode"
+        @timer-click="handleTimerClick"
+        @sauce-alert-fired="handleSauceAlertFired"
+        @timer-completed="handleTimerCompleted"
+        @confirm-sauce-applied="confirmSauceApplied"
+        @skip-sauce="skipSauce"
+        @pause="handlePauseTimer"
+        @resume="handleResumeTimer"
+        @reset="handleResetTimer"
+        @delete="handleDeleteTimer"
+      >
+        <!-- Meal Summary and Recipes in full-width slot -->
+        <template #full-width>
+          <MealSummary :plan="randomizerStore.confirmedPlan" />
+          <PrepDayRecipes />
+        </template>
+
+        <div class="cooking-content-area">
+          <div class="cooking-steps">
+            <div class="section-label">ACTIVE STEP</div>
+
+            <div v-for="(step, index) in prepSteps" :key="step.id" class="step-wrapper">
+              <PrepTimeline :steps="[step]" @ingredient-click="openIngredientPopover" />
+
+              <!-- Timer buttons for oven step -->
+              <div
+                v-if="step.id === 'step-4' && randomizerStore.confirmedPlan"
+                class="timer-buttons"
+              >
+                <div class="timer-button-label">Start Timers:</div>
+                <button @click="startFishTimer" class="btn-timer">▶ Fish (15 min)</button>
+                <button @click="startChickenTimer" class="btn-timer">
+                  ▶ Chicken ({{
+                    randomizerStore.confirmedPlan.batchChickenCut === "thighs" ? "40" : "30"
+                  }}
+                  min)
+                </button>
+                <button @click="startLentilTimer" class="btn-timer">
+                  ▶
+                  {{
+                    randomizerStore.confirmedPlan.legume.charAt(0).toUpperCase() +
+                    randomizerStore.confirmedPlan.legume.slice(1)
+                  }}
+                  ({{ standardCookConfig[randomizerStore.confirmedPlan.legume]?.durationMin || 22 }}
+                  min)
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </CookingModeLayout>
+      </CookingModeLayout>
 
-    <SauceAlertModal
-      v-if="showSauceAlert && currentSauceAlert"
-      :sauce-name="currentSauceAlert.sauceName"
-      :instructions="currentSauceAlert.instructions"
-      :phase2-duration-min="currentSauceAlert.phase2DurationMin"
-      @confirm="confirmSauceApplied"
-      @skip="skipSauce"
-    />
+      <SauceAlertModal
+        v-if="showSauceAlert && currentSauceAlert"
+        :sauce-name="currentSauceAlert.sauceName"
+        :instructions="currentSauceAlert.instructions"
+        :phase2-duration-min="currentSauceAlert.phase2DurationMin"
+        @confirm="confirmSauceApplied"
+        @skip="skipSauce"
+      />
 
-    <RecipePopover
-      :is-open="showRecipePopover"
-      :plan="randomizerStore.confirmedPlan"
-      @close="closeRecipePopover"
-    />
+      <RecipePopover
+        :is-open="showRecipePopover"
+        :plan="randomizerStore.confirmedPlan"
+        @close="closeRecipePopover"
+      />
 
-    <IngredientPopover
-      :is-open="showIngredientPopover"
-      :ingredient="clickedIngredient"
-      :plan="randomizerStore.confirmedPlan"
-      @close="closeIngredientPopover"
-    />
-  </div>
+      <IngredientPopover
+        :is-open="showIngredientPopover"
+        :ingredient="clickedIngredient"
+        :plan="randomizerStore.confirmedPlan"
+        @close="closeIngredientPopover"
+      />
+    </div>
+  </AppPage>
 </template>
 
 <style scoped>

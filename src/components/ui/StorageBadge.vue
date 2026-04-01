@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
-  type: 'pantry' | 'fridge' | 'batch'
-}>()
+  type: "pantry" | "fridge" | "batch" | "fresh";
+}>();
 </script>
 
 <template>
@@ -9,7 +9,8 @@ defineProps<{
     :class="{
       'sb-pantry': type === 'pantry',
       'sb-fridge': type === 'fridge',
-      'sb-batch': type === 'batch'
+      'sb-batch': type === 'batch',
+      'sb-fresh': type === 'fresh',
     }"
   >
     {{ type }}
