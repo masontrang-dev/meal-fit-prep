@@ -184,6 +184,24 @@
     color: var(--cast);
     border: 1px solid #e8b8d0;
   }
+  .sb-sunday-safe {
+    @apply inline-block text-[0.62rem] font-bold tracking-[0.07em] uppercase px-[7px] py-[2px] rounded-sm mr-1;
+    background: var(--green-light);
+    color: var(--green);
+    border: 1px solid var(--green-mid);
+  }
+  .sb-tuesday-only {
+    @apply inline-block text-[0.62rem] font-bold tracking-[0.07em] uppercase px-[7px] py-[2px] rounded-sm mr-1;
+    background: var(--cast-light);
+    color: var(--cast);
+    border: 1px solid #e8b8d0;
+  }
+  .sb-overnight {
+    @apply inline-block text-[0.62rem] font-bold tracking-[0.07em] uppercase px-[7px] py-[2px] rounded-sm mr-1;
+    background: var(--gold-light);
+    color: var(--gold);
+    border: 1px solid #e8d090;
+  }
 
   /* Nutrient status badges */
   .ns-good {

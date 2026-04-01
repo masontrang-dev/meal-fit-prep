@@ -3,7 +3,7 @@ import type { Vegetable } from "@/types/meal.types";
 
 defineProps<{
   vegetables: Vegetable[];
-  selectedVegetable?: string;
+  selectedVegetables?: string[];
 }>();
 
 const emit = defineEmits<{
@@ -36,11 +36,13 @@ const handleSelect = (vegName: string) => {
       :key="veg.name"
       class="card p-4 cursor-pointer transition-all duration-200 hover:shadow-md active:scale-[0.98]"
       :class="{
-        'ring-2 ring-[var(--green)] bg-[var(--green-light)]': selectedVegetable === veg.name,
+        'ring-2 ring-[var(--green)] bg-[var(--green-light)]': selectedVegetables?.includes(
+          veg.name,
+        ),
       }"
       @click="handleSelect(veg.name)"
       role="button"
-      :aria-pressed="selectedVegetable === veg.name"
+      :aria-pressed="selectedVegetables?.includes(veg.name)"
       :aria-label="`Select ${veg.name} as this week's vegetable`"
       tabindex="0"
       @keydown.enter="handleSelect(veg.name)"

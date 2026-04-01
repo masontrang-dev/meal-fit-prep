@@ -35,14 +35,6 @@ import CalloutBox from "@/components/ui/CalloutBox.vue";
             with a fork after heating.
           </p>
         </CalloutBox>
-
-        <CalloutBox variant="gold">
-          <p>
-            <strong>Containers worth having:</strong> Glass 2-compartment meal prep containers —
-            protein and grain stay separate, microwave and dishwasher safe. ~$25–30 for a set of 6
-            on Amazon. One large container for each grain batch. That's the complete setup.
-          </p>
-        </CalloutBox>
       </div>
     </section>
   </div>

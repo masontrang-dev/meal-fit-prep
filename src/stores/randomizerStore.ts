@@ -23,6 +23,7 @@ import {
 } from "@/data/fridgeEngine";
 import { getSauceById } from "@/data/sauces";
 import { useShoppingStore } from "./shoppingStore";
+import { useMealStore } from "./mealStore";
 
 export const useRandomizerStore = defineStore(
   "randomizer",
@@ -65,6 +66,25 @@ export const useRandomizerStore = defineStore(
 
     const lateGenerationWarning = computed(() => pendingPlan.value?.lateGenerationWarning ?? false);
 
+    function formatVegId(id: string): string {
+      return id
+        .split("-")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+    }
+
+    function syncMealStore(plan: GeneratedPlan) {
+      const mealStore = useMealStore();
+      mealStore.setVegetables([formatVegId(plan.roastingVeg1), formatVegId(plan.roastingVeg2)]);
+      mealStore.setSauces([plan.batchFishSauce, plan.batchChickenSauce, plan.castIronSauce]);
+      mealStore.setMarinade(plan.castIronSauce as any);
+      mealStore.setProteins([
+        { role: "batch-fish", proteinId: plan.batchFishVariety, sauceId: plan.batchFishSauce },
+        { role: "batch-chicken", proteinId: plan.batchChickenCut, sauceId: plan.batchChickenSauce },
+        { role: "cast-iron", proteinId: plan.castIronProtein, sauceId: plan.castIronSauce },
+      ]);
+    }
+
     function generatePlan() {
       // If regenerating an existing pending plan, add it to history temporarily
       // to avoid repeating the same selections
@@ -73,6 +93,7 @@ export const useRandomizerStore = defineStore(
         : weekHistory.value;
 
       pendingPlan.value = runFridgeEngine(tempHistory, engineSettings.value);
+      syncMealStore(pendingPlan.value);
     }
 
     function swapSlot(slotKey: keyof GeneratedPlan, excludeOvernight: boolean = false) {
@@ -189,6 +210,7 @@ export const useRandomizerStore = defineStore(
         ...pendingPlan.value,
         [slotKey]: newValue,
       };
+      syncMealStore(pendingPlan.value);
     }
 
     function confirmPlan() {

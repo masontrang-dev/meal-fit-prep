@@ -103,7 +103,6 @@
 | Saturday night pre-step | Callout box at top           | ✅ PASS |
 | Sunday timeline         | 6 steps with elapsed time    | ✅ PASS |
 | Timeline dots           | Color-coded by activity type | ✅ PASS |
-| Emergency meals panel   | Collapsible, 5 meals listed  | ✅ PASS |
 
 ### 3.3 Meal Plan View
 
@@ -186,7 +185,7 @@
 | Selection persists | State saved in localStorage          | ✅ PASS |
 | Default value      | 2 servings selected on first load    | ✅ PASS |
 
-### 4.4 Emergency Meals Panel
+<!-- ### 4.4 Emergency Meals Panel -- Removed
 
 | Test Case           | Expected Behavior            | Status  |
 | ------------------- | ---------------------------- | ------- |
@@ -195,7 +194,7 @@
 | Smooth animation    | 300ms ease-in-out transition | ✅ PASS |
 | Keyboard activation | Enter/Space toggles panel    | ✅ PASS |
 
----
+--- -->
 
 ## 5. Responsive Design Testing
 

@@ -2,14 +2,12 @@
 import { ref, computed, onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { sundayPrepSteps } from "@/data/prepTimeline";
-import { emergencyMeals } from "@/data/emergencyMeals";
 import { useRandomizerStore } from "@/stores/randomizerStore";
 import { useSauceInventoryStore } from "@/stores/sauceInventoryStore";
 import { useTimerStore } from "@/stores/timerStore";
 import { allSauces } from "@/data/sauces";
 import { standardCookConfig } from "@/data/cookConfig";
 import PrepTimeline from "@/components/meal/PrepTimeline.vue";
-import EmergencyMeals from "@/components/meal/EmergencyMeals.vue";
 import CalloutBox from "@/components/ui/CalloutBox.vue";
 import CookingModeLayout from "@/components/meal/CookingModeLayout.vue";
 import SauceRecipeCard from "@/components/meal/SauceRecipeCard.vue";
@@ -17,6 +15,7 @@ import SauceAlertModal from "@/components/meal/SauceAlertModal.vue";
 import RecipePopover from "@/components/meal/RecipePopover.vue";
 import IngredientPopover from "@/components/meal/IngredientPopover.vue";
 import MealSummary from "@/components/meal/MealSummary.vue";
+import PrepDayRecipes from "@/components/meal/PrepDayRecipes.vue";
 import type { PrepStep, Sauce } from "@/types/meal.types";
 import type { GeneratedPlan } from "@/types/randomizer.types";
 
@@ -421,6 +420,9 @@ function closeIngredientPopover() {
       <!-- Meal Summary below header section -->
       <MealSummary :plan="randomizerStore.confirmedPlan" />
 
+      <!-- Recipe details for this week's selections -->
+      <PrepDayRecipes />
+
       <CalloutBox v-if="!randomizerStore.confirmedPlan" variant="gold" class="mb-7">
         <p>
           <strong>Generate your weekly plan first.</strong> Once you confirm your plan in the Fridge
@@ -447,10 +449,6 @@ function closeIngredientPopover() {
           the Breakfasts tab.
         </p>
       </CalloutBox>
-
-      <section class="mt-8">
-        <EmergencyMeals :meals="emergencyMeals" />
-      </section>
     </div>
 
     <CookingModeLayout

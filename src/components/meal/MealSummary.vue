@@ -326,7 +326,7 @@ const toggleExpanded = () => {
 
 @media (max-width: 768px) {
   .summary-content.expanded {
-    max-height: 70vh; /* Use viewport height for better mobile experience */
+    max-height: none;
   }
 
   .summary-header {
@@ -337,8 +337,8 @@ const toggleExpanded = () => {
     grid-template-columns: 1fr;
     gap: 12px;
     padding: 16px;
-    max-height: inherit;
-    overflow-y: auto; /* Allow scrolling within the grid if needed */
+    max-height: none;
+    overflow-y: visible;
   }
 
   .summary-item {

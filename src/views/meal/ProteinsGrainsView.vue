@@ -18,7 +18,7 @@ const chickenBreast = proteins.find((p) => p.id === "chicken-breast")!;
 const steak = proteins.find((p) => p.id === "steak")!;
 
 const handleVegetableSelect = (vegName: string) => {
-  mealStore.setVegetable(vegName);
+  mealStore.toggleVegetable(vegName);
 };
 
 // Welcome box state - persisted in localStorage
@@ -122,14 +122,13 @@ const dismissWelcome = () => {
       <SectionLabel label="Vegetable Rotation" />
       <VegetableGrid
         :vegetables="vegetables"
-        :selected-vegetable="mealStore.selectedVegetable"
+        :selected-vegetables="mealStore.selectedVegetables"
         @select="handleVegetableSelect"
       />
       <CalloutBox variant="green" class="mt-4">
         <p>
-          <strong>This week:</strong> {{ mealStore.selectedVegetable }} —
-          <strong>Default:</strong> Broccoli is the go-to vegetable. <strong>Swap:</strong> Rotate
-          through alternatives weekly. Click to select.
+          <strong>This week:</strong>
+          {{ mealStore.selectedVegetables.join(", ") || "None selected" }}
         </p>
       </CalloutBox>
     </section>

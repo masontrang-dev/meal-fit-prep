@@ -1,17 +1,23 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import type { Sauce } from "@/types/meal.types";
+import { useSauceInventoryStore } from "@/stores/sauceInventoryStore";
 
 const props = defineProps<{
   sauce: Sauce;
   expanded?: boolean;
 }>();
 
+const sauceInventory = useSauceInventoryStore();
+
+const isMade = computed(() => sauceInventory.isInStock(props.sauce.id));
+
+const isExpanded = ref(props.expanded ?? false);
+
+// Keep emit for parent components that may want to react
 const emit = defineEmits<{
   "mark-made": [sauceId: string];
 }>();
-
-const isExpanded = ref(props.expanded ?? false);
 
 function toggleExpand() {
   isExpanded.value = !isExpanded.value;
@@ -49,8 +55,16 @@ function toggleExpand() {
         ⚠️ Oven at {{ sauce.temperatureAdjustment.tempF }}°F —
         {{ sauce.temperatureAdjustment.note }}
       </div>
+    </div>
 
-      <button @click="emit('mark-made', sauce.id)" class="btn-mark-made">✓ Mark as made</button>
+    <div v-if="isExpanded" class="sauce-footer">
+      <button
+        @click.stop="sauceInventory.toggleStock(sauce.id)"
+        class="btn-mark-made"
+        :class="{ 'btn-made': isMade }"
+      >
+        {{ isMade ? "✓ Made" : "Mark as made" }}
+      </button>
     </div>
   </div>
 </template>
@@ -62,6 +76,8 @@ function toggleExpand() {
   background: var(--paper);
   margin-bottom: 12px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .sauce-header {
@@ -104,6 +120,12 @@ function toggleExpand() {
   padding: 0 16px 16px;
   border-top: 1px solid var(--rule);
   padding-top: 16px;
+  flex: 1;
+}
+
+.sauce-footer {
+  border-top: 1px solid var(--rule);
+  padding: 12px 16px;
 }
 
 .sauce-section {
@@ -180,5 +202,15 @@ function toggleExpand() {
 
 .btn-mark-made:hover {
   background: #2d5a3c;
+}
+
+.btn-made {
+  background: var(--green-light);
+  color: var(--green);
+  border: 1px solid var(--green-mid);
+}
+
+.btn-made:hover {
+  background: var(--green-mid);
 }
 </style>
