@@ -1,0 +1,211 @@
+/* Touch Feedback Animations */
+@layer base {
+  :root {
+    --touch-scale-pressed: 0.95;
+    --touch-opacity-pressed: 0.8;
+    --touch-duration: 150ms;
+    --touch-easing: ease;
+  }
+}
+
+@layer components {
+  /* Base touch feedback class */
+  .touch-feedback {
+    transition:
+      transform var(--touch-duration) var(--touch-easing),
+      opacity var(--touch-duration) var(--touch-easing),
+      background-color 150ms ease;
+    will-change: transform, opacity;
+  }
+
+  /* Pressed state */
+  .touch-feedback--pressed {
+    transform: scale(var(--touch-scale-pressed));
+    opacity: var(--touch-opacity-pressed);
+  }
+
+  /* Disabled state */
+  .touch-feedback--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* Ripple effect for buttons */
+  .ripple {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ripple::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition:
+      width 0.6s,
+      height 0.6s;
+  }
+
+  .ripple:active::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  /* Enhanced button feedback */
+  .btn-touch {
+    transition:
+      transform var(--touch-duration) var(--touch-easing),
+      opacity var(--touch-duration) var(--touch-easing),
+      background-color 150ms ease;
+    will-change: transform, opacity;
+  }
+
+  .btn-touch:active {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+
+  /* Card touch feedback */
+  .card-touch {
+    transition:
+      transform 200ms ease,
+      box-shadow 200ms ease;
+    will-change: transform, box-shadow;
+  }
+
+  .card-touch:active {
+    transform: scale(0.98);
+    box-shadow:
+      0 10px 25px -5px rgba(0, 0, 0, 0.1),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Icon button feedback */
+  .icon-btn-touch {
+    transition:
+      transform 100ms ease-in-out,
+      opacity 100ms ease-in-out;
+    will-change: transform, opacity;
+  }
+
+  .icon-btn-touch:active {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+
+  /* Tab feedback */
+  .tab-touch {
+    transition: transform 100ms ease;
+    will-change: transform;
+  }
+
+  .tab-touch:active {
+    transform: scale(0.95);
+  }
+
+  /* Mobile-specific optimizations */
+  @media (hover: none) and (pointer: coarse) {
+    /* Touch devices */
+    .touch-feedback {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    .btn-touch:active,
+    .card-touch:active,
+    .icon-btn-touch:active,
+    .tab-touch:active {
+      transform: scale(var(--touch-scale-pressed));
+      opacity: var(--touch-opacity-pressed);
+    }
+  }
+
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .touch-feedback,
+    .btn-touch,
+    .card-touch,
+    .icon-btn-touch,
+    .tab-touch {
+      transition: none;
+    }
+
+    .touch-feedback:active,
+    .btn-touch:active,
+    .card-touch:active,
+    .icon-btn-touch:active,
+    .tab-touch:active {
+      transform: none;
+      opacity: 1;
+    }
+
+    .ripple::before {
+      transition: none;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .touch-feedback--pressed {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+    }
+  }
+}
+
+/* Utility classes for quick application */
+.btn-feedback {
+  transition:
+    transform var(--touch-duration) var(--touch-easing),
+    opacity var(--touch-duration) var(--touch-easing),
+    background-color 150ms ease;
+  will-change: transform, opacity;
+}
+
+.btn-feedback:active {
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
+.card-feedback {
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease;
+  will-change: transform, box-shadow;
+}
+
+.card-feedback:active {
+  transform: scale(0.98);
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.icon-feedback {
+  transition:
+    transform 100ms ease-in-out,
+    opacity 100ms ease-in-out;
+  will-change: transform, opacity;
+}
+
+.icon-feedback:active {
+  transform: scale(0.9);
+  opacity: 0.7;
+}
+
+.tab-feedback {
+  transition: transform 100ms ease;
+  will-change: transform;
+}
+
+.tab-feedback:active {
+  transform: scale(0.95);
+}

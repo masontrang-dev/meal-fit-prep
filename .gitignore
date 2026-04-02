@@ -39,3 +39,7 @@ __screenshots__/
 *.timestamp-*-*.mjs
 .vercel
 .env*.local
+
+
+*storybook.log
+storybook-static

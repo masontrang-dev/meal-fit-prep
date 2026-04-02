@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import { breakfasts } from "@/data/breakfasts";
-import SectionLabel from "@/components/ui/SectionLabel.vue";
-import CalloutBox from "@/components/ui/CalloutBox.vue";
-import BreakfastCard from "@/components/meal/BreakfastCard.vue";
-import BatchPrepCard from "@/components/meal/BatchPrepCard.vue";
-import AppPage from "@/components/layout/AppPage.vue";
+  import { breakfasts } from '@/data/breakfasts'
+  import SectionLabel from '@/components/ui/SectionLabel.vue'
+  import CalloutBox from '@/components/ui/CalloutBox.vue'
+  import BreakfastCard from '@/components/meal/BreakfastCard.vue'
+  import BatchPrepCard from '@/components/meal/BatchPrepCard.vue'
+  import AppPage from '@/components/layout/AppPage.vue'
 
-const steelCutOats = breakfasts.find((b) => b.id === "steel-cut-oats")!;
-const chiaPudding = breakfasts.find((b) => b.id === "chia-pudding")!;
+  const steelCutOats = breakfasts.find(b => b.id === 'steel-cut-oats')!
+  const chiaPudding = breakfasts.find(b => b.id === 'chia-pudding')!
 </script>
 
 <template>
   <AppPage>
     <div class="max-w-[980px] mx-auto">
       <div class="mb-8">
-        <h1 class="font-display text-3xl font-bold text-[var(--ink)] mb-4">Breakfasts</h1>
-        <p class="text-sm text-[var(--muted)] leading-relaxed">
+        <h1 class="font-display text-3xl font-bold text-black mb-4">Breakfasts</h1>
+        <p class="text-sm text-black leading-relaxed">
           Easy batch-prep breakfast options for busy mornings. Steel-cut oats and chia pudding can
           be prepared on Sunday with no weekday cooking required.
         </p>

@@ -1,87 +1,76 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import { useRouter } from "vue-router";
-import { useRandomizerStore } from "@/stores/randomizerStore";
-import FridgeEmptyState from "@/components/meal/FridgeEmptyState.vue";
-import FridgeSlotCard from "@/components/meal/FridgeSlotCard.vue";
-import SaturdayPrepCard from "@/components/meal/SaturdayPrepCard.vue";
-import type { GeneratedPlan } from "@/types/randomizer.types";
+  import { computed, ref } from 'vue'
+  import { useRouter } from 'vue-router'
+  import { useRandomizerStore } from '@/stores/randomizerStore'
+  import FridgeEmptyState from '@/components/meal/FridgeEmptyState.vue'
+  import FridgeSlotCard from '@/components/meal/FridgeSlotCard.vue'
+  import SaturdayPrepCard from '@/components/meal/SaturdayPrepCard.vue'
+  import PlanControls from '@/components/meal/PlanControls.vue'
+  import type { GeneratedPlan } from '@/types/randomizer.types'
 
-const router = useRouter();
-const store = useRandomizerStore();
+  const router = useRouter()
+  const store = useRandomizerStore()
 
-const warningDismissed = ref(false);
-const showMoreActions = ref(false);
+  const warningDismissed = ref(false)
 
-const currentState = computed(() => {
-  if (store.hasPendingPlan) return "pending";
-  if (store.hasConfirmedPlan) return "confirmed";
-  if (store.hasFavoritePlan) return "favorite";
-  return "empty";
-});
+  const currentState = computed(() => {
+    if (store.hasPendingPlan) return 'pending'
+    if (store.hasConfirmedPlan) return 'confirmed'
+    if (store.hasFavoritePlan) return 'favorite'
+    return 'empty'
+  })
 
-function handleGenerate() {
-  store.generatePlan();
-}
+  function handleGenerate() {
+    store.generatePlan()
+  }
 
-function handleSwap(slotKey: keyof GeneratedPlan) {
-  store.swapSlot(slotKey);
-}
+  function handleSwap(slotKey: keyof GeneratedPlan) {
+    store.swapSlot(slotKey)
+  }
 
-function handleConfirm() {
-  store.confirmPlan();
-}
+  function handleConfirm() {
+    store.confirmPlan()
+  }
 
-function navigateToShoppingList() {
-  router.push("/meal/shopping");
-}
+  function handleRegenerateAll() {
+    store.generatePlan()
+  }
 
-function navigateToPrepDay() {
-  router.push("/meal/prep");
-}
+  function handleSaveAsFavorite() {
+    store.saveAsFavorite()
+  }
 
-function toggleMoreActions() {
-  showMoreActions.value = !showMoreActions.value;
-}
+  function handleSwapChickenSauce() {
+    store.swapSlot('batchChickenSauce', true)
+    warningDismissed.value = false
+  }
 
-function handleRegenerateAll() {
-  store.generatePlan();
-}
+  function handleSwapCastIronSauce() {
+    store.swapSlot('castIronSauce', true)
+    warningDismissed.value = false
+  }
 
-function handleSaveAsFavorite() {
-  store.saveAsFavorite();
-}
+  function handleProceedAnyway() {
+    warningDismissed.value = true
+  }
 
-function handleSwapChickenSauce() {
-  store.swapSlot("batchChickenSauce", true);
-  warningDismissed.value = false;
-}
-
-function handleSwapCastIronSauce() {
-  store.swapSlot("castIronSauce", true);
-  warningDismissed.value = false;
-}
-
-function handleProceedAnyway() {
-  warningDismissed.value = true;
-}
-
-function formatValue(value: string): string {
-  return value
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-}
+  function formatValue(value: string): string {
+    return value
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ')
+  }
 </script>
 
 <template>
-  <div class="space-y-6">
-    <div>
-      <h2 class="text-2xl font-display font-semibold text-ink">This Week's Fridge</h2>
-      <p class="text-muted mt-2">
-        Your randomized weekly ingredient selection — proteins, sauces, grains, and legumes
-      </p>
-    </div>
+  <div class="space-y-6 pb-20 lg:pb-6">
+    <!-- Plan Controls - Generate/Confirm/Regenerate -->
+    <PlanControls
+      :current-state="currentState"
+      @generate="handleGenerate"
+      @confirm="handleConfirm"
+      @regenerate-all="handleRegenerateAll"
+    />
 
     <!-- State A: Empty (no plan, no favorite) -->
     <FridgeEmptyState
@@ -178,16 +167,6 @@ function formatValue(value: string): string {
           />
         </div>
       </div>
-
-      <div class="flex justify-center pt-4">
-        <button
-          @click="handleGenerate"
-          class="px-6 py-3 font-medium rounded-lg transition-colors"
-          style="background: var(--blue); color: var(--paper)"
-        >
-          Generate New Week
-        </button>
-      </div>
     </div>
 
     <!-- State C: Pending (generated, not confirmed) -->
@@ -201,12 +180,6 @@ function formatValue(value: string): string {
         @swap-cast-iron-sauce="handleSwapCastIronSauce"
         @proceed-anyway="handleProceedAnyway"
       />
-
-      <div class="callout callout-blue">
-        <strong>Review Your Week</strong><br />
-        Review the randomized plan below. Swap any slot you'd like to change, then confirm when
-        ready.
-      </div>
 
       <!-- Proteins -->
       <div>
@@ -302,18 +275,10 @@ function formatValue(value: string): string {
         :items="store.pendingPlan!.saturdayPrepItems"
         :is-late-generation="false"
       />
-
-      <!-- Spacer to prevent content from being hidden behind sticky buttons -->
-      <div class="h-24"></div>
     </div>
 
     <!-- State D: Confirmed (locked) -->
     <div v-else-if="currentState === 'confirmed'" class="space-y-6">
-      <div class="callout">
-        <strong>✓ This Week's Fridge</strong><br />
-        Your plan is locked and ready. Shopping list has been updated.
-      </div>
-
       <!-- Proteins -->
       <div>
         <div class="section-label">🍗 Proteins</div>
@@ -395,138 +360,10 @@ function formatValue(value: string): string {
           />
         </div>
       </div>
-
-      <!-- Spacer to prevent content from being hidden behind sticky buttons -->
-      <div class="h-24"></div>
     </div>
-
-    <!-- Sticky Action Buttons for Pending State -->
-    <Teleport to="body">
-      <div
-        v-if="currentState === 'pending'"
-        class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg"
-        style="z-index: 9999"
-      >
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div class="flex justify-center gap-4">
-            <button
-              @click="handleRegenerateAll"
-              class="px-6 py-3 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg"
-              style="background: var(--paper); color: var(--ink); border: 1px solid var(--rule)"
-            >
-              Regenerate All
-            </button>
-            <button
-              @click="handleConfirm"
-              class="px-8 py-3 font-medium rounded-lg transition-all shadow-md hover:scale-105 hover:shadow-xl"
-              style="background: var(--green); color: var(--paper)"
-            >
-              Confirm Week
-            </button>
-          </div>
-        </div>
-      </div>
-    </Teleport>
-
-    <!-- Sticky Action Buttons for Confirmed State -->
-    <Teleport to="body">
-      <div
-        v-if="currentState === 'confirmed'"
-        class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg"
-        style="z-index: 9999"
-      >
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-4">
-          <!-- Mobile: Compact view -->
-          <div class="sm:hidden flex gap-2">
-            <button
-              @click="navigateToShoppingList"
-              class="flex-1 px-3 py-2 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg text-sm"
-              style="background: var(--blue); color: var(--paper)"
-            >
-              🛒 Shopping List
-            </button>
-            <button
-              @click="toggleMoreActions"
-              class="px-3 py-2 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg text-sm"
-              style="background: var(--paper); color: var(--ink); border: 1px solid var(--rule)"
-            >
-              {{ showMoreActions ? "Less" : "More" }}
-            </button>
-          </div>
-
-          <!-- Mobile: Expanded actions -->
-          <div v-if="showMoreActions" class="sm:hidden flex flex-col gap-2 mt-2">
-            <button
-              @click="navigateToPrepDay"
-              class="w-full px-3 py-2 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg text-sm"
-              style="background: var(--green); color: var(--paper)"
-            >
-              👨‍🍳 Prep Day
-            </button>
-            <button
-              @click="handleGenerate"
-              class="w-full px-3 py-2 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg text-sm"
-              style="background: var(--blue); color: var(--paper)"
-            >
-              Generate Next Week
-            </button>
-            <button
-              @click="handleSaveAsFavorite"
-              disabled
-              class="w-full px-3 py-2 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg flex items-center justify-center gap-2 opacity-50 cursor-not-allowed text-sm"
-              style="background: var(--paper); color: var(--ink); border: 1px solid var(--rule)"
-            >
-              <span>⭐</span>
-              <span>Save as Favorite</span>
-            </button>
-          </div>
-
-          <!-- Desktop: Full layout -->
-          <div class="hidden sm:flex sm:justify-between sm:items-center gap-2">
-            <!-- Left aligned: Save as Favorite -->
-            <button
-              @click="handleSaveAsFavorite"
-              disabled
-              class="w-full sm:w-auto px-3 sm:px-6 py-2 sm:py-3 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg flex items-center justify-center gap-2 opacity-50 cursor-not-allowed text-sm"
-              style="background: var(--paper); color: var(--ink); border: 1px solid var(--rule)"
-            >
-              <span>⭐</span>
-              <span class="hidden sm:inline">Save as Favorite</span>
-              <span class="sm:hidden">Favorite</span>
-            </button>
-
-            <!-- Center: View Shopping List and View Prep Day -->
-            <div class="hidden sm:flex sm:flex-row sm:gap-4">
-              <button
-                @click="navigateToShoppingList"
-                class="w-full sm:w-auto px-3 sm:px-6 py-2 sm:py-3 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg text-sm"
-                style="background: var(--blue); color: var(--paper)"
-              >
-                🛒 <span class="hidden sm:inline">View Shopping List</span>
-                <span class="sm:hidden">Shopping List</span>
-              </button>
-              <button
-                @click="navigateToPrepDay"
-                class="w-full sm:w-auto px-3 sm:px-6 py-2 sm:py-3 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg text-sm"
-                style="background: var(--green); color: var(--paper)"
-              >
-                👨‍🍳 <span class="hidden sm:inline">View Prep Day</span>
-                <span class="sm:hidden">Prep Day</span>
-              </button>
-            </div>
-
-            <!-- Right aligned: Generate Next Week -->
-            <button
-              @click="handleGenerate"
-              class="w-full sm:w-auto px-3 sm:px-6 py-2 sm:py-3 font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg text-sm"
-              style="background: var(--blue); color: var(--paper)"
-            >
-              <span class="hidden sm:inline">Generate Next Week</span>
-              <span class="sm:hidden">Next Week</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </Teleport>
   </div>
 </template>
+
+<style scoped>
+  /* Styles are now handled by the PlanControls component */
+</style>

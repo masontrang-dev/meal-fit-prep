@@ -1,41 +1,41 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { proteins } from "@/data/proteins";
-import { grainsAndLegumes } from "@/data/grainsLegumes";
-import { vegetables } from "@/data/vegetables";
-import { useMealStore } from "@/stores/mealStore";
-import ProteinCard from "@/components/meal/ProteinCard.vue";
-import GrainsLegumesTable from "@/components/meal/GrainsLegumesTable.vue";
-import VegetableGrid from "@/components/meal/VegetableGrid.vue";
-import SectionLabel from "@/components/ui/SectionLabel.vue";
-import CalloutBox from "@/components/ui/CalloutBox.vue";
-import AppPage from "@/components/layout/AppPage.vue";
+  import { ref } from 'vue'
+  import { proteins } from '@/data/proteins'
+  import { grainsAndLegumes } from '@/data/grainsLegumes'
+  import { vegetables } from '@/data/vegetables'
+  import { useMealStore } from '@/stores/mealStore'
+  import ProteinCard from '@/components/meal/ProteinCard.vue'
+  import GrainsLegumesTable from '@/components/meal/GrainsLegumesTable.vue'
+  import VegetableGrid from '@/components/meal/VegetableGrid.vue'
+  import SectionLabel from '@/components/ui/SectionLabel.vue'
+  import CalloutBox from '@/components/ui/CalloutBox.vue'
+  import AppPage from '@/components/layout/AppPage.vue'
 
-const mealStore = useMealStore();
+  const mealStore = useMealStore()
 
-const fish = proteins.find((p) => p.id === "fish")!;
-const chickenThigh = proteins.find((p) => p.id === "chicken-thigh")!;
-const chickenBreast = proteins.find((p) => p.id === "chicken-breast")!;
-const steak = proteins.find((p) => p.id === "steak")!;
+  const fish = proteins.find(p => p.id === 'fish')!
+  const chickenThigh = proteins.find(p => p.id === 'chicken-thigh')!
+  const chickenBreast = proteins.find(p => p.id === 'chicken-breast')!
+  const steak = proteins.find(p => p.id === 'steak')!
 
-const handleVegetableSelect = (vegName: string) => {
-  mealStore.toggleVegetable(vegName);
-};
+  const handleVegetableSelect = (vegName: string) => {
+    mealStore.toggleVegetable(vegName)
+  }
 
-// Welcome box state - persisted in localStorage
-const showWelcome = ref(localStorage.getItem("hideWelcome") !== "true");
+  // Welcome box state - persisted in localStorage
+  const showWelcome = ref(localStorage.getItem('hideWelcome') !== 'true')
 
-const dismissWelcome = () => {
-  showWelcome.value = false;
-  localStorage.setItem("hideWelcome", "true");
-};
+  const dismissWelcome = () => {
+    showWelcome.value = false
+    localStorage.setItem('hideWelcome', 'true')
+  }
 </script>
 
 <template>
   <AppPage>
     <div class="max-w-[980px] mx-auto">
       <div class="mb-8">
-        <h1 class="font-display text-3xl font-bold text-[var(--ink)] mb-4">Overview</h1>
+        <h1 class="font-display text-3xl font-bold text-black mb-4">Overview</h1>
         <p class="text-sm text-[var(--muted)] leading-relaxed">
           All available proteins, grains, legumes, and vegetables with cooking instructions and
           nutritional info.

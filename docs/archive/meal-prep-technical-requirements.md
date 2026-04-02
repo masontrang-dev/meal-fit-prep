@@ -391,7 +391,6 @@ src/
 │   │   ├── ShoppingCategory.vue  # One category group in shopping list
 │   │   ├── PrepTimeline.vue      # Sunday prep day step-by-step timeline
 │   │   ├── PrepStep.vue          # Individual timeline step
-│   │   ├── EmergencyMeals.vue    # "Missed Sunday" fallback panel
 │   │   ├── MealPlanTable.vue     # Weekly meal plan table
 │   │   ├── MealPlanRow.vue       # Single day row in meal plan
 │   │   ├── CastIronInstructions.vue  # Sunday setup + Wednesday cook steps
@@ -431,7 +430,6 @@ src/
 │   ├── sauces.ts                 # Sauce definitions
 │   ├── mealPlan.ts               # Default weekly meal plan
 │   ├── prepTimeline.ts           # Sunday prep timeline steps
-│   ├── emergencyMeals.ts         # Fallback meal list
 │   ├── nutrients.ts              # Nutrient status data
 │   ├── storageGuide.ts           # Fridge life and reheating data
 │   └── fitness/
@@ -1069,7 +1067,7 @@ export default defineConfig({
 
 - [ ] ProteinsGrainsView — protein cards, grain table, veg rotation grid
 - [ ] ShoppingListView — category groups, check/uncheck, weekly reset button
-- [ ] PrepDayView — timeline, emergency meals panel
+- [ ] PrepDayView — timeline
 - [ ] MealPlanView — weekly table with protein pills and notes
 - [ ] CastIronView — Sunday setup, Wednesday steps, marinade cards
 - [ ] SaucesView — three sections, sauce cards with full ingredient lists and storage badges

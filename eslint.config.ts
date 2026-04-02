@@ -15,7 +15,7 @@ export default defineConfigWithVueTs(
     files: ['**/*.{vue,ts,mts,tsx}'],
   },
 
-  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**']),
+  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**', '**/.storybook/**']),
 
   ...pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
@@ -26,4 +26,41 @@ export default defineConfigWithVueTs(
   },
 
   ...pluginOxlint.buildFromOxlintConfigFile('.oxlintrc.json'),
+
+  // Accessibility rules
+  {
+    name: 'app/accessibility',
+    rules: {
+      'vue/require-img-alt': 'error',
+      'vue/mouse-events-have-key-events': 'warn',
+      'vue/no-autofocus': 'warn',
+      'vue/require-toggle-type': 'error',
+      'vue/require-explicit-emits': 'error',
+      'vue/no-deprecated-slot-attribute': 'error',
+      'vue/no-deprecated-slot-scope-attribute': 'error',
+      'vue/valid-define-emits': 'error',
+      'vue/valid-define-props': 'error',
+      'vue/no-unsupported-features': 'warn',
+      'vue/no-unused-components': 'warn',
+      'vue/no-unused-vars': 'warn',
+      'vue/padding-lines-between-blocks': ['warn', 'always'],
+      'vue/attributes-order': [
+        'warn',
+        {
+          order: [
+            'DEFINITION',
+            'LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            'UNIQUE',
+            'TWO_WAY_BINDING',
+            'OTHER_ATTR',
+            'EVENTS',
+            'CONTENT',
+          ],
+        },
+      ],
+    },
+  }
 )

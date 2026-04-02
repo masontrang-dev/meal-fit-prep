@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import { getSaucesBySection } from "@/data/sauces";
-import { useMealStore } from "@/stores/mealStore";
-import SauceCard from "@/components/meal/SauceCard.vue";
-import SectionLabel from "@/components/ui/SectionLabel.vue";
-import CalloutBox from "@/components/ui/CalloutBox.vue";
-import AppPage from "@/components/layout/AppPage.vue";
+  import { getSaucesBySection } from '@/data/sauces'
+  import { useMealStore } from '@/stores/mealStore'
+  import SauceCard from '@/components/meal/SauceCard.vue'
+  import SectionLabel from '@/components/ui/SectionLabel.vue'
+  import CalloutBox from '@/components/ui/CalloutBox.vue'
+  import AppPage from '@/components/layout/AppPage.vue'
 
-const mealStore = useMealStore();
+  const mealStore = useMealStore()
 
-const fishSauces = getSaucesBySection("fish");
-const chickenSauces = getSaucesBySection("chicken");
-const castIronSauces = getSaucesBySection("cast-iron");
-const shrimpSauces = getSaucesBySection("shrimp");
+  const fishSauces = getSaucesBySection('fish')
+  const chickenSauces = getSaucesBySection('chicken')
+  const castIronSauces = getSaucesBySection('cast-iron')
+  const shrimpSauces = getSaucesBySection('shrimp')
 </script>
 
 <template>
   <AppPage>
     <div class="max-w-[980px] mx-auto">
       <div class="mb-8">
-        <h1 class="font-display text-3xl font-bold text-[var(--ink)] mb-4">Sauces & Marinades</h1>
-        <p class="text-sm text-[var(--muted)] leading-relaxed">
+        <h1 class="font-display text-3xl font-bold text-black mb-4">Sauces & Marinades</h1>
+        <p class="text-sm text-black leading-relaxed">
           Simple, scalable sauces organized by protein type.
         </p>
       </div>

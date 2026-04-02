@@ -1,0 +1,36 @@
+{
+  "nav": {
+    "overview": "Overview",
+    "breakfasts": "Breakfasts",
+    "shopping": "Shopping List",
+    "prep": "Prep Day",
+    "plan": "Meal Plan",
+    "fridge": "Fridge",
+    "castIron": "Cast Iron",
+    "sauces": "Sauces",
+    "nutrients": "Nutrients",
+    "storage": "Storage",
+    "fitness": "Fitness"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "close": "Close",
+    "confirm": "Confirm"
+  },
+  "meal": {
+    "proteins": "Proteins",
+    "grains": "Grains & Legumes",
+    "vegetables": "Vegetables",
+    "sauces": "Sauces & Marinades",
+    "prepDay": "Prep Day",
+    "shoppingList": "Shopping List",
+    "mealPlan": "Meal Plan"
+  }
+}

@@ -1,30 +1,30 @@
 <script setup lang="ts">
-import type { GeneratedPlan } from "@/types/randomizer.types";
+  import type { GeneratedPlan } from '@/types/randomizer.types'
 
-const props = defineProps<{
-  slotLabel: string;
-  slotKey: keyof GeneratedPlan;
-  value: string;
-  detail?: string;
-  sauceKey?: keyof GeneratedPlan;
-  eatBy?: string;
-  isCastIron?: boolean;
-  marinadeTiming?: string;
-  isConfirmed?: boolean;
-}>();
+  const props = defineProps<{
+    slotLabel: string
+    slotKey: keyof GeneratedPlan
+    value: string
+    detail?: string
+    sauceKey?: keyof GeneratedPlan
+    eatBy?: string
+    isCastIron?: boolean
+    marinadeTiming?: string
+    isConfirmed?: boolean
+  }>()
 
-const emit = defineEmits<{
-  swap: [slotKey: keyof GeneratedPlan];
-  swapSauce: [slotKey: keyof GeneratedPlan];
-}>();
+  const emit = defineEmits<{
+    swap: [slotKey: keyof GeneratedPlan]
+    swapSauce: [slotKey: keyof GeneratedPlan]
+  }>()
 
-function formatValue(value: string): string {
-  if (!value) return "";
-  return value
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-}
+  function formatValue(value: string): string {
+    if (!value) return ''
+    return value
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ')
+  }
 </script>
 
 <template>
@@ -46,8 +46,9 @@ function formatValue(value: string): string {
           <button
             v-if="!isConfirmed && sauceKey"
             @click="emit('swap', slotKey)"
-            class="px-2 py-1 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-50 transition-colors"
+            class="px-3 py-2 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-50 transition-colors min-h-[44px] min-w-[44px] btn-feedback"
             :title="`Swap ${slotLabel.toLowerCase()}`"
+            aria-label="Swap item"
           >
             🔀
           </button>
@@ -57,8 +58,9 @@ function formatValue(value: string): string {
           <button
             v-if="!isConfirmed && sauceKey"
             @click="emit('swapSauce', sauceKey)"
-            class="px-2 py-1 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-50 transition-colors"
+            class="px-3 py-2 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-50 transition-colors min-h-[44px] min-w-[44px] btn-feedback"
             title="Swap sauce only"
+            aria-label="Swap sauce only"
           >
             🔀
           </button>
@@ -67,7 +69,7 @@ function formatValue(value: string): string {
       <button
         v-if="!isConfirmed && !sauceKey"
         @click="emit('swap', slotKey)"
-        class="ml-3 px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors flex items-center gap-1.5"
+        class="ml-3 px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors flex items-center gap-1.5 min-h-[44px] btn-feedback"
         :title="`Swap ${slotLabel}`"
       >
         <span class="text-base">🔀</span>
@@ -89,11 +91,11 @@ function formatValue(value: string): string {
       }"
     >
       {{
-        marinadeTiming === "sunday"
-          ? "✓ Marinade Sunday"
-          : marinadeTiming === "tuesday"
-            ? "⚠️ Marinade Tuesday Only"
-            : "🦐 Season Wednesday"
+        marinadeTiming === 'sunday'
+          ? '✓ Marinade Sunday'
+          : marinadeTiming === 'tuesday'
+            ? '⚠️ Marinade Tuesday Only'
+            : '🦐 Season Wednesday'
       }}
     </div>
   </div>

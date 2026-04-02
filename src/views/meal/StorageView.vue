@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { storageGuide } from "@/data/storageGuide";
-import StorageGuide from "@/components/meal/StorageGuide.vue";
-import CalloutBox from "@/components/ui/CalloutBox.vue";
-import AppPage from "@/components/layout/AppPage.vue";
+  import { storageGuide } from '@/data/storageGuide'
+  import StorageGuide from '@/components/meal/StorageGuide.vue'
+  import CalloutBox from '@/components/ui/CalloutBox.vue'
+  import AppPage from '@/components/layout/AppPage.vue'
 </script>
 
 <template>
   <AppPage>
     <div class="max-w-[980px] mx-auto">
       <div class="mb-8">
-        <h1 class="font-display text-3xl font-bold text-[var(--ink)] mb-4">Storage Guide</h1>
-        <p class="text-sm text-[var(--muted)] leading-relaxed">
+        <h1 class="font-display text-3xl font-bold text-black mb-4">Storage Guide</h1>
+        <p class="text-sm text-black leading-relaxed">
           Fridge life and reheating instructions for all meal prep items.
         </p>
       </div>

@@ -1,3 +1,5 @@
+@import './design-tokens.css';
+@import './touch-feedback.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -48,7 +50,7 @@
   html {
     background-color: var(--bg);
     color: var(--ink);
-    font-family: "Jost", sans-serif;
+    font-family: 'Jost', sans-serif;
     font-weight: 300;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
@@ -58,7 +60,7 @@
   h2,
   h3,
   h4 {
-    font-family: "Cormorant Garamond", serif;
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 700;
   }
 
@@ -71,7 +73,7 @@
   button:focus-visible,
   a:focus-visible,
   input:focus-visible,
-  [role="button"]:focus-visible {
+  [role='button']:focus-visible {
     outline: 2px solid var(--green);
     outline-offset: 2px;
   }
@@ -265,6 +267,8 @@
   .data-table td {
     @apply px-[14px] py-[11px] align-top leading-[1.55];
     border-bottom: 1px solid var(--rule);
+    color: var(--ink);
+    background: var(--paper);
   }
   .data-table tr:last-child td {
     border-bottom: none;

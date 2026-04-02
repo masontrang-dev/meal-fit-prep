@@ -1,0 +1,401 @@
+# Header Redesign Implementation Plan
+
+> **Project:** Meal Fit Prep Header Architecture Unification  
+> **Based on:** FANG-level UI/UX Review Recommendations  
+> **Estimated Timeline:** 2-3 weeks  
+> **Priority:** High (Critical UX improvement)
+
+---
+
+## Executive Summary
+
+This plan implements a unified header architecture that moves from a fragmented multi-header system to a clean, modern bottom-navigation-first approach. The changes will significantly reduce cognitive load while maintaining all functionality.
+
+### Key Changes
+- **Move user controls** (notifications, profile, settings) from masthead to bottom navigation
+- **Simplify masthead** to branding-only element
+- **Unify navigation** pattern across all device sizes
+- **Create Account hub** for centralized user management
+
+---
+
+## Phase 1: Critical Architecture Changes (Week 1)
+
+### 1.1 Update Bottom Navigation Component
+
+**File:** `src/components/layout/BottomNavigation.vue`
+
+#### Changes Required:
+
+```typescript
+// Add Account to primary navigation
+const primaryNavItems: NavItem[] = [
+  { label: 'Plan', path: '/meal/fridge', icon: Calendar },
+  { label: 'Shop', path: '/meal/shopping', icon: ShoppingCart },
+  { label: 'Prep', path: '/meal/prep', icon: ChefHat },
+  { label: 'Account', path: '/account', icon: User }, // NEW
+]
+
+// Move user controls to secondary navigation
+const secondaryNavItems: NavItem[] = [
+  { label: 'Overview', path: '/overview', icon: Home },
+  { label: 'Recipes', path: '/meal/sauces', icon: Utensils },
+  { label: 'Breakfast', path: '/meal/breakfasts', icon: BookOpen },
+  { label: 'Nutrients', path: '/meal/nutrients', icon: Info },
+  { label: 'Storage', path: '/meal/storage', icon: Settings },
+  { label: 'Notifications', path: '/account/notifications', icon: Bell }, // MOVED
+  { label: 'Settings', path: '/account/settings', icon: Settings },      // MOVED
+]
+```
+
+#### Responsive Updates:
+- Show bottom navigation on desktop (currently hidden on md:lg)
+- Add hover states and desktop-optimized spacing
+- Implement keyboard navigation for desktop users
+
+### 1.2 Simplify AppMasthead Component
+
+**File:** `src/components/layout/AppMasthead.vue`
+
+#### Remove User Controls Section:
+```vue
+<!-- REMOVE this entire section -->
+<div class="masthead-user" v-if="isMobile || isTablet">
+  <div class="user-controls">
+    <!-- Notifications -->
+    <button class="user-button" @click="handleUserAction('notifications')">
+      <Bell class="user-icon" />
+    </button>
+    
+    <!-- User Menu -->
+    <div class="user-dropdown" @click="toggleUserMenu">
+      <!-- ... all user menu code -->
+    </div>
+  </div>
+</div>
+```
+
+#### Simplify Script Section:
+```typescript
+// REMOVE these functions and refs
+const showUserMenu = ref(false)
+const toggleUserMenu = () => { /* ... */ }
+const handleUserAction = (action: string) => { /* ... */ }
+
+// KEEP these
+const router = useRouter()
+const version = '1.3.2'
+const isMobile = computed(() => window.innerWidth < 768)
+const isTablet = computed(() => window.innerWidth >= 768 && window.innerWidth < 1024)
+```
+
+#### Update Styles:
+- Remove all `.masthead-user`, `.user-controls`, `.user-button` styles
+- Reduce masthead padding by 30%
+- Make title smaller and less prominent
+- Simplify responsive breakpoints
+
+### 1.3 Create Temporary Account Routes
+
+**File:** `src/router/index.ts`
+
+```typescript
+// Add temporary routes (will be replaced by Account hub in Phase 2)
+{
+  path: '/account',
+  name: 'account',
+  component: () => import('@/views/temp/AccountTempView.vue')
+},
+{
+  path: '/account/notifications',
+  name: 'account-notifications',
+  component: () => import('@/views/temp/NotificationsTempView.vue')
+},
+{
+  path: '/account/settings',
+  name: 'account-settings',
+  component: () => import('@/views/temp/SettingsTempView.vue')
+}
+```
+
+### 1.4 Create Temporary View Components
+
+**Files to create:**
+- `src/views/temp/AccountTempView.vue` - Simple redirect to notifications
+- `src/views/temp/NotificationsTempView.vue` - "Coming soon" placeholder
+- `src/views/temp/SettingsTempView.vue` - "Coming soon" placeholder
+
+---
+
+## Phase 2: Enhanced Features (Week 2)
+
+### 2.1 Create Unified Account Hub
+
+**File:** `src/views/account/AccountView.vue`
+
+#### Features:
+```vue
+<template>
+  <div class="account-hub">
+    <!-- Tab Navigation -->
+    <div class="account-tabs">
+      <button 
+        v-for="tab in tabs" 
+        :key="tab.id"
+        :class="{ active: activeTab === tab.id }"
+        @click="activeTab = tab.id"
+      >
+        <component :is="tab.icon" />
+        {{ tab.label }}
+      </button>
+    </div>
+
+    <!-- Tab Content -->
+    <component :is="activeTabComponent" />
+  </div>
+</template>
+
+<script setup lang="ts">
+const tabs = [
+  { id: 'profile', label: 'Profile', icon: User },
+  { id: 'notifications', label: 'Notifications', icon: Bell },
+  { id: 'settings', label: 'Settings', icon: Settings },
+  { id: 'preferences', label: 'Preferences', icon: Sliders },
+]
+</script>
+```
+
+### 2.2 Implement Feature Badge Functionality
+
+**File:** `src/components/layout/AppMasthead.vue`
+
+#### Option A: Make Badges Functional Filters
+```vue
+<div class="masthead-pills">
+  <button 
+    v-for="badge in filterBadges" 
+    :key="badge.id"
+    :class="{ active: badge.active }"
+    @click="toggleFilter(badge.id)"
+    class="pill pill-interactive"
+  >
+    {{ badge.label }}
+  </button>
+</div>
+
+<script setup lang="ts">
+const filterBadges = ref([
+  { id: 'weekly-plan', label: 'Weekly Plan', active: true },
+  { id: 'whole-foods', label: 'Whole Foods', active: true },
+  { id: 'diet-friendly', label: 'Diet Friendly', active: false },
+  { id: 'flexible-prep', label: 'Flexible Prep', active: false },
+])
+
+const toggleFilter = (badgeId: string) => {
+  const badge = filterBadges.value.find(b => b.id === badgeId)
+  if (badge) badge.active = !badge.active
+  // Emit filter change to parent/store
+}
+</script>
+```
+
+#### Option B: Reduce Visual Prominence
+```css
+.pill {
+  background: rgba(255, 255, 255, 0.05);  /* Reduced opacity */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Reduced opacity */
+  font-size: 0.6rem; /* Smaller font */
+  opacity: 0.6; /* Less prominent */
+  transition: opacity 0.2s;
+}
+
+.pill:hover {
+  opacity: 0.8;
+}
+```
+
+### 2.3 Update Bottom Navigation for Desktop
+
+**File:** `src/components/layout/BottomNavigation.vue`
+
+#### Desktop Optimizations:
+```vue
+<template>
+  <!-- Update responsive classes -->
+  <nav class="bottom-nav" role="navigation">
+    <!-- Existing mobile structure -->
+  </nav>
+</template>
+
+<style scoped>
+.bottom-nav {
+  /* Show on all screen sizes */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* ... existing styles */
+}
+
+/* Desktop enhancements */
+@media (min-width: 1024px) {
+  .bottom-nav {
+    max-width: 600px; /* Limit width on desktop */
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.12);
+  }
+  
+  .bottom-nav-item {
+    min-height: 56px; /* Larger touch targets on desktop */
+  }
+  
+  .bottom-nav-label {
+    font-size: var(--text-sm); /* Larger labels on desktop */
+  }
+}
+</style>
+```
+
+---
+
+## Phase 3: Testing & Refinement (Week 3)
+
+### 3.1 Cross-Device Testing
+
+#### Test Matrix:
+| Device | Screen Size | Test Focus |
+|--------|-------------|------------|
+| iPhone SE | 375x667 | Bottom nav spacing, touch targets |
+| iPhone 14 | 390x844 | Badge visibility, masthead sizing |
+| iPad | 768x1024 | Tablet layout, bottom nav positioning |
+| Desktop | 1920x1080 | Desktop bottom nav behavior |
+| Large Desktop | 2560x1440 | Max-width constraints, centering |
+
+#### Test Scenarios:
+1. **Navigation Flow:** Plan → Shop → Prep → Account
+2. **Account Hub:** Profile → Notifications → Settings navigation
+3. **Responsive Breakpoints:** Smooth transitions between layouts
+4. **Accessibility:** Keyboard navigation, screen reader compatibility
+5. **Performance:** Animation smoothness, load times
+
+### 3.2 User Validation
+
+#### Key Metrics to Track:
+- **Task Success Rate:** Complete account-related tasks
+- **Time to First Action:** How quickly users find account features
+- **Error Rate:** Wrong taps, confusion points
+- **Subjective Feedback:** User satisfaction scores
+
+#### Validation Methods:
+- **5-Second Tests:** Show users new layout, ask what they see
+- **Task-Based Testing:** Ask users to find settings/notifications
+- **A/B Testing:** Compare old vs new header (if possible)
+- **Heatmap Analysis:** Track interaction patterns
+
+---
+
+## Implementation Checklist
+
+### Pre-Implementation
+- [ ] Back up current header components
+- [ ] Create feature branch for header redesign
+- [ ] Document current user control functionality
+- [ ] Set up analytics for navigation tracking
+
+### Phase 1 Tasks
+- [ ] Update BottomNavigation.vue with Account tab
+- [ ] Move notifications/settings to secondary nav
+- [ ] Remove user controls from AppMasthead.vue
+- [ ] Simplify masthead styles and script
+- [ ] Create temporary account routes
+- [ ] Test basic navigation flow
+- [ ] Verify mobile functionality
+
+### Phase 2 Tasks
+- [ ] Build AccountView.vue with tab navigation
+- [ ] Implement profile, notifications, settings tabs
+- [ ] Add filter functionality to badges (Option A) OR reduce prominence (Option B)
+- [ ] Update bottom navigation for desktop
+- [ ] Add hover states and keyboard navigation
+- [ ] Implement smooth transitions
+- [ ] Test responsive behavior
+
+### Phase 3 Tasks
+- [ ] Conduct cross-device testing
+- [ ] Perform accessibility audit
+- [ ] Gather user feedback
+- [ ] Fix identified issues
+- [ ] Update documentation
+- [ ] Prepare for deployment
+
+### Post-Implementation
+- [ ] Monitor analytics for navigation changes
+- [ ] Collect user feedback for 2 weeks
+- [ ] Document lessons learned
+- [ ] Plan future improvements based on data
+
+---
+
+## Risk Assessment & Mitigation
+
+### High Risks
+1. **User Confusion:** Moving familiar elements
+   - **Mitigation:** Clear onboarding tooltips for first visit
+   - **Fallback:** Revert option in settings
+
+2. **Desktop Usability:** Bottom nav on desktop feels odd
+   - **Mitigation:** Desktop-optimized styling and positioning
+   - **Fallback:** Traditional top nav option for desktop users
+
+3. **Accessibility:** New navigation patterns
+   - **Mitigation:** Comprehensive accessibility testing
+   - **Fallback:** Keyboard navigation alternatives
+
+### Medium Risks
+1. **Performance:** Additional components and animations
+   - **Mitigation:** Lazy loading, optimized transitions
+2. **Browser Compatibility:** New CSS features
+   - **Mitigation:** Progressive enhancement, fallbacks
+
+---
+
+## Success Metrics
+
+### Quantitative Metrics
+- **Navigation Efficiency:** 20% reduction in time to find account features
+- **Task Completion:** 85% success rate for account-related tasks
+- **Mobile Engagement:** 15% increase in mobile session duration
+- **Error Reduction:** 50% fewer navigation-related errors
+
+### Qualitative Metrics
+- **User Satisfaction:** 4.5/5 rating for new navigation
+- **Learnability:** 80% of users comfortable within 3 sessions
+- **Visual Clarity:** Positive feedback on cleaner interface
+
+---
+
+## Timeline Summary
+
+| Week | Focus | Deliverables |
+|------|-------|-------------|
+| Week 1 | Core Architecture | Updated bottom nav, simplified masthead, basic routing |
+| Week 2 | Enhanced Features | Account hub, functional badges, desktop optimization |
+| Week 3 | Testing & Polish | Cross-device testing, user validation, bug fixes |
+
+**Total Estimated Effort:** 40-60 developer hours
+**Recommended Release:** Staged rollout with feature flags
+**Rollback Plan:** Revert to previous header components within 24 hours if critical issues arise
+
+---
+
+## Next Steps
+
+1. **Get stakeholder approval** for this implementation plan
+2. **Assign development resources** and set timeline
+3. **Create feature branch** and begin Phase 1 implementation
+4. **Set up analytics** to track navigation changes
+5. **Schedule user testing** sessions for Phase 3
+
+This implementation will transform Meal Fit Prep's navigation from a fragmented system to a modern, unified architecture that significantly improves the user experience across all devices.

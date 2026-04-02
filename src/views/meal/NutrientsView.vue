@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { nutrientStatus } from "@/data/nutrients";
-import NutrientTable from "@/components/meal/NutrientTable.vue";
-import CalloutBox from "@/components/ui/CalloutBox.vue";
-import AppPage from "@/components/layout/AppPage.vue";
+  import { nutrientStatus } from '@/data/nutrients'
+  import NutrientTable from '@/components/meal/NutrientTable.vue'
+  import CalloutBox from '@/components/ui/CalloutBox.vue'
+  import AppPage from '@/components/layout/AppPage.vue'
 </script>
 
 <template>
   <AppPage>
     <div class="max-w-[980px] mx-auto">
       <div class="mb-8">
-        <h1 class="font-display text-3xl font-bold text-[var(--ink)] mb-4">Nutrition Overview</h1>
-        <p class="text-sm text-[var(--muted)] leading-relaxed">
+        <h1 class="font-display text-3xl font-bold text-black mb-4">Nutrition Overview</h1>
+        <p class="text-sm text-black leading-relaxed">
           How this meal plan supports your health and fitness goals.
         </p>
       </div>
