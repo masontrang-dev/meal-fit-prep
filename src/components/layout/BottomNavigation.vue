@@ -1,5 +1,5 @@
 <template>
-  <nav class="bottom-nav md:hidden lg:hidden" role="navigation" aria-label="Main navigation">
+  <nav class="bottom-nav" role="navigation" aria-label="Main navigation">
     <RouterLink
       v-for="item in primaryNavItems"
       :key="item.path"
@@ -83,6 +83,7 @@
     MoreHorizontal,
     Utensils,
     Info,
+    Bell,
     X,
     ChevronRight,
   } from 'lucide-vue-next'
@@ -111,6 +112,9 @@
     { label: 'Breakfast', path: '/meal/breakfasts', icon: BookOpen },
     { label: 'Nutrients', path: '/meal/nutrients', icon: Info },
     { label: 'Storage', path: '/meal/storage', icon: Settings },
+    { label: 'Profile', path: '/account/profile', icon: User }, // MOVED from masthead
+    { label: 'Notifications', path: '/account/notifications', icon: Bell }, // MOVED from masthead
+    { label: 'Settings', path: '/account/settings', icon: Settings }, // MOVED from masthead
   ]
 
   // Check if current path matches a nav item
@@ -154,6 +158,9 @@
       Breakfast: 'Breakfast meal options and prep',
       Nutrients: 'Nutritional information and tracking',
       Storage: 'Food storage guidelines and tips',
+      Profile: 'Manage your profile and preferences',
+      Notifications: 'View your notifications and alerts',
+      Settings: 'Configure app settings and preferences',
       Fitness: 'Fitness tracking and workout plans',
     }
     return descriptions[label] || ''
@@ -537,6 +544,25 @@
     .bottom-nav-icon {
       width: 28px;
       height: 28px;
+    }
+  }
+
+  /* Desktop enhancements */
+  @media (min-width: 1024px) {
+    .bottom-nav {
+      max-width: 600px; /* Limit width on desktop */
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 16px 16px 0 0;
+      box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .bottom-nav-item {
+      min-height: 56px; /* Larger touch targets on desktop */
+    }
+
+    .bottom-nav-label {
+      font-size: var(--text-sm); /* Larger labels on desktop */
     }
   }
 

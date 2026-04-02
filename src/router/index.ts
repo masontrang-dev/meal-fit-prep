@@ -106,6 +106,34 @@ const router = createRouter({
           '../views/fitness/FitnessView.vue'
         ),
     },
+    // Account routes (accessed via More button in bottom nav)
+    {
+      path: '/account/profile',
+      name: 'account-profile',
+      component: () =>
+        import(
+          /* webpackChunkName: "account" */
+          '../views/account/ProfileView.vue'
+        ),
+    },
+    {
+      path: '/account/notifications',
+      name: 'account-notifications',
+      component: () =>
+        import(
+          /* webpackChunkName: "account" */
+          '../views/account/NotificationsView.vue'
+        ),
+    },
+    {
+      path: '/account/settings',
+      name: 'account-settings',
+      component: () =>
+        import(
+          /* webpackChunkName: "account" */
+          '../views/account/SettingsView.vue'
+        ),
+    },
   ],
   scrollBehavior() {
     return { top: 0, behavior: 'smooth' }

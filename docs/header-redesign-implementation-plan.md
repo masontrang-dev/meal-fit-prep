@@ -12,6 +12,7 @@
 This plan implements a unified header architecture that moves from a fragmented multi-header system to a clean, modern bottom-navigation-first approach. The changes will significantly reduce cognitive load while maintaining all functionality.
 
 ### Key Changes
+
 - **Move user controls** (notifications, profile, settings) from masthead to bottom navigation
 - **Simplify masthead** to branding-only element
 - **Unify navigation** pattern across all device sizes
@@ -28,27 +29,32 @@ This plan implements a unified header architecture that moves from a fragmented 
 #### Changes Required:
 
 ```typescript
-// Add Account to primary navigation
+// Keep primary navigation as-is (3 core workflow items)
+// Note: "More" button is handled separately in the template, not in this array
 const primaryNavItems: NavItem[] = [
   { label: 'Plan', path: '/meal/fridge', icon: Calendar },
   { label: 'Shop', path: '/meal/shopping', icon: ShoppingCart },
   { label: 'Prep', path: '/meal/prep', icon: ChefHat },
-  { label: 'Account', path: '/account', icon: User }, // NEW
 ]
 
-// Move user controls to secondary navigation
+// Move user controls to secondary navigation (accessed via More button)
 const secondaryNavItems: NavItem[] = [
   { label: 'Overview', path: '/overview', icon: Home },
   { label: 'Recipes', path: '/meal/sauces', icon: Utensils },
   { label: 'Breakfast', path: '/meal/breakfasts', icon: BookOpen },
   { label: 'Nutrients', path: '/meal/nutrients', icon: Info },
   { label: 'Storage', path: '/meal/storage', icon: Settings },
-  { label: 'Notifications', path: '/account/notifications', icon: Bell }, // MOVED
-  { label: 'Settings', path: '/account/settings', icon: Settings },      // MOVED
+  { label: 'Profile', path: '/account/profile', icon: User }, // MOVED from masthead
+  { label: 'Notifications', path: '/account/notifications', icon: Bell }, // MOVED from masthead
+  { label: 'Settings', path: '/account/settings', icon: Settings }, // MOVED from masthead
 ]
+
+// The "More" button is already implemented in the template (lines 20-33)
+// No changes needed to the template structure - just update secondaryNavItems
 ```
 
 #### Responsive Updates:
+
 - Show bottom navigation on desktop (currently hidden on md:lg)
 - Add hover states and desktop-optimized spacing
 - Implement keyboard navigation for desktop users
@@ -58,6 +64,7 @@ const secondaryNavItems: NavItem[] = [
 **File:** `src/components/layout/AppMasthead.vue`
 
 #### Remove User Controls Section:
+
 ```vue
 <!-- REMOVE this entire section -->
 <div class="masthead-user" v-if="isMobile || isTablet">
@@ -66,7 +73,7 @@ const secondaryNavItems: NavItem[] = [
     <button class="user-button" @click="handleUserAction('notifications')">
       <Bell class="user-icon" />
     </button>
-    
+
     <!-- User Menu -->
     <div class="user-dropdown" @click="toggleUserMenu">
       <!-- ... all user menu code -->
@@ -76,11 +83,16 @@ const secondaryNavItems: NavItem[] = [
 ```
 
 #### Simplify Script Section:
+
 ```typescript
 // REMOVE these functions and refs
 const showUserMenu = ref(false)
-const toggleUserMenu = () => { /* ... */ }
-const handleUserAction = (action: string) => { /* ... */ }
+const toggleUserMenu = () => {
+  /* ... */
+}
+const handleUserAction = (action: string) => {
+  /* ... */
+}
 
 // KEEP these
 const router = useRouter()
@@ -90,6 +102,7 @@ const isTablet = computed(() => window.innerWidth >= 768 && window.innerWidth < 
 ```
 
 #### Update Styles:
+
 - Remove all `.masthead-user`, `.user-controls`, `.user-button` styles
 - Reduce masthead padding by 30%
 - Make title smaller and less prominent
@@ -100,69 +113,183 @@ const isTablet = computed(() => window.innerWidth >= 768 && window.innerWidth < 
 **File:** `src/router/index.ts`
 
 ```typescript
-// Add temporary routes (will be replaced by Account hub in Phase 2)
+// Add account routes (accessed via More button in bottom nav)
 {
-  path: '/account',
-  name: 'account',
-  component: () => import('@/views/temp/AccountTempView.vue')
+  path: '/account/profile',
+  name: 'account-profile',
+  component: () => import('@/views/account/ProfileView.vue')
 },
 {
   path: '/account/notifications',
   name: 'account-notifications',
-  component: () => import('@/views/temp/NotificationsTempView.vue')
+  component: () => import('@/views/account/NotificationsView.vue')
 },
 {
   path: '/account/settings',
   name: 'account-settings',
-  component: () => import('@/views/temp/SettingsTempView.vue')
+  component: () => import('@/views/account/SettingsView.vue')
 }
 ```
 
-### 1.4 Create Temporary View Components
+### 1.4 Create Account View Components
 
 **Files to create:**
-- `src/views/temp/AccountTempView.vue` - Simple redirect to notifications
-- `src/views/temp/NotificationsTempView.vue` - "Coming soon" placeholder
-- `src/views/temp/SettingsTempView.vue` - "Coming soon" placeholder
+
+- `src/views/account/ProfileView.vue` - User profile management
+- `src/views/account/NotificationsView.vue` - Notifications center
+- `src/views/account/SettingsView.vue` - App settings
 
 ---
 
 ## Phase 2: Enhanced Features (Week 2)
 
-### 2.1 Create Unified Account Hub
+### 2.1 Enhance Individual Account Views
 
-**File:** `src/views/account/AccountView.vue`
+Since we're using the existing "More" button structure, we'll create separate dedicated views instead of a unified hub:
 
-#### Features:
+**Files to enhance:**
+
+- `src/views/account/ProfileView.vue` - User preferences, dietary restrictions, meal customization
+- `src/views/account/NotificationsView.vue` - Meal prep reminders, shopping alerts, achievement notifications
+- `src/views/account/SettingsView.vue` - App preferences, units, themes, data management
+
+**ProfileView.vue Features:**
+
 ```vue
 <template>
-  <div class="account-hub">
-    <!-- Tab Navigation -->
-    <div class="account-tabs">
-      <button 
-        v-for="tab in tabs" 
-        :key="tab.id"
-        :class="{ active: activeTab === tab.id }"
-        @click="activeTab = tab.id"
-      >
-        <component :is="tab.icon" />
-        {{ tab.label }}
-      </button>
-    </div>
+  <div class="profile-view">
+    <h2>Profile</h2>
 
-    <!-- Tab Content -->
-    <component :is="activeTabComponent" />
+    <!-- User Preferences -->
+    <section class="preferences">
+      <h3>Dietary Preferences</h3>
+      <div class="preference-options">
+        <label><input type="checkbox" v-model="preferences.vegetarian" /> Vegetarian</label>
+        <label><input type="checkbox" v-model="preferences.glutenFree" /> Gluten-Free</label>
+        <label><input type="checkbox" v-model="preferences.dairyFree" /> Dairy-Free</label>
+      </div>
+    </section>
+
+    <!-- Meal Customization -->
+    <section class="meal-customization">
+      <h3>Meal Customization</h3>
+      <div class="customization-options">
+        <div class="servings-control">
+          <label>Default Servings:</label>
+          <input type="number" v-model="defaultServings" min="1" max="12" />
+        </div>
+        <div class="prep-style">
+          <label>Prep Style:</label>
+          <select v-model="prepStyle">
+            <option value="minimal">Minimal Prep</option>
+            <option value="balanced">Balanced Prep</option>
+            <option value="comprehensive">Comprehensive Prep</option>
+          </select>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
+```
 
-<script setup lang="ts">
-const tabs = [
-  { id: 'profile', label: 'Profile', icon: User },
-  { id: 'notifications', label: 'Notifications', icon: Bell },
-  { id: 'settings', label: 'Settings', icon: Settings },
-  { id: 'preferences', label: 'Preferences', icon: Sliders },
-]
-</script>
+**NotificationsView.vue Features:**
+
+```vue
+<template>
+  <div class="notifications-view">
+    <h2>Notifications</h2>
+
+    <!-- Notification Settings -->
+    <section class="notification-settings">
+      <h3>Notification Preferences</h3>
+      <div class="notification-options">
+        <label>
+          <input type="checkbox" v-model="settings.prepReminders" />
+          Sunday Prep Reminders
+        </label>
+        <label>
+          <input type="checkbox" v-model="settings.shoppingAlerts" />
+          Shopping List Updates
+        </label>
+        <label>
+          <input type="checkbox" v-model="settings.achievements" />
+          Achievement Unlocked
+        </label>
+      </div>
+    </section>
+
+    <!-- Recent Notifications -->
+    <section class="recent-notifications">
+      <h3>Recent Activity</h3>
+      <div class="notification-list">
+        <div
+          v-for="notification in recentNotifications"
+          :key="notification.id"
+          class="notification-item"
+          :class="notification.type"
+        >
+          <div class="notification-icon">
+            <component :is="notification.icon" />
+          </div>
+          <div class="notification-content">
+            <p class="notification-text">{{ notification.message }}</p>
+            <span class="notification-time">{{ formatTime(notification.timestamp) }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</template>
+```
+
+**SettingsView.vue Features:**
+
+```vue
+<template>
+  <div class="settings-view">
+    <h2>Settings</h2>
+
+    <!-- App Preferences -->
+    <section class="app-settings">
+      <h3>App Preferences</h3>
+      <div class="settings-options">
+        <div class="setting-item">
+          <label>Theme:</label>
+          <select v-model="settings.theme">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="auto">Auto</option>
+          </select>
+        </div>
+        <div class="setting-item">
+          <label>Units:</label>
+          <select v-model="settings.units">
+            <option value="imperial">Imperial (lbs, oz)</option>
+            <option value="metric">Metric (kg, g)</option>
+          </select>
+        </div>
+        <div class="setting-item">
+          <label>Language:</label>
+          <select v-model="settings.language">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Data Management -->
+    <section class="data-management">
+      <h3>Data Management</h3>
+      <div class="data-actions">
+        <button @click="exportData" class="btn-secondary">Export Data</button>
+        <button @click="clearCache" class="btn-secondary">Clear Cache</button>
+        <button @click="resetApp" class="btn-danger">Reset App</button>
+      </div>
+    </section>
+  </div>
+</template>
 ```
 
 ### 2.2 Implement Feature Badge Functionality
@@ -170,6 +297,7 @@ const tabs = [
 **File:** `src/components/layout/AppMasthead.vue`
 
 #### Option A: Make Badges Functional Filters
+
 ```vue
 <div class="masthead-pills">
   <button 
@@ -184,25 +312,26 @@ const tabs = [
 </div>
 
 <script setup lang="ts">
-const filterBadges = ref([
-  { id: 'weekly-plan', label: 'Weekly Plan', active: true },
-  { id: 'whole-foods', label: 'Whole Foods', active: true },
-  { id: 'diet-friendly', label: 'Diet Friendly', active: false },
-  { id: 'flexible-prep', label: 'Flexible Prep', active: false },
-])
+  const filterBadges = ref([
+    { id: 'weekly-plan', label: 'Weekly Plan', active: true },
+    { id: 'whole-foods', label: 'Whole Foods', active: true },
+    { id: 'diet-friendly', label: 'Diet Friendly', active: false },
+    { id: 'flexible-prep', label: 'Flexible Prep', active: false },
+  ])
 
-const toggleFilter = (badgeId: string) => {
-  const badge = filterBadges.value.find(b => b.id === badgeId)
-  if (badge) badge.active = !badge.active
-  // Emit filter change to parent/store
-}
+  const toggleFilter = (badgeId: string) => {
+    const badge = filterBadges.value.find(b => b.id === badgeId)
+    if (badge) badge.active = !badge.active
+    // Emit filter change to parent/store
+  }
 </script>
 ```
 
 #### Option B: Reduce Visual Prominence
+
 ```css
 .pill {
-  background: rgba(255, 255, 255, 0.05);  /* Reduced opacity */
+  background: rgba(255, 255, 255, 0.05); /* Reduced opacity */
   border: 1px solid rgba(255, 255, 255, 0.1); /* Reduced opacity */
   font-size: 0.6rem; /* Smaller font */
   opacity: 0.6; /* Less prominent */
@@ -219,6 +348,7 @@ const toggleFilter = (badgeId: string) => {
 **File:** `src/components/layout/BottomNavigation.vue`
 
 #### Desktop Optimizations:
+
 ```vue
 <template>
   <!-- Update responsive classes -->
@@ -228,33 +358,33 @@ const toggleFilter = (badgeId: string) => {
 </template>
 
 <style scoped>
-.bottom-nav {
-  /* Show on all screen sizes */
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  /* ... existing styles */
-}
-
-/* Desktop enhancements */
-@media (min-width: 1024px) {
   .bottom-nav {
-    max-width: 600px; /* Limit width on desktop */
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 16px 16px 0 0;
-    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.12);
+    /* Show on all screen sizes */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* ... existing styles */
   }
-  
-  .bottom-nav-item {
-    min-height: 56px; /* Larger touch targets on desktop */
+
+  /* Desktop enhancements */
+  @media (min-width: 1024px) {
+    .bottom-nav {
+      max-width: 600px; /* Limit width on desktop */
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 16px 16px 0 0;
+      box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .bottom-nav-item {
+      min-height: 56px; /* Larger touch targets on desktop */
+    }
+
+    .bottom-nav-label {
+      font-size: var(--text-sm); /* Larger labels on desktop */
+    }
   }
-  
-  .bottom-nav-label {
-    font-size: var(--text-sm); /* Larger labels on desktop */
-  }
-}
 </style>
 ```
 
@@ -265,15 +395,17 @@ const toggleFilter = (badgeId: string) => {
 ### 3.1 Cross-Device Testing
 
 #### Test Matrix:
-| Device | Screen Size | Test Focus |
-|--------|-------------|------------|
-| iPhone SE | 375x667 | Bottom nav spacing, touch targets |
-| iPhone 14 | 390x844 | Badge visibility, masthead sizing |
-| iPad | 768x1024 | Tablet layout, bottom nav positioning |
-| Desktop | 1920x1080 | Desktop bottom nav behavior |
-| Large Desktop | 2560x1440 | Max-width constraints, centering |
+
+| Device        | Screen Size | Test Focus                            |
+| ------------- | ----------- | ------------------------------------- |
+| iPhone SE     | 375x667     | Bottom nav spacing, touch targets     |
+| iPhone 14     | 390x844     | Badge visibility, masthead sizing     |
+| iPad          | 768x1024    | Tablet layout, bottom nav positioning |
+| Desktop       | 1920x1080   | Desktop bottom nav behavior           |
+| Large Desktop | 2560x1440   | Max-width constraints, centering      |
 
 #### Test Scenarios:
+
 1. **Navigation Flow:** Plan → Shop → Prep → Account
 2. **Account Hub:** Profile → Notifications → Settings navigation
 3. **Responsive Breakpoints:** Smooth transitions between layouts
@@ -283,12 +415,14 @@ const toggleFilter = (badgeId: string) => {
 ### 3.2 User Validation
 
 #### Key Metrics to Track:
+
 - **Task Success Rate:** Complete account-related tasks
 - **Time to First Action:** How quickly users find account features
 - **Error Rate:** Wrong taps, confusion points
 - **Subjective Feedback:** User satisfaction scores
 
 #### Validation Methods:
+
 - **5-Second Tests:** Show users new layout, ask what they see
 - **Task-Based Testing:** Ask users to find settings/notifications
 - **A/B Testing:** Compare old vs new header (if possible)
@@ -299,12 +433,14 @@ const toggleFilter = (badgeId: string) => {
 ## Implementation Checklist
 
 ### Pre-Implementation
+
 - [ ] Back up current header components
 - [ ] Create feature branch for header redesign
 - [ ] Document current user control functionality
 - [ ] Set up analytics for navigation tracking
 
 ### Phase 1 Tasks
+
 - [ ] Update BottomNavigation.vue with Account tab
 - [ ] Move notifications/settings to secondary nav
 - [ ] Remove user controls from AppMasthead.vue
@@ -314,6 +450,7 @@ const toggleFilter = (badgeId: string) => {
 - [ ] Verify mobile functionality
 
 ### Phase 2 Tasks
+
 - [ ] Build AccountView.vue with tab navigation
 - [ ] Implement profile, notifications, settings tabs
 - [ ] Add filter functionality to badges (Option A) OR reduce prominence (Option B)
@@ -323,6 +460,7 @@ const toggleFilter = (badgeId: string) => {
 - [ ] Test responsive behavior
 
 ### Phase 3 Tasks
+
 - [ ] Conduct cross-device testing
 - [ ] Perform accessibility audit
 - [ ] Gather user feedback
@@ -331,6 +469,7 @@ const toggleFilter = (badgeId: string) => {
 - [ ] Prepare for deployment
 
 ### Post-Implementation
+
 - [ ] Monitor analytics for navigation changes
 - [ ] Collect user feedback for 2 weeks
 - [ ] Document lessons learned
@@ -341,6 +480,7 @@ const toggleFilter = (badgeId: string) => {
 ## Risk Assessment & Mitigation
 
 ### High Risks
+
 1. **User Confusion:** Moving familiar elements
    - **Mitigation:** Clear onboarding tooltips for first visit
    - **Fallback:** Revert option in settings
@@ -354,6 +494,7 @@ const toggleFilter = (badgeId: string) => {
    - **Fallback:** Keyboard navigation alternatives
 
 ### Medium Risks
+
 1. **Performance:** Additional components and animations
    - **Mitigation:** Lazy loading, optimized transitions
 2. **Browser Compatibility:** New CSS features
@@ -364,12 +505,14 @@ const toggleFilter = (badgeId: string) => {
 ## Success Metrics
 
 ### Quantitative Metrics
+
 - **Navigation Efficiency:** 20% reduction in time to find account features
 - **Task Completion:** 85% success rate for account-related tasks
 - **Mobile Engagement:** 15% increase in mobile session duration
 - **Error Reduction:** 50% fewer navigation-related errors
 
 ### Qualitative Metrics
+
 - **User Satisfaction:** 4.5/5 rating for new navigation
 - **Learnability:** 80% of users comfortable within 3 sessions
 - **Visual Clarity:** Positive feedback on cleaner interface
@@ -378,11 +521,11 @@ const toggleFilter = (badgeId: string) => {
 
 ## Timeline Summary
 
-| Week | Focus | Deliverables |
-|------|-------|-------------|
+| Week   | Focus             | Deliverables                                           |
+| ------ | ----------------- | ------------------------------------------------------ |
 | Week 1 | Core Architecture | Updated bottom nav, simplified masthead, basic routing |
-| Week 2 | Enhanced Features | Account hub, functional badges, desktop optimization |
-| Week 3 | Testing & Polish | Cross-device testing, user validation, bug fixes |
+| Week 2 | Enhanced Features | Account hub, functional badges, desktop optimization   |
+| Week 3 | Testing & Polish  | Cross-device testing, user validation, bug fixes       |
 
 **Total Estimated Effort:** 40-60 developer hours
 **Recommended Release:** Staged rollout with feature flags
