@@ -4,7 +4,7 @@
   import ServingsSelector from '@/components/ui/ServingsSelector.vue'
 
   const router = useRouter()
-  const version = '1.3.2' // This will be updated automatically by deployment scripts
+  const version = '2.0.0' // This will be updated automatically by deployment scripts
 
   // Feature filter badges state
   const filterBadges = ref([

@@ -14,6 +14,6 @@
 
   const iconComponent = computed(() => {
     const icon = Icons[props.name as keyof typeof Icons]
-    return icon || Icons['HelpCircle']
+    return (icon || Icons['HelpCircle']) as any
   })
 </script>
