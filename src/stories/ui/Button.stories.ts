@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/vue3-vite';
-import { fn } from '@storybook/test';
+import type { Meta, StoryObj } from '@storybook/vue3-vite'
+// import { fn } from '@storybook/test';
 
-import Button from '@/components/ui/Button.vue';
+import Button from '@/components/ui/Button.vue'
 
 const meta = {
   title: 'UI/Button',
@@ -35,120 +35,120 @@ const meta = {
       description: 'Make button full width',
     },
   },
-  args: {
-    onClick: fn(),
-  },
-} satisfies Meta<typeof Button>;
+  // args: {
+  //   onClick: fn(),
+  // },
+} satisfies Meta<typeof Button>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
     variant: 'primary',
   },
-  render: (args) => ({
+  render: args => ({
     components: { Button },
     setup() {
-      return { args };
+      return { args }
     },
     template: '<Button v-bind="args">Primary Button</Button>',
   }),
-};
+}
 
 export const Secondary: Story = {
   args: {
     variant: 'secondary',
   },
-  render: (args) => ({
+  render: args => ({
     components: { Button },
     setup() {
-      return { args };
+      return { args }
     },
     template: '<Button v-bind="args">Secondary Button</Button>',
   }),
-};
+}
 
 export const Ghost: Story = {
   args: {
     variant: 'ghost',
   },
-  render: (args) => ({
+  render: args => ({
     components: { Button },
     setup() {
-      return { args };
+      return { args }
     },
     template: '<Button v-bind="args">Ghost Button</Button>',
   }),
-};
+}
 
 export const Danger: Story = {
   args: {
     variant: 'danger',
   },
-  render: (args) => ({
+  render: args => ({
     components: { Button },
     setup() {
-      return { args };
+      return { args }
     },
     template: '<Button v-bind="args">Delete Item</Button>',
   }),
-};
+}
 
 export const Success: Story = {
   args: {
     variant: 'success',
   },
-  render: (args) => ({
+  render: args => ({
     components: { Button },
     setup() {
-      return { args };
+      return { args }
     },
     template: '<Button v-bind="args">Save Changes</Button>',
   }),
-};
+}
 
 export const WithIcon: Story = {
   args: {
     variant: 'primary',
     icon: 'plus',
   },
-  render: (args) => ({
+  render: args => ({
     components: { Button },
     setup() {
-      return { args };
+      return { args }
     },
     template: '<Button v-bind="args">Add Item</Button>',
   }),
-};
+}
 
 export const Loading: Story = {
   args: {
     variant: 'primary',
     loading: true,
   },
-  render: (args) => ({
+  render: args => ({
     components: { Button },
     setup() {
-      return { args };
+      return { args }
     },
     template: '<Button v-bind="args">Loading...</Button>',
   }),
-};
+}
 
 export const Disabled: Story = {
   args: {
     variant: 'primary',
     disabled: true,
   },
-  render: (args) => ({
+  render: args => ({
     components: { Button },
     setup() {
-      return { args };
+      return { args }
     },
     template: '<Button v-bind="args">Disabled Button</Button>',
   }),
-};
+}
 
 export const Sizes: Story = {
   render: () => ({
@@ -161,18 +161,18 @@ export const Sizes: Story = {
       </div>
     `,
   }),
-};
+}
 
 export const FullWidth: Story = {
   args: {
     variant: 'primary',
     fullWidth: true,
   },
-  render: (args) => ({
+  render: args => ({
     components: { Button },
     setup() {
-      return { args };
+      return { args }
     },
     template: '<Button v-bind="args">Full Width Button</Button>',
   }),
-};
+}

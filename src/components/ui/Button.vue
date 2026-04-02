@@ -1,7 +1,9 @@
 <template>
   <button :class="buttonClasses" :disabled="disabled || loading" :type="type" v-bind="$attrs">
     <span v-if="loading" class="btn-spinner" aria-hidden="true"></span>
-    <Icon v-if="icon && !loading" :name="icon" :class="iconClasses" aria-hidden="true" />
+    <span v-if="icon && !loading" :class="iconClasses">
+      <Icon :name="icon" />
+    </span>
     <span v-if="$slots.default" :class="textClasses">
       <slot />
     </span>
@@ -9,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-  import { computed } from 'vue'
+  import { computed, useSlots } from 'vue'
   import { Icon } from '@/components/icons'
 
   interface Props {
@@ -63,7 +65,7 @@
     if (props.size === 'sm') classes.push('btn-icon-sm')
     else if (props.size === 'lg') classes.push('btn-icon-lg')
 
-    if (props.$slots.default) {
+    if (useSlots().default) {
       classes.push('btn-icon-with-text')
     }
 

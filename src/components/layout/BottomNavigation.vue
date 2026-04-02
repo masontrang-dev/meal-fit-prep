@@ -86,6 +86,9 @@
     Bell,
     X,
     ChevronRight,
+    Package,
+    Refrigerator,
+    Thermometer,
   } from 'lucide-vue-next'
 
   interface NavItem {
@@ -111,7 +114,7 @@
     { label: 'Recipes', path: '/meal/sauces', icon: Utensils },
     { label: 'Breakfast', path: '/meal/breakfasts', icon: BookOpen },
     { label: 'Nutrients', path: '/meal/nutrients', icon: Info },
-    { label: 'Storage', path: '/meal/storage', icon: Settings },
+    { label: 'Storage', path: '/meal/storage', icon: Refrigerator }, // Better food storage icon
     { label: 'Profile', path: '/account/profile', icon: User }, // MOVED from masthead
     { label: 'Notifications', path: '/account/notifications', icon: Bell }, // MOVED from masthead
     { label: 'Settings', path: '/account/settings', icon: Settings }, // MOVED from masthead
@@ -310,8 +313,7 @@
     border-top: 1px solid var(--rule);
     border-radius: var(--radius-md) var(--radius-md) 0 0;
     box-shadow: var(--shadow-xl);
-    max-height: 70vh;
-    overflow-y: auto;
+    /* Remove max-height and overflow to show all items */
     z-index: var(--z-modal);
   }
 
@@ -360,18 +362,23 @@
   }
 
   .panel-content {
-    padding: var(--space-2);
+    padding: var(--space-3);
+    /* Ensure all items are visible without scrolling */
+    max-height: none;
+    overflow: visible;
   }
 
   .panel-item {
     display: flex;
     align-items: center;
-    padding: var(--space-4);
+    padding: var(--space-3) var(--space-4);
     color: var(--ink);
     text-decoration: none;
     transition: background-color var(--transition);
     border-radius: var(--radius);
     margin-bottom: var(--space-1);
+    /* Reduce item height to fit more items */
+    min-height: 56px;
   }
 
   .panel-item:last-child {
@@ -545,6 +552,23 @@
       width: 28px;
       height: 28px;
     }
+
+    /* Enhanced hover states for tablet */
+    .bottom-nav-item:hover {
+      background-color: var(--bg);
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .bottom-nav-item:hover .bottom-nav-icon {
+      transform: translateY(-1px) scale(1.1);
+      filter: brightness(1.1);
+    }
+
+    .bottom-nav-item:hover .bottom-nav-label {
+      font-weight: 600;
+      opacity: 1;
+    }
   }
 
   /* Desktop enhancements */
@@ -559,10 +583,111 @@
 
     .bottom-nav-item {
       min-height: 56px; /* Larger touch targets on desktop */
+      min-width: 80px; /* Wider targets for desktop mouse interaction */
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius-md);
     }
 
     .bottom-nav-label {
       font-size: var(--text-sm); /* Larger labels on desktop */
+      font-weight: 500;
+    }
+
+    .bottom-nav-icon {
+      width: 28px;
+      height: 28px;
+      margin-bottom: var(--space-2);
+    }
+
+    /* Enhanced hover states for desktop */
+    .bottom-nav-item:hover {
+      background: linear-gradient(
+        135deg,
+        var(--bg) 0%,
+        color-mix(in srgb, var(--bg) 80%, var(--green) 20%) 100%
+      );
+      border: 1px solid color-mix(in srgb, var(--rule) 70%, var(--green) 30%);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .bottom-nav-item:hover .bottom-nav-icon {
+      transform: translateY(-2px) scale(1.1);
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    }
+
+    .bottom-nav-item:hover .bottom-nav-label {
+      font-weight: 600;
+      transform: translateY(-1px);
+    }
+
+    /* Enhanced focus states for keyboard navigation */
+    .bottom-nav-item:focus-visible {
+      outline: 3px solid var(--green);
+      outline-offset: 3px;
+      box-shadow: 0 0 0 6px color-mix(in srgb, var(--green) 20%, transparent);
+    }
+
+    .bottom-nav-item:focus {
+      outline: none;
+    }
+
+    /* Active state enhancements */
+    .bottom-nav-item-active {
+      background: linear-gradient(
+        135deg,
+        var(--bg) 0%,
+        color-mix(in srgb, var(--bg) 60%, var(--green) 40%) 100%
+      );
+      border: 1px solid var(--green);
+      box-shadow: 0 4px 16px color-mix(in srgb, var(--green) 30%, transparent);
+    }
+
+    .bottom-nav-item-active:hover {
+      background: linear-gradient(
+        135deg,
+        var(--bg) 0%,
+        color-mix(in srgb, var(--bg) 50%, var(--green) 50%) 100%
+      );
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 12px 32px color-mix(in srgb, var(--green) 40%, transparent);
+    }
+
+    /* Panel desktop enhancements */
+    .bottom-nav-panel {
+      max-width: 500px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.15);
+      /* Ensure all items visible on desktop too */
+      max-height: none;
+      overflow: visible;
+    }
+
+    .panel-item {
+      padding: var(--space-3) var(--space-5);
+      margin-bottom: var(--space-1);
+      border-radius: var(--radius-md);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      /* Compact height for desktop */
+      min-height: 52px;
+    }
+
+    .panel-item:hover {
+      background: linear-gradient(
+        135deg,
+        var(--bg) 0%,
+        color-mix(in srgb, var(--bg) 80%, var(--green) 20%) 100%
+      );
+      border-left: 4px solid var(--green);
+      transform: translateX(4px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .panel-item:focus-visible {
+      outline: 2px solid var(--green);
+      outline-offset: 2px;
     }
   }
 
